@@ -10,7 +10,7 @@
                                         <div class="col-lg-6" data-aos="fade-up">
                                             <h1 class="page-header-title">Build your next project faster with SB UI Kit Pro</h1>
                                             <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p>
-                                            <a class="btn btn-teal btn-marketing rounded-pill lift lift-sm" href="landing-multipurpose.html">View Demo<i class="fas fa-arrow-right ml-1"></i></a><a class="btn btn-link btn-marketing" href="https://docs.startbootstrap.com/sb-ui-kit-pro/quickstart">Documentation</a>
+                                            <a class="btn btn-teal btn-marketing rounded-pill lift lift-sm" href="landing-multipurpose.html">Encontre um cuidador</a>
                                         </div>
                                         <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/img/drawkit/color/drawkit-content-man-color.svg" /></div>
                                     </div>
