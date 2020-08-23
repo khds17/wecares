@@ -1,4 +1,4 @@
-@extends('templates.template')
+@extends('templates.template-admin')
 
 @section('content')
     <h1 class="text-center">Solicitante</h1>
