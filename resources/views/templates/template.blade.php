@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Solicitante</title>
-    <link href="{{url('assets/css/styles.css')}}" rel="stylesheet"/>
+    <link href="{{url('assets/layout/css/styles.css')}}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="icon" type="image/x-icon" href="{{url('assets/img/favicon.png')}}" />
+    <link rel="icon" type="image/x-icon" href="{{url('assets/layout/img/favicon.png')}}" />
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
 </head>
@@ -19,11 +19,11 @@
                             <a class="navbar-brand text-white" href="index.html">WeCares</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto mr-lg-5">
-                                    <li class="nav-item"><a class="nav-link" href="index.html">Home </a></li>
                                     <li class="nav-item dropdown no-caret">
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seja um profissional</a>
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seja um cuidador</a>
                                     </li>
-                                    <li class="nav-item dropdown dropdown-xl no-caret">
+                                    <!-- <li class="nav-item dropdown dropdown-xl no-caret">
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownDemos" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<i class="fas fa-chevron-right dropdown-arrow"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right animated--fade-in-up mr-lg-n15" aria-labelledby="navbarDropdownDemos">
                                             <div class="row no-gutters">
@@ -38,7 +38,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="https://shop.startbootstrap.com/sb-ui-kit-pro">Entrar</a>
                             </div>
@@ -54,7 +54,6 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="footer-brand">WeCares</div>
-                                <div class="mb-3">Build better websites</div>
                                 <div class="icon-list-social mb-5">
                                     <a class="icon-list-social-link" href="javascript:void(0);"><i class="fab fa-instagram"></i></a><a class="icon-list-social-link" href="javascript:void(0);"><i class="fab fa-facebook"></i></a><a class="icon-list-social-link" href="javascript:void(0);"><i class="fab fa-github"></i></a><a class="icon-list-social-link" href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
                                 </div>
@@ -94,8 +93,8 @@
             </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="{{url('assets/js/javascript.js')}}"></script>
-    <script src="{{url('assets/js/scripts.js')}}"></script>
+    <script src="{{url('assets/layout/js/javascript.js')}}"></script>
+    <script src="{{url('assets/layout/js/scripts.js')}}"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
             AOS.init({
