@@ -63,9 +63,8 @@
                                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                                         <div class="text-uppercase-expanded text-xs mb-4">Empresa</div>
                                         <ul class="list-unstyled mb-0">
-                                            <li class="mb-2"><a href="javascript:void(0);">Quem somos</a></li>
+                                            <li class="mb-2"><a href="{{url("/sobre")}}">Quem somos</a></li>
                                             <li class="mb-2"><a href="javascript:void(0);">Como funciona?</a></li>
-                                            <li class="mb-2"><a href="javascript:void(0);">Segurança</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
@@ -74,12 +73,13 @@
                                             <li class="mb-2"><a href="{{url("prestador/create")}}">Seja um cuidador</a></li>
                                             <li class="mb-2"><a href="javascript:void(0);">Encontre um cuidador</a></li>
                                             <li class="mb-2"><a href="javascript:void(0);">Dicas de contratação</a></li>
+                                            <li class="mb-2"><a href="javascript:void(0);">Dicas de segurança</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                                         <div class="text-uppercase-expanded text-xs mb-4">Ajuda</div>
                                         <ul class="list-unstyled mb-0">
-                                            <li class="mb-2"><a href="{{url("prestador/create")}}">Dúvidas frequentes</a></li>
+                                            <li class="mb-2"><a href="">Dúvidas frequentes</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -89,9 +89,11 @@
                         <div class="row align-items-center">
                             <div class="col-md-6 small">Copyright &copy; WeCares 2020</div>
                             <div class="col-md-6 text-md-right small">
-                                <a href="javascript:void(0);">Privacidade</a>
+                                <a href="{{url("/privacidade")}}">Privacidade</a>
                                 &middot;
-                                <a href="javascript:void(0);">Termos</a>
+                                <a href="{{url("/termos")}}">Termos</a>
+                                &middot;
+                                <a href="{{url("/conduta")}}">Código de conduta</a>
                             </div>
                         </div>
                     </div>
