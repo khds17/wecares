@@ -76,6 +76,12 @@
                                             <li class="mb-2"><a href="javascript:void(0);">Dicas de contratação</a></li>
                                         </ul>
                                     </div>
+                                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                                        <div class="text-uppercase-expanded text-xs mb-4">Ajuda</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a href="{{url("prestador/create")}}">Dúvidas frequentes</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
