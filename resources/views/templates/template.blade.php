@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Solicitante</title>
+    <title>WeCares</title>
     <link href="{{url('assets/layout/css/styles.css')}}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="icon" type="image/x-icon" href="{{url('assets/layout/img/favicon.png')}}" />
@@ -20,8 +20,8 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto mr-lg-5">
                                     <li class="nav-item dropdown no-caret">
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seja um cuidador</a>
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("prestador/create")}}" role="button" aria-haspopup="true" aria-expanded="false">Seja um cuidador</a>
                                     </li>
                                     <!-- <li class="nav-item dropdown dropdown-xl no-caret">
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownDemos" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<i class="fas fa-chevron-right dropdown-arrow"></i></a>
@@ -71,7 +71,7 @@
                                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                                         <div class="text-uppercase-expanded text-xs mb-4">Serviços</div>
                                         <ul class="list-unstyled mb-0">
-                                            <li class="mb-2"><a href="javascript:void(0);">Seja um profissional</a></li>
+                                            <li class="mb-2"><a href="{{url("prestador/create")}}">Seja um cuidador</a></li>
                                             <li class="mb-2"><a href="javascript:void(0);">Encontre um cuidador</a></li>
                                             <li class="mb-2"><a href="javascript:void(0);">Dicas de contratação</a></li>
                                         </ul>
