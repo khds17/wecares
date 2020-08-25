@@ -21,9 +21,9 @@ class indexController extends Controller
         return view('sobre');
     }
 
-    public function termo()
+    public function termos()
     {
-        return view('termo');
+        return view('termos');
     }
 
     public function privacidade()
