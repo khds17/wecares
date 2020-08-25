@@ -21,6 +21,11 @@ class indexController extends Controller
         return view('sobre');
     }
 
+    public function termo()
+    {
+        return view('termo');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

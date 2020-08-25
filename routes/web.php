@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/solicitante','solicitanteController@index');
 Route::resource('/','indexController');
 Route::get('/sobre','indexController@sobre');
+Route::get('/termo','indexController@termo');
 Route::resource('/solicitante','solicitanteController');
 Route::resource('/prestador','prestadorController');
