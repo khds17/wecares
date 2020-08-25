@@ -26,6 +26,11 @@ class indexController extends Controller
         return view('termo');
     }
 
+    public function privacidade()
+    {
+        return view('privacidade');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
