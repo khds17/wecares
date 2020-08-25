@@ -16,6 +16,11 @@ class indexController extends Controller
         return view('index');
     }
 
+    public function sobre()
+    {
+        return view('sobre');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
