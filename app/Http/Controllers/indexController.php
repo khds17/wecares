@@ -26,6 +26,11 @@ class indexController extends Controller
         return view('termos');
     }
 
+    public function conduta()
+    {
+        return view('conduta');
+    }
+
     public function privacidade()
     {
         return view('privacidade');
