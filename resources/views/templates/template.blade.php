@@ -40,7 +40,7 @@
                                         </div>
                                     </li> -->
                                 </ul>
-                                <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="https://shop.startbootstrap.com/sb-ui-kit-pro">Entrar</a>
+                                <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="{{url("/login")}}">Entrar</a>
                             </div>
                         </div>
                     </nav>

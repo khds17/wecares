@@ -36,6 +36,10 @@ class indexController extends Controller
         return view('privacidade');
     }
 
+    public function login()
+    {
+        return view('login');
+    }
     /**
      * Show the form for creating a new resource.
      *
