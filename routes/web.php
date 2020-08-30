@@ -21,5 +21,7 @@ Route::get('/encontrecuidador','indexController@encontrecuidador');
 Route::get('/resultado','indexController@resultado');
 Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');
+Route::get('/agradecimento','indexController@agradecimento');
 Route::resource('/solicitante','solicitanteController');
 Route::resource('/prestador','prestadorController');
+
