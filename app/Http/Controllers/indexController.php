@@ -40,6 +40,26 @@ class indexController extends Controller
     {
         return view('login');
     }
+
+    public function agradecimento()
+    {
+        return view('agradecimento-cadastro');
+    }
+
+    public function encontrecuidador()
+    {
+        return view('encontre-cuidador');
+    }
+
+    public function resultado()
+    {
+        return view('resultado-cuidador');
+    }
+
+    public function perfil()
+    {
+        return view('perfil-cuidador');
+    }
     /**
      * Show the form for creating a new resource.
      *
