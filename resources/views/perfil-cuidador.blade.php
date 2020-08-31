@@ -1,12 +1,12 @@
 @extends('templates.template')
 
 @section('content')
-<header class="page-header page-header-light bg-white">
+<header class="page-header page-header-dark bg-img-cover overlay overlay-secondary overlay-90">
     <div class="page-header-content">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-10 text-center">
-                    <img class="mb-4" src="assets/img/avataaars.svg" style="width: 15rem;" />
+                    <img class="mb-4" src="assets/layout/img/avataaars.svg" style="width: 15rem;" />
                         <h1 class="page-header-title">Welcome to my portfolio!</h1>
                         <p class="page-header-text">I am a graphic artist, illustrator, and UI designer specializing in modern, creative design based in Wildemount, TX</p>
                 </div>
@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-    <div class="svg-border-rounded text-dark">
+    <div class="svg-border-rounded text-white">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
     </div>
 </section>
