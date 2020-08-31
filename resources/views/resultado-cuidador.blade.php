@@ -12,15 +12,14 @@
         <div class="container">
             <div class="row features text-center mb-10">
                 <div class="col-lg-4 col-md-6 mb-5">
-                    <a class="card card-link border-top border-top-lg border-primary h-100 lift" href="#!">
+                    <a class="card card-link border-top border-top-lg border-primary h-100 lift" href="{{url("/perfil")}}">
                         <div class="card-body p-5">
                             <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div>
                             <h6>Account</h6>
                             <p class="card-text">Issues related to logging in, out, or about multiple devices.</p>
                         </div>
-                        <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-between">
-                            <div class="small text-primary">See more</div>
-                            <div class="small text-primary"><i data-feather="arrow-right"></i></div></div></a>
+                        <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
+                            <div class="small text-primary">Veja o perfil</div>
                         </div>
                     </a>
                 </div>
