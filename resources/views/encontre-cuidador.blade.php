@@ -12,7 +12,7 @@
                             <div class="col-lg-9 col-md-8">
                                 <div class="form-group mr-0 mr-lg-2"><label class="sr-only" for="inputSearch">Insira seu CEP ou cidade </label><input class="form-control form-control-solid rounded-pill" id="inputSearch" type="text" placeholder="Insira seu CEP ou cidade" /></div>
                             </div>
-                            <div class="col-lg-3 col-md-4"><button class="btn btn-teal btn-block btn-marketing rounded-pill" type="submit">Encontrar</button></div>
+                            <div class="col-lg-3 col-md-4"><a class="btn btn-teal btn-block btn-marketing rounded-pill" href="{{url("/resultado")}}">Encontrar</a></button></div> 
                         </div>
                     </form>
                 </div>
