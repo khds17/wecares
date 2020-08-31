@@ -16,11 +16,11 @@
                 <main>
                     <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark fixed-top">
                         <div class="container">
-                            <a class="navbar-brand text-white" href="index.html">WeCares</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
+                            <a class="navbar-brand text-white" href="">WeCares</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i data-feather="menu"></i></button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto mr-lg-5">
                                     <li class="nav-item dropdown no-caret">
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="#" role="button" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("/encontrecuidador")}}" role="button" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("prestador/create")}}" role="button" aria-haspopup="true" aria-expanded="false">Seja um cuidador</a>
                                     </li>
                                     <!-- <li class="nav-item dropdown dropdown-xl no-caret">
@@ -57,15 +57,15 @@
                                 <div class="modal-body">
                                 <form class="user">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha">
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                            <label class="custom-control-label" for="customCheck">Lembrar-me</label>
                                         </div>
                                     </div>
                                     <a href="index.html" class="btn btn-primary btn-user btn-block">
@@ -73,18 +73,21 @@
                                     </a>
                                     <hr>
                                     <a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Login with Google
+                                        <i class="fab fa-google fa-fw"></i> Login com Google
                                     </a>
                                     <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                        <i class="fab fa-facebook-f fa-fw"></i> Login com Facebook
                                     </a>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                    <a class="small" href="forgot-password.html">Esqueceu a senha?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="register.html">Create an Account!</a>
+                                    <a class="small" href="{{url("/create")}}">Crie uma conta de solicitante!</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="{{url("/encontrecuidador")}}">Crie uma conta de cuidador!</a>
                                 </div>
                                 </div>
                                 <div class="modal-footer">
@@ -119,7 +122,7 @@
                                         <div class="text-uppercase-expanded text-xs mb-4">Serviços</div>
                                         <ul class="list-unstyled mb-0">
                                             <li class="mb-2"><a href="{{url("prestador/create")}}">Seja um cuidador</a></li>
-                                            <li class="mb-2"><a href="javascript:void(0);">Encontre um cuidador</a></li>
+                                            <li class="mb-2"><a href="{{url("/encontrecuidador")}}">Encontre um cuidador</a></li>
                                             <li class="mb-2"><a href="javascript:void(0);">Dicas de contratação</a></li>
                                             <li class="mb-2"><a href="javascript:void(0);">Dicas de segurança</a></li>
                                         </ul>
