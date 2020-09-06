@@ -4,16 +4,16 @@
             <div id="layoutDefault_content">
                 <main>
                         <header class="page-header page-header-dark bg-gradient-primary-to-secondary">
-                            <div class="page-header-content pt-10">
+                            <div class="page-header-content">
                                 <div class="container">
                                     <div class="row align-items-center">
                                         <div class="col-lg-6" data-aos="fade-up">
-                                            <h1 class="page-header-title">Conectamos pessoas que queiram encontrar cuidadores profissionais</h1>
+                                            <h1 class="page-header-title text-center">Conectamos pessoas que queiram encontrar cuidadores profissionais</h1>
                                             <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> -->
                                             <a class="btn btn-teal btn-marketing btn-block rounded-pill lift lift-sm" href="{{url("/encontrecuidador")}}">Encontre um cuidador</a>
                                             <a class="btn btn-green btn-marketing btn-block rounded-pill lift lift-sm" href="{{url("prestador/create")}}">Seja um cuidador</a>
                                         </div>
-                                        <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/layout/img/drawkit/color/drawkit-content-man-color.svg" /></div>
+                                        <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/layout/img/cuidadores.svg" /></div>
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                                             <p>Cada recurso de segurança implantado e cada orientação em nosso código de conduta representa nosso compromisso com a sua proteção.</p>
                                             <p>Saiba mais sobre nosso <a href="{{url("/conduta")}}">código de conduta</a></p>                                            <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> -->
                                         </div>
-                                        <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/layout/img/drawkit/color/drawkit-content-man-color.svg" /></div>
+                                        <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/layout/img/seguranca.svg" /></div>
                                     </div>
                                 </div>
                             <div class="svg-border-rounded text-light">
