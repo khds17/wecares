@@ -19669,6 +19669,7 @@ body {
   transition: background-color 0.15s ease-in-out;
   padding-top: 1.75rem;
   padding-bottom: 1.75rem;
+  color: #fff;
 }
 .navbar-marketing .navbar-toggler {
   padding: 0.5rem;
@@ -20326,7 +20327,7 @@ section {
   padding-bottom: 8rem;
 }
 .page-header .page-header-content .page-header-title {
-  font-size: 2.5rem;
+  font-size: 2.0rem;
 }
 .page-header .page-header-content .page-header-text {
   font-size: 1.15rem;
