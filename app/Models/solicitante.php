@@ -15,4 +15,3 @@ class solicitante extends Model
     // protected $fillable=[''];
 }
 
-}
