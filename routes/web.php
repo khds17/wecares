@@ -23,5 +23,6 @@ Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
 Route::resource('/solicitante','solicitanteController');
+Route::resource('/admin','adminController');
 Route::resource('/prestador','prestadorController');
 
