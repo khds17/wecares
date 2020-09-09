@@ -23,6 +23,12 @@ Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
 Route::resource('/solicitante','solicitanteController');
+Route::get('/solicitanteCadastro','solicitanteController@dadosCadastrais');
+Route::get('/servicosContratados','solicitanteController@servicosContratados');
+Route::get('/pagamentos','solicitanteController@pagamentos');
 Route::resource('/admin','adminController');
 Route::resource('/prestador','prestadorController');
+Route::get('/prestadorCadastro','prestadorController@dadosCadastrais');
+Route::get('/servicosPrestados','prestadorController@servicosPrestados');
+Route::get('/recebimentos','prestadorController@recebimentos');
 

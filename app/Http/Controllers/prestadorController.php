@@ -16,6 +16,21 @@ class prestadorController extends Controller
         echo "Teste";
     }
 
+    public function dadosCadastrais()
+    {
+        return view('prestador/cadastro');
+    }
+
+    
+    public function servicosPrestados()
+    {
+        return view('prestador/servicosPrestados');
+    }
+
+    public function recebimentos()
+    {
+        return view('prestador/recebimentos');
+    }
     /**
      * Show the form for creating a new resource.
      *

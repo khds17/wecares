@@ -24,6 +24,20 @@ class solicitanteController extends Controller
         
     }
 
+    public function dadosCadastrais()
+    {
+        return view('solicitante/cadastro');
+    }
+
+    public function servicosContratados()
+    {
+        return view('solicitante/servicosContratados');
+    }
+
+    public function pagamentos()
+    {
+        return view('solicitante/pagamentos');
+    }
     /**
      * Show the form for creating a new resource.
      *
