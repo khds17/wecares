@@ -20,8 +20,7 @@
                     <thead>
                         <tr>
                             <th scope="col">Nome</th>
-                            <th scope="col">E-mail</th>
-                            <th scope="col">Especilidade</th>
+                            <th scope="col">Idade</th>
                             <th scope="col">Telefone</th>
                         </tr>
                     </thead>
@@ -29,7 +28,6 @@
                         <tr>
                         <th scope="row">Kauan</th>
                         <td>khds2013@gmail.com</td>
-                        <td>Cuidador</td>
                         <td>19995583696</td>
                         </tr>
                         <tr>

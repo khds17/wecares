@@ -26,6 +26,7 @@ Route::resource('/solicitante','solicitanteController');
 Route::get('/solicitanteCadastro','solicitanteController@dadosCadastrais');
 Route::get('/servicosContratados','solicitanteController@servicosContratados');
 Route::get('/pagamentos','solicitanteController@pagamentos');
+Route::get('/pacienteCadastro','solicitanteController@pacienteCadastro');
 Route::resource('/admin','adminController');
 Route::resource('/prestador','prestadorController');
 Route::get('/prestadorCadastro','prestadorController@dadosCadastrais');

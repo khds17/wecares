@@ -38,6 +38,11 @@ class solicitanteController extends Controller
     {
         return view('solicitante/pagamentos');
     }
+
+    public function pacienteCadastro()
+    {
+        return view('solicitante/paciente');
+    }
     /**
      * Show the form for creating a new resource.
      *
