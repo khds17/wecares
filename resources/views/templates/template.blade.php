@@ -40,22 +40,23 @@
                                         </div>
                                     </li> -->
                                 </ul>
-                                <a class="btn-teal btn rounded-pill px-4 ml-lg-4" data-toggle="modal" data-target="#modalExemplo"> Entrar</a>
+                                <a class="btn-teal btn rounded-pill px-4 ml-lg-4" data-toggle="modal" data-target="#modalLogin"> Entrar</a>
                             </div>
                         </div>
                     </nav>
                     <!-- Modal -->
-                    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLoginLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Entrar</h5>
+                                    <h5 class="modal-title" id="modalLoginLabel">Entrar</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
                                 <form class="user">
+                                    @csrf
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">
                                     </div>
