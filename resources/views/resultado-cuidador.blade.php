@@ -15,8 +15,11 @@
                     <a class="card card-link border-top border-top-lg border-primary h-100 lift" href="{{url("/perfil")}}">
                         <div class="card-body p-5">
                             <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div>
-                            <h6>Account</h6>
-                            <p class="card-text">Issues related to logging in, out, or about multiple devices.</p>
+                            <h6>Nome</h6>
+                            <div class="small text-gray-500 text-left">Quantidade de serviço prestado:</div>
+                            <div class="small text-gray-500 text-left">Profissão:</div>
+                            <div class="small text-gray-500 text-left">Distância:</div>
+                            <div class="small text-gray-500 text-left">Avaliação</div>                            
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
                             <div class="small text-primary">Veja o perfil</div>

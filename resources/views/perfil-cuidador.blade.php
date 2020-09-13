@@ -7,17 +7,17 @@
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-10 text-center">
                     <img class="mb-4" src="assets/layout/img/avataaars.svg" style="width: 15rem;" />
-                        <h1 class="page-header-title">Welcome to my portfolio!</h1>
-                        <p class="page-header-text">I am a graphic artist, illustrator, and UI designer specializing in modern, creative design based in Wildemount, TX</p>
+                        <h1 class="page-header-title">Bem vindo ao perfil de X!</h1>
+                        <p class="page-header-text">Veja abaixo mais informações detalhadas sobre X</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="svg-border-rounded text-light">
+    <div class="svg-border-rounded text-white">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
     </div>
 </header>
-<section class="bg-light py-10">
+<section class="bg-white py-10">
     <div class="container">
         <div class="row text-center">
             <div class="col-lg-4 mb-5 mb-lg-0">
@@ -37,46 +37,20 @@
             </div>
         </div>
     </div>
-    <div class="svg-border-rounded text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
-    </div>
-</section>
-<section class="bg-white py-10">
-    <div class="container">
-        <div class="card-columns card-columns-portfolio">
-            <a class="card card-portfolio" href="#!"></a>
-
-        </div>
-    </div>
     <div class="svg-border-rounded text-light">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
     </div>
 </section>
 <section class="bg-light py-10">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                <h2>Contact me</h2>
-                <p class="mb-5">I am available for contract work, when you're ready - let me know!</p>
-                <div class="row">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="icon-stack icon-stack-lg bg-orange text-white mb-3"><i data-feather="mail"></i></div>
-                                <div class="small"><a href="#!">hello@example.com</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="icon-stack icon-stack-lg bg-green text-white mb-3"><i data-feather="smartphone"></i></div>
-                                <div class="small">555-123-4567</div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="card-columns card-columns-portfolio">
+            <a class="card card-link border-top border-top-lg border-primary h-100 lift" href="{{url("/perfil")}}">
+                <div class="card-body p-5">
+                    <h6>X avaliou:</h6>
+                    <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.</p>  
+                    <p>Avalição</p>                     
                 </div>
-            </div>
+            </a>
         </div>
     </div>
     <div class="svg-border-rounded text-white">
