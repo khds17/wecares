@@ -5,17 +5,21 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <h1 class="text-center padding-top-50">Seja um cuidador</h1>
+                    <h1 class="text-center padding-top-50">Preencha os campos abaixo para se tornar um cuidador</h1>
                     <div class="card-body">
                         <form name="formPrestador" id="formPrestador" method="post" action="{{url('prestador')}}">   
                             @csrf
-                            <input class="form-control" type="text" name="nome" id="nome" placeholder="Nome completo"><br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="cpf" name="cpf" id="cpf" placeholder="CPF"> 
+                                    <input class="form-control" type="text" name="nome" id="nome" placeholder="Nome completo" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="cpf" name="cpf" id="cpf" placeholder="CPF" required> 
                                 </div>
                                 <div class="col">
-                                <input class="form-control" type="date" name="nascimento" id="nascimento" placeholder="Data de nascimento"><br>
+                                <input class="form-control" type="date" name="nascimento" id="nascimento" placeholder="Data de nascimento" required ><br>
                                 </div>
                             </div>       
                             <div class="font-color-gray"> 
@@ -26,44 +30,44 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="email" name="email" id="email" placeholder="E-mail"><br>
+                                    <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required><br>
                                 </div>
                             </div>    
                             <div class="row margin-top-10">
                                 <div class="col">
-                                <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
+                                <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha" required>
                                 </div>
                                 <div class="col">
-                                <input class="form-control" type="password" name="confirmarsenha" id="confirmarsenha" placeholder="Confirme a senha"><br>
-                                </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="text" name="cep" id="cep" placeholder="CEP"><br>
+                                <input class="form-control" type="password" name="confirmarsenha" id="confirmarsenha" placeholder="Confirme a senha" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço">
-                                </div>
-                                <div class="col">
-                                    <input class="form-control" type="text" name="numero" id="numero" placeholder="Número"><br>
+                                    <input class="form-control" type="text" name="cep" id="cep" placeholder="CEP" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Cidade">
+                                    <input class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço" required>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Bairro" ><br>
+                                    <input class="form-control" type="text" name="numero" id="numero" placeholder="Número" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="complemento" id="complemento" placeholder="Complemento">
+                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Cidade" required>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="estado" id="estado" placeholder="UF"><br>
+                                    <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Bairro" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="text" name="complemento" id="complemento" placeholder="Complemento" required>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" name="estado" id="estado" placeholder="UF" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
@@ -74,14 +78,14 @@
                             </div>
                                 <div class="col font-color-gray">
                                     <label for="certificado">Certificado</label>
-                                    <input type="file" name="certificadoFormacao" id="certificadoFormacao">
+                                    <input type="file" name="certificadoFormacao" id="certificadoFormacao" required>
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="antecedentes">Antecedentes criminais</label><br>
-                                    <input type="file" name="certificadoFormacao" id="certificadoFormacao">
+                                    <input type="file" name="certificadoFormacao" id="certificadoFormacao" required>
                                 </div>
                             </div>
                             <br>
