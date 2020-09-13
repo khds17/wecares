@@ -14,10 +14,10 @@ class CreateBairrosTable extends Migration
     public function up()
     {
         Schema::create('BAIRROS', function (Blueprint $table) {
-            $table->id('ID');
+            $table->increments('ID');
             $table->string('BAIRRO',45);
-            $table->unsignedBigInteger('ID_CIDADE');
-            $table->foreign('ID_CIDADE')->references('ID')->on('CIDADE');
+            $table->unsignedInteger('ID_CIDADE');
+            $table->foreign('ID_CIDADE')->references('ID')->on('CIDADES')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

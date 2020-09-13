@@ -14,14 +14,15 @@ class CreateFormasPagamentoTable extends Migration
     public function up()
     {
         Schema::create('FORMAS_PAGAMENTO', function (Blueprint $table) {
-            $table->id('ID');
-            $table->smallInteger('NUMERO');
-            $table->smallInteger('VENCIMENTO');
-            $table->smallInteger('CCV');
-            $table->unsignedBigInteger('ID_BANDEIRA');
-            $table->unsignedBigInteger('ID_SOLICITANTE');
-            $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTE');
-            $table->foreign('ID_BANDEIRA')->references('ID')->on('BANDEIRA');
+            $table->increments('ID');
+            $table->unsignedSmallInteger('NUMERO');
+            $table->string('VENCIMENTO');
+            $table->unsignedSmallInteger('CCV');
+            $table->unsignedInteger('STATUS');
+            $table->unsignedInteger('ID_BANDEIRA');
+            $table->unsignedInteger('ID_SOLICITANTE');
+            $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_BANDEIRA')->references('ID')->on('BANDEIRAS')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

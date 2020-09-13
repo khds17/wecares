@@ -14,13 +14,13 @@ class CreateContatosTable extends Migration
     public function up()
     {
         Schema::create('CONTATOS', function (Blueprint $table) {
-            $table->id('ID');
+            $table->increments('ID');
             $table->string('TELEFONE');
             $table->string('EMAIL');
-            $table->unsignedBigInteger('ID_PRESTADOR');
-            $table->unsignedBigInteger('ID_SOLICITANTE');
-            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADOR');
-            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADOR');
+            $table->unsignedInteger('ID_PRESTADOR');
+            $table->unsignedInteger('ID_SOLICITANTE');
+            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -14,15 +14,15 @@ class CreateRegistrosLogTable extends Migration
     public function up()
     {
         Schema::create('REGISTROS_LOG', function (Blueprint $table) {
-            $table->id('ID');
+            $table->increments('ID');
             $table->dateTime('DATA');
             $table->longText('TEXTO');
-            $table->unsignedBigInteger('ID_ADMIN');
-            $table->unsignedBigInteger('ID_PRESTADOR');
-            $table->unsignedBigInteger('ID_SOLICITANTE');
-            $table->foreign('ID_ADMIN')->references('ID')->on('ADMIN');
-            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADOR');
-            $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTE');
+            $table->unsignedInteger('ID_ADMIN');
+            $table->unsignedInteger('ID_PRESTADOR');
+            $table->unsignedInteger('ID_SOLICITANTE');
+            $table->foreign('ID_ADMIN')->references('ID')->on('ADMIN')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

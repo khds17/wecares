@@ -14,19 +14,24 @@ class CreatePrestadoresTable extends Migration
     public function up()
     {
         Schema::create('PRESTADORES', function (Blueprint $table) {
-            $table->id('ID');
+            $table->increments('ID');
             $table->string('NOME',60);
             $table->string('CPF',15);
             $table->string('EMAIL',35);
             $table->string('SENHA',25);
             $table->string('SENHA_CONFIRMACAO',25);
             $table->string('TELEFONE',15);
-            $table->smallInteger('FORMACAO',1);
+            $table->unsignedInteger('FORMACAO');
             $table->date('DT_NASCIMENTO');
-            $table->unsignedBigInteger('ID_ENDERECO');
+            $table->string('CEP',13);
+            $table->string('ENDERECO',50);
+            $table->integer('NUMERO');
+            $table->string('COMPLEMENTO',25);
+            $table->string('BAIRRO',45);
+            $table->string('CIDADE',45);
+            $table->string('SIGLA',2);
             $table->enum('SEXO', ['M', 'F', 'O']);
-            $table->smallInteger('STATUS',1);
-            $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECO');
+            $table->unsignedInteger('STATUS');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class CreateBandeirasTable extends Migration
     public function up()
     {
         Schema::create('BANDEIRAS', function (Blueprint $table) {
-            $table->id('ID');
+            $table->increments('ID');
             $table->string('BANDEIRAS',25);
             $table->timestamps();
         });

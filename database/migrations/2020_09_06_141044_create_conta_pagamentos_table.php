@@ -14,14 +14,15 @@ class CreateContaPagamentosTable extends Migration
     public function up()
     {
         Schema::create('CONTA_PAGAMENTOS', function (Blueprint $table) {
-            $table->id('ID');
-            $table->smallInteger('AGENCIA');
-            $table->smallInteger('CONTA');
-            $table->smallInteger('TIPO_CONTA');
-            $table->unsignedBigInteger('ID_BANCO');
-            $table->unsignedBigInteger('ID_PRESTADOR');
-            $table->foreign('ID_BANCO')->references('ID')->on('BANCO');
-            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADOR');
+            $table->increments('ID');
+            $table->string('AGENCIA');
+            $table->string('CONTA');
+            $table->unsignedSmallInteger('TIPO_CONTA');
+            $table->unsignedInteger('STATUS');
+            $table->unsignedInteger('ID_BANCO');
+            $table->unsignedInteger('ID_PRESTADOR');
+            $table->foreign('ID_BANCO')->references('ID')->on('BANCOS')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

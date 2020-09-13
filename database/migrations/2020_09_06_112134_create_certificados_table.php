@@ -14,9 +14,9 @@ class CreateCertificadosTable extends Migration
     public function up()
     {
         Schema::create('CERTIFICADOS', function (Blueprint $table) {
-            $table->id('ID');
-            $table->unsignedBigInteger('ID_PRESTADOR');
-            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADOR');
+            $table->increments('ID');
+            $table->unsignedInteger('ID_PRESTADOR');
+            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
