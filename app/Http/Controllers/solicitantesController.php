@@ -29,11 +29,6 @@ class solicitantesController extends Controller
         return view('solicitantes/cadastro');
     }
 
-    public function servicosContratados()
-    {
-        return view('solicitantes/servicosContratados');
-    }
-
     public function pacienteCadastro()
     {
         return view('solicitantes/paciente');
