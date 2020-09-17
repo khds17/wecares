@@ -27,6 +27,8 @@ Route::get('/agradecimento','indexController@agradecimento');
 // ===========================================
 Route::resource('/paciente','pacientesController');
 // ===========================================
+Route::resource('/pagamentos','pagamentosController');
+// ===========================================
 Route::resource('/prestador','prestadorController');
 Route::get('/prestadorCadastro','prestadorController@dadosCadastrais');
 Route::get('/servicosPrestados','prestadorController@servicosPrestados');
@@ -35,7 +37,7 @@ Route::get('/recebimentos','prestadorController@recebimentos');
 Route::resource('/solicitante','solicitanteController');
 Route::get('/solicitanteCadastro','solicitanteController@dadosCadastrais');
 Route::get('/servicosContratados','solicitanteController@servicosContratados');
-Route::get('/pagamentos','solicitanteController@pagamentos');
+
 
 
 

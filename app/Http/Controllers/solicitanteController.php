@@ -34,11 +34,6 @@ class solicitanteController extends Controller
         return view('solicitante/servicosContratados');
     }
 
-    public function pagamentos()
-    {
-        return view('solicitante/pagamentos');
-    }
-
     public function pacienteCadastro()
     {
         return view('solicitante/paciente');
