@@ -13,52 +13,52 @@ class indexController extends Controller
      */
     public function index()
     {
-        return view('index');
+        return view('index/index');
     }
 
     public function sobre()
     {
-        return view('sobre');
+        return view('index/sobre');
     }
 
     public function termos()
     {
-        return view('termos');
+        return view('index/termos');
     }
 
     public function conduta()
     {
-        return view('conduta');
+        return view('index/conduta');
     }
 
     public function privacidade()
     {
-        return view('privacidade');
+        return view('index/privacidade');
     }
 
     public function login()
     {
-        return view('login');
+        return view('index/login');
     }
 
     public function agradecimento()
     {
-        return view('agradecimento-cadastro');
+        return view('index/agradecimento-cadastro');
     }
 
     public function encontrecuidador()
     {
-        return view('encontre-cuidador');
+        return view('index/encontre-cuidador');
     }
 
     public function resultado()
     {
-        return view('resultado-cuidador');
+        return view('index/resultado-cuidador');
     }
 
     public function perfil()
     {
-        return view('perfil-cuidador');
+        return view('index/perfil-cuidador');
     }
     /**
      * Show the form for creating a new resource.
