@@ -29,10 +29,10 @@ Route::resource('/paciente','pacientesController');
 // ===========================================
 Route::resource('/pagamentos','pagamentosController');
 // ===========================================
-Route::resource('/prestador','prestadorController');
-Route::get('/prestadorCadastro','prestadorController@dadosCadastrais');
-Route::get('/servicosPrestados','prestadorController@servicosPrestados');
-Route::get('/recebimentos','prestadorController@recebimentos');
+Route::resource('/prestador','prestadoresController');
+Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais');
+Route::get('/servicosPrestados','prestadoresController@servicosPrestados');
+Route::get('/recebimentos','prestadoresController@recebimentos');
 // ===========================================
 Route::resource('/solicitante','solicitanteController');
 Route::get('/solicitanteCadastro','solicitanteController@dadosCadastrais');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class prestadorController extends Controller
+class prestadoresController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,18 +18,18 @@ class prestadorController extends Controller
 
     public function dadosCadastrais()
     {
-        return view('prestador/cadastro');
+        return view('prestadores/cadastro');
     }
 
     
     public function servicosPrestados()
     {
-        return view('prestador/servicosPrestados');
+        return view('prestadores/servicosPrestados');
     }
 
     public function recebimentos()
     {
-        return view('prestador/recebimentos');
+        return view('prestadores/recebimentos');
     }
     /**
      * Show the form for creating a new resource.
@@ -38,7 +38,7 @@ class prestadorController extends Controller
      */
     public function create()
     {
-        return view('prestador/create');
+        return view('prestadores/create');
     }
 
     /**

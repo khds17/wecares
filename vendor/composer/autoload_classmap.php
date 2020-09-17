@@ -10,7 +10,7 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\indexController' => $baseDir . '/app/Http/Controllers/indexController.php',
-    'App\\Http\\Controllers\\prestadorController' => $baseDir . '/app/Http/Controllers/prestadorController.php',
+    'App\\Http\\Controllers\\prestadoresController' => $baseDir . '/app/Http/Controllers/prestadoresController.php',
     'App\\Http\\Controllers\\solicitanteController' => $baseDir . '/app/Http/Controllers/solicitanteController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
