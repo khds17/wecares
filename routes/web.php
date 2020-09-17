@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Route::get('/solicitante','solicitanteController@index');
+Route::resource('/admin','adminController');
+// ===========================================
 Route::resource('/','indexController');
 Route::get('/sobre','indexController@sobre');
 Route::get('/termos','indexController@termos');
@@ -22,14 +24,18 @@ Route::get('/resultado','indexController@resultado');
 Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
-Route::resource('/solicitante','solicitanteController');
-Route::get('/solicitanteCadastro','solicitanteController@dadosCadastrais');
-Route::get('/servicosContratados','solicitanteController@servicosContratados');
-Route::get('/pagamentos','solicitanteController@pagamentos');
-Route::get('/pacienteCadastro','solicitanteController@pacienteCadastro');
-Route::resource('/admin','adminController');
+// ===========================================
+Route::resource('/paciente','pacientesController');
+// ===========================================
 Route::resource('/prestador','prestadorController');
 Route::get('/prestadorCadastro','prestadorController@dadosCadastrais');
 Route::get('/servicosPrestados','prestadorController@servicosPrestados');
 Route::get('/recebimentos','prestadorController@recebimentos');
+// ===========================================
+Route::resource('/solicitante','solicitanteController');
+Route::get('/solicitanteCadastro','solicitanteController@dadosCadastrais');
+Route::get('/servicosContratados','solicitanteController@servicosContratados');
+Route::get('/pagamentos','solicitanteController@pagamentos');
+
+
 
