@@ -31,7 +31,8 @@ Route::resource('/pagamentos','pagamentosController');
 // ===========================================
 Route::resource('/prestador','prestadoresController');
 Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais');
-Route::get('/recebimentos','prestadoresController@recebimentos');
+// ===========================================
+Route::resource('/recebimentos','recebimentosController');
 // ===========================================
 Route::resource('/servico','servicosController');
 Route::get('/servicosContratados','servicosController@servicosContratados');
