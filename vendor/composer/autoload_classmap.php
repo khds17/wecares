@@ -11,7 +11,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\indexController' => $baseDir . '/app/Http/Controllers/indexController.php',
     'App\\Http\\Controllers\\prestadoresController' => $baseDir . '/app/Http/Controllers/prestadoresController.php',
-    'App\\Http\\Controllers\\solicitanteController' => $baseDir . '/app/Http/Controllers/solicitanteController.php',
+    'App\\Http\\Controllers\\solicitantesController' => $baseDir . '/app/Http/Controllers/solicitantesController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckForMaintenanceMode' => $baseDir . '/app/Http/Middleware/CheckForMaintenanceMode.php',

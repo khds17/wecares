@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/solicitante','solicitanteController@index');
+// Route::get('/solicitante','solicitantesController@index');
 Route::resource('/admin','adminController');
 // ===========================================
 Route::resource('/','indexController');
@@ -34,9 +34,9 @@ Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais');
 Route::get('/servicosPrestados','prestadoresController@servicosPrestados');
 Route::get('/recebimentos','prestadoresController@recebimentos');
 // ===========================================
-Route::resource('/solicitante','solicitanteController');
-Route::get('/solicitanteCadastro','solicitanteController@dadosCadastrais');
-Route::get('/servicosContratados','solicitanteController@servicosContratados');
+Route::resource('/solicitante','solicitantesController');
+Route::get('/solicitanteCadastro','solicitantesController@dadosCadastrais');
+Route::get('/servicosContratados','solicitantesController@servicosContratados');
 
 
 

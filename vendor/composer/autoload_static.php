@@ -491,7 +491,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\indexController' => __DIR__ . '/../..' . '/app/Http/Controllers/indexController.php',
         'App\\Http\\Controllers\\prestadoresController' => __DIR__ . '/../..' . '/app/Http/Controllers/prestadoresController.php',
-        'App\\Http\\Controllers\\solicitanteController' => __DIR__ . '/../..' . '/app/Http/Controllers/solicitanteController.php',
+        'App\\Http\\Controllers\\solicitantesController' => __DIR__ . '/../..' . '/app/Http/Controllers/solicitantesController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',

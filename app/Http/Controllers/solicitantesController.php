@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\solicitante;
 
 
-class solicitanteController extends Controller
+class solicitantesController extends Controller
 {
 
     private $solicitante;
@@ -20,23 +20,23 @@ class solicitanteController extends Controller
     {
         
         $solicitante = $this->solicitante->all();
-        return view('solicitante/index',compact('solicitante'));
+        return view('solicitantes/index',compact('solicitante'));
         
     }
 
     public function dadosCadastrais()
     {
-        return view('solicitante/cadastro');
+        return view('solicitantes/cadastro');
     }
 
     public function servicosContratados()
     {
-        return view('solicitante/servicosContratados');
+        return view('solicitantes/servicosContratados');
     }
 
     public function pacienteCadastro()
     {
-        return view('solicitante/paciente');
+        return view('solicitantes/paciente');
     }
     /**
      * Show the form for creating a new resource.
@@ -45,7 +45,7 @@ class solicitanteController extends Controller
      */
     public function create()
     {
-        return view('solicitante/create');
+        return view('solicitantes/create');
     }
 
     /**
@@ -71,7 +71,7 @@ class solicitanteController extends Controller
                 'status'=>$request->status
             ]);
         if($solicitante){
-            return redirect('solicitante');
+            return redirect('solicitantes');
         }
     }
 
@@ -85,7 +85,7 @@ class solicitanteController extends Controller
     {
         
         $solicitante=$this->solicitante->find($id);
-        return view('solicitante/information',compact('solicitante'));
+        return view('solicitantes/information',compact('solicitante'));
     }
 
     /**
@@ -97,7 +97,7 @@ class solicitanteController extends Controller
     public function edit($id)
     {
         $edit=$this->solicitante->find($id);
-        return view('solicitante/create',compact('edit'));
+        return view('solicitantes/create',compact('edit'));
 
     }
 
@@ -124,7 +124,7 @@ class solicitanteController extends Controller
             'nivelfamiliaridadeoutros'=>$request->nivelfamiliaridadeoutros,
             'status'=>$request->status
         ]);
-        return redirect('solicitante');
+        return redirect('solicitantes');
     }
 
     /**
