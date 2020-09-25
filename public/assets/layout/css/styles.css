@@ -206,7 +206,7 @@ a:hover {
 }
 
 a:not([href]) {
-  color: inherit;
+  color: #fff;
   text-decoration: none;
 }
 a:not([href]):hover {
