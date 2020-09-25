@@ -85,10 +85,10 @@
                                     <a class="small" href="forgot-password.html">Esqueceu a senha?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="{{url("/create")}}">Crie uma conta de solicitante!</a>
+                                    <a class="small" href="{{url("solicitante/create")}}">Crie uma conta de solicitante!</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="{{url("/encontrecuidador")}}">Crie uma conta de cuidador!</a>
+                                    <a class="small" href="{{url("prestador/create")}}">Crie uma conta de cuidador!</a>
                                 </div>
                                 </div>
                                 <div class="modal-footer">
