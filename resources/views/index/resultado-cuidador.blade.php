@@ -9,10 +9,10 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container padding-top-50">
             <div class="row features text-center mb-10">
                 <div class="col-lg-4 col-md-6 mb-5">
-                    <a class="card card-link border-top border-top-lg border-primary h-100 lift" href="{{url("/perfil")}}">
+                    <a class="card card-link border-top border-top-lg border-primary h-100 lift" href="{{url("")}}">
                         <div class="card-body p-5">
                             <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div>
                             <h6>Nome</h6>
@@ -22,7 +22,7 @@
                             <div class="small text-gray-500 text-left">Avaliação</div>                            
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
-                            <div class="small text-primary">Veja o perfil</div>
+                            <div class="small text-primary">Selecionar</div>
                         </div>
                     </a>
                 </div>
@@ -33,4 +33,9 @@
         </div>
     </div>
 </header>
+<div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
+    <div class="float-right">
+        <a class="btn-cyan btn rounded-pill px-4 ml-lg-4">Contratar</a>
+    </div>
+</div>
 @endsection
