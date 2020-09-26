@@ -8,7 +8,7 @@
                                 <div class="container">
                                     <div class="row align-items-center">
                                         <div class="col-lg-6" data-aos="fade-up">
-                                            <h1 class="page-header-title text-center">Conectamos pessoas que queiram encontrar cuidadores profissionais</h1>
+                                            <h1 class="page-header-title text-center">Conectamos pessoas que desejam encontrar cuidadores profissionais</h1>
                                             <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> -->
                                             <a class="btn btn-purple btn-marketing btn-block rounded-pill lift lift-sm" href="{{url("/encontrecuidador")}}">Encontre um cuidador</a>
                                             <a class="btn btn-green btn-marketing btn-block rounded-pill lift lift-sm" href="{{url("prestador/create")}}">Seja um cuidador</a>
@@ -27,7 +27,7 @@
                                         <div class="col-lg-6" data-aos="fade-up">
                                             <h2>O que somos?</h2>
                                             <p>Wecares é uma plataforma que conecta pessoas à profissionais que prestam serviços de cuidados pessoais.
-                                               Queremos ajudar você a encontrar profissionais de todo o Brasil que oferecem serviços com qualidade e segurança</p>
+                                               Queremos ajudar você a encontrar profissionais de todo Brasil que ofereçam serviços com qualidade e segurança</p>
                                             <p>Quer entender como contratar um profissional? Então <a href="{{url("/")}}">clique aqui</a>(*Abrir modal com video*)</p>                                            <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> -->
                                         </div>
                                         <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/layout/img/cuidados.png" /></div>
