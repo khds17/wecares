@@ -75,7 +75,7 @@
                                     <label for="formacao">Formação</label><br>
                                     <input type="radio" name="formacao" id="feminino"> Cuidadora <br> 
                                     <input type="radio" name="formacao" id="masculino"> Enfermeira
-                            </div>
+                                </div>
                                 <div class="col font-color-gray">
                                     <label for="certificado">Certificado</label>
                                     <input type="file" name="certificadoFormacao" id="certificadoFormacao" required>
@@ -100,6 +100,7 @@
                         </form>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>

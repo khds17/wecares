@@ -32,10 +32,132 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
         </div>
     </div>
-</header>
-<div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
-    <div class="float-right">
-        <a class="btn-cyan btn rounded-pill px-4 ml-lg-4">Solicitar serviço</a>
+    <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
+        <div class="float-right">
+            <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" data-toggle= "modal" data-target="#modalServico">Solicitar serviço</a>
+        </div>
     </div>
-</div>
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="modalServico" tabindex="-1" role="dialog" aria-labelledby="modalServicoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalServicoLabel">Informações da solicitação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form class="user">
+                    @csrf
+                    <div class="form-group">
+                        <label for="paciente" class="text-dark">Paciente</label><br>
+                        <select name="select" class="custom-select">
+                            <option value="valor1">Kauan Henrique</option> 
+                        </select>                      
+                    </div>
+                    <div class="row margin-top-10">
+                                <div class="col">
+                                    <label for="paciente" class="text-dark">O paciente é?</label><br>
+                                    <select name="select" class="custom-select">
+                                            <option value="valor1">Ex: Bebê, adulto ou criança</option> 
+                                            <option value="valor1">Bebê</option> 
+                                            <option value="valor1">Criança</option> 
+                                            <option value="valor1">Adolescente</option>
+                                            <option value="valor1">Adulto</option>
+                                            <option value="valor1">Idoso</option>
+                                    </select>                                  
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <label for="paciente" class="text-dark">Onde o paciente está localizado?</label><br>
+                                    <select name="select" class="custom-select">
+                                        <option value="valor1">Casa de retiro</option> 
+                                        <option value="valor1">Hospital</option> 
+                                        <option value="valor1">Residência</option>
+                                     </select>   
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="text" name="cep" id="cep" placeholder="CEP" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço" required>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" name="numero" id="numero" placeholder="Número" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Cidade" required>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Bairro" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="text" name="complemento" id="complemento" placeholder="Complemento" required>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" name="estado" id="estado" placeholder="UF" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col font-color-gray">
+                                    <label for="formacao">Serviços que deverão ser realizados</label><br>
+                                    <input type="checkbox" name="acompanhamentos" id="feminino"> Acompanhamentos em saídas <br> 
+                                    <input type="checkbox" name="medicamentos" id="masculino"> Administratação de medicamentos <br> 
+                                    <input type="checkbox" name="refeicao" id="masculino"> Administratação de refeições <br> 
+                                    <input type="checkbox" name="banho" id="masculino"> Banho <br> 
+                                    <input type="checkbox" name="companhia" id="masculino"> Companhia <br> 
+                                    <input type="checkbox" name="outros" id="masculino"> <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Outros" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col font-color-gray">
+                                    <label class ="" for="formacao">Data e hora do serviço:</label><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="date" name="dataservico" id="dataservico" placeholder="Data do serviço">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="datetime" name="horaservico" id="horaservico" placeholder="Horário de início ">
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="datetime" name="horaservico" id="horaservico" placeholder="Horário do fim">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row margin-top-10">
+                                <div class="col font-color-gray">
+                                    <label class ="" for="">Adicionar mais</label><br>        
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row margin-top-10">
+                                <div class="col font-color-gray">
+                                    <label class ="" for="formacao">Valor total do serviço:</label><br>                                
+                                </div>
+                            </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Enviar proposta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 @endsection
