@@ -10,7 +10,7 @@
                                         <div class="col-lg-6" data-aos="fade-up">
                                             <h1 class="page-header-title text-center">Conectamos pessoas que desejam encontrar cuidadores profissionais</h1>
                                             <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> -->
-                                            <a class="btn btn-purple btn-marketing btn-block rounded-pill lift lift-sm" href="{{url("/encontrecuidador")}}">Encontre um cuidador</a>
+                                            <a class="btn btn-purple btn-marketing btn-block rounded-pill lift lift-sm" href="{{url("/encontrecuidador")}}">Encontre cuidadores</a>
                                             <a class="btn btn-green btn-marketing btn-block rounded-pill lift lift-sm" href="{{url("prestador/create")}}">Seja um cuidador</a>
                                         </div>
                                         <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/layout/img/cuidadores.svg" /></div>

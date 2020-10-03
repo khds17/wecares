@@ -300,6 +300,13 @@
                 <!-- End of Footer -->
             </div>
             <!-- End of Content Wrapper -->
+            <!-- Botão de contratação -->
+            <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
+                <div class="float-right">
+                    <a class="btn-purple btn rounded-pill px-4 ml-lg-4">Encontre cuidadores</a>
+                </div>
+            </div>  
+            <!-- Fim do botão -->
         </div>
           <!-- End of Page Wrapper -->
 
