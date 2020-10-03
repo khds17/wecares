@@ -35,7 +35,7 @@
 </header>
 <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
     <div class="float-right">
-        <a class="btn-cyan btn rounded-pill px-4 ml-lg-4">Contratar</a>
+        <a class="btn-cyan btn rounded-pill px-4 ml-lg-4">Solicitar serviço</a>
     </div>
 </div>
 @endsection
