@@ -11,15 +11,15 @@
                             @csrf
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="nome" id="nome" placeholder="Nome completo" required><br>
+                                    <input class="form-control" type="text" name="prestadorNome" id="prestadorNome" placeholder="Nome completo" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="cpf" name="cpf" id="cpf" placeholder="CPF" required> 
+                                    <input class="form-control" type="prestadorCPF" name="prestadorCPF" id="cpf" placeholder="CPF" required> 
                                 </div>
                                 <div class="col">
-                                <input class="form-control" type="date" name="nascimento" id="nascimento" placeholder="Data de nascimento" required ><br>
+                                <input class="form-control" type="date" name="prestadorNascimento" id="prestadorNascimento" placeholder="Data de nascimento" required ><br>
                                 </div>
                             </div>       
                             <div class="font-color-gray"> 
@@ -30,51 +30,51 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required><br>
+                                    <input class="form-control" type="email" name="prestadorEmail" id="prestadorEmail" placeholder="E-mail" required><br>
                                 </div>
                             </div>    
                             <div class="row margin-top-10">
                                 <div class="col">
-                                <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha" required>
+                                <input class="form-control" type="password" name="prestadorSenha" id="prestadorSenha" placeholder="Senha" required>
                                 </div>
                                 <div class="col">
-                                <input class="form-control" type="password" name="confirmarsenha" id="confirmarsenha" placeholder="Confirme a senha" required><br>
-                                </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="text" name="cep" id="cep" placeholder="CEP" required><br>
+                                <input class="form-control" type="password" name="prestadorConfirmarSenha" id="prestadorConfirmarSenha" placeholder="Confirme a senha" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço" required>
-                                </div>
-                                <div class="col">
-                                    <input class="form-control" type="text" name="numero" id="numero" placeholder="Número" required><br>
+                                    <input class="form-control" type="text" name="prestadorCep" id="prestadorCep" placeholder="CEP" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Cidade" required>
+                                    <input class="form-control" type="text" name="prestadorEndereco" id="prestadorEndereco" placeholder="Endereço" required>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Bairro" required><br>
+                                    <input class="form-control" type="text" name="prestadorNumero" id="prestadorNumero" placeholder="Número" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="complemento" id="complemento" placeholder="Complemento" required>
+                                    <input class="form-control" type="text" name="prestadorCidade" id="prestadorCidade" placeholder="Cidade" required>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="estado" id="estado" placeholder="UF" required><br>
+                                    <input class="form-control" type="text" name="prestadorBairro" id="prestadorBairro" placeholder="Bairro" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="text" name="prestadorComplemento" id="prestadorComplemento" placeholder="Complemento" required>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" name="prestadorEstado" id="prestadorEstado" placeholder="UF" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Formação</label><br>
-                                    <input type="radio" name="formacao" id="feminino"> Cuidadora <br> 
-                                    <input type="radio" name="formacao" id="masculino"> Enfermeira
+                                    <input type="radio" name="formacao" id="formacao"> Cuidadora <br> 
+                                    <input type="radio" name="formacao" id="formacao"> Enfermeira
                                 </div>
                                 <div class="col font-color-gray">
                                     <label for="certificado">Certificado</label>
@@ -85,13 +85,13 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="antecedentes">Antecedentes criminais</label><br>
-                                    <input type="file" name="certificadoFormacao" id="certificadoFormacao" required>
+                                    <input type="file" name="antecedentes" id="antecedentes" required>
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <input type="checkbox" name="" id="">
+                                    <input type="checkbox" name="termos" id="termos" required>
                                     <a href="{{url("/termos")}}" target="_blank">Termos </a><label>e</label><a href="{{url("/conduta")}}" target="_blank"> Código de conduta</a>
                                 </div>
                             </div>

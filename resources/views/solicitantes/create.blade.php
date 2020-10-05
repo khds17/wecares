@@ -18,47 +18,47 @@
                             @csrf
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="nome" id="nome" placeholder="Nome:" value="{{$edit->nome ?? ''}}"><br>
+                                    <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome:" required value="{{$edit->nome ?? ''}}"><br>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control"type="email" name="email" id="email" placeholder="E-mail:" value="{{$edit->email ?? ''}}">
-                                </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha" required>
-                                </div>
-                                <div class="col">
-                                <input class="form-control" type="password" name="confirmarsenha" id="confirmarsenha" placeholder="Confirme a senha" required><br>
+                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail:" required value="{{$edit->email ?? ''}}">
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="cep" id="cep" placeholder="CEP" required><br>
+                                <input class="form-control" type="password" name="solicitanteSenha" id="solicitanteSenha" placeholder="Senha" required>
+                                </div>
+                                <div class="col">
+                                <input class="form-control" type="password" name="solicitanteConfirmarSenha" id="solicitanteConfirmarSenha" placeholder="Confirme a senha" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço" required>
-                                </div>
-                                <div class="col">
-                                    <input class="form-control" type="text" name="numero" id="numero" placeholder="Número" required><br>
+                                    <input class="form-control" type="text" name="solicitanteCep" id="solicitanteCep" placeholder="CEP" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Cidade" required>
+                                    <input class="form-control" type="text" name="solicitanteEndereco" id="solicitanteEndereco" placeholder="Endereço" required>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Bairro" required><br>
+                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="complemento" id="complemento" placeholder="Complemento" required>
+                                    <input class="form-control" type="text" name="solicitanteCidade" id="solicitanteCidade" placeholder="Cidade" required>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="estado" id="estado" placeholder="UF" required><br>
+                                    <input class="form-control" type="text" name="solicitanteBairro" id="solicitanteBairro" placeholder="Bairro" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento" required>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" name="solicitanteEstado" id="solicitanteEstado" placeholder="UF" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
@@ -80,13 +80,13 @@
                             @csrf
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="nomePaciente" id="nomePaciente" placeholder="Nome do paciente:" value="{{$edit->nome ?? ''}}"><br>
+                                    <input class="form-control"type="text" name="nomePaciente" id="nomePaciente" placeholder="Nome do paciente:" required"><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <label for="paciente" class="text-dark">O paciente é?</label><br>
-                                    <select name="select" class="custom-select">
+                                    <label for="idadePaciente" class="text-dark">O paciente é?</label><br>
+                                    <select name="select" class="custom-select" required>
                                             <option value="valor1">Ex: Bebê, adulto ou criança</option> 
                                             <option value="valor1">Bebê</option> 
                                             <option value="valor1">Criança</option> 
@@ -99,8 +99,8 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <label for="paciente" class="text-dark">Onde o paciente está localizado?</label><br>
-                                    <select name="select" class="custom-select">
+                                    <label for="localidadePaciente" class="text-dark">Onde o paciente está localizado?</label><br>
+                                    <select name="select" class="custom-select" required>
                                         <option value="valor1">Casa de retiro</option> 
                                         <option value="valor1">Hospital</option> 
                                         <option value="valor1">Residência</option>
@@ -110,42 +110,42 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="cep" id="cep" placeholder="CEP" required><br>
+                                    <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço" required>
+                                    <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" required>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="numero" id="numero" placeholder="Número" required><br>
-                                </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Cidade" required>
-                                </div>
-                                <div class="col">
-                                    <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Bairro" required><br>
+                                    <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="complemento" id="complemento" placeholder="Complemento" required>
+                                    <input class="form-control" type="text" name="pacienteCidade" id="pacienteCidade" placeholder="Cidade" required>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="estado" id="estado" placeholder="UF" required><br>
+                                    <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" required><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" required>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" name="pacienteEstado" id="pacienteEstado" placeholder="UF" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Serviços que deverão ser realizados</label><br>
-                                    <input type="checkbox" name="acompanhamentos" id="feminino"> Acompanhamentos em saídas <br> 
-                                    <input type="checkbox" name="medicamentos" id="masculino"> Administratação de medicamentos <br> 
-                                    <input type="checkbox" name="refeicao" id="masculino"> Administratação de refeições <br> 
-                                    <input type="checkbox" name="banho" id="masculino"> Banho <br> 
-                                    <input type="checkbox" name="companhia" id="masculino"> Companhia <br> 
-                                    <input type="checkbox" name="outros" id="masculino"> <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Outros" required><br>
+                                    <input type="checkbox" name="acompanhamentos" id="acompanhamentos"> Acompanhamentos em saídas <br> 
+                                    <input type="checkbox" name="medicamentos" id="medicamentos"> Administratação de medicamentos <br> 
+                                    <input type="checkbox" name="refeicao" id="refeicao"> Administratação de refeições <br> 
+                                    <input type="checkbox" name="banho" id="banho"> Banho <br> 
+                                    <input type="checkbox" name="companhia" id="companhia"> Companhia <br> 
+                                    <input type="checkbox" name="outros" id="outros"> <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
                                 </div>
                             </div>
                             <br>
