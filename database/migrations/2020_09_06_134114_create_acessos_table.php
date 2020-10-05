@@ -16,9 +16,9 @@ class CreateAcessosTable extends Migration
         Schema::create('ACESSOS', function (Blueprint $table) {
             $table->increments('ID');
             $table->unsignedSmallInteger('TIPO_CONTA');
-            $table->unsignedInteger('ID_ADMIN');
-            $table->unsignedInteger('ID_PRESTADOR');
-            $table->unsignedInteger('ID_SOLICITANTE');
+            $table->unsignedInteger('ID_ADMIN')->nullabel();
+            $table->unsignedInteger('ID_PRESTADOR')->nullabel();;
+            $table->unsignedInteger('ID_SOLICITANTE')->nullabel();;
             $table->foreign('ID_ADMIN')->references('ID')->on('ADMIN')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');

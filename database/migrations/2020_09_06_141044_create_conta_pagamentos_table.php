@@ -15,8 +15,8 @@ class CreateContaPagamentosTable extends Migration
     {
         Schema::create('CONTA_PAGAMENTOS', function (Blueprint $table) {
             $table->increments('ID');
-            $table->string('AGENCIA');
-            $table->string('CONTA');
+            $table->string('AGENCIA',10);
+            $table->string('CONTA',15);
             $table->unsignedSmallInteger('TIPO_CONTA');
             $table->unsignedInteger('STATUS');
             $table->unsignedInteger('ID_BANCO');

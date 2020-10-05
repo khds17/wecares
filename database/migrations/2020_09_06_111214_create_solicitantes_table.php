@@ -15,20 +15,19 @@ class CreateSolicitantesTable extends Migration
     {
         Schema::create('SOLICITANTES', function (Blueprint $table) {
             $table->increments('ID');
-            $table->string('NOME',60);
-            $table->string('EMAIL',35);
+            $table->string('NOME',255);
+            $table->string('EMAIL',255);
             $table->string('SENHA',25);
-            $table->string('SENHA_CONFIRMACAO',25);
             $table->string('TELEFONE',15);
             $table->string('CEP',13);
-            $table->string('ENDERECO',50);
+            $table->string('ENDERECO',255);
             $table->integer('NUMERO');
-            $table->string('COMPLEMENTO',25);
+            $table->string('COMPLEMENTO',255);
             $table->string('BAIRRO',45);
             $table->string('CIDADE',45);
             $table->string('SIGLA',2);
             $table->unsignedSmallInteger('TIPO_FAMILIAR');
-            $table->string('TIPO_FAMILIAR_OUTROS',20);
+            $table->string('TIPO_FAMILIAR_OUTROS',20)->nullalbel();
             $table->unsignedInteger('STATUS');
             $table->timestamps();
         });

@@ -15,18 +15,17 @@ class CreatePrestadoresTable extends Migration
     {
         Schema::create('PRESTADORES', function (Blueprint $table) {
             $table->increments('ID');
-            $table->string('NOME',60);
+            $table->string('NOME',255);
             $table->string('CPF',15);
             $table->string('EMAIL',35);
             $table->string('SENHA',25);
-            $table->string('SENHA_CONFIRMACAO',25);
             $table->string('TELEFONE',15);
             $table->unsignedInteger('FORMACAO');
             $table->date('DT_NASCIMENTO');
             $table->string('CEP',13);
-            $table->string('ENDERECO',50);
+            $table->string('ENDERECO',255);
             $table->integer('NUMERO');
-            $table->string('COMPLEMENTO',25);
+            $table->string('COMPLEMENTO',255);
             $table->string('BAIRRO',45);
             $table->string('CIDADE',45);
             $table->string('SIGLA',2);

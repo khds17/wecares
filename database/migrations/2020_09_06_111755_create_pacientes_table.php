@@ -15,15 +15,15 @@ class CreatePacientesTable extends Migration
     {
         Schema::create('PACIENTES', function (Blueprint $table) {
             $table->increments('ID');
-            $table->string('NOME',60);
+            $table->string('NOME',255);
             $table->longText('OBSERVACAO');
             $table->enum('SEXO', ['M', 'F', 'O']);
             $table->string('TELEFONE',15);
             $table->date('DT_NASCIMENTO');
             $table->string('CEP',13);
-            $table->string('ENDERECO',50);
+            $table->string('ENDERECO',255);
             $table->integer('NUMERO');
-            $table->string('COMPLEMENTO',25);
+            $table->string('COMPLEMENTO',255);
             $table->string('BAIRRO',45);
             $table->string('CIDADE',45);
             $table->string('SIGLA',2);

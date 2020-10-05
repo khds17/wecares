@@ -16,7 +16,7 @@ class CreateFormasPagamentoTable extends Migration
         Schema::create('FORMAS_PAGAMENTO', function (Blueprint $table) {
             $table->increments('ID');
             $table->unsignedSmallInteger('NUMERO');
-            $table->string('VENCIMENTO');
+            $table->string('VENCIMENTO',10);
             $table->unsignedSmallInteger('CCV');
             $table->unsignedInteger('STATUS');
             $table->unsignedInteger('ID_BANDEIRA');

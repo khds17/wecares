@@ -19,7 +19,7 @@ class CreateServicosTable extends Migration
             $table->unsignedInteger('ID_SOLICITANTE');
             $table->unsignedInteger('ID_PACIENTE');
             $table->unsignedSmallInteger('STATUS');
-            $table->unsignedSmallInteger('VALOR');
+            $table->float('VALOR',8,2);
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_PACIENTE')->references('ID')->on('PACIENTES')->onDelete('cascade')->onUpdate('cascade');

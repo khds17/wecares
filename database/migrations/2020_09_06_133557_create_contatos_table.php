@@ -17,8 +17,8 @@ class CreateContatosTable extends Migration
             $table->increments('ID');
             $table->string('TELEFONE');
             $table->string('EMAIL');
-            $table->unsignedInteger('ID_PRESTADOR');
-            $table->unsignedInteger('ID_SOLICITANTE');
+            $table->unsignedInteger('ID_PRESTADOR')->nullabel();
+            $table->unsignedInteger('ID_SOLICITANTE')->nullabel();
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
