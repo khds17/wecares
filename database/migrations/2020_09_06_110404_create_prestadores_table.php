@@ -29,7 +29,7 @@ class CreatePrestadoresTable extends Migration
             $table->unsignedInteger('ID_BAIRRO');
             $table->string('CIDADE',45);
             $table->string('SIGLA',2);
-            $table->enum('SEXO', ['M', 'F', 'O']);
+            $table->enum('SEXO', ['M', 'F']);
             $table->unsignedInteger('STATUS');
             $table->foreign('ID_BAIRRO')->references('ID')->on('BAIRROS')->onDelete('cascade')->onUpdate('cascade');
         });

@@ -26,7 +26,6 @@
                                 <label for="sexo">Sexo:</label> &nbsp;&nbsp;  
                                 <input type="radio" name="sexo" id="feminino"> Feminino &nbsp;
                                 <input type="radio" name="sexo" id="masculino"> Masculino &nbsp;
-                                <input type="radio" name="sexo" id="outrosexo"> Outro
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">

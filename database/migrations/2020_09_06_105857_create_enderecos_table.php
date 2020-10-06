@@ -18,7 +18,11 @@ class CreateEnderecosTable extends Migration
             $table->string('ENDERECO',255);
             $table->string('CEP',13);
             $table->unsignedInteger('ID_BAIRRO');
+            $table->unsignedInteger('ID_CIDADE');
+            $table->unsignedInteger('ID_ESTADO');
             $table->foreign('ID_BAIRRO')->references('ID')->on('BAIRROS')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_CIDADE')->references('ID')->on('CIDADES')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_ESTADO')->references('ID')->on('ESTADOS')->onDelete('cascade')->onUpdate('cascade');
             
         });
     }

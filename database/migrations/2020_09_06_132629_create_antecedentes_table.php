@@ -15,6 +15,7 @@ class CreateAntecedentesTable extends Migration
     {
         Schema::create('ANTEDECENTES', function (Blueprint $table) {
             $table->increments('ID');
+            $table->string('ANTEDECENTE',255);
             $table->unsignedInteger('ID_PRESTADOR');
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             
