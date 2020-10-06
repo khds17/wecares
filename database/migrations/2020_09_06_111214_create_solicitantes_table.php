@@ -29,7 +29,7 @@ class CreateSolicitantesTable extends Migration
             $table->unsignedSmallInteger('TIPO_FAMILIAR');
             $table->string('TIPO_FAMILIAR_OUTROS',20)->nullalbel();
             $table->unsignedInteger('STATUS');
-            $table->timestamps();
+            
         });
     }
 

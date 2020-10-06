@@ -17,7 +17,7 @@ class CreateEstadosTable extends Migration
             $table->increments('ID');
             $table->string('ESTADO');
             $table->string('SIGLA',2);
-            $table->timestamps();
+            
         });
     }
 

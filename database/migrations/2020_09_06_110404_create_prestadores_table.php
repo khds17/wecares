@@ -26,12 +26,12 @@ class CreatePrestadoresTable extends Migration
             $table->string('ENDERECO',255);
             $table->integer('NUMERO');
             $table->string('COMPLEMENTO',255);
-            $table->string('BAIRRO',45);
+            $table->unsignedInteger('ID_BAIRRO');
             $table->string('CIDADE',45);
             $table->string('SIGLA',2);
             $table->enum('SEXO', ['M', 'F', 'O']);
             $table->unsignedInteger('STATUS');
-            $table->timestamps();
+            $table->foreign('ID_BAIRRO')->references('ID')->on('BAIRROS')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -19,7 +19,7 @@ class CreateAdminTable extends Migration
             $table->string('EMAIL',35);
             $table->string('SENHA',25);
             $table->string('SENHA_CONFIRMACAO',25);
-            $table->timestamps();
+            
         });
     }
 

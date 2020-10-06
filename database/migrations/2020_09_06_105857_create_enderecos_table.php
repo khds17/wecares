@@ -19,7 +19,7 @@ class CreateEnderecosTable extends Migration
             $table->string('CEP',13);
             $table->unsignedInteger('ID_BAIRRO');
             $table->foreign('ID_BAIRRO')->references('ID')->on('BAIRROS')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            
         });
     }
 

@@ -23,7 +23,7 @@ class CreateContaPagamentosTable extends Migration
             $table->unsignedInteger('ID_PRESTADOR');
             $table->foreign('ID_BANCO')->references('ID')->on('BANCOS')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            
         });
     }
 

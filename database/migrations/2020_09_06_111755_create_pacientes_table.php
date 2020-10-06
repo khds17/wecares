@@ -30,7 +30,7 @@ class CreatePacientesTable extends Migration
             $table->unsignedInteger('STATUS');
             $table->unsignedInteger('ID_SOLICITANTE');
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            
         });
     }
 

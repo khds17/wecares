@@ -17,7 +17,7 @@ class CreateCertificadosTable extends Migration
             $table->increments('ID');
             $table->unsignedInteger('ID_PRESTADOR');
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            
         });
     }
 

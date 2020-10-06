@@ -17,7 +17,7 @@ class CreateBancosTable extends Migration
             $table->increments('ID');
             $table->string('BANCO',20);
             $table->string('COD_BANCO',20);
-            $table->timestamps();
+            
         });
     }
 

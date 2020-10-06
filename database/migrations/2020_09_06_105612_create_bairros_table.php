@@ -18,7 +18,7 @@ class CreateBairrosTable extends Migration
             $table->string('BAIRRO',45);
             $table->unsignedInteger('ID_CIDADE');
             $table->foreign('ID_CIDADE')->references('ID')->on('CIDADES')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            
         });
     }
 

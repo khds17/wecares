@@ -23,7 +23,7 @@ class CreateFormasPagamentoTable extends Migration
             $table->unsignedInteger('ID_SOLICITANTE');
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_BANDEIRA')->references('ID')->on('BANDEIRAS')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            
         });
     }
 
