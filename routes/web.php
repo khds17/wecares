@@ -45,3 +45,7 @@ Route::get('/solicitanteCadastro','solicitantesController@dadosCadastrais');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
