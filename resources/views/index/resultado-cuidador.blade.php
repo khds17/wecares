@@ -123,6 +123,14 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
+                                    <label for="formacao">Paciente toma medicamentos?</label><br>
+                                    <input type="radio" name="formacao" id="formacao"> Sim <br> 
+                                    <input type="radio" name="formacao" id="formacao"> Não
+                                    <input class="form-control" type="text" name="medicamentos" id="medicamentos" placeholder="Quais?"><br>
+                                </div>
+                            </div>
+                            <div class="row margin-top-10">
+                                <div class="col font-color-gray">
                                     <label class ="" for="formacao">Data e hora do serviço:</label><br>
                                 </div>
                             </div>
@@ -141,12 +149,12 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="row margin-top-10">
+                            <!-- <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label class ="" for="">Adicionar mais</label><br>        
                                 </div>
                             </div>
-                            <br>
+                            <br> -->
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label class ="" for="formacao">Valor total do serviço:</label><br>                                

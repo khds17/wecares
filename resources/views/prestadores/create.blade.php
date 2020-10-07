@@ -19,13 +19,19 @@
                                     <input class="form-control" type="prestadorCPF" name="prestadorCPF" id="cpf" placeholder="CPF" required> 
                                 </div>
                                 <div class="col">
-                                <input class="form-control" type="date" name="prestadorNascimento" id="prestadorNascimento" placeholder="Data de nascimento" required ><br>
+                                    <input class="form-control" type="text" name="prestadorNumero" id="prestadorNumero" placeholder="Número do celular" required ><br>
                                 </div>
-                            </div>       
-                            <div class="font-color-gray"> 
-                                <label for="sexo">Sexo:</label> &nbsp;&nbsp;  
-                                <input type="radio" name="sexo" id="feminino"> Feminino &nbsp;
-                                <input type="radio" name="sexo" id="masculino"> Masculino &nbsp;
+                            </div>    
+                            <div class="row margin-top-10">   
+                                <div class="font-color-gray col"> 
+                                    <label for="sexo">Data de nascimento:</label>
+                                    <input class="form-control" type="date" name="prestadorNascimento" id="prestadorNascimento" placeholder="Data de nascimento" required ><br>
+                                </div>
+                                <div class="font-color-gray col">
+                                    <label for="sexo">Sexo:</label> &nbsp;&nbsp; <br>
+                                    <input type="radio" name="sexo" id="feminino"> Feminino &nbsp;<br>
+                                    <input type="radio" name="sexo" id="masculino"> Masculino &nbsp;
+                                </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">

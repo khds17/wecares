@@ -21,9 +21,17 @@
                                     <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome:" required value="{{$edit->nome ?? ''}}"><br>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail:" required value="{{$edit->email ?? ''}}">
+                                    <input class="form-control" type="solicitanteCPF" name="solicitanteCPF" id="cpf" placeholder="CPF" required> 
                                 </div>
                             </div>
+                            <div class="row margin-top-10">
+                                <div class="col">
+                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail:" required value="{{$edit->email ?? ''}}">
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número do celular" required ><br>
+                                </div>
+                            </div>    
                             <div class="row margin-top-10">
                                 <div class="col">
                                 <input class="form-control" type="password" name="solicitanteSenha" id="solicitanteSenha" placeholder="Senha" required>
@@ -146,6 +154,12 @@
                                     <input type="checkbox" name="banho" id="banho"> Banho <br> 
                                     <input type="checkbox" name="companhia" id="companhia"> Companhia <br> 
                                     <input type="checkbox" name="outros" id="outros"> <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
+                                </div>
+                                <div class="col font-color-gray">
+                                    <label for="formacao">Paciente toma medicamentos?</label><br>
+                                    <input type="radio" name="formacao" id="formacao"> Sim <br> 
+                                    <input type="radio" name="formacao" id="formacao"> Não
+                                    <input class="form-control" type="text" name="medicamentos" id="medicamentos" placeholder="Quais?"><br>
                                 </div>
                             </div>
                             <br>
