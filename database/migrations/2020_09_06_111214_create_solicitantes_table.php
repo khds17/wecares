@@ -16,20 +16,15 @@ class CreateSolicitantesTable extends Migration
         Schema::create('SOLICITANTES', function (Blueprint $table) {
             $table->increments('ID');
             $table->string('NOME',255);
+            $table->string('CPF',15);
             $table->string('EMAIL',255);
-            $table->string('SENHA',25);
             $table->string('TELEFONE',15);
-            $table->string('CEP',13);
-            $table->string('ENDERECO',255);
-            $table->integer('NUMERO');
-            $table->string('COMPLEMENTO',255);
-            $table->string('BAIRRO',45);
-            $table->string('CIDADE',45);
-            $table->string('SIGLA',2);
-            $table->unsignedSmallInteger('TIPO_FAMILIAR');
-            $table->string('TIPO_FAMILIAR_OUTROS',20)->nullalbel();
+            $table->string('SENHA',25);
+            $table->unsignedInteger('ID_ENDERECO');
+            $table->string('TIPO_FAMILIAR',25);
+            $table->string('TIPO_FAMILIAR_OUTROS',20)->nullabel();
             $table->unsignedInteger('STATUS');
-            
+            $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');            
         });
     }
 

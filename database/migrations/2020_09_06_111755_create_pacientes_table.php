@@ -16,20 +16,17 @@ class CreatePacientesTable extends Migration
         Schema::create('PACIENTES', function (Blueprint $table) {
             $table->increments('ID');
             $table->string('NOME',255);
-            $table->longText('OBSERVACAO');
-            $table->enum('SEXO', ['M', 'F', 'O']);
-            $table->string('TELEFONE',15);
-            $table->date('DT_NASCIMENTO');
-            $table->string('CEP',13);
-            $table->string('ENDERECO',255);
-            $table->integer('NUMERO');
-            $table->string('COMPLEMENTO',255);
-            $table->string('BAIRRO',45);
-            $table->string('CIDADE',45);
-            $table->string('SIGLA',2);
+            $table->string('TIPO', 25);
+            $table->string('LOCALIZACAO', 25);
+            $table->unsignedInteger('ID_ENDERECO');
+            $table->string('SERVICOS', 255);
+            $table->unsignedInteger('MEDICAMENTOS');
+            $table->string('TIPO_MEDICAMENTOS');
             $table->unsignedInteger('STATUS');
             $table->unsignedInteger('ID_SOLICITANTE');
+            $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');            
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
+            
             
         });
     }

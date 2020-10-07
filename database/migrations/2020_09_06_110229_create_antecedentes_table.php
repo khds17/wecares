@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCertificadosTable extends Migration
+class CreateAntecedentesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateCertificadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('CERTIFICADOS', function (Blueprint $table) {
+        Schema::create('ANTEDECENTES', function (Blueprint $table) {
             $table->increments('ID');
-            $table->string('CERTIFICADO',255);
-            $table->unsignedInteger('ID_PRESTADOR');
-            $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
-            
+            $table->string('ANTEDECENTE',255);
         });
     }
 
@@ -29,6 +26,6 @@ class CreateCertificadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CERTIFICADOS');
+        Schema::dropIfExists('ANTEDECENTES');
     }
 }

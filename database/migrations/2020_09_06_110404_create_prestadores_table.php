@@ -17,21 +17,19 @@ class CreatePrestadoresTable extends Migration
             $table->increments('ID');
             $table->string('NOME',255);
             $table->string('CPF',15);
+            $table->string('TELEFONE',15);
+            $table->date('DT_NASCIMENTO');
+            $table->enum('SEXO', ['M', 'F']);
             $table->string('EMAIL',35);
             $table->string('SENHA',25);
-            $table->string('TELEFONE',15);
-            $table->unsignedInteger('FORMACAO');
-            $table->date('DT_NASCIMENTO');
-            $table->string('CEP',13);
-            $table->string('ENDERECO',255);
-            $table->integer('NUMERO');
-            $table->string('COMPLEMENTO',255);
-            $table->unsignedInteger('ID_BAIRRO');
-            $table->string('CIDADE',45);
-            $table->string('SIGLA',2);
-            $table->enum('SEXO', ['M', 'F']);
+            $table->unsignedInteger('ID_ENDERECO');
+            $table->string('FORMACAO',15);
+            $table->unsignedInteger('ID_CERTIFICADO');
+            $table->unsignedInteger('ID_ANTEDECENTE');
             $table->unsignedInteger('STATUS');
-            $table->foreign('ID_BAIRRO')->references('ID')->on('BAIRROS')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_CERTIFICADO')->references('ID')->on('CERTIFICADOS')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_ANTEDECENTE')->references('ID')->on('ANTEDECENTES')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
