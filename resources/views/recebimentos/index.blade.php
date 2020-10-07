@@ -32,7 +32,7 @@
                             <td>0001</td>
                             <td>1234568</td>
                             <td>Conta corrente</td>
-                            <td><a class="btn btn-primary" data-toggle="modal" data-target="#modalAlteracao" href=""> Editar </a></td>
+                            <td><a class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro" href=""> Editar </a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -72,7 +72,7 @@
         </div>
     </div>
 </div>
-<!-- Modal -->
+<!-- Modal cadastro -->
 <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="modalCadastroLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -83,23 +83,35 @@
                 </button>
             </div>
             <div class="modal-body">
+                <form name="cadastroConta" id="cadastroConta" method="post" action="">
+                        <div class="row margin-top-10">
+                            <div class="col">
+                                <label for="banco" class="text-dark">Banco</label><br>
+                                <select name="select" class="custom-select" required>
+                                    <option value="valor1">Inter</option> 
+                                </select>                                         
+                            </div>
+                            <div class="col">
+                                <label for="tipoConta" class="text-dark">Tipo conta</label><br>
+                                <select name="select" class="custom-select" required>
+                                    <option value="valor1">Conta corrente</option> 
+                                </select>                                         
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row margin-top-10">
+                            <div class="col">
+                                <input class="form-control"type="text" name="agencia" id="agencia" placeholder="Digite sua agência" required"><br> 
+                            </div>
+                            <div class="col">
+                                <input class="form-control"type="text" name="conta" id="conta" placeholder="Digite sua conta" required"><br>
+                            </div>
+                        </div>
+                        <input class="btn btn-success" type="submit" value="Salvar">
+                </form>
             </div>
         </div>
     </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="modalAlteracao" tabindex="-1" role="dialog" aria-labelledby="modalAlteracaoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAlteracaoLabel">Alteração conta bancária </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            </div>
-        </div>
-    </div>
-</div>
+<!-- Fim modal cadastro -->
 @endsection
