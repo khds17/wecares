@@ -97,6 +97,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Fim modal -->
         </main>       
     </div>
     @yield('content')
