@@ -74,7 +74,7 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="prestadorCidade" id="prestadorCidade">
+                                    <select class ="form-control"name="prestadorEstado" id="prestadorEstado">
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
                                             <option value="{{$estado->ESTADO}}">{{$estado->UF}}</option>

@@ -55,7 +55,12 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteCidade" id="solicitanteCidade" placeholder="Cidade" required>
+                                    <select class ="form-control"name="solicitanteCidade" id="solicitanteCidade">
+                                        <option value="">Cidade</option>
+                                        @foreach($cidades as $cidade)
+                                            <option value="">{{$cidade->CIDADE}}</option>
+                                        @endforeach
+                                    </select>   
                                 </div>
                                 <div class="col">
                                     <input class="form-control" type="text" name="solicitanteBairro" id="solicitanteBairro" placeholder="Bairro" required><br>
@@ -63,12 +68,18 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento" required>
+                                    <select class ="form-control"name="solicitanteEstado" id="solicitanteEstado">
+                                        <option value="">Estado</option>
+                                        @foreach($estados as $estado)
+                                            <option value="{{$estado->ESTADO}}">{{$estado->UF}}</option>
+                                        @endforeach
+                                    </select>  
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteEstado" id="solicitanteEstado" placeholder="UF" required><br>
+                                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento" required>  
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <input class="form-control"type="text" name="nivelfamiliaridade" id="nivelfamiliaridade" placeholder="Nivel familiaridade:" value="{{$edit->nivelfamiliaridade ?? ''}}">
@@ -131,7 +142,12 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteCidade" id="pacienteCidade" placeholder="Cidade" required>
+                                    <select class ="form-control"name="pacienteCidade" id="prestadorCidade">
+                                        <option value="">Cidade</option>
+                                        @foreach($cidades as $cidade)
+                                            <option value="">{{$cidade->CIDADE}}</option>
+                                        @endforeach
+                                    </select>   
                                 </div>
                                 <div class="col">
                                     <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" required><br>
@@ -139,12 +155,18 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" required>
+                                    <select class ="form-control"name="pacienteEstado" id="pacienteEstado">
+                                        <option value="">Estado</option>
+                                        @foreach($estados as $estado)
+                                            <option value="{{$estado->ESTADO}}">{{$estado->UF}}</option>
+                                        @endforeach
+                                    </select>  
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteEstado" id="pacienteEstado" placeholder="UF" required><br>
+                                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" required>
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Serviços que deverão ser realizados</label><br>

@@ -4,22 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\solicitante;
+use App\Models\estados;
+use App\Models\cidades;
 
 
 class solicitantesController extends Controller
 {
+     //Variaveis que vão receber os objetos do model
+    private $objSolicitante;
+    private $objEstados;
+    private $objCidades;
 
-    private $solicitante;
-
+    //Instanciando as classes
     public function __construct()
     {
-        $this->solicitante = new solicitante();
+        $this->objSolicitante = new solicitante();
+        $this->objEstados = new estados();
+        $this->objCidades = new cidades();
     }
     
     public function index()
     {
         
-        $solicitante = $this->solicitante->all();
+        $solicitante = $this->objSolicitante->all();
         return view('solicitantes/index',compact('solicitante'));
         
     }
@@ -40,7 +47,9 @@ class solicitantesController extends Controller
      */
     public function create()
     {
-        return view('solicitantes/create');
+        $estados=$this->objEstados->all();
+        $cidades=$this->objCidades->all();
+        return view('solicitantes/create',compact('estados','cidades'));
     }
 
     /**
@@ -51,7 +60,7 @@ class solicitantesController extends Controller
      */
     public function store(Request $request)
     {
-        $solicitante = $this->solicitante->create([
+        $solicitante = $this->objSolicitante->create([
                 'nome'=>$request->nome,
                 'email'=>$request->email,
                 'cep'=>$request->cep,
