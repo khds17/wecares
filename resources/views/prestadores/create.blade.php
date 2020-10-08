@@ -61,7 +61,12 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorCidade" id="prestadorCidade" placeholder="Cidade" required>
+                                    <select class ="form-control"name="prestadorCidade" id="prestadorCidade">
+                                        <option value="">Cidade</option>
+                                        @foreach($cidades as $cidade)
+                                            <option value="">{{$cidade->CIDADE}}</option>
+                                        @endforeach
+                                    </select>   
                                 </div>
                                 <div class="col">
                                     <input class="form-control" type="text" name="prestadorBairro" id="prestadorBairro" placeholder="Bairro" required><br>
@@ -69,12 +74,18 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorComplemento" id="prestadorComplemento" placeholder="Complemento" required>
+                                    <select class ="form-control"name="prestadorCidade" id="prestadorCidade">
+                                        <option value="">Estado</option>
+                                        @foreach($estados as $estado)
+                                            <option value="{{$estado->ESTADO}}">{{$estado->UF}}</option>
+                                        @endforeach
+                                    </select>              
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorEstado" id="prestadorEstado" placeholder="UF" required><br>
+                                    <input class="form-control" type="text" name="prestadorComplemento" id="prestadorComplemento" placeholder="Complemento" required>
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Formação</label><br>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\prestadores;
+use App\Models\estados;
+use App\Models\cidades;
 
 class prestadoresController extends Controller
 {
@@ -11,6 +14,21 @@ class prestadoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    //Variaveis que vão receber os objetos do model
+    private $objPrestador;
+    private $objEstados;
+    private $objCidades;
+
+
+    //Instanciando as classes
+    public function __construct()
+    {
+        $this->objPrestador = new prestadores();
+        $this->objEstados = new estados();
+        $this->objCidades = new cidades();
+    }
+
     public function index()
     {
         echo "Teste";
@@ -33,7 +51,9 @@ class prestadoresController extends Controller
      */
     public function create()
     {
-        return view('prestadores/create');
+        $estados=$this->objEstados->all();
+        $cidades=$this->objCidades->all();
+        return view('prestadores/create',compact('estados','cidades'));
     }
 
     /**
