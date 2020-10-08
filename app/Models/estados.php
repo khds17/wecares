@@ -9,4 +9,9 @@ class estados extends Model
     public $timestamps = false;
     protected $table='ESTADOS';
     protected $fillable=[''];
+
+    // Relacionamento entre as tabelas enderecos e cidades
+    public function relCidade(){
+        return $this->hasMany('App\Models\cidades','ID_CIDADE');
+    }
 }
