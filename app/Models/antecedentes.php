@@ -8,5 +8,5 @@ class antecedentes extends Model
 {
     public $timestamps = false;
     protected $table='ANTECEDENTES';
-    protected $fillable=[''];
+    protected $fillable=['ANTECEDENTE'];
 }
