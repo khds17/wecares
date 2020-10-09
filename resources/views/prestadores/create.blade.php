@@ -7,7 +7,7 @@
                 <div class="card">
                     <h1 class="text-center padding-top-50">Preencha os campos abaixo para se tornar um cuidador</h1>
                     <div class="card-body">
-                        <form name="formPrestador" id="formPrestador" method="post" action="{{url('prestador')}}">   
+                        <form name="formPrestador" id="formPrestador" method="post" enctype="multipart/form-data" action="{{url('prestador')}}">   
                             @csrf
                             <div class="row margin-top-10">
                                 <div class="col">
@@ -64,7 +64,7 @@
                                     <select class ="form-control"name="prestadorCidade" id="prestadorCidade">
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
-                                            <option value="">{{$cidade->CIDADE}}</option>
+                                            <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
                                         @endforeach
                                     </select>   
                                 </div>
@@ -77,7 +77,7 @@
                                     <select class ="form-control"name="prestadorEstado" id="prestadorEstado">
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
-                                            <option value="{{$estado->ESTADO}}">{{$estado->UF}}</option>
+                                            <option value="{{$estado->ID}}">{{$estado->UF}}</option>
                                         @endforeach
                                     </select>              
                                 </div>
