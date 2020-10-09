@@ -13,9 +13,9 @@ class CreateAntecedentesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ANTEDECENTES', function (Blueprint $table) {
+        Schema::create('ANTECEDENTES', function (Blueprint $table) {
             $table->increments('ID');
-            $table->string('ANTEDECENTE',255);
+            $table->string('ANTECEDENTE',255);
         });
     }
 
@@ -26,6 +26,6 @@ class CreateAntecedentesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ANTEDECENTES');
+        Schema::dropIfExists('ANTECEDENTES');
     }
 }
