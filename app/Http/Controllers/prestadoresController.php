@@ -9,11 +9,7 @@ use App\Models\cidades;
 use App\Models\enderecos;
 use App\Models\certificados;
 use App\Models\antecedentes;
-
-const PENDENTE = 0; 
-const ATIVO = 1;
-const REPROVADO = 2;
-
+use App\Config\constants;
 
 class prestadoresController extends Controller
 {
@@ -77,8 +73,7 @@ class prestadoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // dd($request);
+    {   
         $endereco = $this->objEndereco->create([
             'CEP'=>$request->prestadorCep,
             'ENDERECO'=>$request->prestadorEndereco,
@@ -108,7 +103,7 @@ class prestadoresController extends Controller
             'FORMACAO'=>$request->formacao,
             'ID_CERTIFICADO'=>$request->certificadoFormacao,
             'ID_ANTEDECENTE'=>$request->antecedentes,
-            'STATUS'=>$request->self::PENDENTE
+            'STATUS'=> \Config::get('constants.PENDENTE')
         ]);
     }
 
