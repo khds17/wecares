@@ -9,7 +9,7 @@ class prestadores extends Model
     public $timestamps = false;
     protected $table='PRESTADORES';
     //
-    protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','SEXO','EMAIL','SENHA','ID_ENDERECO','FORMACAO','ID_CERTIFICADO','ID_ANTEDECENTE'];
+    protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','SEXO','EMAIL','SENHA','ID_ENDERECO','FORMACAO','ID_CERTIFICADO','ID_ANTEDECENTE','STATUS'];
 
     // Criando relacionamento entre as tabelas prestadores e enderecos
     public function relEndereco(){
