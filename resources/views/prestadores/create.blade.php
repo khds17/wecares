@@ -29,8 +29,8 @@
                                 </div>
                                 <div class="font-color-gray col">
                                     <label for="sexo">Sexo:</label> &nbsp;&nbsp; <br>
-                                    <input type="radio" name="sexo" id="feminino"> Feminino &nbsp;<br>
-                                    <input type="radio" name="sexo" id="masculino"> Masculino &nbsp;
+                                    <input type="radio" name="sexo" id="feminino" value="feminino"> Feminino &nbsp;<br>
+                                    <input type="radio" name="sexo" id="masculino" value="masculino"> Masculino &nbsp;
                                 </div>
                             </div>
                             <div class="row margin-top-10">
@@ -89,8 +89,8 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Formação</label><br>
-                                    <input type="radio" name="formacao" id="formacao"> Cuidadora <br> 
-                                    <input type="radio" name="formacao" id="formacao"> Enfermeira
+                                    <input type="radio" name="formacao" id="formacao" value="cuidador"> Cuidador <br> 
+                                    <input type="radio" name="formacao" id="formacao" value="enfermagem"> Enfermagem
                                 </div>
                                 <div class="col font-color-gray">
                                     <label for="certificado">Certificado</label>
@@ -107,7 +107,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <input type="checkbox" name="termos" id="termos" required>
+                                    <input type="checkbox" name="termos" id="termos" value="aceito" required>
                                     <a href="{{url("/termos")}}" target="_blank">Termos </a><label>e</label><a href="{{url("/conduta")}}" target="_blank"> Código de conduta</a>
                                 </div>
                             </div>
