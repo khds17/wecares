@@ -19,7 +19,7 @@ class CreatePrestadoresTable extends Migration
             $table->string('CPF',15);
             $table->string('TELEFONE',15);
             $table->date('DT_NASCIMENTO');
-            $table->enum('SEXO', ['M', 'F']);
+            $table->string('SEXO',20);
             $table->string('EMAIL',35);
             $table->string('SENHA',25);
             $table->unsignedInteger('ID_ENDERECO');
