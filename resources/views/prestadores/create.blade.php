@@ -61,7 +61,7 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="prestadorCidade" id="prestadorCidade">
+                                    <select class ="form-control"name="prestadorCidade" id="prestadorCidade" required>
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
                                             <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="prestadorEstado" id="prestadorEstado">
+                                    <select class ="form-control"name="prestadorEstado" id="prestadorEstado" required>
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
                                             <option value="{{$estado->ID}}">{{$estado->UF}}</option>
@@ -82,7 +82,7 @@
                                     </select>              
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorComplemento" id="prestadorComplemento" placeholder="Complemento" required>
+                                    <input class="form-control" type="text" name="prestadorComplemento" id="prestadorComplemento" placeholder="Complemento">
                                 </div>
                             </div>
                             <br>
