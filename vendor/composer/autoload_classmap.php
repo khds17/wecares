@@ -43,7 +43,7 @@ return array(
     'App\\Models\\prestadores' => $baseDir . '/app/Models/prestadores.php',
     'App\\Models\\registros_log' => $baseDir . '/app/Models/registros_log.php',
     'App\\Models\\servicos' => $baseDir . '/app/Models/servicos.php',
-    'App\\Models\\solicitante' => $baseDir . '/app/Models/solicitante.php',
+    'App\\Models\\solicitantes' => $baseDir . '/app/Models/solicitantes.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

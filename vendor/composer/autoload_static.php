@@ -533,7 +533,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'App\\Models\\prestadores' => __DIR__ . '/../..' . '/app/Models/prestadores.php',
         'App\\Models\\registros_log' => __DIR__ . '/../..' . '/app/Models/registros_log.php',
         'App\\Models\\servicos' => __DIR__ . '/../..' . '/app/Models/servicos.php',
-        'App\\Models\\solicitante' => __DIR__ . '/../..' . '/app/Models/solicitante.php',
+        'App\\Models\\solicitantes' => __DIR__ . '/../..' . '/app/Models/solicitantes.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
