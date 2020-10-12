@@ -10,6 +10,8 @@ use App\Models\enderecos;
 use App\Models\certificados;
 use App\Models\antecedentes;
 use App\Config\constants;
+use Illuminate\Support\Facades\DB;
+
 
 class prestadoresController extends Controller
 {
@@ -74,6 +76,9 @@ class prestadoresController extends Controller
      */
     public function store(Request $request)
     {   
+        // Pegando o valor da constant
+        $status = \Config::get('constants.PENDENTE');
+
         $endereco = $this->objEndereco->create([
             'CEP'=>$request->prestadorCep,
             'ENDERECO'=>$request->prestadorEndereco,
@@ -83,14 +88,20 @@ class prestadoresController extends Controller
             'ID_CIDADE'=>$request->prestadorCidade,
             'ID_ESTADO'=>$request->prestadorEstado,
         ]);
-        
+        //Gravando o id do endereco
+        $id_endereco = DB::table('ENDERECOS')->max('ID');
+
         $certificado = $this->objCertificado->create([
             'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
         ]);
+        //Gravando o id do certificado
+        $id_certificado = DB::table('CERTIFICADOS')->max('ID');
 
         $antecedente = $this->objAntecedente->create([
             'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
         ]);
+        //Gravando o id do antecedente criminal
+        $id_antedecente = DB::table('ANTECEDENTES')->max('ID');
 
         $prestador = $this->objPrestador->create([
             'NOME'=>$request->prestadorNome,
@@ -101,9 +112,10 @@ class prestadoresController extends Controller
             'EMAIL'=>$request->prestadorEmail,
             'SENHA'=>$request->prestadorSenha,
             'FORMACAO'=>$request->formacao,
-            'ID_CERTIFICADO'=>$request->certificadoFormacao,
-            'ID_ANTEDECENTE'=>$request->antecedentes,
-            'STATUS'=> \Config::get('constants.PENDENTE')
+            'ID_CERTIFICADO'=>$id_certificado,
+            'ID_ANTEDECENTE'=>$id_antedecente,
+            'ID_ENDERECO'=>$id_endereco,
+            'STATUS'=>$status
         ]);
     }
 
