@@ -18,15 +18,15 @@
                             @csrf
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome:" required value="{{$edit->nome ?? ''}}"><br>
+                                    <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome" required value="{{$edit->nome ?? ''}}"><br>
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="solicitanteCPF" name="solicitanteCPF" id="cpf" placeholder="CPF" required> 
+                                    <input class="form-control" type="text" name="solicitanteCPF" id="solicitanteCPF" placeholder="CPF" required> 
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail:" required value="{{$edit->email ?? ''}}">
+                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail" required value="{{$edit->email ?? ''}}">
                                 </div>
                                 <div class="col">
                                     <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número do celular" required ><br>
@@ -55,10 +55,10 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="solicitanteCidade" id="solicitanteCidade">
+                                    <select class ="form-control"name="solicitanteCidade" id="solicitanteCidade" required>
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
-                                            <option value="">{{$cidade->CIDADE}}</option>
+                                            <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
                                         @endforeach
                                     </select>   
                                 </div>
@@ -68,50 +68,52 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="solicitanteEstado" id="solicitanteEstado">
+                                    <select class ="form-control"name="solicitanteEstado" id="solicitanteEstado" required>
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
-                                            <option value="{{$estado->ESTADO}}">{{$estado->UF}}</option>
+                                            <option value="{{$estado->ID}}">{{$estado->UF}}</option>
                                         @endforeach
                                     </select>  
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento" required>  
+                                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento">  
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="nivelfamiliaridade" id="nivelfamiliaridade" placeholder="Nivel familiaridade:" value="{{$edit->nivelfamiliaridade ?? ''}}">
+                                <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label><br>
+                                <select name="familiaridade" class="custom-select" required>
+                                            <option value="pai/mae">Sou pai/mãe</option> 
+                                            <option value="filho/filha">Sou filho/filha</option>
+                                            <option value="avô/avó">Sou avô/avó</option>
+                                            <option value="tio/tia">Sou tio/tia</option> 
+                                            <option value="neto/neta">Sou neto/neta</option> 
+                                            <option value="primo/prima">Sou primo/prima</option>
+                                            <option value="outros">Outros</option>
+                                    </select>         
                                 </div>
                                 <div class="col">
-                                    <input class="form-control"type="text" name="nivelfamiliaridadeoutros" id="nivelfamiliaridadeoutros" placeholder="Nivel familiaridade outros:" value="{{$edit->nivelfamiliaridadeoutros ?? ''}}"><br>
+                                    <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Nivel familiaridade outros:" value="{{$edit->nivelfamiliaridadeoutros ?? ''}}"><br>
                                 </div>
                             </div>
-                        </form> 
-                        <!-- Fechamento do formulário de cadastro -->
-                        </form> 
-                        <hr>
-                        <!-- Fechamento do formulário de edição -->
-                        <!-- Abertura do formulário de paciente -->
-                        <h1 class="text-center">Preencha os dados do paciente</h1>
-                        <form name="formPaciente" id="formPaciente" method="post" action="{{url('paciente')}}"> 
-                            @csrf
+                            <br>
+                            <h1 class="text-center">Preencha os dados do paciente</h1>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="nomePaciente" id="nomePaciente" placeholder="Nome do paciente:" required"><br>
+                                    <input class="form-control"type="text" name="nomePaciente" id="nomePaciente" placeholder="Nome do paciente" required><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <label for="idadePaciente" class="text-dark">O paciente é?</label><br>
-                                    <select name="select" class="custom-select" required>
-                                            <option value="valor1">Ex: Bebê, adulto ou criança</option> 
-                                            <option value="valor1">Bebê</option> 
-                                            <option value="valor1">Criança</option> 
-                                            <option value="valor1">Adolescente</option>
-                                            <option value="valor1">Adulto</option>
-                                            <option value="valor1">Idoso</option>
+                                    <select name="tipoPaciente" class="custom-select" required>
+                                            <option value="">Ex: Bebê, adulto ou criança</option> 
+                                            <option value="bebe">Bebê</option> 
+                                            <option value="crianca">Criança</option> 
+                                            <option value="adolescente">Adolescente</option>
+                                            <option value="adulto">Adulto</option>
+                                            <option value="idoso">Idoso</option>
                                     </select>                                  
                                 </div>
                             </div>
@@ -119,11 +121,11 @@
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <label for="localidadePaciente" class="text-dark">Onde o paciente está localizado?</label><br>
-                                    <select name="select" class="custom-select" required>
-                                        <option value="valor1">Casa de retiro</option> 
-                                        <option value="valor1">Hospital</option> 
-                                        <option value="valor1">Residência</option>
-                                     </select>   
+                                    <select name="localizacaoPaciente" class="custom-select" required>
+                                        <option value="retiro">Casa de retiro</option> 
+                                        <option value="hospital">Hospital</option> 
+                                        <option value="residencia">Residência</option>
+                                    </select>   
                                 </div>
                             </div>
                             <br>
@@ -142,10 +144,10 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="pacienteCidade" id="prestadorCidade">
+                                    <select class ="form-control"name="pacienteCidade" id="prestadorCidade" required>
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
-                                            <option value="">{{$cidade->CIDADE}}</option>
+                                            <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
                                         @endforeach
                                     </select>   
                                 </div>
@@ -155,38 +157,41 @@
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="pacienteEstado" id="pacienteEstado">
+                                    <select class ="form-control"name="pacienteEstado" id="pacienteEstado" required>
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
-                                            <option value="{{$estado->ESTADO}}">{{$estado->UF}}</option>
+                                            <option value="{{$estado->ID}}">{{$estado->UF}}</option>
                                         @endforeach
                                     </select>  
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" required>
+                                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento">
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Serviços que deverão ser realizados</label><br>
-                                    <input type="checkbox" name="acompanhamentos" id="acompanhamentos"> Acompanhamentos em saídas <br> 
-                                    <input type="checkbox" name="medicamentos" id="medicamentos"> Administratação de medicamentos <br> 
-                                    <input type="checkbox" name="refeicao" id="refeicao"> Administratação de refeições <br> 
-                                    <input type="checkbox" name="banho" id="banho"> Banho <br> 
-                                    <input type="checkbox" name="companhia" id="companhia"> Companhia <br> 
-                                    <input type="checkbox" name="outros" id="outros"> <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
+                                    <input type="checkbox" name="servicos" id="acompanhamentos" value="acompanhamentos"> Acompanhamentos em saídas <br> 
+                                    <input type="checkbox" name="servicos" id="medicamentos" value="medicamentos"> Administratação de medicamentos <br> 
+                                    <input type="checkbox" name="servicos" id="refeicao" value="refeicao"> Administratação de refeições <br> 
+                                    <input type="checkbox" name="servicos" id="banho" value="banho"> Banho <br> 
+                                    <input type="checkbox" name="servicos" id="companhia" value="companhia"> Companhia <br> 
+                                    <input type="checkbox" name="servicos" id="outros" value="sim"><input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
                                 </div>
                                 <div class="col font-color-gray">
                                     <label for="formacao">Paciente toma medicamentos?</label><br>
-                                    <input type="radio" name="formacao" id="formacao"> Sim <br> 
-                                    <input type="radio" name="formacao" id="formacao"> Não
-                                    <input class="form-control" type="text" name="medicamentos" id="medicamentos" placeholder="Quais?"><br>
+                                    <input type="radio" name="medicamento" id="medicamento" value="sim"> Sim <br> 
+                                    <input type="radio" name="medicamento" id="medicamento"value="Não"> Não
+                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?"><br>
                                 </div>
                             </div>
                             <br>
                             <input class="btn btn-primary" type="submit" value="Cadastrar">
+                        </form>
+                        <!-- Fechamento do formulário de cadastro solicitante -->
                         </form> 
+                        <!-- Fechamento do formulário de edição solicitante -->
                     </div>
                 </div>
             </div>
