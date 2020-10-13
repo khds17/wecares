@@ -89,19 +89,19 @@ class prestadoresController extends Controller
             'ID_ESTADO'=>$request->prestadorEstado,
         ]);
         //Gravando o id do endereco
-        $id_endereco = DB::table('ENDERECOS')->max('ID');
-
+        $idEndereco = $endereco->id;
+        
         $certificado = $this->objCertificado->create([
             'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
         ]);
         //Gravando o id do certificado
-        $id_certificado = DB::table('CERTIFICADOS')->max('ID');
+        $idCertificado = $certificado->id;
 
         $antecedente = $this->objAntecedente->create([
             'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
         ]);
         //Gravando o id do antecedente criminal
-        $id_antedecente = DB::table('ANTECEDENTES')->max('ID');
+        $idAntedecente = $antecedente->id;
 
         $prestador = $this->objPrestador->create([
             'NOME'=>$request->prestadorNome,
@@ -112,9 +112,9 @@ class prestadoresController extends Controller
             'EMAIL'=>$request->prestadorEmail,
             'SENHA'=>$request->prestadorSenha,
             'FORMACAO'=>$request->formacao,
-            'ID_CERTIFICADO'=>$id_certificado,
-            'ID_ANTEDECENTE'=>$id_antedecente,
-            'ID_ENDERECO'=>$id_endereco,
+            'ID_CERTIFICADO'=>$idCertificado,
+            'ID_ANTEDECENTE'=>$idAntedecente,
+            'ID_ENDERECO'=>$idEndereco,
             'STATUS'=>$status
         ]);
     }
