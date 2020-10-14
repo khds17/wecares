@@ -3,24 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\solicitante;
+use App\Models\solicitantes;
+use App\Models\pacientes;
 use App\Models\estados;
 use App\Models\cidades;
+use App\Models\enderecos;
+use App\Config\constants;
+use Illuminate\Support\Facades\DB;
 
 
 class solicitantesController extends Controller
 {
      //Variaveis que vão receber os objetos do model
     private $objSolicitante;
+    private $objPaciente;
     private $objEstados;
     private $objCidades;
 
     //Instanciando as classes
     public function __construct()
     {
-        $this->objSolicitante = new solicitante();
+        $this->objSolicitante = new solicitantes();
+        $this->objPaciente = new pacientes();
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
+        $this->objEndereco = new enderecos();
     }
     
     public function index()
@@ -60,20 +67,64 @@ class solicitantesController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
+        // Pegando o valor da constant
+        $status = \Config::get('constants.ATIVO');
+
+        $enderecoSolicitante = $this->objEndereco->create([
+            'CEP'=>$request->solicitanteCep,
+            'ENDERECO'=>$request->solicitanteEndereco,
+            'NUMERO'=>$request->solicitanteNumero,
+            'COMPLEMENTO'=>$request->solicitanteComplemento,
+            'BAIRRO'=>$request->solicitanteBairro,
+            'ID_CIDADE'=>$request->solicitanteCidade,
+            'ID_ESTADO'=>$request->solicitanteEstado,
+        ]);
+        //Gravando o id do endereco
+        $idEnderecoSolicitante = $enderecoSolicitante->id;
+
         $solicitante = $this->objSolicitante->create([
-                'nome'=>$request->nome,
-                'email'=>$request->email,
-                'cep'=>$request->cep,
-                'endereco'=>$request->endereco,
-                'numero'=>$request->numero,
-                'cidade'=>$request->cidade,
-                'bairro'=>$request->bairro,
-                'complemento'=>$request->complemento,
-                'estado'=>$request->estado,
-                'nivelfamiliaridade'=>$request->nivelfamiliaridade,
-                'nivelfamiliaridadeoutros'=>$request->nivelfamiliaridadeoutros,
-                'status'=>$request->status
+                'NOME'=>$request->solicitanteNome,
+                'CPF'=>$request->solicitanteCPF,
+                'EMAIL'=>$request->solicitanteEmail,
+                'TELEFONE'=>$request->solicitanteNumero,
+                'SENHA'=>$request->solicitanteSenha,
+                'ID_ENDERECO'=>$idEnderecoSolicitante,
+                'TIPO_FAMILIAR'=>$request->familiaridade,
+                'TIPO_FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
+                'STATUS'=>$status
             ]);
+        //Gravando o id do solicitante
+        $idSolicitante = $solicitante->id;
+
+        $enderecoPaciente = $this->objEndereco->create([
+            'CEP'=>$request->pacienteCep,
+            'ENDERECO'=>$request->pacienteEndereco,
+            'NUMERO'=>$request->pacienteNumero,
+            'COMPLEMENTO'=>$request->solicitanteComplemento,
+            'BAIRRO'=>$request->pacienteBairro,
+            'ID_CIDADE'=>$request->pacienteCidade,
+            'ID_ESTADO'=>$request->pacienteEstado,
+        ]);
+        
+        //Gravando o id do endereco
+        $idEnderecoPaciente = $enderecoPaciente->id;
+        
+        $arrayServicos = $request->servicos;
+        $servicos = json_encode($arrayServicos); 
+
+        $paciente = $this->objPaciente->create([
+            'NOME'=>$request->nomePaciente,
+            'TIPO'=>$request->tipoPaciente,
+            'LOCALIZACAO'=>$request->localizacaoPaciente,
+            'ID_ENDERECO'=>$idEnderecoPaciente,
+            'SERVICOS'=>$servicos,
+            'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
+            'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
+            'STATUS'=>$status,
+            'ID_SOLICITANTE'=>$idSolicitante,
+            ]);
+
         if($solicitante){
             return redirect('solicitantes');
         }

@@ -172,17 +172,17 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Serviços que deverão ser realizados</label><br>
-                                    <input type="checkbox" name="servicos" id="acompanhamentos" value="acompanhamentos"> Acompanhamentos em saídas <br> 
-                                    <input type="checkbox" name="servicos" id="medicamentos" value="medicamentos"> Administratação de medicamentos <br> 
-                                    <input type="checkbox" name="servicos" id="refeicao" value="refeicao"> Administratação de refeições <br> 
-                                    <input type="checkbox" name="servicos" id="banho" value="banho"> Banho <br> 
-                                    <input type="checkbox" name="servicos" id="companhia" value="companhia"> Companhia <br> 
-                                    <input type="checkbox" name="servicos" id="outros" value="sim"><input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
+                                    <input type="checkbox" name="servicos[]" id="acompanhamentos" value="acompanhamentos"> Acompanhamentos em saídas <br> 
+                                    <input type="checkbox" name="servicos[]" id="medicamentos" value="medicamentos"> Administratação de medicamentos <br> 
+                                    <input type="checkbox" name="servicos[]" id="refeicao" value="refeicao"> Administratação de refeições <br> 
+                                    <input type="checkbox" name="servicos[]" id="banho" value="banho"> Banho <br> 
+                                    <input type="checkbox" name="servicos[]" id="companhia" value="companhia"> Companhia <br> 
+                                    <input type="checkbox" name="outros" id="outros" value="sim"><input class="form-control" type="text" name="servicos[]" id="servicoOutros" placeholder="Outros"><br>
                                 </div>
                                 <div class="col font-color-gray">
                                     <label for="formacao">Paciente toma medicamentos?</label><br>
-                                    <input type="radio" name="medicamento" id="medicamento" value="sim"> Sim <br> 
-                                    <input type="radio" name="medicamento" id="medicamento"value="Não"> Não
+                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="Sim"> Sim <br> 
+                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="Nao"> Não
                                     <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?"><br>
                                 </div>
                             </div>

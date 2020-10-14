@@ -8,5 +8,5 @@ class pacientes extends Model
 {
     public $timestamps = false;
     protected $table='PACIENTES';
-    protected $fillable=[''];
+    protected $fillable=['NOME','TIPO','LOCALIZACAO','ID_ENDERECO','SERVICOS','TOMA_MEDICAMENTOS','TIPO_MEDICAMENTOS','STATUS','ID_SOLICITANTE'];
 }
