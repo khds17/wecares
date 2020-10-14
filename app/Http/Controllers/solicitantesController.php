@@ -8,6 +8,7 @@ use App\Models\pacientes;
 use App\Models\estados;
 use App\Models\cidades;
 use App\Models\enderecos;
+use App\Models\servicos;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
@@ -19,6 +20,7 @@ class solicitantesController extends Controller
     private $objPaciente;
     private $objEstados;
     private $objCidades;
+    private $objServico;
 
     //Instanciando as classes
     public function __construct()
@@ -28,6 +30,8 @@ class solicitantesController extends Controller
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();
+        $this->objServico=  new servicos;
+        
     }
     
     public function index()
@@ -56,7 +60,8 @@ class solicitantesController extends Controller
     {
         $estados=$this->objEstados->all();
         $cidades=$this->objCidades->all();
-        return view('solicitantes/create',compact('estados','cidades'));
+        $servicos=$this->objServico->all();
+        return view('solicitantes/create',compact('estados','cidades','servicos'));
     }
 
     /**
@@ -67,7 +72,6 @@ class solicitantesController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         // Pegando o valor da constant
         $status = \Config::get('constants.ATIVO');
 
