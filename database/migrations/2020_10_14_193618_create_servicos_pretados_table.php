@@ -44,6 +44,6 @@ class CreateServicosPretadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('servicos_pretados');
+        Schema::dropIfExists('SERVICOS_PRESTADOS');
     }
 }
