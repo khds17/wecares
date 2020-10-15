@@ -95,7 +95,7 @@ class solicitantesController extends Controller
                 'TELEFONE'=>$request->solicitanteNumero,
                 'SENHA'=>$request->solicitanteSenha,
                 'ID_ENDERECO'=>$idEnderecoSolicitante,
-                'TIPO_FAMILIAR'=>$request->familiaridade,
+                'ID_FAMILIARIDADE'=>$request->familiaridade,
                 'TIPO_FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
                 'STATUS'=>$status
             ]);
@@ -120,8 +120,8 @@ class solicitantesController extends Controller
 
         $paciente = $this->objPaciente->create([
             'NOME'=>$request->pacienteNome,
-            'TIPO'=>$request->pacienteTipo,
-            'LOCALIZACAO'=>$request->pacienteLocalizacao,
+            'ID_TIPO'=>$request->pacienteTipo,
+            'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
             'ID_ENDERECO'=>$idEnderecoPaciente,
             'SERVICOS'=>$servicos,
             'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
