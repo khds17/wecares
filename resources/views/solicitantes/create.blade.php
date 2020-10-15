@@ -150,7 +150,7 @@ familiaridade                        <!-- Abertura do formulário -->
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <label for="idadePaciente" class="text-dark">O paciente é?</label><br>
+                                    <label for="pacienteTipo" class="text-dark">O paciente é?</label><br>
                                     <select name="pacienteTipo" class="custom-select" >
                                             <option value="">Ex: Bebê, adulto ou criança</option> 
                                             <option value="bebe">Bebê</option> 
