@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\requestPrestador;
 use Illuminate\Http\Request;
 use App\Models\prestadores;
 use App\Models\estados;
@@ -71,10 +72,10 @@ class prestadoresController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \app\Http\Requests\requestPrestador  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(requestPrestador $request)
     {   
         // Pegando o valor da constant
         $status = \Config::get('constants.PENDENTE');

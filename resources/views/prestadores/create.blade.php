@@ -7,6 +7,17 @@
                 <div class="card">
                     <h1 class="text-center padding-top-50">Preencha os campos abaixo para se tornar um cuidador</h1>
                     <div class="card-body">
+                        {{-- Retorno de erros, caso os campos não sejam preenchidos corretamente --}}
+                        @if($errors->any())
+                            <div class="alert alert-danger" role="alert"">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        {{-- Inicio do formulario --}}
                         <form name="formPrestador" id="formPrestador" method="post" enctype="multipart/form-data" action="{{url('prestador')}}">   
                             @csrf
                             <div class="row margin-top-10">
@@ -114,9 +125,9 @@
                             <br>
                             <input class="btn btn-primary" type="submit" value="Cadastrar">
                         </form>
+                        {{-- Fim do formulario --}}
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
