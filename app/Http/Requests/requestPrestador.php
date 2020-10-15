@@ -25,23 +25,23 @@ class requestPrestador extends FormRequest
     public function rules()
     {
         return [
-            'prestadorNome'=>'required',
-            'prestadorCPF'=>'required|min:9|max:9',
+            'prestadorNome'=>'bail|required|min:3|max:100',
+            'prestadorCPF'=>'bail|required|min:9|max:9|unique:PRESTADORES,CPF',
             'prestadorNumero'=>'required',
-            'prestadorNascimento'=>'required',
+            'prestadorNascimento'=>'bail|required|date',
             'sexo'=>'required',
-            'prestadorEmail'=>'required',
-            'prestadorSenha'=>'required',
-            'prestadorCep'=>'required',
+            'prestadorEmail'=>'bail|required|email:rfc,dns|unique:PRESTADORES,EMAIL',
+            'prestadorSenha'=>'required:min:8',
+            'prestadorConfirmarSenha'=>'required|min:8|same:prestadorSenha',
+            'prestadorCep'=>'bail|required|min:8|max:9',
             'prestadorEndereco'=>'required',
-            'prestadorNumero'=>'required',
+            'prestadorNumero'=>'bail|required|numeric',
             'prestadorCidade'=>'required',
             'prestadorBairro'=>'required',
             'prestadorEstado'=>'required',
-            'prestadorComplemento'=>'required',
             'formacao'=>'required',
-            'certificadoFormacao'=>'required',
-            'antecedentes'=>'required',
+            'certificadoFormacao'=>'bail|required|mimes:jpeg,png,pdf',
+            'antecedentes'=>'bail|required|mimes:jpeg,png,pdf',
             'termos'=>'required'
         ];
     }
