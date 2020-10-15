@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\requestSolicitantePaciente;
 use Illuminate\Http\Request;
 use App\Models\solicitantes;
 use App\Models\pacientes;
@@ -67,10 +68,10 @@ class solicitantesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\requestSolicitantePaciente; $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(requestSolicitantePaciente $request)
     {
         // Pegando o valor da constant
         $status = \Config::get('constants.ATIVO');
@@ -118,9 +119,9 @@ class solicitantesController extends Controller
         $servicos = json_encode($arrayServicos); 
 
         $paciente = $this->objPaciente->create([
-            'NOME'=>$request->nomePaciente,
-            'TIPO'=>$request->tipoPaciente,
-            'LOCALIZACAO'=>$request->localizacaoPaciente,
+            'NOME'=>$request->pacienteNome,
+            'TIPO'=>$request->pacienteTipo,
+            'LOCALIZACAO'=>$request->pacienteLocalizacao,
             'ID_ENDERECO'=>$idEnderecoPaciente,
             'SERVICOS'=>$servicos,
             'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,

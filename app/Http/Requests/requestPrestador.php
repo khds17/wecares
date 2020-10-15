@@ -29,7 +29,6 @@ class requestPrestador extends FormRequest
             'prestadorCPF'=>'bail|required|min:9|max:9|unique:PRESTADORES,CPF',
             'prestadorNumero'=>'required',
             'prestadorNascimento'=>'bail|required|date',
-            'sexo'=>'required',
             'prestadorEmail'=>'bail|required|email:rfc,dns|unique:PRESTADORES,EMAIL',
             'prestadorSenha'=>'required:min:8',
             'prestadorConfirmarSenha'=>'required|min:8|same:prestadorSenha',

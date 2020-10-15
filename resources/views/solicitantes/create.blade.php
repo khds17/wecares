@@ -7,73 +7,110 @@
                 <div class="card">
                     <h1 class="text-center padding-top-50">@if(isset($edit)) Editar @else Preencha os dados do solicitante @endif</h1>
                     <div class="card-body">
-                        @if(isset($edit))
-                        <!-- Abertura do formulário de edição solicitante -->
-                        <form name="formEdit" id="formEdit" method="post" action="{{url("solicitante/$edit->id")}}">
-                            @method('PUT') 
-                        @else
-                        <!-- Abertura do formulário de cadastro solicitante -->
-                        <form name="formSolictante" id="formSolictante" method="post" action="{{url('solicitante')}}"> 
-                        @endif        
+familiaridade                        <!-- Abertura do formulário -->
+                        <form name="formSolictante" id="formSolictante" method="post" action="{{url('solicitante')}}">       
                             @csrf
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome" required value="{{$edit->nome ?? ''}}"><br>
+                                    <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome">
+                                    @error('solicitanteNome')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
+                                <br>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteCPF" id="solicitanteCPF" placeholder="CPF" required> 
+                                    <input class="form-control" type="text" name="solicitanteCPF" id="solicitanteCPF" placeholder="CPF"> 
+                                    @error('solicitanteCPF')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail" required value="{{$edit->email ?? ''}}">
+                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail">
+                                    @error('solicitanteEmail')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número do celular" required ><br>
+                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número do celular">
+                                    @error('solicitanteNumero')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>    
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                <input class="form-control" type="password" name="solicitanteSenha" id="solicitanteSenha" placeholder="Senha" required>
+                                    <input class="form-control" type="password" name="solicitanteSenha" id="solicitanteSenha" placeholder="Senha" >
+                                    @error('solicitanteSenha')
+                                     <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
-                                <input class="form-control" type="password" name="solicitanteConfirmarSenha" id="solicitanteConfirmarSenha" placeholder="Confirme a senha" required><br>
+                                    <input class="form-control" type="password" name="solicitanteConfirmarSenha" id="solicitanteConfirmarSenha" placeholder="Confirme a senha">
+                                    @error('solicitanteConfirmarSenha')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteCep" id="solicitanteCep" placeholder="CEP" required><br>
+                                    <input class="form-control" type="text" name="solicitanteCep" id="solicitanteCep" placeholder="CEP">
+                                    @error('solicitanteCep')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteEndereco" id="solicitanteEndereco" placeholder="Endereço" required>
+                                    <input class="form-control" type="text" name="solicitanteEndereco" id="solicitanteEndereco" placeholder="Endereço" >
+                                    @error('solicitanteEndereco')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número" required><br>
+                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número">
+                                    @error('solicitanteNumero')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="solicitanteCidade" id="solicitanteCidade" required>
+                                    <select class ="form-control"name="solicitanteCidade" id="solicitanteCidade" >
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
                                             <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
                                         @endforeach
                                     </select>   
+                                    @error('solicitanteCidade')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteBairro" id="solicitanteBairro" placeholder="Bairro" required><br>
+                                    <input class="form-control" type="text" name="solicitanteBairro" id="solicitanteBairro" placeholder="Bairro">
+                                    @error('solicitanteBairro')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="solicitanteEstado" id="solicitanteEstado" required>
+                                    <select class ="form-control"name="solicitanteEstado" id="solicitanteEstado" >
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
                                             <option value="{{$estado->ID}}">{{$estado->UF}}</option>
                                         @endforeach
                                     </select>  
+                                    @error('solicitanteEstado')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
                                     <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento">  
@@ -82,8 +119,8 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label><br>
-                                <select name="familiaridade" class="custom-select" required>
+                                <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label>
+                                <select name="familiaridade" class="custom-select" >
                                             <option value="pai/mae">Sou pai/mãe</option> 
                                             <option value="filho/filha">Sou filho/filha</option>
                                             <option value="avô/avó">Sou avô/avó</option>
@@ -91,78 +128,112 @@
                                             <option value="neto/neta">Sou neto/neta</option> 
                                             <option value="primo/prima">Sou primo/prima</option>
                                             <option value="outros">Outros</option>
-                                    </select>         
+                                    </select>    
+                                    @error('familiaridade')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror     
                                 </div>
                                 <div class="col">
-                                    <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Nivel familiaridade outros:" value="{{$edit->nivelfamiliaridadeoutros ?? ''}}"><br>
+                                    <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Descreva o que é do paciente">
                                 </div>
                             </div>
                             <br>
                             <h1 class="text-center">Preencha os dados do paciente</h1>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="nomePaciente" id="nomePaciente" placeholder="Nome do paciente" required><br>
+                                    <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" placeholder="Nome do paciente">
+                                    @error('pacienteNome')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <label for="idadePaciente" class="text-dark">O paciente é?</label><br>
-                                    <select name="tipoPaciente" class="custom-select" required>
+                                    <select name="pacienteTipo" class="custom-select" >
                                             <option value="">Ex: Bebê, adulto ou criança</option> 
                                             <option value="bebe">Bebê</option> 
                                             <option value="crianca">Criança</option> 
                                             <option value="adolescente">Adolescente</option>
                                             <option value="adulto">Adulto</option>
                                             <option value="idoso">Idoso</option>
-                                    </select>                                  
+                                    </select>     
+                                    @error('pacienteTipo')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror                             
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <label for="localidadePaciente" class="text-dark">Onde o paciente está localizado?</label><br>
-                                    <select name="localizacaoPaciente" class="custom-select" required>
+                                    <select name="pacienteLocalizacao" class="custom-select" >
                                         <option value="retiro">Casa de retiro</option> 
                                         <option value="hospital">Hospital</option> 
                                         <option value="residencia">Residência</option>
                                     </select>   
+                                    @error('pacienteLocalizacao')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" required><br>
+                                    <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP">
+                                    @error('pacienteCep')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" required>
+                                    <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço">
+                                    @error('pacienteEndereco')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" required><br>
+                                    <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número">
+                                    @error('pacienteNumero')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="pacienteCidade" id="prestadorCidade" required>
+                                    <select class ="form-control"name="pacienteCidade" id="pacienteCidade" >
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
                                             <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
                                         @endforeach
                                     </select>   
+                                    @error('pacienteCidade')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" required><br>
+                                    <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro">
+                                    @error('pacienteBairro')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="pacienteEstado" id="pacienteEstado" required>
+                                    <select class ="form-control"name="pacienteEstado" id="pacienteEstado">
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
                                             <option value="{{$estado->ID}}">{{$estado->UF}}</option>
                                         @endforeach
                                     </select>  
+                                    @error('pacienteEstado')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
                                     <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento">
@@ -181,15 +252,16 @@
                                     <label for="formacao">Paciente toma medicamentos?</label><br>
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="Sim"> Sim <br> 
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="Nao"> Não
-                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?"><br>
+                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?">
+                                    @error('tomaMedicamento')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
                             <br>
                             <input class="btn btn-primary" type="submit" value="Cadastrar">
-                        </form>
-                        <!-- Fechamento do formulário de cadastro solicitante -->
                         </form> 
-                        <!-- Fechamento do formulário de edição solicitante -->
+                        <!-- Fechamento do formulário -->
                     </div>
                 </div>
             </div>
