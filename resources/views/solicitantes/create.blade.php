@@ -121,14 +121,10 @@ familiaridade                        <!-- Abertura do formulário -->
                                 <div class="col">
                                 <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label>
                                 <select name="familiaridade" class="custom-select" >
-                                            <option value="pai/mae">Sou pai/mãe</option> 
-                                            <option value="filho/filha">Sou filho/filha</option>
-                                            <option value="avô/avó">Sou avô/avó</option>
-                                            <option value="tio/tia">Sou tio/tia</option> 
-                                            <option value="neto/neta">Sou neto/neta</option> 
-                                            <option value="primo/prima">Sou primo/prima</option>
-                                            <option value="outros">Outros</option>
-                                    </select>    
+                                    @foreach($familiaridades as $familiaridade)
+                                       <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
+                                    @endforeach
+                                </select>    
                                     @error('familiaridade')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror     
@@ -152,12 +148,9 @@ familiaridade                        <!-- Abertura do formulário -->
                                 <div class="col">
                                     <label for="pacienteTipo" class="text-dark">O paciente é?</label><br>
                                     <select name="pacienteTipo" class="custom-select" >
-                                            <option value="">Ex: Bebê, adulto ou criança</option> 
-                                            <option value="bebe">Bebê</option> 
-                                            <option value="crianca">Criança</option> 
-                                            <option value="adolescente">Adolescente</option>
-                                            <option value="adulto">Adulto</option>
-                                            <option value="idoso">Idoso</option>
+                                        @foreach($pacienteTipo as $tipo)
+                                            <option value="{{$tipo->ID}}">{{$tipo->TIPO}}</option>
+                                        @endforeach
                                     </select>     
                                     @error('pacienteTipo')
                                         <span class="text-danger"><small>{{$message}}</small></span>
@@ -169,9 +162,9 @@ familiaridade                        <!-- Abertura do formulário -->
                                 <div class="col">
                                     <label for="localidadePaciente" class="text-dark">Onde o paciente está localizado?</label><br>
                                     <select name="pacienteLocalizacao" class="custom-select" >
-                                        <option value="retiro">Casa de retiro</option> 
-                                        <option value="hospital">Hospital</option> 
-                                        <option value="residencia">Residência</option>
+                                        @foreach($pacienteLocalizacao as $localizacao)
+                                            <option value="{{$localizacao->ID}}">{{$localizacao->LOCALIZACAO}}</option>
+                                        @endforeach
                                     </select>   
                                     @error('pacienteLocalizacao')
                                         <span class="text-danger"><small>{{$message}}</small></span>
@@ -241,13 +234,6 @@ familiaridade                        <!-- Abertura do formulário -->
                             </div>
                             <br>
                             <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label for="formacao">Serviços que deverão ser realizados</label><br>
-                                    @foreach($servicos as $servico)
-                                        <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
-                                    @endforeach
-                                    <input type="checkbox" name="outros" id="outros" value="sim"><input class="form-control" type="text" name="servicos[]" id="servicoOutros" placeholder="Outros"><br>
-                                </div>
                                 <div class="col font-color-gray">
                                     <label for="formacao">Paciente toma medicamentos?</label><br>
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="Sim"> Sim <br> 

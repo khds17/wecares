@@ -10,6 +10,9 @@ use App\Models\estados;
 use App\Models\cidades;
 use App\Models\enderecos;
 use App\Models\servicos;
+use App\Models\paciente_tipo;
+use App\Models\paciente_localizacao;
+use App\Models\familiaridade;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
@@ -22,6 +25,9 @@ class solicitantesController extends Controller
     private $objEstados;
     private $objCidades;
     private $objServico;
+    private $objPacienteTipo;
+    private $objPacienteLocalizacao;
+    private $objFamiliaridade;
 
     //Instanciando as classes
     public function __construct()
@@ -31,13 +37,16 @@ class solicitantesController extends Controller
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();
-        $this->objServico=  new servicos;
+        $this->objServico = new servicos();
+        $this->objPacienteTipo = new paciente_tipo();
+        $this->objPacienteLocalizacao = new paciente_localizacao();
+        $this->objFamiliaridade = new familiaridade(); 
         
     }
     
     public function index()
     {
-        
+           
         $solicitante = $this->objSolicitante->all();
         return view('solicitantes/index',compact('solicitante'));
         
@@ -62,7 +71,10 @@ class solicitantesController extends Controller
         $estados=$this->objEstados->all();
         $cidades=$this->objCidades->all();
         $servicos=$this->objServico->all();
-        return view('solicitantes/create',compact('estados','cidades','servicos'));
+        $pacienteTipo=$this->objPacienteTipo->all();
+        $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
+        $familiaridades=$this->objFamiliaridade->all(); 
+        return view('solicitantes/create',compact('estados','cidades','servicos','familiaridades','pacienteTipo','pacienteLocalizacao'));
     }
 
     /**
