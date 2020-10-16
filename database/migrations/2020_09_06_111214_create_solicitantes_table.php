@@ -22,7 +22,7 @@ class CreateSolicitantesTable extends Migration
             $table->string('SENHA',25);
             $table->unsignedInteger('ID_ENDERECO');
             $table->unsignedInteger('ID_FAMILIARIDADE');
-            $table->string('TIPO_FAMILIAR_OUTROS',20)->nullabel();
+            $table->string('FAMILIAR_OUTROS',100)->nullabel();
             $table->unsignedInteger('STATUS');
             $table->unsignedInteger('ID_ACESSO');
             $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');   

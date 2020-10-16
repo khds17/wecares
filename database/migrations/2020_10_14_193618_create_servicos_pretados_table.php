@@ -22,7 +22,8 @@ class CreateServicosPretadosTable extends Migration
             $table->string('TIPO', 25);
             $table->string('LOCALIZACAO', 25);
             $table->unsignedInteger('ID_ENDERECO');
-            $table->string('SERVICOS', 255);
+            $table->unsignedInteger('ID_SERVICOS');
+            $table->string('SERVICOS_OUTROS', 255);
             $table->unsignedInteger('MEDICAMENTOS');
             $table->string('TIPO_MEDICAMENTOS');
             $table->date('DATA_SERVICO');
@@ -34,6 +35,7 @@ class CreateServicosPretadosTable extends Migration
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_PACIENTE')->references('ID')->on('PACIENTES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_SERVICOS')->references('ID')->on('SERVICOS')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
