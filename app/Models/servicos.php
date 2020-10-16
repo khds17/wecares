@@ -8,5 +8,5 @@ class servicos extends Model
 {
     public $timestamps = false;
     protected $table='SERVICOS';
-    protected $fillable=[''];
+    protected $fillable=['ID','TIPO'];
 }
