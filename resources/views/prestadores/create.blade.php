@@ -27,8 +27,8 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorNumero" id="prestadorNumero" placeholder="Número do celular">
-                                    @error('prestadorNumero')
+                                    <input class="form-control" type="text" name="prestadorTelefone" id="prestadorTelefone" placeholder="Número do celular">
+                                    @error('prestadorTelefone')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="col">
                                     <input class="form-control" type="text" name="prestadorBairro" id="prestadorBairro" placeholder="Bairro">
-                                    @error('prestadorCPF')
+                                    @error('prestadorBairro')
                                     <span class="text-danger"><small>{{$message}}</small></span>
                                 @enderror
                                 </div>
