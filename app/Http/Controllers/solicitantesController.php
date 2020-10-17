@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\requestSolicitantePaciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\solicitantes;
 use App\Models\pacientes;
 use App\Models\estados;
@@ -104,7 +105,7 @@ class solicitantesController extends Controller
                 'CPF'=>$request->solicitanteCPF,
                 'EMAIL'=>$request->solicitanteEmail,
                 'TELEFONE'=>$request->solicitanteNumero,
-                'SENHA'=>$request->solicitanteSenha,
+                'SENHA'=>Hash::make($request['solicitanteSenha']),
                 'ID_ENDERECO'=>$idEnderecoSolicitante,
                 'ID_FAMILIARIDADE'=>$request->familiaridade,
                 'TIPO_FAMILIAR_OUTROS'=>$request->familiaridadeOutros,

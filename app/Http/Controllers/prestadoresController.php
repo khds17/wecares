@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\requestPrestador;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\prestadores;
 use App\Models\estados;
 use App\Models\cidades;
@@ -85,12 +86,9 @@ class prestadoresController extends Controller
      */
     public function store(requestPrestador $request)
     {   
-        
         // Pegando o valor da constant
         $status = \Config::get('constants.STATUS.PENDENTE');
         $acesso = \Config::get('constants.ACESSOS.PRESTADOR');
-
-        dd($status);
 
         $endereco = $this->objEndereco->create([
             'CEP'=>$request->prestadorCep,
@@ -125,7 +123,7 @@ class prestadoresController extends Controller
             'DT_NASCIMENTO'=>$request->prestadorNascimento,
             'SEXO'=>$request->sexo,
             'EMAIL'=>$request->prestadorEmail,
-            'SENHA'=>$request->prestadorSenha,
+            'SENHA'=>Hash::make($request['prestadorSenha']),
             'FORMACAO'=>$request->formacao,
             'ID_CERTIFICADO'=>$idCertificado,
             'ID_ANTECEDENTE'=>$idAntedecente,
