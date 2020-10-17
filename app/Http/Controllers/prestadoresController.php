@@ -10,6 +10,8 @@ use App\Models\cidades;
 use App\Models\enderecos;
 use App\Models\certificados;
 use App\Models\antecedentes;
+use App\Models\formacao;
+use App\Models\sexo;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +31,8 @@ class prestadoresController extends Controller
     private $objEndereco;
     private $objCertificado;
     private $objAntecedente;
+    private $objFormacao;
+    private $objSexos;
 
 
     //Instanciando as classes
@@ -40,6 +44,8 @@ class prestadoresController extends Controller
         $this->objEndereco = new enderecos();
         $this->objCertificado = new certificados();
         $this->objAntecedente = new antecedentes();
+        $this->objFormacao = new formacao();
+        $this->objSexos = new sexo();
     }
 
     public function index()
@@ -66,7 +72,9 @@ class prestadoresController extends Controller
     {
         $estados=$this->objEstado->all();
         $cidades=$this->objCidade->all();
-        return view('prestadores/create',compact('estados','cidades'));
+        $formacoes=$this->objFormacao->all();
+        $sexos=$this->objSexos->all();
+        return view('prestadores/create',compact('estados','cidades','formacoes','sexos'));
     }
 
     /**

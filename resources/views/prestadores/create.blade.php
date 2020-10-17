@@ -44,8 +44,9 @@
                                 </div>
                                 <div class="font-color-gray col">
                                     <label for="sexo">Sexo:</label> &nbsp;&nbsp; <br>
-                                    <input type="radio" name="sexo" id="feminino" value="feminino"> Feminino &nbsp;<br>
-                                    <input type="radio" name="sexo" id="masculino" value="masculino"> Masculino &nbsp;<br>
+                                    @foreach($sexos as $sexo)
+                                        <input type="radio" name="sexo" id="sexo" value="{{$sexo->ID}}"> {{$sexo->SEXO}} <br> 
+                                    @endforeach
                                     @error('sexo')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -143,8 +144,9 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Formação</label><br>
-                                    <input type="radio" name="formacao" id="formacao" value="cuidador"> Cuidador <br> 
-                                    <input type="radio" name="formacao" id="formacao" value="enfermagem"> Enfermagem <br>
+                                    @foreach($formacoes as $formacao)
+                                        <input type="radio" name="formacao" id="formacao" value="{{$formacao->ID}}"> {{$formacao->FORMACAO}} <br> 
+                                    @endforeach
                                     @error('formacao')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
