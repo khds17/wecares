@@ -77,8 +77,12 @@ class prestadoresController extends Controller
      */
     public function store(requestPrestador $request)
     {   
+        
         // Pegando o valor da constant
-        $status = \Config::get('constants.PENDENTE');
+        $status = \Config::get('constants.STATUS.PENDENTE');
+        $acesso = \Config::get('constants.ACESSOS.PRESTADOR');
+
+        dd($status);
 
         $endereco = $this->objEndereco->create([
             'CEP'=>$request->prestadorCep,
@@ -104,18 +108,21 @@ class prestadoresController extends Controller
         //Gravando o id do antecedente criminal
         $idAntedecente = $antecedente->id;
 
+        // dd($idAntedecente);
+
         $prestador = $this->objPrestador->create([
             'NOME'=>$request->prestadorNome,
             'CPF'=>$request->prestadorCPF,
-            'TELEFONE'=>$request->prestadorNumero,
+            'TELEFONE'=>$request->prestadorTelefone,
             'DT_NASCIMENTO'=>$request->prestadorNascimento,
             'SEXO'=>$request->sexo,
             'EMAIL'=>$request->prestadorEmail,
             'SENHA'=>$request->prestadorSenha,
             'FORMACAO'=>$request->formacao,
             'ID_CERTIFICADO'=>$idCertificado,
-            'ID_ANTEDECENTE'=>$idAntedecente,
+            'ID_ANTECEDENTE'=>$idAntedecente,
             'ID_ENDERECO'=>$idEndereco,
+            'ID_ACESSO'=>$acesso,
             'STATUS'=>$status
         ]);
     }

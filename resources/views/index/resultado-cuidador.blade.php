@@ -113,12 +113,10 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Serviços que deverão ser realizados</label><br>
-                                    <input type="checkbox" name="acompanhamentos" id="feminino"> Acompanhamentos em saídas <br> 
-                                    <input type="checkbox" name="medicamentos" id="masculino"> Administratação de medicamentos <br> 
-                                    <input type="checkbox" name="refeicao" id="masculino"> Administratação de refeições <br> 
-                                    <input type="checkbox" name="banho" id="masculino"> Banho <br> 
-                                    <input type="checkbox" name="companhia" id="masculino"> Companhia <br> 
-                                    <input type="checkbox" name="outros" id="masculino"> <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Outros" required><br>
+                                    @foreach($servicos as $servico)
+                                        <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
+                                    @endforeach
+                                    <input type="checkbox" name="outros" id="outros" value="sim"><input class="form-control" type="text" name="servicos[]" id="servicoOutros" placeholder="Outros"><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
