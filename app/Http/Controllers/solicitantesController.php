@@ -9,7 +9,6 @@ use App\Models\pacientes;
 use App\Models\estados;
 use App\Models\cidades;
 use App\Models\enderecos;
-use App\Models\servicos;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
