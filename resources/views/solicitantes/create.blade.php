@@ -7,7 +7,7 @@
                 <div class="card">
                     <h1 class="text-center padding-top-50">@if(isset($edit)) Editar @else Preencha os dados do solicitante @endif</h1>
                     <div class="card-body">
-familiaridade                        <!-- Abertura do formulário -->
+                        <!-- Abertura do formulário -->
                         <form name="formSolictante" id="formSolictante" method="post" action="{{url('solicitante')}}">       
                             @csrf
                             <div class="row margin-top-10">
