@@ -115,8 +115,8 @@
                                 <div class="col">
                                     <input class="form-control" type="text" name="prestadorBairro" id="prestadorBairro" placeholder="Bairro">
                                     @error('prestadorBairro')
-                                    <span class="text-danger"><small>{{$message}}</small></span>
-                                @enderror
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
                             <br>
