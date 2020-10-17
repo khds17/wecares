@@ -15,7 +15,7 @@ class CreateAcessosTable extends Migration
     {
         Schema::create('ACESSOS', function (Blueprint $table) {
             $table->increments('ID');
-            $table->unsignedSmallInteger('TIPO_CONTA');            
+            $table->string('TIPO_CONTA',50);            
         });
     }
 
