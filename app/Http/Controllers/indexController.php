@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\servicos;
 
 class indexController extends Controller
 {
+    //Instanciando as classes
+    public function __construct()
+    {
+        $this->objServico = new servicos();
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +60,8 @@ class indexController extends Controller
 
     public function resultado()
     {
-        return view('index/resultado-cuidador');
+        $servicos=$this->objServico->all();
+        return view('index/resultado-cuidador',compact('servicos'));
     }
 
     public function perfil()
