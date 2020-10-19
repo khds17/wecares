@@ -19,7 +19,7 @@ class CreateSolicitantesTable extends Migration
             $table->string('CPF',15);
             $table->string('EMAIL',255);
             $table->string('TELEFONE',15);
-            $table->string('SENHA',25);
+            $table->string('SENHA',255);
             $table->unsignedInteger('ID_ENDERECO');
             $table->unsignedInteger('ID_FAMILIARIDADE');
             $table->string('FAMILIAR_OUTROS',100)->nullabel();

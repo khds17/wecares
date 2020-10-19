@@ -21,7 +21,7 @@ class CreatePrestadoresTable extends Migration
             $table->date('DT_NASCIMENTO');
             $table->unsignedInteger('ID_SEXO');
             $table->string('EMAIL',35);
-            $table->string('SENHA',25);
+            $table->string('SENHA',255);
             $table->unsignedInteger('ID_ENDERECO');
             $table->unsignedInteger('ID_FORMACAO');
             $table->unsignedInteger('ID_CERTIFICADO');
