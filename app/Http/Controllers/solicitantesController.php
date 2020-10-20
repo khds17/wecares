@@ -24,7 +24,6 @@ class solicitantesController extends Controller
     private $objPaciente;
     private $objEstados;
     private $objCidades;
-    private $objServico;
     private $objPacienteTipo;
     private $objPacienteLocalizacao;
     private $objFamiliaridade;
@@ -37,7 +36,6 @@ class solicitantesController extends Controller
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();
-        $this->objServico = new servicos();
         $this->objPacienteTipo = new paciente_tipo();
         $this->objPacienteLocalizacao = new paciente_localizacao();
         $this->objFamiliaridade = new familiaridade(); 
@@ -70,11 +68,10 @@ class solicitantesController extends Controller
     {
         $estados=$this->objEstados->all();
         $cidades=$this->objCidades->all();
-        $servicos=$this->objServico->all();
         $pacienteTipo=$this->objPacienteTipo->all();
         $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
         $familiaridades=$this->objFamiliaridade->all(); 
-        return view('solicitantes/create',compact('estados','cidades','servicos','familiaridades','pacienteTipo','pacienteLocalizacao'));
+        return view('solicitantes/create',compact('estados','cidades','familiaridades','pacienteTipo','pacienteLocalizacao'));
     }
 
     /**
