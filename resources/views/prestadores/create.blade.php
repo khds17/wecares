@@ -12,7 +12,7 @@
                             @csrf
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorNome" id="prestadorNome" placeholder="Nome completo" >
+                                <input class="form-control" type="text" name="prestadorNome" id="prestadorNome" placeholder="Nome completo" value="{{old('prestadorNome')}}">
                                     @error('prestadorNome')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -21,13 +21,13 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="prestadorCPF" name="prestadorCPF" id="cpf" placeholder="CPF" > 
+                                    <input class="form-control" type="prestadorCPF" name="prestadorCPF" id="cpf" placeholder="CPF" value="{{old('prestadorCPF')}}"> 
                                     @error('prestadorCPF')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorTelefone" id="prestadorTelefone" placeholder="Número do celular">
+                                    <input class="form-control" type="text" name="prestadorTelefone" id="prestadorTelefone" placeholder="Número do celular" value="{{old('prestadorTelefone')}}">
                                     @error('prestadorTelefone')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -37,7 +37,7 @@
                             <div class="row margin-top-10">   
                                 <div class="font-color-gray col"> 
                                     <label for="sexo">Data de nascimento:</label>
-                                    <input class="form-control" type="date" name="prestadorNascimento" id="prestadorNascimento" placeholder="Data de nascimento">
+                                    <input class="form-control" type="date" name="prestadorNascimento" id="prestadorNascimento" placeholder="Data de nascimento" value="{{old('prestadorNascimento')}}">
                                     @error('prestadorNascimento')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -55,7 +55,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="email" name="prestadorEmail" id="prestadorEmail" placeholder="E-mail">
+                                    <input class="form-control" type="email" name="prestadorEmail" id="prestadorEmail" placeholder="E-mail" value="{{old('prestadorEmail')}}">
                                     @error('prestadorEmail')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -64,13 +64,13 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="password" name="prestadorSenha" id="prestadorSenha" placeholder="Senha">
+                                    <input class="form-control" type="password" name="prestadorSenha" id="prestadorSenha" placeholder="Senha" value="{{old('prestadorSenha')}}">
                                     @error('prestadorSenha')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="password" name="prestadorConfirmarSenha" id="prestadorConfirmarSenha" placeholder="Confirme a senha">
+                                    <input class="form-control" type="password" name="prestadorConfirmarSenha" id="prestadorConfirmarSenha" placeholder="Confirme a senha" value="{{old('prestadorConfirmarSenha')}}">
                                     @error('prestadorConfirmarSenha')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -79,7 +79,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorCep" id="prestadorCep" placeholder="CEP">
+                                    <input class="form-control" type="text" name="prestadorCep" id="prestadorCep" placeholder="CEP" value="{{old('prestadorCep')}}">
                                     @error('prestadorCep')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -88,13 +88,13 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorEndereco" id="prestadorEndereco" placeholder="Endereço">
+                                    <input class="form-control" type="text" name="prestadorEndereco" id="prestadorEndereco" placeholder="Endereço" value="{{old('prestadorEndereco')}}">
                                     @error('prestadorEndereco')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorNumero" id="prestadorNumero" placeholder="Número">
+                                    <input class="form-control" type="text" name="prestadorNumero" id="prestadorNumero" placeholder="Número" value="{{old('prestadorNumero')}}">
                                     @error('prestadorNumero')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -103,7 +103,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="prestadorCidade" id="prestadorCidade" >
+                                    <select class ="form-control" name="prestadorCidade" id="prestadorCidade" value="{{old('prestadorCidade')}}">
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
                                             <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
@@ -114,7 +114,7 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorBairro" id="prestadorBairro" placeholder="Bairro">
+                                    <input class="form-control" type="text" name="prestadorBairro" id="prestadorBairro" placeholder="Bairro" value="{{old('prestadorBairro')}}">
                                     @error('prestadorBairro')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -123,7 +123,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="prestadorEstado" id="prestadorEstado" >
+                                    <select class ="form-control"name="prestadorEstado" id="prestadorEstado" value="{{old('prestadorEstado')}}">
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
                                             <option value="{{$estado->ID}}">{{$estado->UF}}</option>
@@ -134,7 +134,7 @@
                                     @enderror           
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="prestadorComplemento" id="prestadorComplemento" placeholder="Complemento">
+                                    <input class="form-control" type="text" name="prestadorComplemento" id="prestadorComplemento" placeholder="Complemento" value="{{old('prestadorComplemento')}}">
                                     @error('prestadorComplemento')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -153,7 +153,7 @@
                                 </div>
                                 <div class="col font-color-gray">
                                     <label for="certificado">Certificado</label>
-                                    <input type="file" name="certificadoFormacao" id="certificadoFormacao">
+                                    <input type="file" name="certificadoFormacao" id="certificadoFormacao" value="{{old('certificadoFormacao')}}">
                                     @error('certificadoFormacao')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -163,7 +163,7 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="antecedentes">Antecedentes criminais</label><br>
-                                    <input type="file" name="antecedentes" id="antecedentes"><br>
+                                    <input type="file" name="antecedentes" id="antecedentes" value="{{old('antecedentes')}}"><br>
                                     @error('antecedentes')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -172,7 +172,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <input type="checkbox" name="termos" id="termos" value="aceito" >
+                                    <input type="checkbox" name="termos" id="termos" value="aceito">
                                     <a href="{{url("/termos")}}" target="_blank">Termos </a><label>e</label><a href="{{url("/conduta")}}" target="_blank"> Código de conduta</a><br>
                                     @error('termos')
                                         <span class="text-danger"><small>{{$message}}</small></span>

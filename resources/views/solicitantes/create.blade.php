@@ -12,14 +12,14 @@
                             @csrf
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome">
+                                    <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome" value="{{old('solicitanteNome')}}">
                                     @error('solicitanteNome')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <br>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteCPF" id="solicitanteCPF" placeholder="CPF"> 
+                                    <input class="form-control" type="text" name="solicitanteCPF" id="solicitanteCPF" placeholder="CPF" value="{{old('solicitanteCPF')}}"> 
                                     @error('solicitanteCPF')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -28,13 +28,13 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail">
+                                    <input class="form-control"type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail" value="{{old('solicitanteEmail')}}">
                                     @error('solicitanteEmail')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número do celular">
+                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número do celular" value="{{old('solicitanteNumero')}}">
                                     @error('solicitanteNumero')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -43,13 +43,13 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="password" name="solicitanteSenha" id="solicitanteSenha" placeholder="Senha" >
+                                    <input class="form-control" type="password" name="solicitanteSenha" id="solicitanteSenha" placeholder="Senha" value="{{old('solicitanteSenha')}}">
                                     @error('solicitanteSenha')
                                      <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="password" name="solicitanteConfirmarSenha" id="solicitanteConfirmarSenha" placeholder="Confirme a senha">
+                                    <input class="form-control" type="password" name="solicitanteConfirmarSenha" id="solicitanteConfirmarSenha" placeholder="Confirme a senha" value="{{old('solicitanteConfirmarSenha')}}">
                                     @error('solicitanteConfirmarSenha')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -58,7 +58,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteCep" id="solicitanteCep" placeholder="CEP">
+                                    <input class="form-control" type="text" name="solicitanteCep" id="solicitanteCep" placeholder="CEP" value="{{old('solicitanteCep')}}">
                                     @error('solicitanteCep')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -67,13 +67,13 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteEndereco" id="solicitanteEndereco" placeholder="Endereço" >
+                                    <input class="form-control" type="text" name="solicitanteEndereco" id="solicitanteEndereco" placeholder="Endereço" value="{{old('solicitanteEndereco')}}">
                                     @error('solicitanteEndereco')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número">
+                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número" value="{{old('solicitanteNumero')}}">
                                     @error('solicitanteNumero')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -82,7 +82,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="solicitanteCidade" id="solicitanteCidade" >
+                                    <select class ="form-control"name="solicitanteCidade" id="solicitanteCidade" value="{{old('solicitanteCidade')}}">
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
                                             <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
@@ -93,7 +93,7 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteBairro" id="solicitanteBairro" placeholder="Bairro">
+                                    <input class="form-control" type="text" name="solicitanteBairro" id="solicitanteBairro" placeholder="Bairro" value="{{old('solicitanteBairro')}}">
                                     @error('solicitanteBairro')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -102,7 +102,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="solicitanteEstado" id="solicitanteEstado" >
+                                    <select class ="form-control"name="solicitanteEstado" id="solicitanteEstado" value="{{old('solicitanteEstado')}}">
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
                                             <option value="{{$estado->ID}}">{{$estado->UF}}</option>
@@ -113,14 +113,14 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento">  
+                                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento" value="{{old('solicitanteComplemento')}}">  
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
                                 <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label>
-                                <select name="familiaridade" class="custom-select" >
+                                <select name="familiaridade" class="custom-select" value="{{old('familiaridade')}}">
                                     @foreach($familiaridades as $familiaridade)
                                        <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
                                     @endforeach
@@ -130,14 +130,14 @@
                                     @enderror     
                                 </div>
                                 <div class="col">
-                                    <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Descreva o que é do paciente">
+                                    <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Descreva o que é do paciente" value="{{old('familiaridadeOutros')}}">
                                 </div>
                             </div>
                             <br>
                             <h1 class="text-center">Preencha os dados do paciente</h1>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" placeholder="Nome do paciente">
+                                    <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" placeholder="Nome do paciente" value="{{old('pacienteNome')}}">
                                     @error('pacienteNome')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -147,7 +147,7 @@
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <label for="pacienteTipo" class="text-dark">O paciente é?</label><br>
-                                    <select name="pacienteTipo" class="custom-select" >
+                                    <select name="pacienteTipo" class="custom-select" value="{{old('pacienteTipo')}}">
                                         @foreach($pacienteTipo as $tipo)
                                             <option value="{{$tipo->ID}}">{{$tipo->TIPO}}</option>
                                         @endforeach
@@ -161,7 +161,7 @@
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <label for="localidadePaciente" class="text-dark">Onde o paciente está localizado?</label><br>
-                                    <select name="pacienteLocalizacao" class="custom-select" >
+                                    <select name="pacienteLocalizacao" class="custom-select" value="{{old('pacienteLocalizacao')}}">
                                         @foreach($pacienteLocalizacao as $localizacao)
                                             <option value="{{$localizacao->ID}}">{{$localizacao->LOCALIZACAO}}</option>
                                         @endforeach
@@ -174,7 +174,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP">
+                                    <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" value="{{old('pacienteCep')}}">
                                     @error('pacienteCep')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -183,13 +183,13 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço">
+                                    <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" value="{{old('pacienteEndereco')}}">
                                     @error('pacienteEndereco')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número">
+                                    <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" value="{{old('pacienteNumero')}}">
                                     @error('pacienteNumero')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -198,7 +198,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="pacienteCidade" id="pacienteCidade" >
+                                    <select class ="form-control"name="pacienteCidade" id="pacienteCidade" value="{{old('pacienteCidade')}}">
                                         <option value="">Cidade</option>
                                         @foreach($cidades as $cidade)
                                             <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
@@ -209,7 +209,7 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro">
+                                    <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" value="{{old('pacienteBairro')}}">
                                     @error('pacienteBairro')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -218,7 +218,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col">
-                                    <select class ="form-control"name="pacienteEstado" id="pacienteEstado">
+                                    <select class ="form-control"name="pacienteEstado" id="pacienteEstado" value="{{old('pacienteEstado')}}">
                                         <option value="">Estado</option>
                                         @foreach($estados as $estado)
                                             <option value="{{$estado->ID}}">{{$estado->UF}}</option>
@@ -229,7 +229,7 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento">
+                                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" value="{{old('pacienteComplemento')}}">
                                 </div>
                             </div>
                             <br>
@@ -238,7 +238,7 @@
                                     <label for="formacao">Paciente toma medicamentos?</label><br>
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="Sim"> Sim <br> 
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="Nao"> Não
-                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?">
+                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="{{old('tipoMedicamento')}}">
                                     @error('tomaMedicamento')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
