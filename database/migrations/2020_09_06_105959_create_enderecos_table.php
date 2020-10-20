@@ -18,7 +18,7 @@ class CreateEnderecosTable extends Migration
             $table->string('CEP',13);
             $table->string('ENDERECO',255);
             $table->integer('NUMERO');
-            $table->string('COMPLEMENTO',255);
+            $table->string('COMPLEMENTO',255)->nullable();
             $table->string('BAIRRO',50);
             $table->unsignedInteger('ID_CIDADE');
             $table->unsignedInteger('ID_ESTADO');

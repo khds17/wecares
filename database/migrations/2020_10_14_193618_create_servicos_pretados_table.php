@@ -23,9 +23,9 @@ class CreateServicosPretadosTable extends Migration
             $table->string('LOCALIZACAO', 25);
             $table->unsignedInteger('ID_ENDERECO');
             $table->unsignedInteger('ID_SERVICOS');
-            $table->string('SERVICOS_OUTROS', 255);
+            $table->string('SERVICOS_OUTROS', 255)->nullable();
             $table->unsignedInteger('MEDICAMENTOS');
-            $table->string('TIPO_MEDICAMENTOS');
+            $table->string('TIPO_MEDICAMENTOS')->nullable();
             $table->date('DATA_SERVICO');
             $table->time('HORA_INICIO',0);
             $table->time('HORA_FIM',0);

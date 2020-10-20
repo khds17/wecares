@@ -17,9 +17,9 @@ class CreateRegistrosLogTable extends Migration
             $table->increments('ID');
             $table->dateTime('DATA');
             $table->longText('TEXTO');
-            $table->unsignedInteger('ID_ADMIN')->nullabel();;
-            $table->unsignedInteger('ID_PRESTADOR')->nullabel();;
-            $table->unsignedInteger('ID_SOLICITANTE')->nullabel();;
+            $table->unsignedInteger('ID_ADMIN')->nullable();
+            $table->unsignedInteger('ID_PRESTADOR')->nullable();
+            $table->unsignedInteger('ID_SOLICITANTE')->nullable();
             $table->foreign('ID_ADMIN')->references('ID')->on('ADMIN')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');

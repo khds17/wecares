@@ -21,7 +21,7 @@ class CreatePacientesTable extends Migration
             $table->unsignedInteger('ID_ENDERECO');
             $table->string('SERVICOS', 255);
             $table->string('TOMA_MEDICAMENTOS',3);
-            $table->string('TIPO_MEDICAMENTOS');
+            $table->string('TIPO_MEDICAMENTOS')->nullable();
             $table->unsignedInteger('STATUS');
             $table->unsignedInteger('ID_SOLICITANTE');
             $table->foreign('ID_TIPO')->references('ID')->on('PACIENTES_TIPOS')->onDelete('cascade')->onUpdate('cascade');
