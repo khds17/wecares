@@ -89,46 +89,60 @@ class prestadoresController extends Controller
         // Pegando o valor da constant
         $status = \Config::get('constants.STATUS.PENDENTE');
 
-        $endereco = $this->objEndereco->create([
-            'CEP'=>$request->prestadorCep,
-            'ENDERECO'=>$request->prestadorEndereco,
-            'NUMERO'=>$request->prestadorNumero,
-            'COMPLEMENTO'=>$request->prestadorComplemento,
-            'BAIRRO'=>$request->prestadorBairro,
-            'ID_CIDADE'=>$request->prestadorCidade,
-            'ID_ESTADO'=>$request->prestadorEstado,
-        ]);
-        //Gravando o id do endereco
-        $idEndereco = $endereco->id;
+        DB::beginTransaction();
+
+        try {
+            $endereco = $this->objEndereco->create([
+                'CEP'=>$request->prestadorCep,
+                'ENDERECO'=>$request->prestadorEndereco,
+                'NUMERO'=>$request->prestadorNumero,
+                'COMPLEMENTO'=>$request->prestadorComplemento,
+                'BAIRRO'=>$request->prestadorBairro,
+                'ID_CIDADE'=>$request->prestadorCidade,
+                'ID_ESTADO'=>$request->prestadorEstado,
+            ]);
+            //Gravando o id do endereco
+            $idEndereco = $endereco->id;
+            
+            $certificado = $this->objCertificado->create([
+                'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
+            ]);
+            //Gravando o id do certificado
+            $idCertificado = $certificado->id;
+    
+            $antecedente = $this->objAntecedente->create([
+                'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
+            ]);
+            //Gravando o id do antecedente criminal
+            $idAntedecente = $antecedente->id;
+    
+            // dd($idAntedecente);
+    
+            $prestador = $this->objPrestador->create([
+                'NOME'=>$request->prestadorNome,
+                'CPF'=>$request->prestadorCPF,
+                'TELEFONE'=>$request->prestadorTelefone,
+                'DT_NASCIMENTO'=>$request->prestadorNascimento,
+                'ID_SEXO'=>$request->sexo,
+                'EMAIL'=>$request->prestadorEmail,
+                'SENHA'=>Hash::make($request['prestadorSenha']),
+                'ID_FORMACAO'=>$request->formacao,
+                'ID_CERTIFICADO'=>$idCertificado,
+                'ID_ANTECEDENTE'=>$idAntedecente,
+                'ID_ENDERECO'=>$idEndereco,
+                'STATUS'=>$status
+            ]);
+
+            DB::commit();
+            
+        } catch (\Throwable $e) {
+            
+            DB::rollback();
+            report($e);
+            return false;
+        }
+
         
-        $certificado = $this->objCertificado->create([
-            'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
-        ]);
-        //Gravando o id do certificado
-        $idCertificado = $certificado->id;
-
-        $antecedente = $this->objAntecedente->create([
-            'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
-        ]);
-        //Gravando o id do antecedente criminal
-        $idAntedecente = $antecedente->id;
-
-        // dd($idAntedecente);
-
-        $prestador = $this->objPrestador->create([
-            'NOME'=>$request->prestadorNome,
-            'CPF'=>$request->prestadorCPF,
-            'TELEFONE'=>$request->prestadorTelefone,
-            'DT_NASCIMENTO'=>$request->prestadorNascimento,
-            'ID_SEXO'=>$request->sexo,
-            'EMAIL'=>$request->prestadorEmail,
-            'SENHA'=>Hash::make($request['prestadorSenha']),
-            'ID_FORMACAO'=>$request->formacao,
-            'ID_CERTIFICADO'=>$idCertificado,
-            'ID_ANTECEDENTE'=>$idAntedecente,
-            'ID_ENDERECO'=>$idEndereco,
-            'STATUS'=>$status
-        ]);
     }
 
     /**
