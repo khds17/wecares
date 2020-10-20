@@ -19,7 +19,6 @@ class CreatePacientesTable extends Migration
             $table->unsignedInteger('ID_TIPO');
             $table->unsignedInteger('ID_LOCALIZACAO');
             $table->unsignedInteger('ID_ENDERECO');
-            $table->string('SERVICOS', 255);
             $table->string('TOMA_MEDICAMENTOS',3);
             $table->string('TIPO_MEDICAMENTOS')->nullable();
             $table->unsignedInteger('STATUS');

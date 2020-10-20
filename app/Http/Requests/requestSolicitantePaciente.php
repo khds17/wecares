@@ -26,8 +26,8 @@ class requestSolicitantePaciente extends FormRequest
     {
         return [
             'solicitanteNome'=>'bail|required|min:3|max:100',
-            'solicitanteCPF'=>'bail|required|min:9|max:9|unique:solicitanteES,CPF',
-            'solicitanteEmail'=>'bail|required|email:rfc,dns|unique:solicitanteES,EMAIL',
+            'solicitanteCPF'=>'bail|required|min:11|max:11|unique:SOLICITANTES,CPF',
+            'solicitanteEmail'=>'bail|required|email:rfc,dns|unique:SOLICITANTES,EMAIL',
             'solicitanteNumero'=>'required',
             'solicitanteSenha'=>'required:min:8',
             'solicitanteConfirmarSenha'=>'required|min:8|same:solicitanteSenha',

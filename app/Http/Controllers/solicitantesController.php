@@ -83,7 +83,7 @@ class solicitantesController extends Controller
     public function store(requestSolicitantePaciente $request)
     {
         // Pegando o valor da constant
-        $status = \Config::get('constants.ATIVO');
+        $status = \Config::get('constants.STATUS.ATIVO');
 
         $enderecoSolicitante = $this->objEndereco->create([
             'CEP'=>$request->solicitanteCep,
@@ -98,15 +98,15 @@ class solicitantesController extends Controller
         $idEnderecoSolicitante = $enderecoSolicitante->id;
 
         $solicitante = $this->objSolicitante->create([
-                'NOME'=>$request->solicitanteNome,
-                'CPF'=>$request->solicitanteCPF,
-                'EMAIL'=>$request->solicitanteEmail,
-                'TELEFONE'=>$request->solicitanteNumero,
-                'SENHA'=>Hash::make($request['solicitanteSenha']),
-                'ID_ENDERECO'=>$idEnderecoSolicitante,
-                'ID_FAMILIARIDADE'=>$request->familiaridade,
-                'TIPO_FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
-                'STATUS'=>$status
+            'NOME'=>$request->solicitanteNome,
+            'CPF'=>$request->solicitanteCPF,
+            'EMAIL'=>$request->solicitanteEmail,
+            'TELEFONE'=>$request->solicitanteNumero,
+            'SENHA'=>Hash::make($request['solicitanteSenha']),
+            'ID_ENDERECO'=>$idEnderecoSolicitante,
+            'ID_FAMILIARIDADE'=>$request->familiaridade,
+            'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
+            'STATUS'=>$status
             ]);
         //Gravando o id do solicitante
         $idSolicitante = $solicitante->id;
@@ -124,15 +124,11 @@ class solicitantesController extends Controller
         //Gravando o id do endereco
         $idEnderecoPaciente = $enderecoPaciente->id;
         
-        $arrayServicos = $request->servicos;
-        $servicos = json_encode($arrayServicos); 
-
         $paciente = $this->objPaciente->create([
             'NOME'=>$request->pacienteNome,
             'ID_TIPO'=>$request->pacienteTipo,
             'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
             'ID_ENDERECO'=>$idEnderecoPaciente,
-            'SERVICOS'=>$servicos,
             'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
             'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
             'STATUS'=>$status,
