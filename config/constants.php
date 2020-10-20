@@ -8,10 +8,4 @@ return [
         'REPROVADO' => 2,
         'DESATIVADO' => 3
     ],
-
-    'ACESSOS' => [
-        'PRESTADOR' => 1,
-        'SOLICITANTE' => 2
-    ]
-
 ];

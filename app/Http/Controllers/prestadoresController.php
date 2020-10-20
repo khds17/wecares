@@ -88,7 +88,6 @@ class prestadoresController extends Controller
     {   
         // Pegando o valor da constant
         $status = \Config::get('constants.STATUS.PENDENTE');
-        $acesso = \Config::get('constants.ACESSOS.PRESTADOR');
 
         $endereco = $this->objEndereco->create([
             'CEP'=>$request->prestadorCep,
@@ -121,14 +120,13 @@ class prestadoresController extends Controller
             'CPF'=>$request->prestadorCPF,
             'TELEFONE'=>$request->prestadorTelefone,
             'DT_NASCIMENTO'=>$request->prestadorNascimento,
-            'SEXO'=>$request->sexo,
+            'ID_SEXO'=>$request->sexo,
             'EMAIL'=>$request->prestadorEmail,
             'SENHA'=>Hash::make($request['prestadorSenha']),
-            'FORMACAO'=>$request->formacao,
+            'ID_FORMACAO'=>$request->formacao,
             'ID_CERTIFICADO'=>$idCertificado,
             'ID_ANTECEDENTE'=>$idAntedecente,
             'ID_ENDERECO'=>$idEndereco,
-            'ID_ACESSO'=>$acesso,
             'STATUS'=>$status
         ]);
     }

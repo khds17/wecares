@@ -24,10 +24,8 @@ class CreateSolicitantesTable extends Migration
             $table->unsignedInteger('ID_FAMILIARIDADE');
             $table->string('FAMILIAR_OUTROS',100)->nullabel();
             $table->unsignedInteger('STATUS');
-            $table->unsignedInteger('ID_ACESSO');
             $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreign('ID_FAMILIARIDADE')->references('ID')->on('FAMILIARIDADES')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('ID_ACESSO')->references('ID')->on('ACESSOS')->onDelete('cascade')->onUpdate('cascade');           
         });
     }
 
