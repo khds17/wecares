@@ -85,59 +85,74 @@ class solicitantesController extends Controller
         // Pegando o valor da constant
         $status = \Config::get('constants.STATUS.ATIVO');
 
-        $enderecoSolicitante = $this->objEndereco->create([
-            'CEP'=>$request->solicitanteCep,
-            'ENDERECO'=>$request->solicitanteEndereco,
-            'NUMERO'=>$request->solicitanteNumero,
-            'COMPLEMENTO'=>$request->solicitanteComplemento,
-            'BAIRRO'=>$request->solicitanteBairro,
-            'ID_CIDADE'=>$request->solicitanteCidade,
-            'ID_ESTADO'=>$request->solicitanteEstado,
-        ]);
-        //Gravando o id do endereco
-        $idEnderecoSolicitante = $enderecoSolicitante->id;
+        DB::beginTransaction();
 
-        $solicitante = $this->objSolicitante->create([
-            'NOME'=>$request->solicitanteNome,
-            'CPF'=>$request->solicitanteCPF,
-            'EMAIL'=>$request->solicitanteEmail,
-            'TELEFONE'=>$request->solicitanteNumero,
-            'SENHA'=>Hash::make($request['solicitanteSenha']),
-            'ID_ENDERECO'=>$idEnderecoSolicitante,
-            'ID_FAMILIARIDADE'=>$request->familiaridade,
-            'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
-            'STATUS'=>$status
+        try {            
+            $enderecoSolicitante = $this->objEndereco->create([
+                'CEP'=>$request->solicitanteCep,
+                'ENDERECO'=>$request->solicitanteEndereco,
+                'NUMERO'=>$request->solicitanteNumero,
+                'COMPLEMENTO'=>$request->solicitanteComplemento,
+                'BAIRRO'=>$request->solicitanteBairro,
+                'ID_CIDADE'=>$request->solicitanteCidade,
+                'ID_ESTADO'=>$request->solicitanteEstado,
             ]);
-        //Gravando o id do solicitante
-        $idSolicitante = $solicitante->id;
-
-        $enderecoPaciente = $this->objEndereco->create([
-            'CEP'=>$request->pacienteCep,
-            'ENDERECO'=>$request->pacienteEndereco,
-            'NUMERO'=>$request->pacienteNumero,
-            'COMPLEMENTO'=>$request->solicitanteComplemento,
-            'BAIRRO'=>$request->pacienteBairro,
-            'ID_CIDADE'=>$request->pacienteCidade,
-            'ID_ESTADO'=>$request->pacienteEstado,
-        ]);
-        
-        //Gravando o id do endereco
-        $idEnderecoPaciente = $enderecoPaciente->id;
-        
-        $paciente = $this->objPaciente->create([
-            'NOME'=>$request->pacienteNome,
-            'ID_TIPO'=>$request->pacienteTipo,
-            'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
-            'ID_ENDERECO'=>$idEnderecoPaciente,
-            'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
-            'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
-            'STATUS'=>$status,
-            'ID_SOLICITANTE'=>$idSolicitante,
+            //Gravando o id do endereco
+            $idEnderecoSolicitante = $enderecoSolicitante->id;
+    
+            $solicitante = $this->objSolicitante->create([
+                'NOME'=>$request->solicitanteNome,
+                'CPF'=>$request->solicitanteCPF,
+                'EMAIL'=>$request->solicitanteEmail,
+                'TELEFONE'=>$request->solicitanteNumero,
+                'SENHA'=>Hash::make($request['solicitanteSenha']),
+                'ID_ENDERECO'=>$idEnderecoSolicitante,
+                'ID_FAMILIARIDADE'=>$request->familiaridade,
+                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
+                'STATUS'=>$status
+                ]);
+            //Gravando o id do solicitante
+            $idSolicitante = $solicitante->id;
+    
+            $enderecoPaciente = $this->objEndereco->create([
+                'CEP'=>$request->pacienteCep,
+                'ENDERECO'=>$request->pacienteEndereco,
+                'NUMERO'=>$request->pacienteNumero,
+                'COMPLEMENTO'=>$request->solicitanteComplemento,
+                'BAIRRO'=>$request->pacienteBairro,
+                'ID_CIDADE'=>$request->pacienteCidade,
+                'ID_ESTADO'=>$request->pacienteEstado,
             ]);
+            
+            //Gravando o id do endereco
+            $idEnderecoPaciente = $enderecoPaciente->id;
+            
+            $paciente = $this->objPaciente->create([
+                'NOME'=>$request->pacienteNome,
+                'ID_TIPO'=>$request->pacienteTipo,
+                'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
+                'ID_ENDERECO'=>$idEnderecoPaciente,
+                'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
+                'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
+                'STATUS'=>$status,
+                'ID_SOLICITANTE'=>$idSolicitante,
+                ]);
+                
+            DB::commit();
 
-        if($solicitante){
-            return redirect('solicitantes');
+            if($solicitante && $paciente){                
+                return redirect('solicitantes');
+            }
+            
+        } catch (\Throwable $e) {
+
+            DB::rollback();
+            report($e);
+            return false;
+    
         }
+
+        
     }
 
     /**
