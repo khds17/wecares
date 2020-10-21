@@ -72,7 +72,7 @@ class prestadoresController extends Controller
     public function create()
     {
         $estados=$this->objEstado->all();
-        $cidades=$this->objCidade->all();
+        $cidades=$this->objCidade->orderBy('CIDADE','asc')->get();
         $formacoes=$this->objFormacao->all();
         $sexos=$this->objSexos->all();
         return view('prestadores/create',compact('estados','cidades','formacoes','sexos'));

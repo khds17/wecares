@@ -67,7 +67,7 @@ class solicitantesController extends Controller
     public function create()
     {
         $estados=$this->objEstados->all();
-        $cidades=$this->objCidades->all();
+        $cidades=$this->objCidade->orderBy('CIDADE','asc')->get();
         $pacienteTipo=$this->objPacienteTipo->all();
         $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
         $familiaridades=$this->objFamiliaridade->all(); 
