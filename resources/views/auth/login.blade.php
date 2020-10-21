@@ -1,7 +1,48 @@
-@extends('layouts.app')
-
+@extends('templates.template')
 @section('content')
-<div class="container">
+<header class="page-header page-header-dark bg-gradient-primary-to-secondary">
+    <div class="page-header-content">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="card rounded-lg text-dark">
+                        <div class="card-header py-4">Entrar</div>
+                        <div class="card-body">
+                            <form class="user">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha">
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox small">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                                        <label class="custom-control-label" for="customCheck">Lembrar-me</label>
+                                    </div>
+                                </div>
+                                <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                Login
+                                </a>
+                                {{-- <hr>
+                                <a href="index.html" class="btn btn-google btn-user btn-block">
+                                    <i class="fab fa-google fa-fw"></i> Login com Google
+                                </a>
+                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Login com Facebook
+                                </a> --}}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="svg-border-rounded text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+    </div>
+</header>
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,5 +110,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
