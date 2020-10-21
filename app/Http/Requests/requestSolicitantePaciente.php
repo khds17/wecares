@@ -26,7 +26,7 @@ class requestSolicitantePaciente extends FormRequest
     {
         return [
             'solicitanteNome'=>'bail|required|min:3|max:100',
-            'solicitanteCPF'=>'bail|required|min:11|max:11|unique:SOLICITANTES,CPF',
+            'solicitanteCPF'=>'bail|required|cpf|unique:SOLICITANTES,CPF',
             'solicitanteEmail'=>'bail|required|email:rfc,dns|unique:SOLICITANTES,EMAIL',
             'solicitanteNumero'=>'required',
             'solicitanteSenha'=>'required:min:8',
@@ -59,8 +59,7 @@ class requestSolicitantePaciente extends FormRequest
             'solicitanteNome.mix'=>'Preencha o nome completo',
             'solicitanteCPF.required'=>'CPF é um campo obrigatório',
             'solicitanteCPF.unique'=>'CPF já cadastrado. Caso seja o dono deste CPF, entre em contato conosco!',
-            'solicitanteCPF.min'=>'CPF inválido',
-            'solicitanteCPF.max'=>'CPF inválido',
+            'solicitanteCPF.cpf'=>'CPF inválido',
             'solicitanteNascimento.required'=>'Data de nascimento é um campo obrigatório',
             'solicitanteNascimento.date'=>'Data inválida',
             'solicitanteEmail.required'=>'E-mail é um campo obrigatório',

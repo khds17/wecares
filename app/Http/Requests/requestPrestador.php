@@ -26,7 +26,7 @@ class requestPrestador extends FormRequest
     {
         return [
             'prestadorNome'=>'bail|required|min:3|max:100',
-            'prestadorCPF'=>'bail|required|min:11|max:11|unique:PRESTADORES,CPF',
+            'prestadorCPF'=>'bail|required|cpf|unique:PRESTADORES,CPF',
             'prestadorTelefone'=>'required',
             'prestadorNascimento'=>'bail|required|date',
             'prestadorEmail'=>'bail|required|email:rfc,dns|unique:PRESTADORES,EMAIL',
@@ -52,8 +52,7 @@ class requestPrestador extends FormRequest
             'prestadorNome.mix'=>'Preencha o nome completo',
             'prestadorCPF.required'=>'CPF é um campo obrigatório',
             'prestadorCPF.unique'=>'CPF já cadastrado. Caso seja o dono deste CPF, entre em contato conosco!',
-            'prestadorCPF.min'=>'CPF inválido',
-            'prestadorCPF.max'=>'CPF inválido',
+            'prestadorCPF.cpf'=>'CPF inválido',
             'prestadorTelefone.required'=>'Telefone é um campo obrigatório',
             'prestadorNascimento.required'=>'Data de nascimento é um campo obrigatório',
             'prestadorNascimento.date'=>'Data inválida',
