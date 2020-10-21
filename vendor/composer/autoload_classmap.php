@@ -1948,6 +1948,8 @@ return array(
     'Illuminate\\View\\ViewName' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewName.php',
     'Illuminate\\View\\ViewServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+    'LaravelLegends\\PtBrValidator\\Validator' => $vendorDir . '/laravellegends/pt-br-validator/src/pt-br-validator/Validator.php',
+    'LaravelLegends\\PtBrValidator\\ValidatorProvider' => $vendorDir . '/laravellegends/pt-br-validator/src/pt-br-validator/ValidatorProvider.php',
     'Laravel\\Tinker\\ClassAliasAutoloader' => $vendorDir . '/laravel/tinker/src/ClassAliasAutoloader.php',
     'Laravel\\Tinker\\Console\\TinkerCommand' => $vendorDir . '/laravel/tinker/src/Console/TinkerCommand.php',
     'Laravel\\Tinker\\TinkerCaster' => $vendorDir . '/laravel/tinker/src/TinkerCaster.php',

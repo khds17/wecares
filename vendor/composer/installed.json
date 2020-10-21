@@ -1464,6 +1464,55 @@
         ]
     },
     {
+        "name": "laravellegends/pt-br-validator",
+        "version": "7.0.1",
+        "version_normalized": "7.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/LaravelLegends/pt-br-validator.git",
+            "reference": "c0d3d6ed81661a39caa1a2d3b018067d5397268a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/LaravelLegends/pt-br-validator/zipball/c0d3d6ed81661a39caa1a2d3b018067d5397268a",
+            "reference": "c0d3d6ed81661a39caa1a2d3b018067d5397268a",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "^6.0 || ^7.0 || ^8.0"
+        },
+        "require-dev": {
+            "orchestra/testbench": "^4.0 || ^5.0 || ^6.0",
+            "phpunit/phpunit": "^8.3 || ^9.0"
+        },
+        "time": "2020-09-11T17:33:48+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "LaravelLegends\\PtBrValidator\\ValidatorProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "LaravelLegends\\PtBrValidator\\": "src/pt-br-validator"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Wallace de Souza Vizerra",
+                "email": "wallacemaxters@gmail.com"
+            }
+        ],
+        "description": "Uma biblioteca contendo validações de formatos Brasileiros, para o Laravel"
+    },
+    {
         "name": "league/commonmark",
         "version": "1.5.4",
         "version_normalized": "1.5.4.0",

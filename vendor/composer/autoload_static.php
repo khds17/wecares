@@ -124,6 +124,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
             'League\\CommonMark\\' => 18,
             'Laravel\\Ui\\' => 11,
             'Laravel\\Tinker\\' => 15,
+            'LaravelLegends\\PtBrValidator\\' => 29,
         ),
         'I' => 
         array (
@@ -383,6 +384,10 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
+        ),
+        'LaravelLegends\\PtBrValidator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravellegends/pt-br-validator/src/pt-br-validator',
         ),
         'Illuminate\\Foundation\\Auth\\' => 
         array (
@@ -2438,6 +2443,8 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'LaravelLegends\\PtBrValidator\\Validator' => __DIR__ . '/..' . '/laravellegends/pt-br-validator/src/pt-br-validator/Validator.php',
+        'LaravelLegends\\PtBrValidator\\ValidatorProvider' => __DIR__ . '/..' . '/laravellegends/pt-br-validator/src/pt-br-validator/ValidatorProvider.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
