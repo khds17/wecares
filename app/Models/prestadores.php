@@ -14,4 +14,14 @@ class prestadores extends Model
     public function relEndereco(){
         return $this->hasOne('App\Models\enderecos', 'ID','ID_ENDERECO');
     }
+
+    // Criando relacionamento entre as tabelas prestadores e formacao
+    public function relFormacao(){
+        return $this->hasMany('App\Models\formacao', 'ID','ID_FORMACAO');
+    }
+
+    // Criando relacionamento entre as tabelas prestadores e certificados
+    public function relCertificado(){
+        return $this->hasMany('App\Models\certificados', 'ID','ID_CERTIFICADO');
+    }
 }
