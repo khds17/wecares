@@ -60,6 +60,12 @@ class prestadoresController extends Controller
     }
 
 
+    public function prestadoresLista()
+    {
+        $prestadores = $this->objPrestador->all();
+        return view('prestadores/lista-prestadores',compact('prestadores'));
+    }
+
     public function recebimentos()
     {
         return view('prestadores/recebimentos');
@@ -86,11 +92,12 @@ class prestadoresController extends Controller
      */
     public function store(requestPrestador $request)
     {   
-        // Pegando o valor da constant
+        // Pegando o valor da constant para colocar no prestador
         $status = \Config::get('constants.STATUS.PENDENTE');
-
+        
         DB::beginTransaction();
 
+        // Cadastro do endereço, certificado, antecedentes crimimais e prestador
         try {
             $endereco = $this->objEndereco->create([
                 'CEP'=>$request->prestadorCep,
@@ -101,22 +108,23 @@ class prestadoresController extends Controller
                 'ID_CIDADE'=>$request->prestadorCidade,
                 'ID_ESTADO'=>$request->prestadorEstado,
             ]);
+
             //Gravando o id do endereco
             $idEndereco = $endereco->id;
             
             $certificado = $this->objCertificado->create([
                 'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
             ]);
+
             //Gravando o id do certificado
             $idCertificado = $certificado->id;
     
             $antecedente = $this->objAntecedente->create([
                 'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
             ]);
+
             //Gravando o id do antecedente criminal
             $idAntedecente = $antecedente->id;
-    
-            // dd($idAntedecente);
     
             $prestador = $this->objPrestador->create([
                 'NOME'=>$request->prestadorNome,
@@ -153,7 +161,12 @@ class prestadoresController extends Controller
      */
     public function show($id)
     {
-        //
+        //Criando as variaveis com os objetos que podem ser usados na view
+        $prestadores=$this->objPrestador->find($id);
+        $enderecos=$this->objEndereco->find($id);
+        $certificados=$this->objCertificado->find($id);
+        $antecedentes=$this->objAntecedente->find($id);
+        return view('prestadores/prestadores-informacoes',compact('prestadores','enderecos','certificados', 'antecedentes'));
     }
 
     /**
