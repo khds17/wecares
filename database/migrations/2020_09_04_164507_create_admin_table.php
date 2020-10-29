@@ -18,6 +18,7 @@ class CreateAdminTable extends Migration
             $table->string('NOME',50);
             $table->string('EMAIL',35);
             $table->string('SENHA',25);
+            $table->unsignedInteger('STATUS');
         });
     }
 

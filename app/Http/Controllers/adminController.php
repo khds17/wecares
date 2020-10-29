@@ -42,7 +42,6 @@ class adminController extends Controller
             'NOME'=>$request->nome,
             'EMAIL'=>$request->email,
             'SENHA'=>$request->senha,
-            'SENHA_CONFIRMACAO'=>$request->senha_confirmacao,
             'STATUS'=>$request->status
         ]);
 
@@ -88,7 +87,6 @@ class adminController extends Controller
             'NOME'=>$request->nome,
             'EMAIL'=>$request->email,
             'SENHA'=>$request->senha,
-            'SENHA_CONFIRMACAO'=>$request->senha_confirmacao,
             'STATUS'=>$request->status
         ]);
         return redirect('admin');
