@@ -166,6 +166,7 @@ class prestadoresController extends Controller
         $enderecos=$this->objEndereco->find($id);
         $certificados=$this->objCertificado->find($id);
         $antecedentes=$this->objAntecedente->find($id);
+
         return view('prestadores/prestadores-informacoes',compact('prestadores','enderecos','certificados', 'antecedentes'));
     }
 
@@ -190,6 +191,33 @@ class prestadoresController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function aprovar($id)
+    {
+        // Pegando o valor da constant para colocar no prestador
+        $statusAprovado = \Config::get('constants.STATUS.ATIVO');
+
+        $this->objPrestador->where(['ID'=>$id])->update([
+            'STATUS'=>$statusAprovado
+        ]);
+
+        // return redirect()->route('/prestadoreslista');
+
+        // return redirect('prestadoreslista');
+
+    }
+
+    public function reprovar($id)
+    {
+        // Pegando o valor da constant para colocar no prestador
+        $statusReprovado = \Config::get('constants.STATUS.REPROVADO');
+
+        $this->objPrestador->where(['ID'=>$id])->update([
+            'STATUS'=>$statusReprovado
+        ]);
+
+        // return redirect('prestadoreslista');
     }
 
     /**
