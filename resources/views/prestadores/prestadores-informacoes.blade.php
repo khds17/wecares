@@ -48,10 +48,10 @@
         @endif
         <br><br>
         <a href="">
-            <button class="btn btn-success">Aprovar</button>
+            <button class="btn btn-success" onclick="aprovar({{$prestadores->ID}})">Aprovar</button>
         </a>
         <a href="">
-            <button class="btn btn-danger">Reprovar</button>
+            <button class="btn btn-danger" onclick="reprovar({{$prestadores->ID}})">Reprovar</button>
         </a>
        {{-- Certificado:{{$certificado->CERTIFICADO}}<br> --}}
        {{-- Antecedente:{{$prestadores->NOME}}<br> --}}
