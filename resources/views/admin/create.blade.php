@@ -13,8 +13,6 @@
             <input class="form-control"type="text" name="nome" id="nome" placeholder="Nome:" value="{{$edit->NOME ?? ''}}">
             <input class="form-control"type="email" name="email" id="email" placeholder="E-mail:" value="{{$edit->EMAIL ?? ''}}">
             <input class="form-control"type="password" name="senha" id="senha" placeholder="Senha:" value="{{$edit->SENHA ?? ''}}">
-            <input class="form-control"type="password" name="senha_confirmacao" id="senha_confirmacao" placeholder="Confirme a senha" value="{{$edit->SENHA_CONFIRMACAO ?? ''}}">
-            <input class="form-control"type="text" name="status" id="status" placeholder="Status:" value="{{$edit->STATUS ?? ''}}">
             <br>
             <input class="btn btn-primary" type="submit" value="@if(isset($edit)) Salvar edição @else Cadastrar @endif">
          </form>
