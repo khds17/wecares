@@ -59,7 +59,7 @@ return array(
     'App\\Models\\servicos_prestados' => $baseDir . '/app/Models/servicos_prestados.php',
     'App\\Models\\sexo' => $baseDir . '/app/Models/sexo.php',
     'App\\Models\\solicitantes' => $baseDir . '/app/Models/solicitantes.php',
-    'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Models\\user' => $baseDir . '/app/Models/user.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
