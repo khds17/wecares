@@ -30,7 +30,7 @@ Route::resource('/paciente','pacientesController');
 Route::resource('/pagamentos','pagamentosController');
 // ===========================================
 Route::resource('/prestador','prestadoresController');
-Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais');
+Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais')->middleware('auth');
 Route::get('/prestadoreslista','prestadoresController@prestadoreslista');
 Route::put('/aprovar/{id}', 'prestadoresController@aprovar');
 Route::put('/reprovar/{id}', 'prestadoresController@reprovar');
@@ -45,11 +45,6 @@ Route::get('/servicosPrestados','servicosController@servicosPrestados');
 Route::resource('/solicitante','solicitantesController');
 Route::get('/solicitanteCadastro','solicitantesController@dadosCadastrais');
 
-
-
-
-
-
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
