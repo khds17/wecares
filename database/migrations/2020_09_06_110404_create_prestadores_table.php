@@ -21,12 +21,13 @@ class CreatePrestadoresTable extends Migration
             $table->date('DT_NASCIMENTO');
             $table->unsignedInteger('ID_SEXO');
             $table->string('EMAIL',35);
-            $table->string('SENHA',255);
+            $table->unsignedInteger('ID_USUARIO');
             $table->unsignedInteger('ID_ENDERECO');
             $table->unsignedInteger('ID_FORMACAO');
             $table->unsignedInteger('ID_CERTIFICADO');
             $table->unsignedInteger('ID_ANTECEDENTE');
             $table->unsignedInteger('STATUS');
+            $table->foreign('ID_USUARIO')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_CERTIFICADO')->references('ID')->on('CERTIFICADOS')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_ANTECEDENTE')->references('ID')->on('ANTECEDENTES')->onDelete('cascade')->onUpdate('cascade');
