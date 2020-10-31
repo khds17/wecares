@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Relacionamento entre as tabelas users e prestadores
+    public function relPrestador(){
+        return $this->hasOne('App\Models\prestadores','ID_USUARIO');
+    }
+
+    // Relacionamento entre as tabelas users e solicitanteS
+    public function relSolicitante(){
+        return $this->hasOne('App\Models\solicitantes','ID_USUARIO');
+    }
 }

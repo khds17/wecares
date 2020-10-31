@@ -8,11 +8,16 @@ class prestadores extends Model
 {
     public $timestamps = false;
     protected $table='PRESTADORES';
-    protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','ID_SEXO','EMAIL','SENHA','ID_ENDERECO','ID_FORMACAO','ID_CERTIFICADO','ID_ANTECEDENTE','STATUS'];
+    protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','ID_SEXO','EMAIL','ID_USUARIO','ID_ENDERECO','ID_FORMACAO','ID_CERTIFICADO','ID_ANTECEDENTE','STATUS'];
 
     // Criando relacionamento entre as tabelas prestadores e enderecos
     public function relEndereco(){
         return $this->hasOne('App\Models\enderecos', 'ID','ID_ENDERECO');
+    }
+
+    // Criando relacionamento entre as tabelas solicitantes e users
+    public function relUsuario(){
+        return $this->hasOne('App\Models\users', 'ID','ID_USUARIO');
     }
 
     // Criando relacionamento entre as tabelas prestadores e formacao

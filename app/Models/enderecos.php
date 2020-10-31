@@ -15,6 +15,16 @@ class enderecos extends Model
         return $this->hasOne('App\Models\prestadores','ID_ENDERECO');
     }
 
+    // Relacionamento entre as tabelas enderecos e solicitantes
+    public function relSolicitante(){
+        return $this->hasOne('App\Models\solicitantes','ID_ENDERECO');
+    }
+
+    // Relacionamento entre as tabelas enderecos e prestadores
+    public function relPaciente(){
+        return $this->hasOne('App\Models\pacientes','ID_ENDERECO');
+    }
+
     // Relacionamento entre as tabelas enderecos e cidades
     public function relCidade(){
         return $this->hasOne('App\Models\cidades','ID','ID_CIDADE');
