@@ -13,6 +13,7 @@ use App\Models\certificados;
 use App\Models\antecedentes;
 use App\Models\formacao;
 use App\Models\sexo;
+use App\Models\user;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
@@ -34,6 +35,7 @@ class prestadoresController extends Controller
     private $objAntecedente;
     private $objFormacao;
     private $objSexos;
+    private $objUsers;
 
 
     //Instanciando as classes
@@ -47,6 +49,8 @@ class prestadoresController extends Controller
         $this->objAntecedente = new antecedentes();
         $this->objFormacao = new formacao();
         $this->objSexos = new sexo();
+        $this->objUsers = new user();
+
     }
 
     public function index()
@@ -125,7 +129,16 @@ class prestadoresController extends Controller
 
             //Gravando o id do antecedente criminal
             $idAntedecente = $antecedente->id;
-    
+
+            $usuario = $this->objUsers->create([
+                'name' => $request->prestadorNome,
+                'email' => $request->prestadorEmail,
+                'password' => Hash::make($request['prestadorSenha']),
+            ]);
+
+            //Gravando o id do antecedente criminal
+            $idUsuario = $usuario->id;
+                
             $prestador = $this->objPrestador->create([
                 'NOME'=>$request->prestadorNome,
                 'CPF'=>$request->prestadorCPF,
@@ -133,7 +146,7 @@ class prestadoresController extends Controller
                 'DT_NASCIMENTO'=>$request->prestadorNascimento,
                 'ID_SEXO'=>$request->sexo,
                 'EMAIL'=>$request->prestadorEmail,
-                'SENHA'=>Hash::make($request['prestadorSenha']),
+                'ID_USUARIO'=>$idUsuario,
                 'ID_FORMACAO'=>$request->formacao,
                 'ID_CERTIFICADO'=>$idCertificado,
                 'ID_ANTECEDENTE'=>$idAntedecente,

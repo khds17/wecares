@@ -13,6 +13,7 @@ use App\Models\enderecos;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
+use App\Models\user;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
@@ -27,6 +28,7 @@ class solicitantesController extends Controller
     private $objPacienteTipo;
     private $objPacienteLocalizacao;
     private $objFamiliaridade;
+    private $objUsers;
 
     //Instanciando as classes
     public function __construct()
@@ -39,6 +41,7 @@ class solicitantesController extends Controller
         $this->objPacienteTipo = new paciente_tipo();
         $this->objPacienteLocalizacao = new paciente_localizacao();
         $this->objFamiliaridade = new familiaridade(); 
+        $this->objUsers = new user();
         
     }
     
@@ -67,7 +70,7 @@ class solicitantesController extends Controller
     public function create()
     {
         $estados=$this->objEstados->all();
-        $cidades=$this->objCidade->orderBy('CIDADE','asc')->get();
+        $cidades=$this->objCidades->orderBy('CIDADE','asc')->get();
         $pacienteTipo=$this->objPacienteTipo->all();
         $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
         $familiaridades=$this->objFamiliaridade->all(); 
@@ -82,12 +85,14 @@ class solicitantesController extends Controller
      */
     public function store(requestSolicitantePaciente $request)
     {
+
         // Pegando o valor da constant
         $status = \Config::get('constants.STATUS.ATIVO');
 
         DB::beginTransaction();
 
-        try {            
+        try {           
+
             $enderecoSolicitante = $this->objEndereco->create([
                 'CEP'=>$request->solicitanteCep,
                 'ENDERECO'=>$request->solicitanteEndereco,
@@ -97,20 +102,31 @@ class solicitantesController extends Controller
                 'ID_CIDADE'=>$request->solicitanteCidade,
                 'ID_ESTADO'=>$request->solicitanteEstado,
             ]);
+
             //Gravando o id do endereco
             $idEnderecoSolicitante = $enderecoSolicitante->id;
+
+            $usuario = $this->objUsers->create([
+                'name' => $request->solicitanteNome,
+                'email' => $request->solicitanteEmail,
+                'password' => Hash::make($request['solicitanteSenha']),
+            ]);
+
+            //Gravando o id do antecedente criminal
+            $idUsuario = $usuario->id;
     
             $solicitante = $this->objSolicitante->create([
                 'NOME'=>$request->solicitanteNome,
                 'CPF'=>$request->solicitanteCPF,
                 'EMAIL'=>$request->solicitanteEmail,
                 'TELEFONE'=>$request->solicitanteNumero,
-                'SENHA'=>Hash::make($request['solicitanteSenha']),
+                'ID_USUARIO'=>$idUsuario,
                 'ID_ENDERECO'=>$idEnderecoSolicitante,
                 'ID_FAMILIARIDADE'=>$request->familiaridade,
                 'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
                 'STATUS'=>$status
                 ]);
+
             //Gravando o id do solicitante
             $idSolicitante = $solicitante->id;
     
@@ -145,7 +161,7 @@ class solicitantesController extends Controller
             }
             
         } catch (\Throwable $e) {
-
+            dd('Caiu 2');
             DB::rollback();
             report($e);
             return false;
