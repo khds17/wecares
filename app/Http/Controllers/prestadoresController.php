@@ -155,6 +155,8 @@ class prestadoresController extends Controller
             ]);
 
             DB::commit();
+                
+            return redirect()->action('indexController@agradecimento');
             
         } catch (\Throwable $e) {
             
