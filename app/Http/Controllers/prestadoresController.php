@@ -158,11 +158,20 @@ class prestadoresController extends Controller
                 
             return redirect()->action('indexController@agradecimento');
             
-        } catch (\Throwable $e) {
-            
+        } catch (\Exception $e) {
+            // dd('Oi');
+
             DB::rollback();
-            report($e);
-            return false;
+
+            return redirect()->action('prestadoresController@create');
+
+            // return response()->json([
+            //     'message' => $e->getMessage(),
+            //     'data' => '',
+            //     'result' => false,
+            // ], 401);
+
+
         }
 
         
