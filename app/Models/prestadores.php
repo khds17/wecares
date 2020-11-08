@@ -10,14 +10,19 @@ class prestadores extends Model
     protected $table='PRESTADORES';
     protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','ID_SEXO','EMAIL','ID_USUARIO','ID_ENDERECO','ID_FORMACAO','ID_CERTIFICADO','ID_ANTECEDENTE','STATUS'];
 
-    // Criando relacionamento entre as tabelas prestadores e enderecos
-    public function relEndereco(){
-        return $this->hasOne('App\Models\enderecos', 'ID','ID_ENDERECO');
+    // Criando relacionamento entre as tabelas prestadores e sexo
+    public function relSexo(){
+        return $this->hasOne('App\Models\sexo', 'ID','ID_SEXO');
     }
 
     // Criando relacionamento entre as tabelas solicitantes e users
     public function relUsuario(){
         return $this->hasOne('App\Models\users', 'ID','ID_USUARIO');
+    }
+
+    // Criando relacionamento entre as tabelas prestadores e enderecos
+    public function relEndereco(){
+        return $this->hasOne('App\Models\enderecos', 'ID','ID_ENDERECO');
     }
 
     // Criando relacionamento entre as tabelas prestadores e formacao
@@ -29,4 +34,10 @@ class prestadores extends Model
     public function relCertificado(){
         return $this->hasMany('App\Models\certificados', 'ID','ID_CERTIFICADO');
     }
+
+    // Criando relacionamento entre as tabelas prestadores e antecedentes
+    public function relAntecedentes(){
+        return $this->hhasOneasMany('App\Models\antecedentes', 'ID','ID_ANTECEDENTE');
+    }
+
 }

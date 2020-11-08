@@ -9,4 +9,9 @@ class antecedentes extends Model
     public $timestamps = false;
     protected $table='ANTECEDENTES';
     protected $fillable=['ANTECEDENTE'];
+
+    // Criando relacionamento entre as tabelas antecedentes e prestadores 
+    public function relPrestadores(){
+        return $this->hasOne('App\Models\PRESTADORES', 'ID_ANTECEDENTE');
+    }
 }
