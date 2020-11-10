@@ -49,7 +49,7 @@ class requestPrestador extends FormRequest
     {
         return[
             'prestadorNome.required'=>'Nome é um campo obrigatório',
-            'prestadorNome.mix'=>'Preencha o nome completo',
+            'prestadorNome.min'=>'Preencha o nome completo',
             'prestadorCPF.required'=>'CPF é um campo obrigatório',
             'prestadorCPF.unique'=>'CPF já cadastrado. Caso seja o dono deste CPF, entre em contato conosco!',
             'prestadorCPF.cpf'=>'CPF inválido',
