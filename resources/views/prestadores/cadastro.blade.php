@@ -10,7 +10,9 @@
                         <h6 class="m-0 font-weight-bold text-primary padding-top-15">Dados cadastrais</h6>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro" href=""> Editar </a>
+                        @foreach($prestadores as $prestador) 
+                            <a class="btn btn-primary" href="{{"prestador/$prestador->ID/edit"}}"> Editar </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -25,21 +27,25 @@
                             <th scope="col">Telefone</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row">Kauan</th>
-                        <td>khds2013@gmail.com</td>
-                        <td>Cuidador</td>
-                        <td>19995583696</td>
-                        </tr>
-                        <tr>
+                    <tbody>                       
+                        @foreach($prestadores as $prestador) 
+                            @foreach ($formacoes as $formacao)
+                                <tr>
+                                <th scope="row">{{$prestador->NOME}}</th>
+                                <td>{{$prestador->EMAIL}}</td>
+                                <td>{{$formacao->FORMACAO}}</td>
+                                <td>{{$prestador->TELEFONE}}</td>
+                                </tr>
+                                <tr>
+                            @endforeach 
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<!-- Modal -->
+{{-- <!-- Modal -->
 <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="modalCadastroLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -50,8 +56,26 @@
                 </button>
             </div>
             <div class="modal-body">
+                <form name="formEditPrestador" id="formEditPrestador" method="post" enctype="multipart/form-data" action="{{url('prestador')}}">   
+                    @foreach($prestadores as $prestador) 
+                        @foreach ($formacoes as $formacao)
+                        <input class="form-control" type="text" name="prestadorNome" id="prestadorNome" placeholder="Nome completo" value="{{old('prestadorNome')}}">
+                        @error('prestadorNome')
+                            <span class="text-danger"><small>{{$message}}</small></span>
+                        @enderror
+                    </div>
+                        <tr>
+                        <th scope="row"></th>
+                        <td>{{$prestador->EMAIL}}</td>
+                        <td>{{$formacao->FORMACAO}}</td>
+                        <td>{{$prestador->TELEFONE}}</td>
+                        </tr>
+                        <tr>
+                        @endforeach 
+                    @endforeach
+                </form>
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
