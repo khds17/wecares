@@ -37,7 +37,7 @@ class prestadores extends Model
 
     // Criando relacionamento entre as tabelas prestadores e antecedentes
     public function relAntecedentes(){
-        return $this->hhasOneasMany('App\Models\antecedentes', 'ID','ID_ANTECEDENTE');
+        return $this->hasMany('App\Models\antecedentes', 'ID','ID_ANTECEDENTE');
     }
 
 }
