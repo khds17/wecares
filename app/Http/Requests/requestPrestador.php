@@ -59,7 +59,7 @@ class requestPrestador extends FormRequest
             'sexo.required'=>'Sexo é um campo obrigatório',
             'prestadorEmail.required'=>'E-mail é um campo obrigatório',
             'prestadorEmail.email'=>'E-mail inválido',
-            'prestadorEmail.unique'=>'E-mail já cadastrado. Caseo seja o dono deste e-mail, entre em contato conosco!',
+            'prestadorEmail.unique'=>'E-mail já cadastrado. Caso seja o dono deste e-mail, entre em contato conosco!',
             'prestadorSenha.required'=>'Senha é um campo obrigatório',
             'prestadorSenha.min'=>'Digite uma senha de no mínimo 8 digitos',
             'prestadorConfirmarSenha.required'=>'Confirme a senha é um campo obrigatório',
