@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\requestPrestador;
+use App\Http\Requests\requestPrestadorEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\prestadores;
@@ -60,11 +61,19 @@ class prestadoresController extends Controller
 
     public function dadosCadastrais()
     {
-        return view('prestadores/cadastro');
+        // Encontra o prestador pelo usuario logado.
+        $prestadores = $this->objPrestador->where('ID_USUARIO', auth()->user()->id)->get();
+        
+        $formacoes = $this->objFormacao
+                         ->join('PRESTADORES', 'FORMACAO.ID', '=', 'PRESTADORES.ID_FORMACAO')
+                         ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+                         ->get();
+
+        return view('prestadores/cadastro',compact('prestadores','formacoes'));
     }
 
 
-    public function prestadoresLista()
+    public function prestadoresLista(prestadores $prestadores)
     {
         $prestadores = $this->objPrestador->all();
         return view('prestadores/lista-prestadores',compact('prestadores'));
@@ -202,7 +211,26 @@ class prestadoresController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prestadores= $this->objPrestador->find($id);
+
+        $users = $prestadores->find($prestadores->ID)
+                        ->relUsuario;
+
+        $certificados = $prestadores->find($prestadores->ID)
+                                ->relCertificado;
+
+        $antecedentes = $prestadores->find($prestadores->ID)
+                                ->relAntecedentes;
+
+        $enderecos = $prestadores->find($prestadores->ID)
+                            ->relEndereco;
+
+        $formacoes = $this->objFormacao->all();
+        $sexos = $this->objSexos->all();
+        $cidades = $this->objCidade->all();
+        $estados = $this->objEstado->all();
+
+        return view('prestadores/edit',compact('prestadores','users','sexos','enderecos','cidades','estados','formacoes','certificados','antecedentes'));
     }
 
     /**
@@ -212,9 +240,67 @@ class prestadoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(requestPrestadorEdit $request, $id)
     {
-        //
+        $prestadores= $this->objPrestador->find($id);
+
+        $users = $prestadores->find($prestadores->ID)
+                        ->relUsuario;
+
+        $certificados = $prestadores->find($prestadores->ID)
+                                ->relCertificado;
+
+        $antecedentes = $prestadores->find($prestadores->ID)
+                                ->relAntecedentes;
+
+        $enderecos = $prestadores->find($prestadores->ID)
+                            ->relEndereco;
+
+
+        DB::beginTransaction();
+
+        try {
+
+            $this->objEndereco->where(['ID' => $enderecos->ID])->update([
+                'CEP'=>$request->prestadorCep,
+                'ENDERECO'=>$request->prestadorEndereco,
+                'NUMERO'=>$request->prestadorNumero,
+                'COMPLEMENTO'=>$request->prestadorComplemento,
+                'BAIRRO'=>$request->prestadorBairro,
+                'ID_CIDADE'=>$request->prestadorCidade,
+                'ID_ESTADO'=>$request->prestadorEstado,
+            ]);
+
+            $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
+                'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
+            ]);
+
+            // $this->objAntecedente->where(['ID' => $prestadores->ID_ANTECEDENTE])->update([
+            //     'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
+            // ]);
+
+            $this->objUsers->where(['id' => $prestadores->ID_USUARIO])->update([
+                'name' => $request->prestadorNome,
+                'email' => $request->prestadorEmail,
+            ]);
+
+            $this->objPrestador->where(['ID' => $id])->update([
+                'NOME'=>$request->prestadorNome,
+                'CPF'=>$request->prestadorCPF,
+                'TELEFONE'=>$request->prestadorTelefone,
+                'DT_NASCIMENTO'=>$request->prestadorNascimento,
+                'EMAIL'=>$request->prestadorEmail,
+            ]);
+            
+        return redirect()->action('prestadoresController@dadosCadastrais');
+
+        DB::commit();
+
+        } catch (\Throwable $th) {
+            
+            DB::rollback();
+            dd('Caiu no catch');
+        }
     }
 
     public function aprovar($id)
