@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\admin;
+use App\Models\user;
+use Illuminate\Support\Facades\Hash;
+use App\Config\constants;
 
 class adminController extends Controller
 {
@@ -12,11 +15,13 @@ class adminController extends Controller
 
     public function __construct()
     {
-        $this->admin = new admin();
+        $this->objAdmin = new admin();
+        $this->objUsers = new user();
+
     }
     public function index()
     {
-        $admin = $this->admin->all();
+        $admin = $this->objAdmin->all();
         return view('admin/index',compact('admin'));
     }
 
@@ -38,12 +43,26 @@ class adminController extends Controller
      */
     public function store(Request $request)
     {
-        $admin = $this->admin->create([
-            'NOME'=>$request->nome,
-            'EMAIL'=>$request->email,
-            'SENHA'=>$request->senha,
-            'STATUS'=>$request->status
+
+        // Pegando o valor da constant para colocar no prestador
+        $status = \Config::get('constants.STATUS.ATIVO');
+
+        $usuario = $this->objUsers->create([
+            'name' => $request->nome,
+            'email' => $request->email,
+            'password' => Hash::make($request['senha']),
         ]);
+
+        $idUsuario = $usuario->id;
+
+        $admin = $this->objAdmin->create([
+            'NOME' => $request->nome,
+            'EMAIL' => $request->email,
+            'SENHA' => $request->senha,
+            'ID_USUARIO' => $idUsuario,
+            'STATUS' => $status
+        ]);
+        
 
         if($admin){
             return redirect('admin');
@@ -58,7 +77,7 @@ class adminController extends Controller
      */
     public function show($id)
     {
-        $admin=$this->admin->find($id);
+        $admin=$this->objAdmin->find($id);
         return view('admin/information',compact('admin'));
     }
 
@@ -70,7 +89,7 @@ class adminController extends Controller
      */
     public function edit($id)
     {
-        $edit=$this->admin->find($id);
+        $edit=$this->objAdmin->find($id);
         return view('admin/create',compact('edit'));
     }
 
@@ -83,7 +102,7 @@ class adminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->admin->where(['id'=>$id])->update([
+        $this->objAdmin->where(['id'=>$id])->update([
             'NOME'=>$request->nome,
             'EMAIL'=>$request->email,
             'SENHA'=>$request->senha,
@@ -100,7 +119,7 @@ class adminController extends Controller
      */
     public function destroy($id)
     {
-        $del=$this->admin->destroy($id);
+        $del=$this->objAdmin->destroy($id);
         return($del)?"sim":"não";
     }
 }

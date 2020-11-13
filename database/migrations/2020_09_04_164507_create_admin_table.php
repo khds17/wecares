@@ -15,10 +15,12 @@ class CreateAdminTable extends Migration
     {
         Schema::create('ADMIN', function (Blueprint $table) {
             $table->increments('ID');
-            $table->string('NOME',50);
-            $table->string('EMAIL',35);
-            $table->string('SENHA',25);
+            $table->string('NOME',255);
+            $table->string('EMAIL',255);
+            $table->string('SENHA',255);
+            $table->unsignedInteger('ID_USUARIO');
             $table->unsignedInteger('STATUS');
+            $table->foreign('ID_USUARIO')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

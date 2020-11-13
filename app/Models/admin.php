@@ -8,5 +8,5 @@ class admin extends Model
 {
     public $timestamps = false;
     protected $table='ADMIN';
-    protected $fillable=['NOME','EMAIL','SENHA','STATUS'];
+    protected $fillable=['NOME','EMAIL','SENHA','ID_USUARIO','STATUS'];
 }
