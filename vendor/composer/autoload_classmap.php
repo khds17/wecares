@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Exceptions\\Exception' => $baseDir . '/app/Exceptions/Exception.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -34,6 +35,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\requestPrestador' => $baseDir . '/app/Http/Requests/requestPrestador.php',
+    'App\\Http\\Requests\\requestPrestadorEdit' => $baseDir . '/app/Http/Requests/requestPrestadorEdit.php',
     'App\\Http\\Requests\\requestSolicitantePaciente' => $baseDir . '/app/Http/Requests/requestSolicitantePaciente.php',
     'App\\Models\\acessos' => $baseDir . '/app/Models/acessos.php',
     'App\\Models\\admin' => $baseDir . '/app/Models/admin.php',
@@ -60,6 +62,7 @@ return array(
     'App\\Models\\sexo' => $baseDir . '/app/Models/sexo.php',
     'App\\Models\\solicitantes' => $baseDir . '/app/Models/solicitantes.php',
     'App\\Models\\user' => $baseDir . '/app/Models/user.php',
+
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
