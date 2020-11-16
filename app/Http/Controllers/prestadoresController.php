@@ -75,7 +75,6 @@ class prestadoresController extends Controller
 
     public function prestadoresLista(prestadores $prestadores)
     {
-        $this->authorize('view', $prestadores);
         $prestadores = $this->objPrestador->all();
         return view('prestadores/lista-prestadores',compact('prestadores'));
     }
