@@ -24,7 +24,7 @@
                     </div>
                     <div class="sidebar-brand-text mx-3">WeCares</div>
                 </a>
-                @role('Administrador')
+                @role('administrador')
                 <hr class="sidebar-divider my-0">
                 <!-- Nav Item - Lista de prestadores -->
                 <li class="nav-item">

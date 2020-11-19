@@ -56,7 +56,7 @@ class adminController extends Controller
             'password' => Hash::make($request['senha']),
         ]);
 
-        $usuario->assignRole('Administrador');
+        $usuario->assignRole('administrador');
 
         $idUsuario = $usuario->id;
 
