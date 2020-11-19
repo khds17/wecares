@@ -30,7 +30,7 @@ Route::resource('/paciente','pacientesController')->middleware('auth');
 Route::resource('/pagamentos','pagamentosController')->middleware('auth');
 // ===========================================
 Route::resource('/prestador','prestadoresController');
-Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais')->middleware('auth');
+Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 Route::get('/prestadoreslista','prestadoresController@prestadoreslista')->middleware('auth');
 Route::put('/aprovar/{id}', 'prestadoresController@aprovar')->middleware('auth');
 Route::put('/reprovar/{id}', 'prestadoresController@reprovar')->middleware('auth');
