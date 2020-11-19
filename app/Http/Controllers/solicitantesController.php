@@ -15,8 +15,9 @@ use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
 use App\Models\user;
 use App\Config\constants;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
-
 
 class solicitantesController extends Controller
 {
@@ -85,14 +86,13 @@ class solicitantesController extends Controller
      */
     public function store(requestSolicitantePaciente $request)
     {
-
-        // Pegando o valor da constant
+        // Pegando o valor da constant para colocar no solicitante
         $status = \Config::get('constants.STATUS.ATIVO');
 
         DB::beginTransaction();
 
         try {           
-
+            
             $enderecoSolicitante = $this->objEndereco->create([
                 'CEP'=>$request->solicitanteCep,
                 'ENDERECO'=>$request->solicitanteEndereco,
@@ -105,13 +105,17 @@ class solicitantesController extends Controller
 
             //Gravando o id do endereco
             $idEnderecoSolicitante = $enderecoSolicitante->id;
+            // dd('Teste');
 
             $usuario = $this->objUsers->create([
                 'name' => $request->solicitanteNome,
                 'email' => $request->solicitanteEmail,
                 'password' => Hash::make($request['solicitanteSenha']),
             ]);
-
+            
+            //Gravando a função no usuario
+            $usuario->assignRole('solicitante');
+            
             //Gravando o id do antecedente criminal
             $idUsuario = $usuario->id;
     
@@ -156,9 +160,9 @@ class solicitantesController extends Controller
                 
             DB::commit();
 
-            if($solicitante && $paciente){                
-                return redirect('solicitantes');
-            }
+            // if($solicitante && $paciente){                
+            //     return redirect('solicitantes');
+            // }
             
         } catch (\Throwable $e) {
             dd('Caiu 2');

@@ -16,8 +16,9 @@ use App\Models\formacao;
 use App\Models\sexo;
 use App\Models\user;
 use App\Config\constants;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
-
 
 class prestadoresController extends Controller
 {
@@ -144,6 +145,9 @@ class prestadoresController extends Controller
                 'email' => $request->prestadorEmail,
                 'password' => Hash::make($request['prestadorSenha']),
             ]);
+
+            //Gravando a função do usuario
+            $usuario->assignRole('cuidador/enfermeiro');
 
             //Gravando o id do antecedente criminal
             $idUsuario = $usuario->id;
