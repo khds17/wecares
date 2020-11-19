@@ -24,6 +24,7 @@
                     </div>
                     <div class="sidebar-brand-text mx-3">WeCares</div>
                 </a>
+                @role('Administrador')
                 <hr class="sidebar-divider my-0">
                 <!-- Nav Item - Lista de prestadores -->
                 <li class="nav-item">
@@ -34,6 +35,7 @@
                         <span>Lista de prestadores</span>
                     </a>
                 </li>
+                @endrole
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
 

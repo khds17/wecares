@@ -7,6 +7,9 @@ use App\Models\admin;
 use App\Models\user;
 use Illuminate\Support\Facades\Hash;
 use App\Config\constants;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 class adminController extends Controller
 {
@@ -52,6 +55,8 @@ class adminController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request['senha']),
         ]);
+
+        $usuario->assignRole('Administrador');
 
         $idUsuario = $usuario->id;
 
