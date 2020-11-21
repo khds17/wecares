@@ -50,13 +50,17 @@ class solicitantesController extends Controller
     {
            
         $solicitante = $this->objSolicitante->all();
+
         return view('solicitantes/index',compact('solicitante'));
         
     }
 
     public function dadosCadastrais()
     {
-        return view('solicitantes/cadastro');
+        // Encontra o prestador pelo usuario logado.
+        $solicitantes = $this->objSolicitante->where('ID_USUARIO', auth()->user()->id)->get();
+
+        return view('solicitantes/cadastro',compact("solicitantes"));
     }
 
     public function pacienteCadastro()
@@ -71,10 +75,15 @@ class solicitantesController extends Controller
     public function create()
     {
         $estados=$this->objEstados->all();
+
         $cidades=$this->objCidades->orderBy('CIDADE','asc')->get();
+
         $pacienteTipo=$this->objPacienteTipo->all();
+
         $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
+
         $familiaridades=$this->objFamiliaridade->all(); 
+
         return view('solicitantes/create',compact('estados','cidades','familiaridades','pacienteTipo','pacienteLocalizacao'));
     }
 
@@ -116,14 +125,14 @@ class solicitantesController extends Controller
             //Gravando a função no usuario
             $usuario->assignRole('solicitante');
             
-            //Gravando o id do antecedente criminal
+            //Gravando o id do usuario
             $idUsuario = $usuario->id;
     
             $solicitante = $this->objSolicitante->create([
                 'NOME'=>$request->solicitanteNome,
                 'CPF'=>$request->solicitanteCPF,
                 'EMAIL'=>$request->solicitanteEmail,
-                'TELEFONE'=>$request->solicitanteNumero,
+                'TELEFONE'=>$request->solicitanteTelefone,
                 'ID_USUARIO'=>$idUsuario,
                 'ID_ENDERECO'=>$idEnderecoSolicitante,
                 'ID_FAMILIARIDADE'=>$request->familiaridade,
@@ -160,12 +169,8 @@ class solicitantesController extends Controller
                 
             DB::commit();
 
-            // if($solicitante && $paciente){                
-            //     return redirect('solicitantes');
-            // }
-            
         } catch (\Throwable $e) {
-            dd('Caiu 2');
+
             DB::rollback();
             report($e);
             return false;
@@ -184,7 +189,7 @@ class solicitantesController extends Controller
     public function show($id)
     {
         
-        $solicitante=$this->solicitante->find($id);
+        $solicitante=$this->objSolicitante->find($id);
         return view('solicitantes/information',compact('solicitante'));
     }
 
@@ -196,8 +201,19 @@ class solicitantesController extends Controller
      */
     public function edit($id)
     {
-        $edit=$this->solicitante->find($id);
-        return view('solicitantes/create',compact('edit'));
+        $solicitantes= $this->objSolicitante->find($id);
+
+        $users = $solicitantes->find($solicitantes->ID)
+        ->relUsuario;
+
+        $enderecos = $solicitantes->find($solicitantes->ID)
+        ->relEndereco;
+
+        $cidades = $this->objCidades->all();
+
+        $estados = $this->objEstados->all();
+
+        return view('solicitantes/edit',compact('solicitantes','users','enderecos','cidades','estados'));
 
     }
 
@@ -210,20 +226,45 @@ class solicitantesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->solicitante->where(['id'=>$id])->update([
-            'nome'=>$request->nome,
-            'email'=>$request->email,
-            'cep'=>$request->cep,
-            'endereco'=>$request->endereco,
-            'numero'=>$request->numero,
-            'cidade'=>$request->cidade,
-            'bairro'=>$request->bairro,
-            'complemento'=>$request->complemento,
-            'estado'=>$request->estado,
-            'nivelfamiliaridade'=>$request->nivelfamiliaridade,
-            'nivelfamiliaridadeoutros'=>$request->nivelfamiliaridadeoutros,
-            'status'=>$request->status
-        ]);
+        $solicitantes= $this->objSolicitante->find($id);
+
+        DB::beginTransaction();
+
+        try {           
+
+            $this->objEndereco->where(['ID' => $solicitantes->ID_ENDERECO])->update([
+                'CEP'=>$request->solicitanteCep,
+                'ENDERECO'=>$request->solicitanteEndereco,
+                'NUMERO'=>$request->solicitanteNumero,
+                'COMPLEMENTO'=>$request->solicitanteComplemento,
+                'BAIRRO'=>$request->solicitanteBairro,
+                'ID_CIDADE'=>$request->solicitanteCidade,
+                'ID_ESTADO'=>$request->solicitanteEstado,
+            ]);
+
+            $this->objUsers->where(['id' => $solicitantes->ID_USUARIO])->update([
+                'name' => $request->solicitanteNome,
+            ]);
+
+            $this->objSolicitante->where(['ID' => $solicitantes->ID])->update([
+                'NOME'=>$request->solicitanteNome,
+                'CPF'=>$request->solicitanteCPF,
+                'TELEFONE'=>$request->solicitanteTelefone,
+                ]);
+            
+            DB::commit();
+
+            return redirect()->action('solicitantesController@dadosCadastrais');
+
+            
+        } catch (\Throwable $e) {
+
+
+            DB::rollback();
+            report($e);
+            return false;
+    
+        }
         return redirect('solicitantes');
     }
 
@@ -235,7 +276,6 @@ class solicitantesController extends Controller
      */
     public function destroy($id)
     {
-        $del=$this->solicitante->destroy($id);
-        return($del)?"sim":"não";
+
     }
 }
