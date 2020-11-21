@@ -10,7 +10,9 @@
                         <h6 class="m-0 font-weight-bold text-primary padding-top-15">Dados cadastrais</h6>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro" href=""> Editar </a>
+                        @foreach($solicitantes as $solicitante) 
+                            <a class="btn btn-primary" href="{{"solicitante/$solicitante->ID/edit"}}"> Editar </a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -21,18 +23,18 @@
                         <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">E-mail</th>
-                            <th scope="col">Especilidade</th>
                             <th scope="col">Telefone</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                        <th scope="row">Kauan</th>
-                        <td>khds2013@gmail.com</td>
-                        <td>Cuidador</td>
-                        <td>19995583696</td>
-                        </tr>
-                        <tr>
+                        @foreach($solicitantes as $solicitante) 
+                            <tr>
+                            <th scope="row">{{$solicitante->NOME}}</th>
+                            <td>{{$solicitante->EMAIL}}</td>
+                            <td>{{$solicitante->TELEFONE}}</td>
+                            </tr>
+                            <tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
