@@ -34,8 +34,8 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número do celular" value="{{old('solicitanteNumero')}}">
-                                    @error('solicitanteNumero')
+                                    <input class="form-control" type="text" name="solicitanteTelefone" id="solicitanteTelefone" placeholder="Número do celular" value="{{old('solicitanteNumero')}}">
+                                    @error('solicitanteTelefone')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
