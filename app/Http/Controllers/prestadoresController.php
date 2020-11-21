@@ -172,18 +172,10 @@ class prestadoresController extends Controller
             return redirect()->action('indexController@agradecimento');
             
         } catch (\Exception $e) {
-            // dd('Oi');
 
             DB::rollback();
 
             return redirect()->action('prestadoresController@create');
-
-            // return response()->json([
-            //     'message' => $e->getMessage(),
-            //     'data' => '',
-            //     'result' => false,
-            // ], 401);
-
 
         }
 
@@ -248,24 +240,11 @@ class prestadoresController extends Controller
     {
         $prestadores= $this->objPrestador->find($id);
 
-        $users = $prestadores->find($prestadores->ID)
-                        ->relUsuario;
-
-        $certificados = $prestadores->find($prestadores->ID)
-                                ->relCertificado;
-
-        $antecedentes = $prestadores->find($prestadores->ID)
-                                ->relAntecedentes;
-
-        $enderecos = $prestadores->find($prestadores->ID)
-                            ->relEndereco;
-
-
         DB::beginTransaction();
 
         try {
 
-            $this->objEndereco->where(['ID' => $enderecos->ID])->update([
+            $this->objEndereco->where(['ID' => $prestadores->ID_ENDERECO])->update([
                 'CEP'=>$request->prestadorCep,
                 'ENDERECO'=>$request->prestadorEndereco,
                 'NUMERO'=>$request->prestadorNumero,
@@ -275,30 +254,30 @@ class prestadoresController extends Controller
                 'ID_ESTADO'=>$request->prestadorEstado,
             ]);
 
-            $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
-                'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
-            ]);
+            // $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
+            //     'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
+            // ]);
 
             // $this->objAntecedente->where(['ID' => $prestadores->ID_ANTECEDENTE])->update([
             //     'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
             // ]);
-
             $this->objUsers->where(['id' => $prestadores->ID_USUARIO])->update([
                 'name' => $request->prestadorNome,
-                'email' => $request->prestadorEmail,
             ]);
 
             $this->objPrestador->where(['ID' => $id])->update([
                 'NOME'=>$request->prestadorNome,
                 'CPF'=>$request->prestadorCPF,
                 'TELEFONE'=>$request->prestadorTelefone,
+                'ID_SEXO'=>$request->sexo,
                 'DT_NASCIMENTO'=>$request->prestadorNascimento,
-                'EMAIL'=>$request->prestadorEmail,
+                'ID_FORMACAO'=>$request->formacao,
             ]);
             
+        DB::commit();
+
         return redirect()->action('prestadoresController@dadosCadastrais');
 
-        DB::commit();
 
         } catch (\Throwable $th) {
             
