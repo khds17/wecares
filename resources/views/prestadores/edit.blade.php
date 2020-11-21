@@ -53,7 +53,7 @@
         <div class="row margin-top-10">
             <div class="col">
                 <label for="">E-mail:</label>
-                <input class="form-control" type="email" name="prestadorEmail" id="prestadorEmail" placeholder="E-mail" value="{{$prestadores->EMAIL}}">
+                <input class="form-control" type="email" name="prestadorEmail" id="prestadorEmail" placeholder="E-mail" value="{{$prestadores->EMAIL}}" disabled>
                 @error('prestadorEmail')
                     <span class="text-danger"><small>{{$message}}</small></span>
                 @enderror
