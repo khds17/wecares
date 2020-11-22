@@ -63,10 +63,6 @@ class solicitantesController extends Controller
         return view('solicitantes/cadastro',compact("solicitantes"));
     }
 
-    public function pacienteCadastro()
-    {
-        return view('solicitantes/paciente');
-    }
     /**
      * Show the form for creating a new resource.
      *
