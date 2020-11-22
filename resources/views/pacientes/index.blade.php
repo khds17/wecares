@@ -10,7 +10,7 @@
                         <h6 class="m-0 font-weight-bold text-primary padding-top-15">Dados cadastrais</h6>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro" href=""> Editar </a>
+                        <a class="btn btn-success" href=""> Cadastrar novo paciente</a>
                     </div>
                 </div>
             </div>
@@ -20,15 +20,24 @@
                     <thead>
                         <tr>
                             <th scope="col">Nome</th>
-                            <th scope="col">Idade</th>
-                            <th scope="col">Telefone</th>
+                            <th scope="col">Tipo paciente</th>
+                            <th scope="col">Hospedado em</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                        <th scope="row">Kauan</th>
-                        <td>khds2013@gmail.com</td>
-                        <td>19995583696</td>
+                        @foreach ($pacientes as $paciente)
+                            @foreach ($pacientesTipos as $pacienteTipo)
+                                @foreach ($pacientesLocalizacao as $pacienteLocalizacao)
+                                    <th scope="row">{{$paciente->NOME}}</th>
+                                    <td>{{$pacienteTipo->TIPO}}</td>
+                                    <td>{{$pacienteLocalizacao->LOCALIZACAO}}</td>
+                                    <td>                
+                                        <a class="btn btn-primary" href="{{"paciente/$paciente->ID/edit"}}"> Editar </a>
+                                    </td>
+                                @endforeach
+                            @endforeach
+                        @endforeach
                         </tr>
                         <tr>
                     </tbody>
