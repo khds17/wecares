@@ -20,5 +20,11 @@ class solicitantes extends Model
             return $this->hasOne('App\Models\user', 'ID','ID_USUARIO');
         }
 
+        // Criando relacionamento entre as tabelas solicitantes e pacientes
+        public function relPaciente(){
+            return $this->hasMany('App\Models\pacientes', 'ID_SOLICITANTE');
+        }
+        
+
 }
 
