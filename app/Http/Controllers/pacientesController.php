@@ -8,6 +8,8 @@ use App\Models\cidades;
 use App\Models\enderecos;
 use App\Models\pacientes;
 use App\Models\solicitantes;
+use App\Models\paciente_tipo;
+use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
 use Illuminate\Support\Facades\DB;
 
@@ -19,11 +21,13 @@ class pacientesController extends Controller
     {
         $this->objSolicitante = new solicitantes();
         $this->objPaciente = new pacientes();
+        $this->objPacienteTipo = new paciente_tipo();
+        $this->objPacienteLocalizacao = new paciente_localizacao(); 
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();
-        $this->objFamiliaridade = new familiaridade(); 
-        
+        $this->objFamiliaridades = new familiaridade();   
+              
     }
 
     /**
@@ -102,7 +106,39 @@ class pacientesController extends Controller
      */
     public function edit($id)
     {
-        return view('pacientes/edit');
+        //Encontrando os pacientes do solicitante logado
+        $paciente = $this->objPaciente->find($id);
+
+        //Pegando todos os tipos de pacientes
+        $pacientesTipos = $this->objPacienteTipo->all();
+
+        //Pegando todas as localizações
+        $pacientesLocalizacao = $this->objPacienteLocalizacao->all();
+
+        //Encontrando o endereço da localização dos pacientes
+        $endereco = $paciente->find($paciente->ID)
+        ->relEndereco;
+
+        $solicitante = $paciente->find($paciente->ID)
+        ->relSolicitante;
+
+        $cidades = $this->objCidades->all();
+
+        $estados = $this->objEstados->all();
+
+        //Encontrando a familiaridade do solicitante logado vinculado ao pacientes.
+        // $solicitantesFamiliaridade = DB::table('FAMILIARIDADES')
+        // ->join('SOLICITANTES', 'FAMILIARIDADES.ID', '=', 'SOLICITANTES.ID_FAMILIARIDADE')
+        // ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
+        // ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+        // ->select('FAMILIARIDADES.*')
+        // ->get();
+
+        $familiaridades = $this->objFamiliaridades->all();
+
+        // dd($pacientesTipos);
+
+        return view('pacientes/edit', compact("paciente", "pacientesTipos", "pacientesLocalizacao", "solicitante","familiaridades", "endereco", "cidades", "estados"));
     }
 
     /**
