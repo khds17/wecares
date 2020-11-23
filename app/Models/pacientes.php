@@ -16,4 +16,8 @@ class pacientes extends Model
         return $this->hasOne('App\Models\solicitantes', 'ID', 'ID_SOLICITANTE');
     }
 
+    // Criando relacionamento entre as tabelas prestadores e enderecos
+    public function relEndereco(){
+        return $this->hasOne('App\Models\enderecos', 'ID','ID_ENDERECO');
+    }
 }
