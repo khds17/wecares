@@ -126,17 +126,7 @@ class pacientesController extends Controller
 
         $estados = $this->objEstados->all();
 
-        //Encontrando a familiaridade do solicitante logado vinculado ao pacientes.
-        // $solicitantesFamiliaridade = DB::table('FAMILIARIDADES')
-        // ->join('SOLICITANTES', 'FAMILIARIDADES.ID', '=', 'SOLICITANTES.ID_FAMILIARIDADE')
-        // ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
-        // ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-        // ->select('FAMILIARIDADES.*')
-        // ->get();
-
         $familiaridades = $this->objFamiliaridades->all();
-
-        // dd($pacientesTipos);
 
         return view('pacientes/edit', compact("paciente", "pacientesTipos", "pacientesLocalizacao", "solicitante","familiaridades", "endereco", "cidades", "estados"));
     }
@@ -150,7 +140,47 @@ class pacientesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $paciente = $this->objPaciente->find($id);
+
+        DB::beginTransaction();
+
+        try {           
+            $this->objEndereco->where(['ID' => $paciente->ID_ENDERECO])->update([
+                'CEP'=>$request->pacienteCep,
+                'ENDERECO'=>$request->pacienteEndereco,
+                'NUMERO'=>$request->pacienteNumero,
+                'COMPLEMENTO'=>$request->pacienteComplemento,
+                'BAIRRO'=>$request->pacienteBairro,
+                'ID_CIDADE'=>$request->pacienteCidade,
+                'ID_ESTADO'=>$request->pacienteEstado,
+            ]);
+
+            $this->objSolicitante->where(['ID' => $paciente->ID_SOLICITANTE])->update([
+                'ID_FAMILIARIDADE'=>$request->familiaridade,
+                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
+                ]);
+
+            $this->objPaciente->where(['ID' => $paciente->ID])->update([
+                'NOME'=>$request->pacienteNome,
+                'ID_TIPO'=>$request->pacienteTipo,
+                'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
+                'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
+                'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
+                ]);
+           
+            DB::commit();
+
+            // return redirect()->action('pacienteController@index');
+
+            
+        } catch (\Throwable $e) {
+
+            dd('Deu ruim');
+            DB::rollback();
+            report($e);
+            return false;
+    
+        }
     }
 
     /**

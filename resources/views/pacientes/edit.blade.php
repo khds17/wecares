@@ -1,9 +1,19 @@
 @extends('templates.template-admin')
 @section('content')
     {{-- Inicio do formulario --}}
-    <form name="formPacienteEdit" id="formPacienteEdit" method="post" enctype="multipart/form-data" action="">   
+    <form name="formPacienteEdit" id="formPacienteEdit" method="post" enctype="multipart/form-data" action="{{url("paciente/$paciente->ID")}}">   
         @csrf
         @method('PUT') 
+        <div class="row margin-top-10">
+            <div class="col">
+                <label for="">Nome:</label>
+                <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" placeholder="Nome do paciente" value="{{$paciente->NOME}}">
+                @error('pacienteNome')
+                    <span class="text-danger"><small>{{$message}}</small></span>
+                @enderror
+            </div>
+        </div>
+        <br>
         <div class="row margin-top-10">
             <div class="col">
                 <label for="pacienteTipo" class="text-dark">O paciente é?</label><br>
@@ -34,6 +44,7 @@
         <br>
         <div class="row margin-top-10">
             <div class="col">
+                <label for="">CEP:</label>
                 <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" value="{{$endereco->CEP}}">
                 @error('pacienteCep')
                     <span class="text-danger"><small>{{$message}}</small></span>
@@ -43,12 +54,14 @@
         <br>
         <div class="row margin-top-10">
             <div class="col">
+                <label for="">Endereço:</label>
                 <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" value="{{$endereco->ENDERECO}}">
                 @error('pacienteEndereco')
                     <span class="text-danger"><small>{{$message}}</small></span>
                 @enderror
             </div>
             <div class="col">
+                <label for="">Número:</label>
                 <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" value="{{$endereco->NUMERO}}">
                 @error('pacienteNumero')
                     <span class="text-danger"><small>{{$message}}</small></span>
@@ -98,7 +111,7 @@
                 <label for="formacao">Paciente toma medicamentos?</label><br>
                 <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1" {{($paciente->TOMA_MEDICAMENTOS == 1) ? 'checked' : ''}}> Sim <br> 
                 <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0" {{($paciente->TOMA_MEDICAMENTOS == 0) ? 'checked' : ''}}> Não
-                <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="{{old('tipoMedicamento')}}">                    
+                <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="{{$paciente->TIPO_MEDICAMENTOS}}">                    
                 @error('tomaMedicamento')
                     <span class="text-danger"><small>{{$message}}</small></span>
                 @enderror
@@ -118,7 +131,7 @@
                 @enderror     
             </div>
             <div class="col">
-                <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Descreva o que é do paciente" value="{{old('familiaridadeOutros')}}">
+                <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Descreva o que é do paciente" value="{{$solicitante->FAMILIAR_OUTROS}}">
             </div>
         </div>
         <br>
