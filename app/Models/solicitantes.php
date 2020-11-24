@@ -23,13 +23,7 @@ class solicitantes extends Model
         // Criando relacionamento entre as tabelas solicitantes e pacientes
         public function relPaciente(){
             return $this->hasMany('App\Models\pacientes', 'ID_SOLICITANTE');
-        }
-
-        // Criando relacionamento entre as tabelas solicitantes e familiaridade
-        public function relFamiliaridade(){
-            return $this->hasOne('App\Models\familiaridade', 'ID','ID_FAMILIARIDADE');
-        }
-        
+        }     
 
 }
 

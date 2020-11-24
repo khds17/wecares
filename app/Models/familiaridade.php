@@ -10,9 +10,9 @@ class familiaridade extends Model
     protected $table='FAMILIARIDADES';
     protected $fillable=['ID','FAMILIARIDADE'];
 
-    // Criando relacionamento entre as tabelas familiaridade e solicitantes
-    public function relSolicitante(){
-        return $this->hasMany('App\Models\solicitante', 'ID_FAMILIARIDADE');
+    // Criando relacionamento entre as tabelas familiaridade e pacientes
+    public function relSolicitantePaciente(){
+        return $this->hasMany('App\Models\paciente', 'ID_FAMILIARIDADE');
     }
 
 }

@@ -20,4 +20,9 @@ class pacientes extends Model
     public function relEndereco(){
         return $this->hasOne('App\Models\enderecos', 'ID','ID_ENDERECO');
     }
+
+    // Criando relacionamento entre as tabelas pacientes e familiaridade
+    public function relFamiliaridade(){
+        return $this->hasOne('App\Models\familiaridade', 'ID','ID_FAMILIARIDADE');
+    }
 }
