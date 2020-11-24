@@ -21,12 +21,8 @@ class CreateSolicitantesTable extends Migration
             $table->string('TELEFONE',15);
             $table->unsignedInteger('ID_USUARIO');
             $table->unsignedInteger('ID_ENDERECO');
-            $table->unsignedInteger('ID_FAMILIARIDADE');
-            $table->string('FAMILIAR_OUTROS',100)->nullable();
-            $table->unsignedInteger('STATUS');
             $table->foreign('ID_USUARIO')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');   
-            $table->foreign('ID_FAMILIARIDADE')->references('ID')->on('FAMILIARIDADES')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
