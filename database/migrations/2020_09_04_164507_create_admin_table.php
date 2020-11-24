@@ -17,9 +17,7 @@ class CreateAdminTable extends Migration
             $table->increments('ID');
             $table->string('NOME',255);
             $table->string('EMAIL',255);
-            $table->string('SENHA',255);
             $table->unsignedInteger('ID_USUARIO');
-            $table->unsignedInteger('STATUS');
             $table->foreign('ID_USUARIO')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
