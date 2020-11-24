@@ -144,6 +144,7 @@ class prestadoresController extends Controller
                 'name' => $request->prestadorNome,
                 'email' => $request->prestadorEmail,
                 'password' => Hash::make($request['prestadorSenha']),
+                'status'=>$status,
             ]);
 
             //Gravando a função do usuario
@@ -164,7 +165,6 @@ class prestadoresController extends Controller
                 'ID_CERTIFICADO'=>$idCertificado,
                 'ID_ANTECEDENTE'=>$idAntedecente,
                 'ID_ENDERECO'=>$idEndereco,
-                'STATUS'=>$status
             ]);
 
             DB::commit();

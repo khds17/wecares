@@ -110,12 +110,12 @@ class solicitantesController extends Controller
 
             //Gravando o id do endereco
             $idEnderecoSolicitante = $enderecoSolicitante->id;
-            // dd('Teste');
 
             $usuario = $this->objUsers->create([
                 'name' => $request->solicitanteNome,
                 'email' => $request->solicitanteEmail,
                 'password' => Hash::make($request['solicitanteSenha']),
+                'status'=>$status,
             ]);
             
             //Gravando a função no usuario
@@ -131,14 +131,11 @@ class solicitantesController extends Controller
                 'TELEFONE'=>$request->solicitanteTelefone,
                 'ID_USUARIO'=>$idUsuario,
                 'ID_ENDERECO'=>$idEnderecoSolicitante,
-                'ID_FAMILIARIDADE'=>$request->familiaridade,
-                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
-                'STATUS'=>$status
                 ]);
 
             //Gravando o id do solicitante
             $idSolicitante = $solicitante->id;
-    
+            
             $enderecoPaciente = $this->objEndereco->create([
                 'CEP'=>$request->pacienteCep,
                 'ENDERECO'=>$request->pacienteEndereco,
@@ -159,14 +156,15 @@ class solicitantesController extends Controller
                 'ID_ENDERECO'=>$idEnderecoPaciente,
                 'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
                 'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
-                'STATUS'=>$status,
                 'ID_SOLICITANTE'=>$idSolicitante,
+                'STATUS'=>$status,
+                'ID_FAMILIARIDADE'=>$request->familiaridade,
+                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
                 ]);
-                
+                  
             DB::commit();
 
         } catch (\Throwable $e) {
-
             DB::rollback();
             report($e);
             return false;
