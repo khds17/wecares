@@ -8,7 +8,7 @@ class admin extends Model
 {
     public $timestamps = false;
     protected $table='ADMIN';
-    protected $fillable=['NOME','EMAIL','SENHA','ID_USUARIO','STATUS'];
+    protected $fillable=['NOME','EMAIL','ID_USUARIO'];
 
     // Criando relacionamento entre as tabelas admin e users
     public function relUsuario(){

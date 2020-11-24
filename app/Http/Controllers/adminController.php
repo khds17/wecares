@@ -54,6 +54,7 @@ class adminController extends Controller
             'name' => $request->nome,
             'email' => $request->email,
             'password' => Hash::make($request['senha']),
+            'status' => $status
         ]);
 
         $usuario->assignRole('administrador');
@@ -63,9 +64,7 @@ class adminController extends Controller
         $admin = $this->objAdmin->create([
             'NOME' => $request->nome,
             'EMAIL' => $request->email,
-            'SENHA' => $request->senha,
             'ID_USUARIO' => $idUsuario,
-            'STATUS' => $status
         ]);
         
 
