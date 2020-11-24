@@ -8,7 +8,7 @@ class prestadores extends Model
 {
     public $timestamps = false;
     protected $table='PRESTADORES';
-    protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','ID_SEXO','EMAIL','ID_USUARIO','ID_ENDERECO','ID_FORMACAO','ID_CERTIFICADO','ID_ANTECEDENTE','STATUS'];
+    protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','ID_SEXO','EMAIL','ID_USUARIO','ID_ENDERECO','ID_FORMACAO','ID_CERTIFICADO','ID_ANTECEDENTE'];
 
     // Criando relacionamento entre as tabelas prestadores e sexo
     public function relSexo(){

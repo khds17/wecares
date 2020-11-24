@@ -8,7 +8,7 @@ class solicitantes extends Model
 {
     public $timestamps = false;
     protected $table='SOLICITANTES';
-    protected $fillable=['NOME','CPF','EMAIL','TELEFONE','ID_USUARIO','ID_ENDERECO','ID_FAMILIARIDADE','FAMILIAR_OUTROS','STATUS'];
+    protected $fillable=['NOME','CPF','EMAIL','TELEFONE','ID_USUARIO','ID_ENDERECO'];
 
         // Criando relacionamento entre as tabelas solicitantes e enderecos
         public function relEndereco(){
