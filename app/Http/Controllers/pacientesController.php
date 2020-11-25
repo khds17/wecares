@@ -73,7 +73,18 @@ class pacientesController extends Controller
      */
     public function create()
     {
-        return view('pacientes/create');
+
+        $estados=$this->objEstados->all();
+
+        $cidades=$this->objCidades->orderBy('CIDADE','asc')->get();
+
+        $pacienteTipo=$this->objPacienteTipo->all();
+
+        $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
+
+        $familiaridades=$this->objFamiliaridades->all(); 
+
+        return view('pacientes/create',compact('estados','cidades','familiaridades','pacienteTipo','pacienteLocalizacao'));
     }
 
     /**
@@ -120,7 +131,7 @@ class pacientesController extends Controller
         ->relEndereco;
 
         $solicitante = $paciente->find($paciente->ID)
-        ->relSolicitante;
+        ->relSolicitante;        
 
         $cidades = $this->objCidades->all();
 
@@ -144,7 +155,7 @@ class pacientesController extends Controller
 
         DB::beginTransaction();
 
-        try {           
+        try {          
             $this->objEndereco->where(['ID' => $paciente->ID_ENDERECO])->update([
                 'CEP'=>$request->pacienteCep,
                 'ENDERECO'=>$request->pacienteEndereco,
@@ -153,12 +164,7 @@ class pacientesController extends Controller
                 'BAIRRO'=>$request->pacienteBairro,
                 'ID_CIDADE'=>$request->pacienteCidade,
                 'ID_ESTADO'=>$request->pacienteEstado,
-            ]);
-
-            $this->objSolicitante->where(['ID' => $paciente->ID_SOLICITANTE])->update([
-                'ID_FAMILIARIDADE'=>$request->familiaridade,
-                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
-                ]);
+            ]);            
 
             $this->objPaciente->where(['ID' => $paciente->ID])->update([
                 'NOME'=>$request->pacienteNome,
@@ -166,11 +172,13 @@ class pacientesController extends Controller
                 'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
                 'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
                 'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
+                'ID_FAMILIARIDADE'=>$request->familiaridade,
+                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
                 ]);
            
             DB::commit();
 
-            // return redirect()->action('pacienteController@index');
+            return redirect("/paciente");
 
             
         } catch (\Throwable $e) {
