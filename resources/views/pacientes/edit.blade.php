@@ -123,7 +123,7 @@
             <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label>
             <select name="familiaridade" class="custom-select" value="{{old('familiaridade')}}">
                 @foreach($familiaridades as $familiaridade)
-                   <option value="{{$familiaridade->ID}}" {{($solicitante->ID_FAMILIARIDADE == $familiaridade->ID) ? 'selected' : ''}}>{{$familiaridade->FAMILIARIDADE}}</option>
+                   <option value="{{$familiaridade->ID}}" {{($paciente->ID_FAMILIARIDADE == $familiaridade->ID) ? 'selected' : ''}}>{{$familiaridade->FAMILIARIDADE}}</option>
                 @endforeach
             </select>    
                 @error('familiaridade')
