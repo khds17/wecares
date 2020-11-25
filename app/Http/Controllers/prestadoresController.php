@@ -222,8 +222,11 @@ class prestadoresController extends Controller
                             ->relEndereco;
 
         $formacoes = $this->objFormacao->all();
+
         $sexos = $this->objSexos->all();
+
         $cidades = $this->objCidade->all();
+
         $estados = $this->objEstado->all();
 
         return view('prestadores/edit',compact('prestadores','users','sexos','enderecos','cidades','estados','formacoes','certificados','antecedentes'));
@@ -254,13 +257,14 @@ class prestadoresController extends Controller
                 'ID_ESTADO'=>$request->prestadorEstado,
             ]);
 
-            // $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
-            //     'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
-            // ]);
+            $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
+                'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
+            ]);
 
             // $this->objAntecedente->where(['ID' => $prestadores->ID_ANTECEDENTE])->update([
             //     'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
             // ]);
+
             $this->objUsers->where(['id' => $prestadores->ID_USUARIO])->update([
                 'name' => $request->prestadorNome,
             ]);
