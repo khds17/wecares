@@ -12,6 +12,6 @@ class antecedentes extends Model
 
     // Criando relacionamento entre as tabelas antecedentes e prestadores 
     public function relPrestadores(){
-        return $this->hasOne('App\Models\PRESTADORES', 'ID_ANTECEDENTE');
+        return $this->hasOne('App\Models\prestadores', 'ID_ANTECEDENTE');
     }
 }
