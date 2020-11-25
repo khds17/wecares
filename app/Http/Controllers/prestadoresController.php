@@ -241,6 +241,7 @@ class prestadoresController extends Controller
      */
     public function update(requestPrestadorEdit $request, $id)
     {
+        // dd($request->certificadoFormacao);
         $prestadores= $this->objPrestador->find($id);
 
         DB::beginTransaction();
@@ -256,15 +257,19 @@ class prestadoresController extends Controller
                 'ID_CIDADE'=>$request->prestadorCidade,
                 'ID_ESTADO'=>$request->prestadorEstado,
             ]);
+            
+            if($request->certificadoFormacao) {
+                $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
+                    'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
+                ]);
+            }
 
-            $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
-                'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
-            ]);
-
-            // $this->objAntecedente->where(['ID' => $prestadores->ID_ANTECEDENTE])->update([
-            //     'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
-            // ]);
-
+            else if($request->antecedentes) {
+                $this->objAntecedente->where(['ID' => $prestadores->ID_ANTECEDENTE])->update([
+                    'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
+                ]);
+            }
+            
             $this->objUsers->where(['id' => $prestadores->ID_USUARIO])->update([
                 'name' => $request->prestadorNome,
             ]);
