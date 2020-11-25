@@ -47,21 +47,21 @@ class pacientesController extends Controller
 
         //Encontrando o tipo dos pacientes do solicitante logado
         $pacientesTipos = DB::table('PACIENTES_TIPOS')
-        ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
-        ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-        ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
-        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-        ->select('PACIENTES_TIPOS.*')
-        ->get();
-
+                            ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
+                            ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+                            ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
+                            ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                            ->select('PACIENTES_TIPOS.*')
+                            ->get();
+        
         //Encontrando a localizaçao dos pacientes do solicitante logado
         $pacientesLocalizacao = DB::table('PACIENTE_LOCALIZACAO')
-        ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
-        ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-        ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
-        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-        ->select('PACIENTE_LOCALIZACAO.*')
-        ->get();
+                                ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
+                                ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+                                ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
+                                ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                                ->select('PACIENTE_LOCALIZACAO.*')
+                                ->get();
 
         return view('pacientes/index',compact("pacientes", "pacientesTipos", "pacientesLocalizacao"));
     }
@@ -95,7 +95,59 @@ class pacientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Pegando o valor da constant para colocar no solicitante
+        $status = \Config::get('constants.STATUS.ATIVO');
+        
+        //Pega o solicitante logado
+        $solicitantesArray = $this->objSolicitante->where('ID_USUARIO', auth()->user()->id)->get();
+
+        DB::beginTransaction();
+
+        try {
+            // Tirando o solicitante do array
+            foreach ($solicitantesArray as $solicitanteArray) {
+                $solicitante = $solicitanteArray;
+            }
+
+            //Gravando o id do solicitante
+            $idSolicitante = $solicitante->ID;
+            
+            $enderecoPaciente = $this->objEndereco->create([
+                'CEP'=>$request->pacienteCep,
+                'ENDERECO'=>$request->pacienteEndereco,
+                'NUMERO'=>$request->pacienteNumero,
+                'COMPLEMENTO'=>$request->solicitanteComplemento,
+                'BAIRRO'=>$request->pacienteBairro,
+                'ID_CIDADE'=>$request->pacienteCidade,
+                'ID_ESTADO'=>$request->pacienteEstado,
+            ]);
+            
+            //Gravando o id do endereco
+            $idEnderecoPaciente = $enderecoPaciente->id;
+            
+            $paciente = $this->objPaciente->create([
+                'NOME'=>$request->pacienteNome,
+                'ID_TIPO'=>$request->pacienteTipo,
+                'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
+                'ID_ENDERECO'=>$idEnderecoPaciente,
+                'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
+                'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
+                'ID_SOLICITANTE'=>$idSolicitante,
+                'STATUS'=>$status,
+                'ID_FAMILIARIDADE'=>$request->familiaridade,
+                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
+                ]);
+                  
+            DB::commit();
+
+            return redirect("/paciente");
+
+        } catch (\Throwable $e) {
+            DB::rollback();
+            report($e);
+            return false;
+    
+        }
     }
 
     /**
