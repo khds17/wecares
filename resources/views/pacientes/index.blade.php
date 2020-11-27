@@ -10,13 +10,13 @@
                         <h6 class="m-0 font-weight-bold text-primary padding-top-15">Dados cadastrais</h6>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-success" href=""> Cadastrar novo paciente</a>
+                        <a class="btn btn-success" href="{{url("paciente/create")}}"> Cadastrar novo paciente</a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 @csrf
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th scope="col">Nome</th>
@@ -25,39 +25,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {{-- @dd($pacientes, $pacientesTipos, $pacientesLocalizacao); --}}
                         @foreach ($pacientes as $paciente)
                             @foreach ($pacientesTipos as $pacienteTipo)
                                 @foreach ($pacientesLocalizacao as $pacienteLocalizacao)
+                                <tr>
                                     <th scope="row">{{$paciente->NOME}}</th>
                                     <td>{{$pacienteTipo->TIPO}}</td>
                                     <td>{{$pacienteLocalizacao->LOCALIZACAO}}</td>
                                     <td>                
                                         <a class="btn btn-primary" href="{{"paciente/$paciente->ID/edit"}}"> Editar </a>
                                     </td>
+                                </tr>
                                 @endforeach
                             @endforeach
                         @endforeach
-                        </tr>
-                        <tr>
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="modalCadastroLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalCadastroLabel">Dados cadastrais </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-            
             </div>
         </div>
     </div>
