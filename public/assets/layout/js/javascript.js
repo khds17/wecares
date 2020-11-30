@@ -28,3 +28,27 @@
         }
     }
 })(window,document);
+
+$(document).ready(function() {
+    $( "#id_cidade" ).autocomplete({
+ 
+        source: function(request, response) {
+            $.ajax({
+            url: '/cuidadorcidades',
+            type: 'get',
+            data: {
+                    term : request.term
+             },
+            dataType: "json",
+            success: function(data){
+               var resp = $.map(data,function(obj){
+                    return obj.CIDADE;
+               }); 
+ 
+               response(resp);
+            }
+        });
+    },
+    minLength: 1
+ });
+});

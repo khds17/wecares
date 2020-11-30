@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\servicos;
+use App\Models\cidades;
 
 class indexController extends Controller
 {
@@ -56,6 +57,18 @@ class indexController extends Controller
     public function encontrecuidador()
     {
         return view('index/encontre-cuidador');
+    }
+
+    public function getCidades(Request $request)
+    {
+        $search = $request->search;
+
+        $search = $request->get('term');
+      
+        $result = Cidades::orderBy('CIDADE','asc')->select('ID','CIDADE')->where('CIDADE', 'LIKE', '%' .$search . '%')->limit(5)->get();
+
+        return response()->json($result);
+
     }
 
     public function resultado()

@@ -20,6 +20,7 @@ Route::get('/sobre','indexController@sobre');
 Route::get('/termos','indexController@termos');
 Route::get('/conduta','indexController@conduta');
 Route::get('/encontrecuidador','indexController@encontrecuidador');
+Route::get('/cuidadorcidades','indexController@getCidades');
 Route::get('/resultado','indexController@resultado')->middleware('auth');
 // Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');
