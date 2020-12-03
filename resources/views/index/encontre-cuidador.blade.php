@@ -7,12 +7,19 @@
                 <div class="col-xl-8 col-lg-10 text-center">
                     <h1 class="page-header-title">Encontre um cuidador</h1>
                     <p class="page-header-text mb-5">Digite o seu CEP ou sua cidade</p>
-                    <form class="page-header-signup mb-2 mb-md-0">
-                        <div class="form-row justify-content-center">
+                    <form class="page-header-signup mb-2 mb-md-0" name="formEncontreCuidador" id="formEncontreCuidador" method="get" enctype="multipart/form-data" action="{{url('resultado')}}">   
+                         <div class="form-row justify-content-center">
                             <div class="col-lg-9 col-md-8">
-                                <div class="form-group mr-0 mr-lg-2"><label class="sr-only" for="inputSearch">Insira seu CEP ou cidade </label><input class="form-control form-control-solid rounded-pill" id="inputSearch" type="text" placeholder="Insira seu CEP ou cidade" /></div>
+                                <div class="form-group mr-0 mr-lg-2">
+                                    <label class="sr-only" for="inputSearch">Insira seu CEP ou cidade </label>
+                                    <input class="form-control form-control-solid rounded-pill" id="cidade" name="cidade" type="text" placeholder="Insira a cidade"/>
+                                    <input id="id" name="id" type="hidden"/>
+                                </div>
+
                             </div>
-                            <div class="col-lg-3 col-md-4"><a class="btn btn-teal btn-block btn-marketing rounded-pill" href="{{url("/resultado")}}">Encontrar</a></button></div> 
+                            <div class="col-lg-3 col-md-4">
+                                <input class="btn btn-teal btn-block btn-marketing rounded-pill" type="submit" value="Buscar">
+                            </div> 
                         </div>
                     </form>
                 </div>

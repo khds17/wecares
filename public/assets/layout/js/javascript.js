@@ -30,9 +30,8 @@
 })(window,document);
 
 $(document).ready(function() {
-    $( "#id_cidade" ).autocomplete({
- 
-        source: function(request, response) {
+    $( "#cidade" ).autocomplete({
+         source: function(request, response) {
             $.ajax({
             url: '/cuidadorcidades',
             type: 'get',
@@ -42,6 +41,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data){
                var resp = $.map(data,function(obj){
+                    $( "#id" ).val(obj.ID);
                     return obj.CIDADE;
                }); 
  
