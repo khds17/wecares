@@ -21,7 +21,6 @@ Route::get('/termos','indexController@termos');
 Route::get('/conduta','indexController@conduta');
 Route::get('/encontrecuidador','indexController@encontrecuidador');
 Route::get('/cuidadorcidades','indexController@getCidades');
-Route::get('/resultado','indexController@resultado')->middleware('auth');
 // Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
@@ -32,6 +31,7 @@ Route::resource('/pagamentos','pagamentosController')->middleware('auth');
 // ===========================================
 Route::resource('/prestador','prestadoresController');
 Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais')->middleware('auth')->middleware('role:cuidador/enfermeiro');
+Route::get('/resultado','prestadoresController@resultado');
 Route::get('/prestadoreslista','prestadoresController@prestadoreslista')->middleware('auth');
 Route::put('/aprovar/{id}', 'prestadoresController@aprovar')->middleware('auth');
 Route::put('/reprovar/{id}', 'prestadoresController@reprovar')->middleware('auth');

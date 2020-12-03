@@ -7,6 +7,7 @@ use App\Http\Requests\requestPrestadorEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\prestadores;
+use App\Models\servicos;
 use App\Models\estados;
 use App\Models\cidades;
 use App\Models\enderecos;
@@ -52,6 +53,7 @@ class prestadoresController extends Controller
         $this->objFormacao = new formacao();
         $this->objSexos = new sexo();
         $this->objUsers = new user();
+        $this->objServico = new servicos();
 
     }
 
@@ -78,6 +80,13 @@ class prestadoresController extends Controller
     {
         $prestadores = $this->objPrestador->all();
         return view('prestadores/lista-prestadores',compact('prestadores'));
+    }
+
+    public function resultado()
+    {
+        // dd('Chegou');
+        $servicos=$this->objServico->all();
+        return view('prestadores/resultado-cuidador',compact('servicos'));
     }
 
     public function recebimentos()
@@ -291,7 +300,6 @@ class prestadoresController extends Controller
         } catch (\Throwable $th) {
             
             DB::rollback();
-            dd('Caiu no catch');
         }
     }
 

@@ -71,11 +71,6 @@ class indexController extends Controller
 
     }
 
-    public function resultado()
-    {
-        $servicos=$this->objServico->all();
-        return view('index/resultado-cuidador',compact('servicos'));
-    }
 
     public function perfil()
     {
