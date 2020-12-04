@@ -84,8 +84,18 @@ class prestadoresController extends Controller
 
     public function resultado(Request $request)
     {
+        $idCidade = $request->id;
+
+        $prestadores = $this->objPrestador
+                            ->join('ENDERECOS', 'PRESTADORES.ID_ENDERECO', '=', 'ENDERECOS.ID')
+                            ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
+                            ->where('ENDERECOS.ID_CIDADE', '=', $idCidade)
+                            ->get();
+
+        // dd($prestadores);
         $servicos=$this->objServico->all();
-        return view('prestadores/resultado-prestadores',compact('servicos'));
+
+        return view('prestadores/resultado-prestadores',compact('servicos','prestadores'));
     }
 
     public function recebimentos()

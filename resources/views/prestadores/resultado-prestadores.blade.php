@@ -5,38 +5,47 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-10 text-center">
-                    <h1 class="page-header-title">Cuidadores encontrados</h1>
+                    @if (count($prestadores) >= 1)
+                        <h1 class="page-header-title">Profissionais encontrados</h1>
+                    @else
+                        <h1 class="page-header-title">Não foi possível encontrar profissionais para esta cidade</h1>
+                    @endif
                 </div>
             </div>
         </div>
         <div class="container padding-top-50">
             <div class="row features text-center mb-10">
+                @foreach ($prestadores as $prestador)
                 <div class="col-lg-4 col-md-6 mb-5">
                     <a class="card card-link border-top border-top-lg border-primary h-100 lift" href="{{url("")}}">
                         <div class="card-body p-5">
                             <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div>
-                            <h6>Nome</h6>
-                            <div class="small text-gray-500 text-left">Quantidade de serviço prestado:</div>
-                            <div class="small text-gray-500 text-left">Profissão:</div>
-                            <div class="small text-gray-500 text-left">Distância:</div>
-                            <div class="small text-gray-500 text-left">Avaliação</div>                            
+
+                            <h6>{{$prestador->NOME}}</h6>
+                            <div class="small text-gray-500 text-left">Formação:{{$prestador->FORMACAO}}</div>
+                            {{-- <div class="small text-gray-500 text-left">Distância:</div>
+                            <div class="small text-gray-500 text-left">Avaliação</div>    --}}
+                                
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
                             <div class="small text-primary">Selecionar</div>
                         </div>
                     </a>
                 </div>
+                @endforeach                        
             </div>
         </div>
         <div class="svg-border-rounded text-white">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
         </div>
     </div>
-    <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
-        <div class="float-right">
-            <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" data-toggle= "modal" data-target="#modalServico">Solicitar serviço</a>
+    @if (count($prestadores) >= 1)
+        <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
+            <div class="float-right">
+                <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" data-toggle= "modal" data-target="#modalServico">Solicitar serviço</a>
+            </div>
         </div>
-    </div>
+    @endif
     <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="modalServico" tabindex="-1" role="dialog" aria-labelledby="modalServicoLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
