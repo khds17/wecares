@@ -85,7 +85,7 @@ class prestadoresController extends Controller
     public function resultado(Request $request)
     {
         $servicos=$this->objServico->all();
-        return view('prestadores/resultado-cuidador',compact('servicos'));
+        return view('prestadores/resultado-prestadores',compact('servicos'));
     }
 
     public function recebimentos()
