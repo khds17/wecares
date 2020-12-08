@@ -102,7 +102,7 @@
                 @enderror
             </div>
             <div class="col">
-                <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" value="{{old('pacienteComplemento')}}">
+                <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" value="{{$endereco->COMPLEMENTO}}">
             </div>
         </div>
         <br>
