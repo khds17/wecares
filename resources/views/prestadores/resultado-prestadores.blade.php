@@ -17,7 +17,7 @@
             <div class="row features text-center mb-10">
                 @foreach ($prestadores as $prestador)
                 <div class="col-lg-4 col-md-6 mb-5">
-                    <a class="card card-link border-top border-top-lg border-primary h-100 lift" href="{{url("")}}">
+                    <a class="card card-link border-top border-top-lg border-primary h-100 lift">
                         <div class="card-body p-5">
                             <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div>
 
@@ -28,6 +28,7 @@
                                 
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
+                            <input type="checkbox" name="prestador" id="prestador" onclick="select()">&nbsp
                             <div class="small text-primary">Selecionar</div>
                         </div>
                     </a>
@@ -59,114 +60,132 @@
                 <div class="modal-body">
                 <form class="user">
                     @csrf
-                    <div class="form-group">
-                        <label for="paciente" class="text-dark">Paciente</label><br>
-                        <select name="select" class="custom-select">
-                            <option value="valor1">Kauan Henrique</option> 
-                        </select>                      
-                    </div>
-                    <div class="row margin-top-10">
-                                <div class="col">
-                                    <label for="paciente" class="text-dark">O paciente é?</label><br>
-                                    <select name="select" class="custom-select">
-                                            <option value="valor1">Ex: Bebê, adulto ou criança</option> 
-                                            <option value="valor1">Bebê</option> 
-                                            <option value="valor1">Criança</option> 
-                                            <option value="valor1">Adolescente</option>
-                                            <option value="valor1">Adulto</option>
-                                            <option value="valor1">Idoso</option>
-                                    </select>                                  
+                        <div class="form-group">
+                            <label for="paciente" class="text-dark">Paciente</label><br>
+                            <select name="select-paciente" class="custom-select" onchange="getPaciente(this.value)">
+                                <option value="">Escolha um paciente</option> 
+                                @foreach ($pacientes as $paciente)
+                                    <option value="{{$paciente->ID}}">{{$paciente->NOME}}</option> 
+                                @endforeach
+                            </select>                      
+                        </div>
+                        <div class="row margin-top-10">
+                                    <div class="col">
+                                        <label for="paciente" class="text-dark">O paciente é?</label><br>
+                                        <select name="pacienteTipo" id="pacienteTipo" class="custom-select">
+                                            <option value=""></option> 
+                                            @foreach($pacientesTipos as $tipo)
+                                                    <option value="{{$tipo->ID}}">{{$tipo->TIPO}}</option>
+                                            @endforeach
+                                        </select>                                 
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <label for="paciente" class="text-dark">Onde o paciente está localizado?</label><br>
-                                    <select name="select" class="custom-select">
-                                        <option value="valor1">Casa de retiro</option> 
-                                        <option value="valor1">Hospital</option> 
-                                        <option value="valor1">Residência</option>
-                                     </select>   
+                                <br>
+                                <div class="row margin-top-10">
+                                    <div class="col">
+                                        <label for="paciente" class="text-dark">Onde o paciente está localizado?</label><br>
+                                        <select name="pacienteLocalizacao" id="pacienteLocalizacao" class="custom-select">
+                                            <option value=""></option> 
+                                            @foreach($pacientesLocalizacao as $localizacao)
+                                                    <option value="{{$localizacao->ID}}" >{{$localizacao->LOCALIZACAO}}</option>
+                                            @endforeach
+                                        </select>     
+                                    </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="text" name="cep" id="cep" placeholder="CEP" required><br>
+                                <br>
+                                @foreach ($enderecos as $endereco)
+                                    @if ($paciente->ID_ENDERECO == $endereco->ID)
+                                        <div class="row margin-top-10">
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" value=""><br>
+                                            </div>
+                                        </div>
+                                        <div class="row margin-top-10">
+                                            <div class="col">
+                                                    <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" value="">
+                                            </div>
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" value=""><br>
+                                            </div>
+                                        </div>
+                                        <div class="row margin-top-10">
+                                            <div class="col">
+                                                <select class ="form-control"name="pacienteCidade" id="pacienteCidade">
+                                                    <option value="">Cidade</option>
+                                                    @foreach($cidades as $cidade)
+                                                        <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
+                                                    @endforeach
+                                                </select>   
+                                            </div>
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" value=""><br>
+                                            </div>
+                                        </div>
+                                        <div class="row margin-top-10">
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" value="">
+                                            </div>
+                                            <div class="col">
+                                                <select class ="form-control"name="pacienteEstado" id="pacienteEstado">
+                                                    <option value="">Estado</option>
+                                                    @foreach($estados as $estado)
+                                                        <option value="{{$estado->ID}}">{{$estado->UF}}</option>
+                                                    @endforeach
+                                                </select>  
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                <br>
+                                <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label for="formacao">Serviços que deverão ser realizados</label><br>
+                                        @foreach($servicos as $servico)
+                                            <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
+                                        @endforeach
+                                        <input type="checkbox" name="outros" id="outros" value="sim"><input class="form-control" type="text" name="servicos[]" id="servicoOutros" placeholder="Outros"><br>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="text" name="endereco" id="endereco" placeholder="Endereço" required>
+                                <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label for="formacao">Paciente toma medicamentos?</label><br>
+                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
+                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
+                                        <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="">  
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <input class="form-control" type="text" name="numero" id="numero" placeholder="Número" required><br>
+                                <br> 
+                                <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label class ="" for="formacao">Data e hora do serviço:</label><br>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="text" name="cidade" id="cidade" placeholder="Cidade" required>
+                                <div class="row margin-top-10">
+                                    <div class="col">
+                                        <input class="form-control" type="date" name="dataservico" id="dataservico" placeholder="Data do serviço">
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <input class="form-control" type="text" name="bairro" id="bairro" placeholder="Bairro" required><br>
+                                <br>
+                                <div class="row margin-top-10">
+                                    <div class="col">
+                                        <input class="form-control" type="datetime" name="horaservico" id="horaservico" placeholder="Horário de início ">
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" type="datetime" name="horaservico" id="horaservico" placeholder="Horário do fim">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="text" name="complemento" id="complemento" placeholder="Complemento" required>
+                                <br>
+                                <!-- <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label class ="" for="">Adicionar mais</label><br>        
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <input class="form-control" type="text" name="estado" id="estado" placeholder="UF" required><br>
+                                <br> -->
+                                <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label class ="" for="formacao">Valor total do serviço:</label><br>                                
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label for="formacao">Serviços que deverão ser realizados</label><br>
-                                    @foreach($servicos as $servico)
-                                        <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
-                                    @endforeach
-                                    <input type="checkbox" name="outros" id="outros" value="sim"><input class="form-control" type="text" name="servicos[]" id="servicoOutros" placeholder="Outros"><br>
-                                </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label for="formacao">Paciente toma medicamentos?</label><br>
-                                    <input type="radio" name="formacao" id="formacao"> Sim <br> 
-                                    <input type="radio" name="formacao" id="formacao"> Não
-                                    <input class="form-control" type="text" name="medicamentos" id="medicamentos" placeholder="Quais?"><br>
-                                </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label class ="" for="formacao">Data e hora do serviço:</label><br>
-                                </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="date" name="dataservico" id="dataservico" placeholder="Data do serviço">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="datetime" name="horaservico" id="horaservico" placeholder="Horário de início ">
-                                </div>
-                                <div class="col">
-                                    <input class="form-control" type="datetime" name="horaservico" id="horaservico" placeholder="Horário do fim">
-                                </div>
-                            </div>
-                            <br>
-                            <!-- <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label class ="" for="">Adicionar mais</label><br>        
-                                </div>
-                            </div>
-                            <br> -->
-                            <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label class ="" for="formacao">Valor total do serviço:</label><br>                                
-                                </div>
-                            </div>
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Enviar proposta</button>

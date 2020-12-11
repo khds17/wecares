@@ -161,6 +161,45 @@ class pacientesController extends Controller
         //
     }
 
+    public function selectPacientes($id)
+    {
+
+        //Encontrando os pacientes do solicitante logado
+        $paciente = $this->objPaciente->find($id);
+
+        
+        //Pegando todos os tipos de pacientes
+        $pacientesTipos = $this->objPacienteTipo
+                            ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
+                            ->where('PACIENTES_TIPOS.ID', '=', $paciente->ID_TIPO)
+                            ->select('PACIENTES_TIPOS.*')
+                            ->get();
+
+        //Pegando todas as localizações
+        $pacientesLocalizacao = $this->objPacienteLocalizacao
+                                    ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
+                                    ->where('PACIENTE_LOCALIZACAO.ID', '=', $paciente->ID_LOCALIZACAO)
+                                    ->select('PACIENTE_LOCALIZACAO.*')
+                                    ->get();
+
+        
+        // //Encontrando o endereço da localização dos pacientes
+        $endereco = $paciente->find($paciente->ID)
+                            ->relEndereco;
+
+        // Colocando todos os dados em um array e retornando para o js
+        $dadosPacientes = [
+            'paciente' => $paciente,
+            'pacientesTipos' => $pacientesTipos,
+            'pacientesLocalizacao' => $pacientesLocalizacao,
+            'endereco' => $endereco
+
+        ];
+
+        return $dadosPacientes;
+
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

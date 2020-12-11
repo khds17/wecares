@@ -26,6 +26,7 @@ Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
 // ===========================================
 Route::resource('/paciente','pacientesController')->middleware('auth');
+Route::post('/selectpacientes/{id}','pacientesController@selectPacientes');
 // ===========================================
 Route::resource('/pagamentos','pagamentosController')->middleware('auth');
 // ===========================================
