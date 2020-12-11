@@ -7,6 +7,7 @@ use App\Http\Requests\requestPrestadorEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\prestadores;
+use App\Models\pacientes;
 use App\Models\servicos;
 use App\Models\estados;
 use App\Models\cidades;
@@ -16,6 +17,8 @@ use App\Models\antecedentes;
 use App\Models\formacao;
 use App\Models\sexo;
 use App\Models\user;
+use App\Models\paciente_tipo;
+use App\Models\paciente_localizacao;
 use App\Config\constants;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -52,8 +55,11 @@ class prestadoresController extends Controller
         $this->objAntecedente = new antecedentes();
         $this->objFormacao = new formacao();
         $this->objSexos = new sexo();
+        $this->objPacientes = new pacientes();
         $this->objUsers = new user();
         $this->objServico = new servicos();
+        $this->objPacienteTipo = new paciente_tipo();
+        $this->objPacienteLocalizacao = new paciente_localizacao(); 
 
     }
 
@@ -92,10 +98,34 @@ class prestadoresController extends Controller
                             ->where('ENDERECOS.ID_CIDADE', '=', $idCidade)
                             ->get();
 
-        // dd($prestadores);
+        $pacientes = $this->objPacientes
+                        ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+                        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                        ->select('PACIENTES.*')
+                        ->get();
+
+        // dd($pacientes);
         $servicos=$this->objServico->all();
 
-        return view('prestadores/resultado-prestadores',compact('servicos','prestadores'));
+        //Pegando todos os tipos de pacientes
+        $pacientesTipos = $this->objPacienteTipo->all();
+
+        //Pegando todas as localizações
+        $pacientesLocalizacao = $this->objPacienteLocalizacao->all();
+
+        //Encontrando o endereço da localização dos pacientes
+        $enderecos = $this->objEndereco
+                        ->join('PACIENTES', 'ENDERECOS.ID', '=', 'PACIENTES.ID_ENDERECO')
+                        ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+                        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                        ->select('ENDERECOS.*')
+                        ->get();
+
+        $cidades = $this->objCidade->all();
+
+        $estados = $this->objEstado->all();
+
+        return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientes','pacientesTipos','pacientesLocalizacao', 'enderecos', 'cidades','estados'));
     }
 
     public function recebimentos()
