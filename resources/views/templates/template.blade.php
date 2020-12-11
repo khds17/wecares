@@ -43,7 +43,12 @@
                                     </li> -->
                                 </ul>
                                 {{-- <a class="btn-teal btn rounded-pill px-4 ml-lg-4" data-toggle="modal" data-target="#modalLogin"> Entrar</a> --}}
-                                <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="{{url("login")}}"> Entrar</a>
+                                @if (Auth::user())
+                                    <a class="text-white" href=""> {{ Auth::user()->name }}</a>
+                                @else 
+                                    <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="{{url("login")}}"> Entrar</a>
+                                @endif
+
                             </div>
                         </div>
                     </nav>
