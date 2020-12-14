@@ -557,6 +557,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'App\\Models\\paciente_tipo' => __DIR__ . '/../..' . '/app/Models/paciente_tipo.php',
         'App\\Models\\pacientes' => __DIR__ . '/../..' . '/app/Models/pacientes.php',
         'App\\Models\\prestadores' => __DIR__ . '/../..' . '/app/Models/prestadores.php',
+        'App\\Models\\proposta' => __DIR__ . '/../..' . '/app/Models/proposta.php',
         'App\\Models\\registros_log' => __DIR__ . '/../..' . '/app/Models/registros_log.php',
         'App\\Models\\servicos' => __DIR__ . '/../..' . '/app/Models/servicos.php',
         'App\\Models\\servicos_prestados' => __DIR__ . '/../..' . '/app/Models/servicos_prestados.php',

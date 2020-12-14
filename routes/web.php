@@ -41,6 +41,7 @@ Route::put('/reprovar/{id}', 'prestadoresController@reprovar')->middleware('auth
 Route::resource('/recebimentos','recebimentosController')->middleware('auth');
 // ===========================================
 Route::resource('/servico','servicosController');
+Route::post('/proposta','servicosController@propostas')->middleware('auth');
 Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
 Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth');
 // ===========================================

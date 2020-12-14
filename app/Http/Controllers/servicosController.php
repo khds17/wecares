@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\proposta;
+use Illuminate\Support\Facades\DB;
 
 class servicosController extends Controller
 {
@@ -14,6 +16,22 @@ class servicosController extends Controller
     public function index()
     {
         //
+    }
+
+    public function propostas(Request $request)
+    {
+
+    DB::beginTransaction();
+
+    try {
+        
+        DB::commit();
+    } catch (\Throwable $th) {
+        //throw $th;
+        DB::rollback();
+    }
+
+        dd($request);
     }
 
     public function servicosPrestados()
