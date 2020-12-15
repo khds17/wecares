@@ -28,6 +28,25 @@ class adminController extends Controller
         return view('admin/index',compact('admin'));
     }
 
+    public function listaAdmins()
+    {
+        $admin = $this->objAdmin->all();
+        return view('admin/lista-admins',compact('admin'));
+    }
+
+    public function listaServicosPrestados()
+    {
+        return view('admin/lista-servicos-prestados');
+    }
+
+    public function dadosCadastrais()
+    {
+        $arrayAdmin = $this->objAdmin->where('ID_USUARIO', auth()->user()->id)->get();
+        return view('admin/cadastro',compact('arrayAdmin'));
+    }
+
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -93,8 +112,8 @@ class adminController extends Controller
      */
     public function edit($id)
     {
-        $edit=$this->objAdmin->find($id);
-        return view('admin/create',compact('edit'));
+        $admin=$this->objAdmin->find($id);
+        return view('admin/edit',compact('admin'));
     }
 
     /**

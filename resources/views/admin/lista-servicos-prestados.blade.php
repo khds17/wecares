@@ -1,4 +1,4 @@
 @extends('templates.template-admin')
 @section('content')
-    Menu
+    Serviços prestados
 @endsection
