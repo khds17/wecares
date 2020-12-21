@@ -37,6 +37,7 @@ Route::resource('/prestador','prestadoresController');
 Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 Route::get('/resultado','prestadoresController@resultado')->middleware('auth')->middleware('role:solicitante');
 Route::get('/prestadoresLista','prestadoresController@prestadoreslista')->middleware('auth');
+Route::get('/novaspropostas','prestadoresController@prestadoresPropostas')->middleware('auth');
 Route::put('/aprovar/{id}', 'prestadoresController@aprovar')->middleware('auth');
 Route::put('/reprovar/{id}', 'prestadoresController@reprovar')->middleware('auth');
 

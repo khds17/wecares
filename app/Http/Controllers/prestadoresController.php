@@ -16,6 +16,7 @@ use App\Models\certificados;
 use App\Models\antecedentes;
 use App\Models\formacao;
 use App\Models\sexo;
+use App\Models\proposta;
 use App\Models\user;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
@@ -48,6 +49,7 @@ class prestadoresController extends Controller
     public function __construct()
     {
         $this->objPrestador = new prestadores();
+        $this->objProposta = new proposta();  
         $this->objEstado = new estados();
         $this->objCidade = new cidades();
         $this->objEndereco = new enderecos();
@@ -86,6 +88,18 @@ class prestadoresController extends Controller
     {
         $prestadores = $this->objPrestador->all();
         return view('prestadores/lista-prestadores',compact('prestadores'));
+    }
+
+    public function prestadoresPropostas()
+    {
+        $propostas = $this->objProposta
+                        ->join('PRESTADORES','PROPOSTAS.ID_PRESTADOR','=','PRESTADORES.ID')
+                        ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+                        ->whereNull('PROPOSTAS.APROVACAO_PRESTADOR')
+                        ->select('PROPOSTAS.*')
+                        ->get();
+
+        return view('prestadores/propostas',compact('propostas'));
     }
 
     public function resultado(Request $request)
