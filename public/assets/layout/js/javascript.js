@@ -89,3 +89,18 @@ function getPaciente(id) {
         }
     });
 }
+
+function selectPrestadores() {
+    
+    let prestadores = [];
+
+    $("input[id*='checkPrestador[']").each(function (chave, elemento) {
+
+        if($(elemento).is(':checked')) {
+
+            prestadores.push($(elemento).val());
+        }
+    });
+
+    $("#idPrestadores").val(prestadores);
+}
