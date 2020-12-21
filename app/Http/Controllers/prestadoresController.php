@@ -95,6 +95,7 @@ class prestadoresController extends Controller
         $prestadores = $this->objPrestador
                             ->join('ENDERECOS', 'PRESTADORES.ID_ENDERECO', '=', 'ENDERECOS.ID')
                             ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
+                            ->select('PRESTADORES.*','FORMACAO.FORMACAO')
                             ->where('ENDERECOS.ID_CIDADE', '=', $idCidade)
                             ->get();
 
