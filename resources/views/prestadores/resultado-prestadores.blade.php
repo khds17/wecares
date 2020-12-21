@@ -21,6 +21,7 @@
                         <div class="card-body p-5">
                             <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div>
 
+                            <input type="hidden" id="idPrestador[{{$prestador->ID}}]" name="idPrestador" value="{{$prestador->ID}}">
                             <h6>{{$prestador->NOME}}</h6>
                             <div class="small text-gray-500 text-left">Formação:{{$prestador->FORMACAO}}</div>
                             {{-- <div class="small text-gray-500 text-left">Distância:</div>
@@ -28,7 +29,7 @@
                                 
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
-                            <input type="checkbox" name="prestador" id="prestador" onclick="select()">&nbsp
+                            <input type="checkbox" name="checkPrestador" id="checkPrestador[{{$prestador->ID}}]" value="{{$prestador->ID}}">&nbsp
                             <div class="small text-primary">Selecionar</div>
                         </div>
                     </a>
@@ -43,7 +44,7 @@
     @if (count($prestadores) >= 1)
         <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
             <div class="float-right">
-                <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" data-toggle= "modal" data-target="#modalServico">Solicitar serviço</a>
+                <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" data-toggle= "modal" data-target="#modalServico" onclick="selectPrestadores()">Solicitar serviço</a>
             </div>
         </div>
     @endif
@@ -58,11 +59,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form class="user">
-                    @csrf
+                <form name="formProposta" id="formProposta" method="post" enctype="multipart/form-data" action="{{url('proposta')}}">   
+                        @csrf
                         <div class="form-group">
+                            <input type="hidden" id="idPrestadores" name="idPrestadores">
                             <label for="paciente" class="text-dark">Paciente</label><br>
-                            <select name="select-paciente" class="custom-select" onchange="getPaciente(this.value)">
+                            <select name="selectPaciente" class="custom-select" onchange="getPaciente(this.value)">
                                 <option value="">Escolha um paciente</option> 
                                 @foreach ($pacientes as $paciente)
                                     <option value="{{$paciente->ID}}">{{$paciente->NOME}}</option> 
@@ -143,14 +145,14 @@
                                         @foreach($servicos as $servico)
                                             <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
                                         @endforeach
-                                        <input type="checkbox" name="outros" id="outros" value="sim"><input class="form-control" type="text" name="servicos[]" id="servicoOutros" placeholder="Outros"><br>
+                                        <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
                                     </div>
                                 </div>
                                 <div class="row margin-top-10">
                                     <div class="col font-color-gray">
                                         <label for="formacao">Paciente toma medicamentos?</label><br>
-                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
-                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
+                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="Sim"> Sim <br> 
+                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="Não"> Não
                                         <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="">  
                                     </div>
                                 </div>
@@ -162,16 +164,16 @@
                                 </div>
                                 <div class="row margin-top-10">
                                     <div class="col">
-                                        <input class="form-control" type="date" name="dataservico" id="dataservico" placeholder="Data do serviço">
+                                        <input class="form-control" type="date" name="dataServico" id="dataServico" placeholder="Data do serviço">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row margin-top-10">
                                     <div class="col">
-                                        <input class="form-control" type="datetime" name="horaservico" id="horaservico" placeholder="Horário de início ">
+                                        <input class="form-control" type="datetime" name="horaInicio" id="horaInicio" placeholder="Horário de início ">
                                     </div>
                                     <div class="col">
-                                        <input class="form-control" type="datetime" name="horaservico" id="horaservico" placeholder="Horário do fim">
+                                        <input class="form-control" type="datetime" name="horaFim" id="horaFim" placeholder="Horário do fim">
                                     </div>
                                 </div>
                                 <br>
@@ -186,10 +188,10 @@
                                         <label class ="" for="formacao">Valor total do serviço:</label><br>                                
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <input class="btn btn-teal btn-block btn-marketing rounded-pill" type="submit" value="Enviar proposta">
+                                </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Enviar proposta</button>
-                </div>
             </div>
         </div>
     </div>
