@@ -151,8 +151,8 @@
                                 <div class="row margin-top-10">
                                     <div class="col font-color-gray">
                                         <label for="formacao">Paciente toma medicamentos?</label><br>
-                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="Sim"> Sim <br> 
-                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="Não"> Não
+                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
+                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
                                         <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="">  
                                     </div>
                                 </div>

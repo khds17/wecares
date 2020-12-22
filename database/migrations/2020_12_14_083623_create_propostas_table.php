@@ -32,7 +32,7 @@ class CreatePropostasTable extends Migration
             $table->string('UF',2);
             $table->string('SERVICOS');
             $table->string('SERVICOS_OUTROS', 255)->nullable();
-            $table->string('TOMA_MEDICAMENTOS',3);
+            $table->unsignedSmallInteger('TOMA_MEDICAMENTOS');
             $table->string('TIPO_MEDICAMENTOS')->nullable();
             $table->date('DATA_SERVICO');
             $table->time('HORA_INICIO',0);
