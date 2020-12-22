@@ -19,6 +19,8 @@ class CreatePropostasTable extends Migration
             $table->string('NOME_PRESTADOR',255);
             $table->unsignedInteger('ID_SOLICITANTE');
             $table->string('NOME_SOLICITANTE',255);
+            $table->unsignedInteger('ID_FAMILIARIDADE');
+            $table->string('OUTROS_FAMILIARIDADE',100)->nullable();
             $table->unsignedInteger('ID_PACIENTE');
             $table->string('NOME_PACIENTE',255);
             $table->string('TIPO', 25);
@@ -43,6 +45,7 @@ class CreatePropostasTable extends Migration
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_PACIENTE')->references('ID')->on('PACIENTES')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_FAMILIARIDADE')->references('ID')->on('FAMILIARIDADES')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

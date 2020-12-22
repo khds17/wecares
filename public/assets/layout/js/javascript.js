@@ -64,14 +64,18 @@ function getPaciente(id) {
         },
         success: function (data) {
             if (data != null) {
+                console.log(data);
                 //Limpa todos os select selecionados
                 $("#pacienteTipo").find('option').attr("selected",false);
                 $("#pacienteLocalizacao").find('option').attr("selected",false);
                 $("#pacienteCidade").find('option').attr("selected",false);
                 $("#pacienteEstado").find('option').attr("selected",false);
+                $("#familiaridade").find('option').attr("selected",false);
                 // $("#tomaMedicamento").find('input[type="radio"]').attr("checked",false);
 
                 //Atualiza os dados do formulário de solicitação conforme o paciente selecionado
+                $("#familiaridade option[value="+data.paciente.ID_FAMILIARIDADE+"]").attr("selected", "selected");
+                $('#familiaridadeOutros').val(data.paciente.FAMILIAR_OUTROS);
                 $("#pacienteTipo option[value="+data.pacientesTipos[0].ID+"]").attr("selected", "selected");
                 $("#pacienteLocalizacao option[value="+data.pacientesLocalizacao[0].ID+"]").attr("selected", "selected");
                 $('#pacienteCep').val(data.endereco.CEP);

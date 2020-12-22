@@ -18,6 +18,7 @@ use App\Models\formacao;
 use App\Models\sexo;
 use App\Models\proposta;
 use App\Models\user;
+use App\Models\familiaridade;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
 use App\Config\constants;
@@ -62,6 +63,7 @@ class prestadoresController extends Controller
         $this->objServico = new servicos();
         $this->objPacienteTipo = new paciente_tipo();
         $this->objPacienteLocalizacao = new paciente_localizacao(); 
+        $this->objFamiliaridades = new familiaridade();   
 
     }
 
@@ -99,7 +101,19 @@ class prestadoresController extends Controller
                         ->select('PROPOSTAS.*')
                         ->get();
 
-        return view('prestadores/propostas',compact('propostas'));
+        // $servicos = DB::table('PROPOSTAS')
+        //                 ->join('PRESTADORES','PROPOSTAS.ID_PRESTADOR','=','PRESTADORES.ID')
+        //                 ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+        //                 ->whereNull('PROPOSTAS.APROVACAO_PRESTADOR')
+        //                 ->select('PROPOSTAS.SERVICOS')
+        //                 ->get();
+
+
+        $servicos=$this->objServico->all();
+
+        $familiaridades=$this->objFamiliaridades->all(); 
+
+        return view('prestadores/propostas',compact('propostas','servicos','familiaridades'));
     }
 
     public function resultado(Request $request)
@@ -140,7 +154,9 @@ class prestadoresController extends Controller
 
         $estados = $this->objEstado->all();
 
-        return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientes','pacientesTipos','pacientesLocalizacao', 'enderecos', 'cidades','estados'));
+        $familiaridades=$this->objFamiliaridades->all(); 
+
+        return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientes','pacientesTipos','pacientesLocalizacao', 'enderecos', 'cidades','estados','familiaridades'));
     }
 
     public function recebimentos()
