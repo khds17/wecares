@@ -37,6 +37,43 @@ function reprovar(id)
     }
 }
 
+function aceitar(id)
+ {
+    event.preventDefault();
+    if(confirm("Deseja mesmo aceitar este serviço?")){
+        $.ajax({
+            url:'/aceitar/' + id,
+            type: 'PUT',
+            dataType: 'json',
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (result) {
+                window.location.replace('/servicosPrestados');
+         }
+        })
+    }
+}
+
+function recusar(id)
+ {
+    event.preventDefault();
+    if(confirm("Deseja mesmo recusar este serviço?")){
+        $.ajax({
+            url:'/recusar/' + id,
+            type: 'PUT',
+            dataType: 'json',
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (result) {
+                console.log('Entrou');
+                window.location.replace('/novaspropostas');
+         }
+        })
+    }
+}
+
 (function(win,doc){
     'use strict';
 

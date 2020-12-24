@@ -20,14 +20,21 @@
             <div class="card-body">
                 @csrf
                 <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome solicitante</th>
-                            <th scope="col">Nome paciente</th>
-                            <th scope="col">Cidade</th>
-                            <th scope="col">Valor</th>
-                        </tr>
-                    </thead>
+                    @if (!empty($propostas))
+                    {{-- @dd($propostas); --}}
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome solicitante</th>
+                                <th scope="col">Nome paciente</th>
+                                <th scope="col">Cidade</th>
+                                <th scope="col">Valor</th>
+                            </tr>
+                        </thead>
+                    @else
+                        <thead>
+                            Não há propostas disponíveis no momento
+                        </thead>
+                    @endif
                     <tbody>                       
                         @foreach($propostas as $proposta) 
                                 <tr>
@@ -40,10 +47,10 @@
                                             <button class="btn btn-primary">Visualizar</button>
                                         </a>
                                         <a href="">
-                                            <button class="btn btn-success">Aceitar</button>
+                                            <button class="btn btn-success" onclick="aceitar({{$proposta->ID}})">Aceitar</button>
                                         </a>
                                         <a href="">
-                                            <button class="btn btn-danger">Recusar</button>
+                                            <button class="btn btn-danger" onclick="recusar({{$proposta->ID}})">Recusar</button>
                                         </a>
                                     </td>     
                                 <tr>
@@ -65,7 +72,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form name="cadastroConta" id="cadastroConta" method="post" action="">
+                @if (isset($propostas))
+                @foreach($propostas as $proposta) 
+                    <form name="formExibicaoPropostas" id="formExibicaoPropostas" method="post" action="">
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Nome do solicitante</label>
@@ -175,6 +184,8 @@
                             </div>
                         </div>
                 </form>
+                @endforeach
+                @endif
             </div>
         </div>
     </div>

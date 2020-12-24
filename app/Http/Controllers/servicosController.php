@@ -10,6 +10,7 @@ use App\Models\pacientes;
 use App\Models\prestadores;
 use App\Models\cidades;
 use App\Models\paciente_localizacao;
+use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
 class servicosController extends Controller
@@ -195,6 +196,29 @@ class servicosController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function aceitar($id)
+    {
+        // dd('Chegou');
+        // Pegando o valor da constant para colocar na propostas
+        $aceitado = \Config::get('constants.SERVICOS.ACEITADO');
+
+        $this->objProposta->where(['ID'=>$id])->update([
+            'APROVACAO_PRESTADOR'=>$aceitado
+        ]);
+    }
+
+    public function recusar($id)
+    {
+
+        // Pegando o valor da constant para colocar na propostas
+        $recusado = \Config::get('constants.SERVICOS.RECUSADO');
+
+        $this->objProposta->where(['ID'=>$id])->update([
+            'APROVACAO_PRESTADOR'=>$recusado
+        ]);
+
     }
 
     /**
