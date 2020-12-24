@@ -1,6 +1,5 @@
 @extends('templates.template-admin')
 @section('content')
-{{-- @dd($propostas) --}}
 <div id="content">
     <div class="container-fluid">
         <!-- DataTales Example -->
@@ -9,11 +8,6 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h6 class="m-0 font-weight-bold text-primary padding-top-15">Propostas</h6>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        {{-- @foreach($propostas as $propostas) 
-                            <a class="btn btn-primary" href="{{"prestador/$prestador->ID/edit"}}"> Editar </a>
-                        @endforeach --}}
                     </div>
                 </div>
             </div>
