@@ -7,7 +7,7 @@
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6 class="m-0 font-weight-bold text-primary padding-top-15">Propostas pendentes</h6>
+                        <h6 class="m-0 font-weight-bold text-primary padding-top-15">Propostas</h6>
                     </div>
                 </div>
             </div>
@@ -15,11 +15,11 @@
                 @csrf
                 <table class="table table-bordered">
                     @if (!empty($propostas))
-                    {{-- @dd($propostas); --}}
                         <thead>
                             <tr>
-                                <th scope="col">Nome prestador</th>
-                                <th scope="col">Formação</th>
+                                <th scope="col">Número da proposta</th>
+                                <th scope="col">Nome do profissional</th>
+                                <th scope="col">Paciente</th>
                                 <th scope="col">Valor</th>
                             </tr>
                         </thead>
@@ -28,22 +28,23 @@
                             Não há propostas disponíveis no momento
                         </thead>
                     @endif
-                    <tbody>                       
+                    <tbody>         
+                        {{-- Só crio esse foreach para percorrer e jogar os valores dentro do td do foreach de baixo --}}           
                         @foreach($propostas as $proposta) 
                                 <tr>
-                                    <th scope="row">{{$proposta->NOME_SOLICITANTE}}</th>
+                                    <th scope="row">{{$proposta->ID}}</th>
+                                    <td>{{$proposta->NOME_PRESTADOR}}</td>
                                     <td>{{$proposta->NOME_PACIENTE}}</td>
-                                    <td>{{$proposta->CIDADE}}</td>
                                     <td>R${{$proposta->VALOR}}</td>
                                     <td>
                                         <a data-toggle="modal" data-target="#modalVisualizarProposta" href="">
                                             <button class="btn btn-primary">Visualizar</button>
                                         </a>
                                         <a href="">
-                                            <button class="btn btn-success" onclick="aceitarProspostaPrestador({{$proposta->ID}})">Aceitar</button>
+                                            <button class="btn btn-success" onclick="aceitarPropostaSolicitante({{$proposta->ID}})">Aceitar</button>
                                         </a>
                                         <a href="">
-                                            <button class="btn btn-danger" onclick="recusarProspostaPrestador({{$proposta->ID}})">Recusar</button>
+                                            <button class="btn btn-danger" onclick="recusarProspostaSolicitante({{$proposta->ID}})">Recusar</button>
                                         </a>
                                     </td>     
                                 <tr>
@@ -69,34 +70,32 @@
                     <form name="formExibicaoPropostas" id="formExibicaoPropostas" method="post" action="">
                         <div class="row margin-top-10">
                             <div class="col">
-                                <label for="">Nome do solicitante</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->NOME_SOLICITANTE}}" disabled><br>                                         
+                                <label for="">Nome do profissional</label>
+                                <input class="form-control"type="text" name="" id="" value="{{$proposta->NOME_PRESTADOR}}" disabled><br>                                       
                             </div>
+                            <div class="col">
+                                <label for="">Formação</label>
+                                <input class="form-control"type="text" name="" id="" value="{{$proposta->FORMACAO}}" disabled><br>     
+                            </div>
+                        </div>
+                        <div class="row margin-top-10">
+                            <div class="col">
+                                <label for="">Telefone para contato</label>
+                                <input class="form-control"type="text" name="" id="" value="{{$proposta->TELEFONE}}" disabled><br>                                       
+                            </div>
+                        </div>
+                        <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Nome do paciente</label>
                                 <input class="form-control"type="text" name="" id="" value="{{$proposta->NOME_PACIENTE}}" disabled><br>                                       
                             </div>
-                        </div>
-                        <div class="row margin-top-10">
-                            <div class="col">
-                                <label for="">Familiaridade do solicitante</label>
-                                <select name="familiaridade" class="custom-select" value="{{old('familiaridade')}}" disabled>
-                                    @foreach($familiaridades as $familiaridade)
-                                        <option value="{{$familiaridade->ID}}" {{($proposta->ID_FAMILIARIDADE == $familiaridade->ID) ? 'selected' : ''}} >{{$familiaridade->FAMILIARIDADE}}</option>
-                                    @endforeach
-                                </select>                                       
-                            </div>
-                            <div class="col">
-                                <label for="">Familiaridade Outros</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->OUTROS_FAMILIARIDADE}}" disabled><br>                                       
-                            </div>
-                        </div>
-                        <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Tipo paciente</label>
                                 <input class="form-control"type="text" name="" id="" value="{{$proposta->TIPO}}" disabled><br>     
                             </div>
-                            <div class="col">
+                        </div>
+                        <div class="row margin-top-10">
+                             <div class="col">
                                 <label for="">Localização do paciente</label>
                                 <input class="form-control"type="text" name="" id="" value="{{$proposta->LOCALIZACAO}}" disabled><br>      
                             </div>
@@ -181,5 +180,4 @@
         </div>
     </div>
 </div>
-<!-- Fim modal cadastro -->
 @endsection

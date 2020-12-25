@@ -48,12 +48,15 @@ Route::resource('/servico','servicosController');
 Route::post('/proposta','servicosController@propostas')->middleware('auth');
 Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
 Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth');
-Route::put('/aceitar/{id}', 'servicosController@aceitar')->middleware('auth');
-Route::put('/recusar/{id}', 'servicosController@recusar')->middleware('auth');
+Route::put('/aceitarProspostaPrestador/{id}', 'servicosController@aceitarProspostaPrestador')->middleware('auth');
+Route::put('/recusarProspostaPrestador/{id}', 'servicosController@recusarProspostaPrestador')->middleware('auth');
+Route::put('/aceitarPropostaSolicitante/{id}', 'servicosController@aceitarPropostaSolicitante')->middleware('auth');
+Route::put('/recusarProspostaSolicitante/{id}', 'servicosController@recusarProspostaSolicitante')->middleware('auth');
 
 // ===========================================
 Route::resource('/solicitante','solicitantesController');
 Route::get('/solicitanteCadastro','solicitantesController@dadosCadastrais')->middleware('auth');
+Route::get('/propostas','solicitantesController@solicitantePropostas')->middleware('auth');
 
 Auth::routes(['register' => false]);
 

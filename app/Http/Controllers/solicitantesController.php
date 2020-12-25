@@ -9,11 +9,13 @@ use App\Models\solicitantes;
 use App\Models\pacientes;
 use App\Models\estados;
 use App\Models\cidades;
+use App\Models\servicos;
 use App\Models\enderecos;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
 use App\Models\user;
+use App\Models\proposta;
 use App\Config\constants;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -35,10 +37,12 @@ class solicitantesController extends Controller
     public function __construct()
     {
         $this->objSolicitante = new solicitantes();
+        $this->objProposta = new proposta();  
         $this->objPaciente = new pacientes();
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();
+        $this->objServico = new servicos();
         $this->objPacienteTipo = new paciente_tipo();
         $this->objPacienteLocalizacao = new paciente_localizacao();
         $this->objFamiliaridade = new familiaridade(); 
@@ -260,6 +264,27 @@ class solicitantesController extends Controller
     
         }
         return redirect('solicitantes');
+    }
+
+    public function solicitantePropostas()
+    {
+
+        $propostaAceita = \Config::get('constants.SERVICOS.ACEITADO');
+
+        $propostas = $this->objProposta
+                        ->join('SOLICITANTES','PROPOSTAS.ID_SOLICITANTE','=','SOLICITANTES.ID')
+                        ->join('PRESTADORES','PROPOSTAS.ID_PRESTADOR','=','PRESTADORES.ID')
+                        ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
+                        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                        ->where('PROPOSTAS.APROVACAO_PRESTADOR', '=', $propostaAceita)
+                        ->whereNull('PROPOSTAS.APROVACAO_SOLICITANTE')
+                        ->select('PROPOSTAS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
+                        ->get();
+
+        $servicos=$this->objServico->all();
+
+        return view('solicitantes/propostas',compact('propostas','servicos'));
+
     }
 
     /**

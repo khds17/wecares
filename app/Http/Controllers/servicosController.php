@@ -198,9 +198,8 @@ class servicosController extends Controller
         //
     }
 
-    public function aceitar($id)
+    public function aceitarProspostaPrestador($id)
     {
-        // dd('Chegou');
         // Pegando o valor da constant para colocar na propostas
         $aceitado = \Config::get('constants.SERVICOS.ACEITADO');
 
@@ -209,7 +208,7 @@ class servicosController extends Controller
         ]);
     }
 
-    public function recusar($id)
+    public function recusarProspostaPrestador($id)
     {
 
         // Pegando o valor da constant para colocar na propostas
@@ -217,6 +216,28 @@ class servicosController extends Controller
 
         $this->objProposta->where(['ID'=>$id])->update([
             'APROVACAO_PRESTADOR'=>$recusado
+        ]);
+
+    }
+
+    public function aceitarPropostaSolicitante($id)
+    {
+        // Pegando o valor da constant para colocar na propostas
+        $aceitado = \Config::get('constants.SERVICOS.ACEITADO');
+
+        $this->objProposta->where(['ID'=>$id])->update([
+            'APROVACAO_SOLICITANTE'=>$aceitado
+        ]);
+    }
+
+    public function recusarProspostaSolicitante($id)
+    {
+
+        // Pegando o valor da constant para colocar na propostas
+        $recusado = \Config::get('constants.SERVICOS.RECUSADO');
+
+        $this->objProposta->where(['ID'=>$id])->update([
+            'APROVACAO_SOLICITANTE'=>$recusado
         ]);
 
     }

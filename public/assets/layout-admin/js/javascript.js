@@ -37,12 +37,12 @@ function reprovar(id)
     }
 }
 
-function aceitar(id)
+function aceitarProspostaPrestador(id)
  {
     event.preventDefault();
     if(confirm("Deseja mesmo aceitar este serviço?")){
         $.ajax({
-            url:'/aceitar/' + id,
+            url:'/aceitarProspostaPrestador/' + id,
             type: 'PUT',
             dataType: 'json',
             headers:{
@@ -55,12 +55,49 @@ function aceitar(id)
     }
 }
 
-function recusar(id)
+function recusarProspostaPrestador(id)
  {
     event.preventDefault();
     if(confirm("Deseja mesmo recusar este serviço?")){
         $.ajax({
-            url:'/recusar/' + id,
+            url:'/recusarProspostaPrestador/' + id,
+            type: 'PUT',
+            dataType: 'json',
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (result) {
+                console.log('Entrou');
+                window.location.replace('/novaspropostas');
+         }
+        })
+    }
+}
+
+function aceitarPropostaSolicitante(id)
+ {
+    event.preventDefault();
+    if(confirm("Deseja mesmo aceitar este serviço?")){
+        $.ajax({
+            url:'/aceitarPropostaSolicitante/' + id,
+            type: 'PUT',
+            dataType: 'json',
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (result) {
+                window.location.replace('/servicosPrestados');
+         }
+        })
+    }
+}
+
+function recusarProspostaSolicitante(id)
+ {
+    event.preventDefault();
+    if(confirm("Deseja mesmo recusar este serviço?")){
+        $.ajax({
+            url:'/recusarProspostaSolicitante/' + id,
             type: 'PUT',
             dataType: 'json',
             headers:{
