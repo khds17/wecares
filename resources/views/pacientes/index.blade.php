@@ -25,20 +25,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @dd($pacientes, $pacientesTipos, $pacientesLocalizacao); --}}
                         @foreach ($pacientes as $paciente)
-                            @foreach ($pacientesTipos as $pacienteTipo)
-                                @foreach ($pacientesLocalizacao as $pacienteLocalizacao)
                                 <tr>
                                     <th scope="row">{{$paciente->NOME}}</th>
-                                    <td>{{$pacienteTipo->TIPO}}</td>
-                                    <td>{{$pacienteLocalizacao->LOCALIZACAO}}</td>
+                                    <td>{{$paciente->TIPO}}</td>
+                                    <td>{{$paciente->LOCALIZACAO}}</td>
                                     <td>                
                                         <a class="btn btn-primary" href="{{"paciente/$paciente->ID/edit"}}"> Editar </a>
                                     </td>
                                 </tr>
-                                @endforeach
-                            @endforeach
                         @endforeach
                     </tbody>
                 </table>

@@ -40,30 +40,14 @@ class pacientesController extends Controller
         //Encontrando os pacientes do solicitante logado
         $pacientes = DB::table('PACIENTES')
                         ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+                        ->join('PACIENTES_TIPOS', 'PACIENTES.ID_TIPO', '=', 'PACIENTES_TIPOS.ID')
+                        ->join('PACIENTE_LOCALIZACAO', 'PACIENTES.ID_LOCALIZACAO', '=', 'PACIENTE_LOCALIZACAO.ID')
                         ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
                         ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                        ->select('PACIENTES.*')
+                        ->select('PACIENTES.*','PACIENTES_TIPOS.TIPO','PACIENTE_LOCALIZACAO.LOCALIZACAO')
                         ->get();
 
-        //Encontrando o tipo dos pacientes do solicitante logado
-        $pacientesTipos = DB::table('PACIENTES_TIPOS')
-                            ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
-                            ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-                            ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
-                            ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                            ->select('PACIENTES_TIPOS.*')
-                            ->get();
-        
-        //Encontrando a localizaçao dos pacientes do solicitante logado
-        $pacientesLocalizacao = DB::table('PACIENTE_LOCALIZACAO')
-                                ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
-                                ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-                                ->join('users', 'SOLICITANTES.ID_USUARIO', '=', 'users.id')
-                                ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                                ->select('PACIENTE_LOCALIZACAO.*')
-                                ->get();
-
-        return view('pacientes/index',compact("pacientes", "pacientesTipos", "pacientesLocalizacao"));
+        return view('pacientes/index',compact("pacientes"));
     }
 
     /**
