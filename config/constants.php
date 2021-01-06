@@ -12,5 +12,8 @@ return [
     'SERVICOS' => [
         'ACEITADO' => 1,
         'RECUSADO' => 2,
+        'PENDENTE' => 3,
+        'APROVADO' => 4,
+        'CANCELADO' => 5,
     ]
 ];

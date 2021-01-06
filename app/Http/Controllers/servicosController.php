@@ -155,6 +155,62 @@ class servicosController extends Controller
         return view('servicos/servicosContratados');
     }
 
+    public function servicos()
+    {
+        // Constant para validar os servicos que foram aceitados por prestadores e solicitantes
+        $propostaAceita = \Config::get('constants.SERVICOS.ACEITADO');
+
+        // Constant para incluir o serviço como pendente antes de ser prestado e transacionado no meio de pagamento
+        $servicoPendente = \Config::get('constants.SERVICOS.PENDENTE');
+
+        // Select para pegar todas as propostas que ainda não foram criadas como serviços a serem prestados
+        $servicos = $this->objProposta
+                        ->leftJoin('SERVICOS_PRESTADOS', 'SERVICOS_PRESTADOS.ID_PROPOSTA', '=', 'PROPOSTAS.ID')
+                        ->where('PROPOSTAS.APROVACAO_SOLICITANTE', '=', $propostaAceita)
+                        ->where('PROPOSTAS.APROVACAO_PRESTADOR', '=', $propostaAceita)
+                        ->whereNull('SERVICOS_PRESTADOS.ID_PROPOSTA')
+                        ->select('PROPOSTAS.*')
+                        ->get();
+
+        // Percorre o select e cria o serviço a ser prestado para todas as propostas que não possuem essa serviço.
+        foreach ($servicos as $ojbServico) {
+
+            $servico = $ojbServico;
+
+            DB::table('SERVICOS_PRESTADOS')->insert([
+                'ID_PROPOSTA' => $servico->ID,
+                'ID_PRESTADOR' => $servico->ID_PRESTADOR, 
+                'NOME_PRESTADOR' => $servico->NOME_PRESTADOR,
+                'ID_SOLICITANTE' => $servico->ID_SOLICITANTE,
+                'NOME_SOLICITANTE' => $servico->NOME_SOLICITANTE,
+                'ID_FAMILIARIDADE' => $servico->ID_FAMILIARIDADE,
+                'OUTROS_FAMILIARIDADE' => $servico->OUTROS_FAMILIARIDADE,
+                'ID_PACIENTE' => $servico->ID_PACIENTE,
+                'NOME_PACIENTE' => $servico->NOME_PACIENTE, 
+                'TIPO' => $servico->TIPO,
+                'LOCALIZACAO' => $servico->LOCALIZACAO,
+                'CEP' => $servico->CEP,
+                'ENDERECO' => $servico->ENDERECO,
+                'NUMERO' => $servico->NUMERO,
+                'COMPLEMENTO' => $servico->COMPLEMENTO, 
+                'BAIRRO' => $servico->BAIRRO,
+                'CIDADE' => $servico->CIDADE,
+                'UF' => $servico->UF,
+                'SERVICOS' => $servico->SERVICOS,
+                'SERVICOS_OUTROS' => $servico->SERVICOS_OUTROS,
+                'TOMA_MEDICAMENTOS' => $servico->TOMA_MEDICAMENTOS, 
+                'TIPO_MEDICAMENTOS' => $servico->TIPO_MEDICAMENTOS,
+                'DATA_SERVICO' => $servico->DATA_SERVICO,
+                'HORA_INICIO' => $servico->HORA_INICIO,
+                'HORA_FIM' => $servico->HORA_FIM,
+                'VALOR' => $servico->VALOR,
+                'STATUS' => $servicoPendente
+            ]);
+
+        }                      
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
