@@ -133,7 +133,6 @@ class prestadoresController extends Controller
                         ->select('PACIENTES.*')
                         ->get();
 
-        // dd($pacientes);
         $servicos=$this->objServico->all();
 
         //Pegando todos os tipos de pacientes
