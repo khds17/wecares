@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\DB;
 
 trait AuthenticatesUsers
 {
@@ -126,6 +127,39 @@ trait AuthenticatesUsers
     protected function authenticated(Request $request, $user)
     {
         //
+    }
+
+    public function redirectTo()
+    {
+
+        $arrayUsersPrestadores = DB::table('users')
+                            ->join('PRESTADORES','users.ID','=','PRESTADORES.ID_USUARIO')
+                            ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+                            ->get();
+
+        $arrayUsersSolicitantes = DB::table('users')
+                            ->join('SOLICITANTES','users.ID','=','SOLICITANTES.ID_USUARIO')
+                            ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                            ->get();
+
+        // dd($arrayUsersPrestadores,$arrayUsersSolicitantes);
+
+        foreach ($arrayUsersPrestadores as $arrayUserPrestador) {
+            $userPrestador = $arrayUserPrestador;
+        }
+
+        foreach ($arrayUsersSolicitantes as $arrayUserSolicitante) {
+            $userSolicitante = $arrayUserSolicitante;
+        }
+
+        if (isset($userPrestador)) {
+            return '/prestadorCadastro';
+        } else if (isset($userSolicitante)) {
+            return '/solicitanteCadastro';
+        } else {
+            return '/adminCadastro';
+        }
+                    
     }
 
     /**
