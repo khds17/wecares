@@ -12,6 +12,7 @@ use App\Models\cidades;
 use App\Models\servicos;
 use App\Models\servicos_prestados;
 use App\Models\paciente_localizacao;
+use App\Models\familiaridade;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
@@ -30,6 +31,7 @@ class servicosController extends Controller
             $this->objPacienteLocalizacao = new paciente_localizacao(); 
             $this->objServicosPrestados = new servicos_prestados(); 
             $this->objServico = new servicos();
+            $this->objFamiliaridades = new familiaridade(); 
                   
         }
     /**
@@ -150,7 +152,19 @@ class servicosController extends Controller
 
     public function servicosPrestados()
     {
-        return view('servicos/servicosPrestados');
+        $servicosPrestados = $this->objServicosPrestados
+        ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
+        ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
+        ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
+        ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+        ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
+        ->get();
+
+        $servicos=$this->objServico->all();
+
+        $familiaridades=$this->objFamiliaridades->all(); 
+
+        return view('servicos/servicosPrestados', compact('servicosPrestados','servicos','familiaridades'));
     }
 
 
