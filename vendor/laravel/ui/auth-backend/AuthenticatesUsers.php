@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
+use App\Config\constants;
 
 trait AuthenticatesUsers
 {
@@ -131,19 +132,29 @@ trait AuthenticatesUsers
 
     public function redirectTo()
     {
+        // Pegando o valor da constant para colocar no solicitante
+        $status = \Config::get('constants.STATUS.ATIVO');
 
+        // Select para pegar todos os usuarios ativos que estão tentando autenticar
         $arrayUsersPrestadores = DB::table('users')
                             ->join('PRESTADORES','users.ID','=','PRESTADORES.ID_USUARIO')
                             ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+                            ->where('users.status', '=', $status)
                             ->get();
 
         $arrayUsersSolicitantes = DB::table('users')
                             ->join('SOLICITANTES','users.ID','=','SOLICITANTES.ID_USUARIO')
                             ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                            ->where('users.status', '=', $status)
                             ->get();
 
-        // dd($arrayUsersPrestadores,$arrayUsersSolicitantes);
+        $arrayUsersAdmins = DB::table('users')
+                            ->join('ADMIN','users.ID','=','ADMIN.ID_USUARIO')
+                            ->where('ADMIN.ID_USUARIO', auth()->user()->id)
+                            ->where('users.status', '=', $status)
+                            ->get();
 
+        // Remove os resultados do array e coloca em uma variável
         foreach ($arrayUsersPrestadores as $arrayUserPrestador) {
             $userPrestador = $arrayUserPrestador;
         }
@@ -152,11 +163,16 @@ trait AuthenticatesUsers
             $userSolicitante = $arrayUserSolicitante;
         }
 
+        foreach ($arrayUsersAdmins as $arrayUserAdmin) {
+            $userAdmin = $arrayUserAdmin;
+        }
+
+        // Verifica o tipo do usuario e redireciona
         if (isset($userPrestador)) {
             return '/prestadorCadastro';
         } else if (isset($userSolicitante)) {
             return '/solicitanteCadastro';
-        } else {
+        } else if (isset($userAdmin)) {
             return '/adminCadastro';
         }
                     
