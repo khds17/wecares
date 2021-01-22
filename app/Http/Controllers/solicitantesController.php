@@ -61,7 +61,7 @@ class solicitantesController extends Controller
 
     public function dadosCadastrais()
     {
-        // Encontra o prestador pelo usuario logado.
+        // Encontra o solicitante pelo usuario logado.
         $solicitantes = $this->objSolicitante->where('ID_USUARIO', auth()->user()->id)->get();
 
         return view('solicitantes/cadastro',compact("solicitantes"));
