@@ -15,7 +15,7 @@ class CreateRegistrosLogTable extends Migration
     {
         Schema::create('REGISTROS_LOG', function (Blueprint $table) {
             $table->increments('ID');
-            $table->dateTime('DATA');
+            $table->string('DATA',50);
             $table->longText('TEXTO');
             $table->unsignedInteger('ID_ADMIN')->nullable();
             $table->unsignedInteger('ID_PRESTADOR')->nullable();
