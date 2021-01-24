@@ -141,7 +141,18 @@
                             <div class="col-lg-3">
                                 <div class="footer-brand">WeCares</div>
                                 <div class="icon-list-social mb-5">
-                                    <a class="icon-list-social-link" href="javascript:void(0);"><i class="fab fa-instagram"></i></a><a class="icon-list-social-link" href="javascript:void(0);"><i class="fab fa-facebook"></i></a><a class="icon-list-social-link" href="javascript:void(0);"><i class="fab fa-linkedin"></i></a><a class="icon-list-social-link" href="javascript:void(0);"><i class="fab fa-twitter"></i></a>
+                                    <a class="icon-list-social-link" href="javascript:void(0);">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                    <a class="icon-list-social-link" href="javascript:void(0);">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a class="icon-list-social-link" href="javascript:void(0);">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                    {{-- <a class="icon-list-social-link" href="javascript:void(0);">
+                                        <i class="fab fa-twitter"></i>
+                                    </a> --}}
                                 </div>
                             </div>
                             <div class="col-lg-9">
@@ -150,7 +161,7 @@
                                         <div class="text-uppercase-expanded text-xs mb-4">Empresa</div>
                                         <ul class="list-unstyled mb-0">
                                             <li class="mb-2"><a href="{{url("/sobre")}}">Quem somos</a></li>
-                                            <li class="mb-2"><a href="javascript:void(0);">Como funciona?</a></li>
+                                            {{-- <li class="mb-2"><a href="javascript:void(0);">Como funciona?</a></li> --}}
                                         </ul>
                                     </div>
                                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
@@ -162,10 +173,17 @@
                                             {{-- <li class="mb-2"><a href="javascript:void(0);">Dicas de segurança</a></li> --}}
                                         </ul>
                                     </div>
-                                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                                    {{-- <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                                         <div class="text-uppercase-expanded text-xs mb-4">Ajuda</div>
                                         <ul class="list-unstyled mb-0">
                                             <li class="mb-2"><a href="">Dúvidas frequentes</a></li>
+                                        </ul>
+                                    </div> --}}
+                                    <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+                                        <div class="text-uppercase-expanded text-xs mb-4">Contato</div>
+                                        <ul class="list-unstyled mb-0">
+                                            <li class="mb-2"><a>wecares99@gmail.com</a></li>
+                                            <li class="mb-2"><a>(19) 99558-3696</a></li>
                                         </ul>
                                     </div>
                                 </div>
