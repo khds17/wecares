@@ -23,6 +23,7 @@ Route::get('/sobre','indexController@sobre');
 Route::get('/termos','indexController@termos');
 Route::get('/conduta','indexController@conduta');
 Route::get('/encontrecuidador','indexController@encontrecuidador');
+Route::get('/registros','indexController@registros');
 Route::get('/cuidadorcidades','indexController@getCidades');
 // Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');

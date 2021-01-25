@@ -8,5 +8,5 @@ class registros_log extends Model
 {
     public $timestamps = false;
     protected $table='REGISTROS_LOG';
-    protected $fillable=[''];
+    protected $fillable=['ID','DATA','TEXTO','ID_USUARIO'];
 }

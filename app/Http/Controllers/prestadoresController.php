@@ -21,6 +21,7 @@ use App\Models\user;
 use App\Models\familiaridade;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
+use App\Models\registros_log;
 use App\Config\constants;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -64,6 +65,7 @@ class prestadoresController extends Controller
         $this->objPacienteTipo = new paciente_tipo();
         $this->objPacienteLocalizacao = new paciente_localizacao(); 
         $this->objFamiliaridades = new familiaridade();   
+        $this->objRegistros = new registros_log(); 
 
     }
 
@@ -173,6 +175,7 @@ class prestadoresController extends Controller
         $cidades=$this->objCidade->orderBy('CIDADE','asc')->get();
         $formacoes=$this->objFormacao->all();
         $sexos=$this->objSexos->all();
+
         return view('prestadores/create',compact('estados','cidades','formacoes','sexos'));
     }
 
@@ -245,12 +248,25 @@ class prestadoresController extends Controller
                 'ID_ENDERECO'=>$idEndereco,
             ]);
 
+            // Pegando informações para popular no registro
+            $dataHora = date('d/m/Y \à\s H:i:s');
+
+            $nomeUsuario = $usuario->name;
+                
+            $textoRegistro = 'Cadastro de '.$nomeUsuario.' realizado com sucesso'; 
+
+            $registro = $this->objRegistros->create([
+                'DATA' => $dataHora,
+                'TEXTO' => $textoRegistro,
+                'ID_USUARIO' => $idUsuario
+            ]);
+
             DB::commit();
                 
             return redirect()->action('indexController@agradecimento');
             
         } catch (\Exception $e) {
-
+            dd('Deu ruim');
             DB::rollback();
 
             return redirect()->action('prestadoresController@create');

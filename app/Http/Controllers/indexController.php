@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\servicos;
 use App\Models\cidades;
+use App\Models\registros_log;
+
 
 class indexController extends Controller
 {
@@ -12,6 +14,7 @@ class indexController extends Controller
     public function __construct()
     {
         $this->objServico = new servicos();
+        $this->objRegistros = new registros_log();
         
     }
     /**
@@ -57,6 +60,16 @@ class indexController extends Controller
     public function encontrecuidador()
     {
         return view('index/encontre-cuidador');
+    }
+
+    public function registros()
+    {
+
+        $registros = $this->objRegistros
+                        ->where('REGISTROS_LOG.ID_USUARIO', auth()->user()->id)
+                        ->get();
+        
+        return view('registros/registros',compact('registros'));
     }
 
     public function getCidades(Request $request)
