@@ -188,6 +188,7 @@ class solicitantesController extends Controller
     {
         
         $solicitante=$this->objSolicitante->find($id);
+        
         return view('solicitantes/information',compact('solicitante'));
     }
 
