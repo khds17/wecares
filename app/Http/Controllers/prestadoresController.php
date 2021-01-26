@@ -172,8 +172,11 @@ class prestadoresController extends Controller
     public function create()
     {
         $estados=$this->objEstado->all();
+
         $cidades=$this->objCidade->orderBy('CIDADE','asc')->get();
+
         $formacoes=$this->objFormacao->all();
+
         $sexos=$this->objSexos->all();
 
         return view('prestadores/create',compact('estados','cidades','formacoes','sexos'));
@@ -195,27 +198,27 @@ class prestadoresController extends Controller
         // Cadastro do endereço, certificado, antecedentes crimimais e prestador
         try {
             $endereco = $this->objEndereco->create([
-                'CEP'=>$request->prestadorCep,
-                'ENDERECO'=>$request->prestadorEndereco,
-                'NUMERO'=>$request->prestadorNumero,
-                'COMPLEMENTO'=>$request->prestadorComplemento,
-                'BAIRRO'=>$request->prestadorBairro,
-                'ID_CIDADE'=>$request->prestadorCidade,
-                'ID_ESTADO'=>$request->prestadorEstado,
+                'CEP' => $request->prestadorCep,
+                'ENDERECO' => $request->prestadorEndereco,
+                'NUMERO' => $request->prestadorNumero,
+                'COMPLEMENTO' => $request->prestadorComplemento,
+                'BAIRRO' => $request->prestadorBairro,
+                'ID_CIDADE' => $request->prestadorCidade,
+                'ID_ESTADO' => $request->prestadorEstado,
             ]);
 
             //Gravando o id do endereco
             $idEndereco = $endereco->id;
             
             $certificado = $this->objCertificado->create([
-                'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
+                'CERTIFICADO' => $request->certificadoFormacao->store('certificados')
             ]);
 
             //Gravando o id do certificado
             $idCertificado = $certificado->id;
     
             $antecedente = $this->objAntecedente->create([
-                'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
+                'ANTECEDENTE' => $request->antecedentes->store('antecedentes')
             ]);
 
             //Gravando o id do antecedente criminal
@@ -235,17 +238,17 @@ class prestadoresController extends Controller
             $idUsuario = $usuario->id;
                 
             $prestador = $this->objPrestador->create([
-                'NOME'=>$request->prestadorNome,
-                'CPF'=>$request->prestadorCPF,
-                'TELEFONE'=>$request->prestadorTelefone,
-                'DT_NASCIMENTO'=>$request->prestadorNascimento,
-                'ID_SEXO'=>$request->sexo,
-                'EMAIL'=>$request->prestadorEmail,
-                'ID_USUARIO'=>$idUsuario,
-                'ID_FORMACAO'=>$request->formacao,
-                'ID_CERTIFICADO'=>$idCertificado,
-                'ID_ANTECEDENTE'=>$idAntedecente,
-                'ID_ENDERECO'=>$idEndereco,
+                'NOME' => $request->prestadorNome,
+                'CPF' => $request->prestadorCPF,
+                'TELEFONE' => $request->prestadorTelefone,
+                'DT_NASCIMENTO' => $request->prestadorNascimento,
+                'ID_SEXO' => $request->sexo,
+                'EMAIL' => $request->prestadorEmail,
+                'ID_USUARIO' => $idUsuario,
+                'ID_FORMACAO' => $request->formacao,
+                'ID_CERTIFICADO' => $idCertificado,
+                'ID_ANTECEDENTE' => $idAntedecente,
+                'ID_ENDERECO' => $idEndereco,
             ]);
 
             // Pegando informações para popular no registro
@@ -286,8 +289,11 @@ class prestadoresController extends Controller
     {
         //Criando as variaveis com os objetos que podem ser usados na view
         $prestadores=$this->objPrestador->find($id);
+
         $enderecos=$this->objEndereco->find($id);
+
         $certificados=$this->objCertificado->find($id);
+
         $antecedentes=$this->objAntecedente->find($id);
 
         return view('prestadores/prestadores-informacoes',compact('prestadores','enderecos','certificados', 'antecedentes'));
@@ -335,32 +341,31 @@ class prestadoresController extends Controller
      */
     public function update(requestPrestadorEdit $request, $id)
     {
-        // dd($request->certificadoFormacao);
-        $prestadores= $this->objPrestador->find($id);
+        $prestadores = $this->objPrestador->find($id);
 
         DB::beginTransaction();
 
         try {
 
             $this->objEndereco->where(['ID' => $prestadores->ID_ENDERECO])->update([
-                'CEP'=>$request->prestadorCep,
-                'ENDERECO'=>$request->prestadorEndereco,
-                'NUMERO'=>$request->prestadorNumero,
-                'COMPLEMENTO'=>$request->prestadorComplemento,
-                'BAIRRO'=>$request->prestadorBairro,
-                'ID_CIDADE'=>$request->prestadorCidade,
-                'ID_ESTADO'=>$request->prestadorEstado,
+                'CEP' => $request->prestadorCep,
+                'ENDERECO' => $request->prestadorEndereco,
+                'NUMERO' => $request->prestadorNumero,
+                'COMPLEMENTO' => $request->prestadorComplemento,
+                'BAIRRO' => $request->prestadorBairro,
+                'ID_CIDADE' => $request->prestadorCidade,
+                'ID_ESTADO' => $request->prestadorEstado,
             ]);
             
             if($request->certificadoFormacao) {
                 $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
-                    'CERTIFICADO'=>$request->certificadoFormacao->store('certificados')
+                    'CERTIFICADO' => $request->certificadoFormacao->store('certificados')
                 ]);
             }
 
             else if($request->antecedentes) {
                 $this->objAntecedente->where(['ID' => $prestadores->ID_ANTECEDENTE])->update([
-                    'ANTECEDENTE'=>$request->antecedentes->store('antecedentes')
+                    'ANTECEDENTE' => $request->antecedentes->store('antecedentes')
                 ]);
             }
             
@@ -369,21 +374,32 @@ class prestadoresController extends Controller
             ]);
 
             $this->objPrestador->where(['ID' => $id])->update([
-                'NOME'=>$request->prestadorNome,
-                'CPF'=>$request->prestadorCPF,
-                'TELEFONE'=>$request->prestadorTelefone,
-                'ID_SEXO'=>$request->sexo,
-                'DT_NASCIMENTO'=>$request->prestadorNascimento,
-                'ID_FORMACAO'=>$request->formacao,
+                'NOME' => $request->prestadorNome,
+                'CPF' => $request->prestadorCPF,
+                'TELEFONE' => $request->prestadorTelefone,
+                'ID_SEXO' => $request->sexo,
+                'DT_NASCIMENTO' => $request->prestadorNascimento,
+                'ID_FORMACAO' => $request->formacao,
             ]);
             
-        DB::commit();
+            // Pegando informações para popular no registro
+            $dataHora = date('d/m/Y \à\s H:i:s');
 
-        return redirect()->action('prestadoresController@dadosCadastrais');
+            $nomeUsuario = $prestadores->NOME;
+                
+            $textoRegistro = 'Cadastro de '.$nomeUsuario.' alterado com sucesso'; 
 
+            $registro = $this->objRegistros->create([
+                'DATA' => $dataHora,
+                'TEXTO' => $textoRegistro,
+                'ID_USUARIO' => $prestadores->ID_USUARIO
+            ]);
+
+            DB::commit();
+
+            return redirect()->action('prestadoresController@dadosCadastrais');
 
         } catch (\Throwable $th) {
-            
             DB::rollback();
         }
     }
@@ -394,7 +410,7 @@ class prestadoresController extends Controller
         $statusAprovado = \Config::get('constants.STATUS.ATIVO');
 
         $this->objPrestador->where(['ID'=>$id])->update([
-            'STATUS'=>$statusAprovado
+            'STATUS' => $statusAprovado
         ]);
 
         // return redirect()->route('/prestadoreslista');
@@ -409,7 +425,7 @@ class prestadoresController extends Controller
         $statusReprovado = \Config::get('constants.STATUS.REPROVADO');
 
         $this->objPrestador->where(['ID'=>$id])->update([
-            'STATUS'=>$statusReprovado
+            'STATUS' => $statusReprovado
         ]);
 
         // return redirect('prestadoreslista');
