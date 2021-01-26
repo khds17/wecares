@@ -2,7 +2,7 @@
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>WeCares</title>
         <!-- Custom fonts for this template-->
@@ -18,7 +18,7 @@
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
@@ -383,10 +383,14 @@
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Settings
                                     </a> --}}
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{url("/registros")}}">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Registro de atividades
                                     </a>
+                                    {{-- <a class="dropdown-item" href="{{url("/registros")}}">
+                                        <i class="fas fa-camera-retro fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Foto de perfil
+                                    </a> --}}
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -462,6 +466,7 @@
         <!-- Custom scripts for all pages-->
         <script src="{{url('assets/layout-admin/js/sb-admin-2.min.js')}}"></script>
         <script src="{{url('assets/layout-admin/js/javascript.js')}}"></script>
+        
 
         <!-- Page level plugins -->
         <script src="{{url('assets/layout-admin/vendor/chart.js/Chart.min.js')}}"></script>
@@ -471,6 +476,10 @@
         <script src="{{url('assets/layout-admin/js/demo/chart-area-demo.js')}}"></script>
         <script src="{{url('assets/layout-admin/js/demo/chart-pie-demo.js')}}"></script>
         <script src="{{url('assets/layout-admin/js/demo/datatables-demo.js')}}"></script>
+
+        {{-- Mercado pago --}}
+        <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+        <script src="{{url('assets/layout-admin/js/mercadopago.js')}}"></script>
 
     </body>
 </html>
