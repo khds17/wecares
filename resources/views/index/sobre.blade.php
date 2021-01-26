@@ -6,7 +6,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <h1 class="page-header-title mb-3">WeCares</h1>
-                        <p class="page-header-text">A cultura da nossa empresa e como fazemos as coisas</p>
+                        <p class="page-header-text">A cultura da nossa empresa é como fazemos as coisas</p>
                 </div>
             </div>
         </div>
