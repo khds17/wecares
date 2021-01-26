@@ -11,6 +11,7 @@ use App\Models\solicitantes;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
+use App\Models\registros_log;
 use Illuminate\Support\Facades\DB;
 
 class pacientesController extends Controller
@@ -26,7 +27,8 @@ class pacientesController extends Controller
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();
-        $this->objFamiliaridades = new familiaridade();   
+        $this->objFamiliaridades = new familiaridade(); 
+        $this->objRegistros = new registros_log();   
               
     }
 
@@ -58,15 +60,15 @@ class pacientesController extends Controller
     public function create()
     {
 
-        $estados=$this->objEstados->all();
+        $estados = $this->objEstados->all();
 
-        $cidades=$this->objCidades->orderBy('CIDADE','asc')->get();
+        $cidades = $this->objCidades->orderBy('CIDADE','asc')->get();
 
-        $pacienteTipo=$this->objPacienteTipo->all();
+        $pacienteTipo = $this->objPacienteTipo->all();
 
-        $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
+        $pacienteLocalizacao = $this->objPacienteLocalizacao->all();
 
-        $familiaridades=$this->objFamiliaridades->all(); 
+        $familiaridades = $this->objFamiliaridades->all(); 
 
         return view('pacientes/create',compact('estados','cidades','familiaridades','pacienteTipo','pacienteLocalizacao'));
     }
@@ -97,31 +99,44 @@ class pacientesController extends Controller
             $idSolicitante = $solicitante->ID;
             
             $enderecoPaciente = $this->objEndereco->create([
-                'CEP'=>$request->pacienteCep,
-                'ENDERECO'=>$request->pacienteEndereco,
-                'NUMERO'=>$request->pacienteNumero,
-                'COMPLEMENTO'=>$request->solicitanteComplemento,
-                'BAIRRO'=>$request->pacienteBairro,
-                'ID_CIDADE'=>$request->pacienteCidade,
-                'ID_ESTADO'=>$request->pacienteEstado,
+                'CEP' => $request->pacienteCep,
+                'ENDERECO' => $request->pacienteEndereco,
+                'NUMERO' => $request->pacienteNumero,
+                'COMPLEMENTO' => $request->solicitanteComplemento,
+                'BAIRRO' => $request->pacienteBairro,
+                'ID_CIDADE' => $request->pacienteCidade,
+                'ID_ESTADO' => $request->pacienteEstado,
             ]);
             
             //Gravando o id do endereco
             $idEnderecoPaciente = $enderecoPaciente->id;
             
             $paciente = $this->objPaciente->create([
-                'NOME'=>$request->pacienteNome,
-                'ID_TIPO'=>$request->pacienteTipo,
-                'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
-                'ID_ENDERECO'=>$idEnderecoPaciente,
-                'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
-                'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
-                'ID_SOLICITANTE'=>$idSolicitante,
-                'STATUS'=>$status,
-                'ID_FAMILIARIDADE'=>$request->familiaridade,
-                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
+                'NOME' => $request->pacienteNome,
+                'ID_TIPO' => $request->pacienteTipo,
+                'ID_LOCALIZACAO' => $request->pacienteLocalizacao,
+                'ID_ENDERECO' => $idEnderecoPaciente,
+                'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
+                'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
+                'ID_SOLICITANTE' => $idSolicitante,
+                'STATUS' => $status,
+                'ID_FAMILIARIDADE' => $request->familiaridade,
+                'FAMILIAR_OUTROS' => $request->familiaridadeOutros,
                 ]);
-                  
+
+            // Pegando informações para popular no registro
+            $dataHora = date('d/m/Y \à\s H:i:s');
+
+            $nomeUsuario = $paciente->NOME;
+                
+            $textoRegistro = 'Cadastro do paciente '.$nomeUsuario.' realizado com sucesso'; 
+
+            $registro = $this->objRegistros->create([
+                'DATA' => $dataHora,
+                'TEXTO' => $textoRegistro,
+                'ID_USUARIO' => $solicitante->ID_USUARIO
+            ]);
+
             DB::commit();
 
             return redirect("/paciente");
@@ -206,7 +221,7 @@ class pacientesController extends Controller
         ->relEndereco;
 
         $solicitante = $paciente->find($paciente->ID)
-        ->relSolicitante;        
+                                ->relSolicitante;        
 
         $cidades = $this->objCidades->all();
 
@@ -232,25 +247,41 @@ class pacientesController extends Controller
 
         try {          
             $this->objEndereco->where(['ID' => $paciente->ID_ENDERECO])->update([
-                'CEP'=>$request->pacienteCep,
-                'ENDERECO'=>$request->pacienteEndereco,
-                'NUMERO'=>$request->pacienteNumero,
-                'COMPLEMENTO'=>$request->pacienteComplemento,
-                'BAIRRO'=>$request->pacienteBairro,
-                'ID_CIDADE'=>$request->pacienteCidade,
-                'ID_ESTADO'=>$request->pacienteEstado,
+                'CEP' => $request->pacienteCep,
+                'ENDERECO' => $request->pacienteEndereco,
+                'NUMERO' => $request->pacienteNumero,
+                'COMPLEMENTO' => $request->pacienteComplemento,
+                'BAIRRO' => $request->pacienteBairro,
+                'ID_CIDADE' => $request->pacienteCidade,
+                'ID_ESTADO' => $request->pacienteEstado,
             ]);            
 
             $this->objPaciente->where(['ID' => $paciente->ID])->update([
-                'NOME'=>$request->pacienteNome,
-                'ID_TIPO'=>$request->pacienteTipo,
-                'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
-                'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
-                'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
-                'ID_FAMILIARIDADE'=>$request->familiaridade,
-                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
+                'NOME' => $request->pacienteNome,
+                'ID_TIPO' => $request->pacienteTipo,
+                'ID_LOCALIZACAO' => $request->pacienteLocalizacao,
+                'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
+                'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
+                'ID_FAMILIARIDADE' => $request->familiaridade,
+                'FAMILIAR_OUTROS' => $request->familiaridadeOutros,
                 ]);
-           
+
+            // Pegando informações para popular no registro
+            $solicitante = $paciente->find($paciente->ID)
+                                    ->relSolicitante;  
+            
+            $dataHora = date('d/m/Y \à\s H:i:s');
+
+            $nomeUsuario = $paciente->NOME;
+                
+            $textoRegistro = 'Cadastro do paciente '.$nomeUsuario.' alterado com sucesso'; 
+
+            $registro = $this->objRegistros->create([
+                'DATA' => $dataHora,
+                'TEXTO' => $textoRegistro,
+                'ID_USUARIO' => $solicitante->ID_USUARIO
+            ]);
+
             DB::commit();
 
             return redirect("/paciente");
@@ -258,7 +289,6 @@ class pacientesController extends Controller
             
         } catch (\Throwable $e) {
 
-            dd('Deu ruim');
             DB::rollback();
             report($e);
             return false;
