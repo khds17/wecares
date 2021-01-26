@@ -16,6 +16,7 @@ use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
 use App\Models\user;
 use App\Models\proposta;
+use App\Models\registros_log;
 use App\Config\constants;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -47,6 +48,7 @@ class solicitantesController extends Controller
         $this->objPacienteLocalizacao = new paciente_localizacao();
         $this->objFamiliaridade = new familiaridade(); 
         $this->objUsers = new user();
+        $this->objRegistros = new registros_log(); 
         
     }
     
@@ -103,13 +105,13 @@ class solicitantesController extends Controller
         try {           
             
             $enderecoSolicitante = $this->objEndereco->create([
-                'CEP'=>$request->solicitanteCep,
-                'ENDERECO'=>$request->solicitanteEndereco,
-                'NUMERO'=>$request->solicitanteNumero,
-                'COMPLEMENTO'=>$request->solicitanteComplemento,
-                'BAIRRO'=>$request->solicitanteBairro,
-                'ID_CIDADE'=>$request->solicitanteCidade,
-                'ID_ESTADO'=>$request->solicitanteEstado,
+                'CEP' => $request->solicitanteCep,
+                'ENDERECO' => $request->solicitanteEndereco,
+                'NUMERO' => $request->solicitanteNumero,
+                'COMPLEMENTO' => $request->solicitanteComplemento,
+                'BAIRRO' => $request->solicitanteBairro,
+                'ID_CIDADE' => $request->solicitanteCidade,
+                'ID_ESTADO' => $request->solicitanteEstado,
             ]);
 
             //Gravando o id do endereco
@@ -129,42 +131,74 @@ class solicitantesController extends Controller
             $idUsuario = $usuario->id;
     
             $solicitante = $this->objSolicitante->create([
-                'NOME'=>$request->solicitanteNome,
-                'CPF'=>$request->solicitanteCPF,
-                'EMAIL'=>$request->solicitanteEmail,
-                'TELEFONE'=>$request->solicitanteTelefone,
-                'ID_USUARIO'=>$idUsuario,
-                'ID_ENDERECO'=>$idEnderecoSolicitante,
+                'NOME' => $request->solicitanteNome,
+                'CPF' => $request->solicitanteCPF,
+                'EMAIL' => $request->solicitanteEmail,
+                'TELEFONE' => $request->solicitanteTelefone,
+                'ID_USUARIO' => $idUsuario,
+                'ID_ENDERECO' => $idEnderecoSolicitante,
                 ]);
 
             //Gravando o id do solicitante
             $idSolicitante = $solicitante->id;
+
+            if($solicitante) {
+            // Pegando informações para popular no registro
+            $dataHora = date('d/m/Y \à\s H:i:s');
+
+            $nomeUsuario = $usuario->name;
+                
+            $textoRegistro = 'Cadastro de '.$nomeUsuario.' realizado com sucesso'; 
+
+            $registro = $this->objRegistros->create([
+                'DATA' => $dataHora,
+                'TEXTO' => $textoRegistro,
+                'ID_USUARIO' => $idUsuario
+            ]);
+
+            }
             
             $enderecoPaciente = $this->objEndereco->create([
-                'CEP'=>$request->pacienteCep,
-                'ENDERECO'=>$request->pacienteEndereco,
-                'NUMERO'=>$request->pacienteNumero,
-                'COMPLEMENTO'=>$request->solicitanteComplemento,
-                'BAIRRO'=>$request->pacienteBairro,
-                'ID_CIDADE'=>$request->pacienteCidade,
-                'ID_ESTADO'=>$request->pacienteEstado,
+                'CEP' => $request->pacienteCep,
+                'ENDERECO' => $request->pacienteEndereco,
+                'NUMERO' => $request->pacienteNumero,
+                'COMPLEMENTO' => $request->solicitanteComplemento,
+                'BAIRRO' => $request->pacienteBairro,
+                'ID_CIDADE' => $request->pacienteCidade,
+                'ID_ESTADO' => $request->pacienteEstado,
             ]);
             
             //Gravando o id do endereco
             $idEnderecoPaciente = $enderecoPaciente->id;
             
             $paciente = $this->objPaciente->create([
-                'NOME'=>$request->pacienteNome,
-                'ID_TIPO'=>$request->pacienteTipo,
-                'ID_LOCALIZACAO'=>$request->pacienteLocalizacao,
-                'ID_ENDERECO'=>$idEnderecoPaciente,
-                'TOMA_MEDICAMENTOS'=>$request->tomaMedicamento,
-                'TIPO_MEDICAMENTOS'=>$request->tipoMedicamento,
-                'ID_SOLICITANTE'=>$idSolicitante,
-                'STATUS'=>$status,
-                'ID_FAMILIARIDADE'=>$request->familiaridade,
-                'FAMILIAR_OUTROS'=>$request->familiaridadeOutros,
+                'NOME' => $request->pacienteNome,
+                'ID_TIPO' => $request->pacienteTipo,
+                'ID_LOCALIZACAO' => $request->pacienteLocalizacao,
+                'ID_ENDERECO' => $idEnderecoPaciente,
+                'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
+                'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
+                'ID_SOLICITANTE' => $idSolicitante,
+                'STATUS' => $status,
+                'ID_FAMILIARIDADE' => $request->familiaridade,
+                'FAMILIAR_OUTROS' => $request->familiaridadeOutros,
                 ]);
+            
+            if($paciente) {
+                // Pegando informações para popular no registro
+                $dataHora = date('d/m/Y \à\s H:i:s');
+    
+                $nomeUsuario = $paciente->NOME;
+                    
+                $textoRegistro = 'Cadastro do paciente '.$nomeUsuario.' realizado com sucesso'; 
+    
+                $registro = $this->objRegistros->create([
+                    'DATA' => $dataHora,
+                    'TEXTO' => $textoRegistro,
+                    'ID_USUARIO' => $idUsuario
+                ]);
+    
+                }
                   
             DB::commit();
 
@@ -232,13 +266,13 @@ class solicitantesController extends Controller
         try {           
 
             $this->objEndereco->where(['ID' => $solicitantes->ID_ENDERECO])->update([
-                'CEP'=>$request->solicitanteCep,
-                'ENDERECO'=>$request->solicitanteEndereco,
-                'NUMERO'=>$request->solicitanteNumero,
-                'COMPLEMENTO'=>$request->solicitanteComplemento,
-                'BAIRRO'=>$request->solicitanteBairro,
-                'ID_CIDADE'=>$request->solicitanteCidade,
-                'ID_ESTADO'=>$request->solicitanteEstado,
+                'CEP' => $request->solicitanteCep,
+                'ENDERECO' => $request->solicitanteEndereco,
+                'NUMERO' => $request->solicitanteNumero,
+                'COMPLEMENTO' => $request->solicitanteComplemento,
+                'BAIRRO' => $request->solicitanteBairro,
+                'ID_CIDADE' => $request->solicitanteCidade,
+                'ID_ESTADO' => $request->solicitanteEstado,
             ]);
 
             $this->objUsers->where(['id' => $solicitantes->ID_USUARIO])->update([
@@ -246,10 +280,23 @@ class solicitantesController extends Controller
             ]);
 
             $this->objSolicitante->where(['ID' => $solicitantes->ID])->update([
-                'NOME'=>$request->solicitanteNome,
-                'CPF'=>$request->solicitanteCPF,
-                'TELEFONE'=>$request->solicitanteTelefone,
+                'NOME' => $request->solicitanteNome,
+                'CPF' => $request->solicitanteCPF,
+                'TELEFONE' => $request->solicitanteTelefone,
                 ]);
+
+            // Pegando informações para popular no registro
+            $dataHora = date('d/m/Y \à\s H:i:s');
+
+            $nomeUsuario = $solicitantes->NOME;
+                
+            $textoRegistro = 'Cadastro de '.$nomeUsuario.' alterado com sucesso'; 
+
+            $registro = $this->objRegistros->create([
+                'DATA' => $dataHora,
+                'TEXTO' => $textoRegistro,
+                'ID_USUARIO' => $solicitantes->ID_USUARIO
+            ]);
             
             DB::commit();
 
