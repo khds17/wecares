@@ -62,7 +62,6 @@
                                             </label>
                                         </div>
                                 </div>
-        
                                 <div class="form-group">
                                     <div class="col-md-8 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
@@ -75,6 +74,13 @@
                                             </a>
                                         @endif
                                     </div>
+                                </div>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="{{url("prestador/create")}}">Seja um cuidador</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="{{url("solicitante/create")}}">Seja um solicitante!</a>
                                 </div>
                             </form>
                         </div>
