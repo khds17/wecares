@@ -1,6 +1,6 @@
 @extends('templates.template')
 @section('content')
-<header class="page-header page-header-dark bg-img-cover overlay overlay-secondary overlay-90" style='background-image: url("https://drive.google.com/file/d/1EkJcyR65gl8FvOZAIX15s4i00kXKp_4w/view?usp=sharing")'>
+<header class="page-header page-header-dark bg-gradient-primary-to-secondary">
     <div class="page-header-content py-5">
         <div class="container">
             <div class="row justify-content-center">
