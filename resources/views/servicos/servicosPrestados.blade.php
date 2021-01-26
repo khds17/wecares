@@ -7,7 +7,7 @@
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-md-6">
-                        <h6 class="m-0 font-weight-bold text-primary padding-top-15">Serviços contratados</h6>
+                        <h6 class="m-0 font-weight-bold text-primary padding-top-15">Serviços prestados</h6>
                     </div>
                 </div>
             </div>
