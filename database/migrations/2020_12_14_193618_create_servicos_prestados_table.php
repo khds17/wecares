@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicosPretadosTable extends Migration
+class CreateServicosPrestadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,6 @@ class CreateServicosPretadosTable extends Migration
     public function up()
     {
         Schema::create('SERVICOS_PRESTADOS', function (Blueprint $table) {
-
             $table->increments('ID');
             $table->unsignedInteger('ID_PROPOSTA');
             $table->unsignedInteger('ID_PRESTADOR');
