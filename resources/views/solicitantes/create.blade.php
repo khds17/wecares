@@ -34,7 +34,7 @@
                                     @enderror
                                 </div>
                                 <div class="col">
-                                    <input class="form-control" type="text" name="solicitanteTelefone" id="solicitanteTelefone" placeholder="Número do celular" value="{{old('solicitanteNumero')}}">
+                                    <input class="form-control" type="text" name="solicitanteTelefone" id="solicitanteTelefone" placeholder="Número do celular" value="{{old('solicitanteTelefone')}}">
                                     @error('solicitanteTelefone')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
@@ -133,6 +133,8 @@
                                     <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Descreva o que é do paciente" value="{{old('familiaridadeOutros')}}">
                                 </div>
                             </div>
+                            <br>
+                            <hr>
                             <br>
                             <h1 class="text-center">Preencha os dados do paciente</h1>
                             <div class="row margin-top-10">
@@ -240,6 +242,16 @@
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
                                     <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="{{old('tipoMedicamento')}}">
                                     @error('tomaMedicamento')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row margin-top-10">
+                                <div class="col font-color-gray">
+                                    <input type="checkbox" name="termos" id="termos" value="aceito">
+                                    <a href="{{url("/termos")}}" target="_blank">Termos </a><label>e</label><a href="{{url("/conduta")}}" target="_blank"> Código de conduta</a><br>
+                                    @error('termos')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
