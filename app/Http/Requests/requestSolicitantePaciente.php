@@ -65,7 +65,7 @@ class requestSolicitantePaciente extends FormRequest
             'solicitanteEmail.required'=>'E-mail é um campo obrigatório',
             'solicitanteEmail.email'=>'E-mail inválido',
             'solicitanteEmail.unique'=>'E-mail já cadastrado. Caseo seja o dono deste e-mail, entre em contato conosco!',
-            'solicitanteTelefone'=>'required',
+            'solicitanteTelefone.required'=>'Telefone é um campo obrigatório',
             'solicitanteSenha.required'=>'Senha é um campo obrigatório',
             'solicitanteSenha.min'=>'Digite uma senha de no mínimo 8 digitos',
             'solicitanteConfirmarSenha.required'=>'Confirme a senha é um campo obrigatório',
