@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\requestAdmin;
 use Illuminate\Http\Request;
 use App\Models\admin;
 use App\Models\user;
+use App\Models\estados;
+use App\Models\cidades;
+use App\Models\enderecos;
+use App\Models\registros_log;
 use Illuminate\Support\Facades\Hash;
 use App\Config\constants;
 use Spatie\Permission\Models\Role;
@@ -20,6 +25,10 @@ class adminController extends Controller
     {
         $this->objAdmin = new admin();
         $this->objUsers = new user();
+        $this->objEstados = new estados();
+        $this->objCidades = new cidades();
+        $this->objEndereco = new enderecos();
+        $this->objRegistros = new registros_log(); 
 
     }
     public function index()
@@ -54,7 +63,11 @@ class adminController extends Controller
      */
     public function create()
     {
-        return view('admin/create');
+        $estados=$this->objEstados->all();
+
+        $cidades=$this->objCidades->orderBy('CIDADE','asc')->get();
+
+        return view('admin/create',compact('estados','cidades',));
     }
 
     /**
@@ -63,33 +76,80 @@ class adminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(requestAdmin $request)
     {
-
         // Pegando o valor da constant para colocar no prestador
         $status = \Config::get('constants.STATUS.ATIVO');
 
-        $usuario = $this->objUsers->create([
-            'name' => $request->nome,
-            'email' => $request->email,
-            'password' => Hash::make($request['senha']),
-            'status' => $status
-        ]);
+        DB::beginTransaction();
 
-        $usuario->assignRole('administrador');
+        try {
+            $enderecoAdmin = $this->objEndereco->create([
+                'CEP' => $request->adminCep,
+                'ENDERECO' => $request->adminEndereco,
+                'NUMERO' => $request->adminNumero,
+                'COMPLEMENTO' => $request->adminComplemento,
+                'BAIRRO' => $request->adminBairro,
+                'ID_CIDADE' => $request->adminCidade,
+                'ID_ESTADO' => $request->adminEstado,
+            ]);
+            
+            $idEnderecoAdmin = $enderecoAdmin->id;
+            
+            $usuario = $this->objUsers->create([
+                'name' => $request->adminNome,
+                'email' => $request->adminEmail,
+                'password' => Hash::make($request['adminSenha']),
+                'status' => $status
+            ]);
 
-        $idUsuario = $usuario->id;
+            $usuario->assignRole('administrador');
 
-        $admin = $this->objAdmin->create([
-            'NOME' => $request->nome,
-            'EMAIL' => $request->email,
-            'ID_USUARIO' => $idUsuario,
-        ]);
-        
+            //Gravando o id do usuario
+            $idUsuario = $usuario->id;
 
-        if($admin){
-            return redirect('admin');
+            $admin = $this->objAdmin->create([
+                'NOME' => $request->adminNome,
+                'CPF' => $request->adminCPF,
+                'EMAIL' => $request->adminEmail,
+                'TELEFONE' => $request->adminTelefone,
+                'ID_ENDERECO' => $idEnderecoAdmin,
+                'ID_USUARIO' => $idUsuario,
+            ]);
+
+            // Pegando informações para popular no registro
+            $dataHora = date('d/m/Y \à\s H:i:s');
+
+            $nomeUsuario = $usuario->name;
+
+            $arrayUsuariosAdmins = $this->objAdmin
+                                    ->where('ID_USUARIO', auth()->user()->id)
+                                    ->get();
+
+            foreach ($arrayUsuariosAdmins as $arrayUsuarioAdmin) {
+                $usuarioAdmin = $arrayUsuarioAdmin;
+            }
+                
+            $textoRegistro = 'Cadastro de '.$nomeUsuario.' realizado com sucesso pelo administrator '.$usuarioAdmin->NOME.''; 
+
+            $registro = $this->objRegistros->create([
+                'DATA' => $dataHora,
+                'TEXTO' => $textoRegistro,
+                'ID_USUARIO' => $idUsuario
+            ]);
+
+            DB::commit();
+
+            return redirect()->action('adminController@listaAdmins');
+
+        } catch (\Throwable $th) {
+            
+            DB::rollback();
+            report($e);
+            return false;
         }
+
+
     }
 
     /**
