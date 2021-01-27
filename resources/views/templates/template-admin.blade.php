@@ -463,9 +463,12 @@
         <!-- Core plugin JavaScript-->
         <script src="{{url('assets/layout-admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        
         <!-- Custom scripts for all pages-->
         <script src="{{url('assets/layout-admin/js/sb-admin-2.min.js')}}"></script>
         <script src="{{url('assets/layout-admin/js/javascript.js')}}"></script>
+        <script src="{{url('assets/layout-admin/js/validacaoPrestador.js')}}"></script>
+        <script src="{{url('assets/layout/js/solicitacaoServico.js')}}"></script>
         
 
         <!-- Page level plugins -->

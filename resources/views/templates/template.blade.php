@@ -209,6 +209,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="{{url('assets/layout/js/javascript.js')}}"></script>
+    <script src="{{url('assets/layout/js/solicitacaoServico.js')}}"></script>
     <script src="{{url('assets/layout/js/scripts.js')}}"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
