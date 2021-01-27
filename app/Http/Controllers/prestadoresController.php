@@ -409,14 +409,9 @@ class prestadoresController extends Controller
         // Pegando o valor da constant para colocar no prestador
         $statusAprovado = \Config::get('constants.STATUS.ATIVO');
 
-        $this->objPrestador->where(['ID'=>$id])->update([
-            'STATUS' => $statusAprovado
+        $this->objUsers->where(['ID'=>$id])->update([
+            'status' => $statusAprovado
         ]);
-
-        // return redirect()->route('/prestadoreslista');
-
-        // return redirect('prestadoreslista');
-
     }
 
     public function reprovar($id)
@@ -424,11 +419,10 @@ class prestadoresController extends Controller
         // Pegando o valor da constant para colocar no prestador
         $statusReprovado = \Config::get('constants.STATUS.REPROVADO');
 
-        $this->objPrestador->where(['ID'=>$id])->update([
-            'STATUS' => $statusReprovado
+        $this->objUsers->where(['ID'=>$id])->update([
+            'status' => $statusReprovado
         ]);
 
-        // return redirect('prestadoreslista');
     }
 
     /**
