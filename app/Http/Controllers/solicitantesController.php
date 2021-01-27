@@ -121,7 +121,7 @@ class solicitantesController extends Controller
                 'name' => $request->solicitanteNome,
                 'email' => $request->solicitanteEmail,
                 'password' => Hash::make($request['solicitanteSenha']),
-                'status'=>$status,
+                'status' => $status,
             ]);
             
             //Gravando a função no usuario
