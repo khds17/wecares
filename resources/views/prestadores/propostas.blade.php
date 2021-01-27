@@ -18,8 +18,9 @@
                     {{-- @dd($propostas); --}}
                         <thead>
                             <tr>
-                                <th scope="col">Nome prestador</th>
-                                <th scope="col">Formação</th>
+                                <th scope="col">Nome do solicitante</th>
+                                <th scope="col">Nome do paciente</th>
+                                <th scope="col">Cidade</th>
                                 <th scope="col">Valor</th>
                             </tr>
                         </thead>
