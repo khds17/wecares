@@ -153,12 +153,12 @@ class servicosController extends Controller
     public function servicosPrestados()
     {
         $servicosPrestados = $this->objServicosPrestados
-        ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
-        ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
-        ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
-        ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
-        ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
-        ->get();
+                                ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
+                                ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
+                                ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
+                                ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+                                ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
+                                ->get();
 
         $servicos=$this->objServico->all();
 
@@ -171,12 +171,12 @@ class servicosController extends Controller
     public function servicosContratados()
     {
         $servicosContratados = $this->objServicosPrestados
-        ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
-        ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
-        ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
-        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-        ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
-        ->get();
+                                ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
+                                ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
+                                ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
+                                ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                                ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
+                                ->get();
 
         $servicos=$this->objServico->all();
 
@@ -290,6 +290,7 @@ class servicosController extends Controller
         $this->objProposta->where(['ID'=>$id])->update([
             'APROVACAO_PRESTADOR'=>$aceitado
         ]);
+
     }
 
     public function recusarProspostaPrestador($id)
