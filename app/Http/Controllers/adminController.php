@@ -67,7 +67,7 @@ class adminController extends Controller
 
         $cidades=$this->objCidades->orderBy('CIDADE','asc')->get();
 
-        return view('admin/create',compact('estados','cidades',));
+        return view('admin/create',compact('estados','cidades'));
     }
 
     /**
