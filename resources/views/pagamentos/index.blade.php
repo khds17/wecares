@@ -1,5 +1,8 @@
 @extends('templates.template-admin')
 @section('content')
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+</head>
 <div id="content">
     <div class="container-fluid">
         <!-- DataTales Example -->
@@ -78,7 +81,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form name="cadastroCartao" id="cadastroCartao" method="post" action="">
+                {{-- <form name="cadastroCartao" id="cadastroCartao" method="post" action="">
                     <div class="row margin-top-10">
                         <div class="col">
                             <input class="form-control"type="text" name="numeroCartao" id="numeroCartao" placeholder="Número do seu cartão" required"><br> 
@@ -122,7 +125,84 @@
                     </div>
                     <br>
                     <input class="btn btn-success" type="submit" value="Salvar">
-                </form>
+                </form> --}}
+                <form action="{{url('processPayment')}}" method="post" id="paymentForm">
+                    @csrf
+                    {{-- <h3>Detalhe do comprador</h3> --}}
+                    @foreach ($solicitantes as $solicitante)
+                      <div class="row margin-top-10">
+                        <div class="col">
+                          {{-- <label for="email">E-mail</label> --}}
+                          <input id="email" name="email" type="hidden" value="{{$solicitante->EMAIL}}"/>
+                        </div>
+                        <div class="col">
+                          {{-- <label for="docType">Tipo de documento</label> --}}
+                          <input id="docType" name="docType" data-checkout="docType" type="hidden" value="CPF"></>
+                        </div>
+                        <div class="col">
+                          {{-- <label for="docNumber">Número do documento</label> --}}
+                          <input id="docNumber" name="docNumber" data-checkout="docNumber" type="hidden" value="{{$solicitante->CPF}}"/>
+                        </div>
+                      </div>
+                    @endforeach
+                    {{-- <h3>Detalhes do cartão</h3> --}}
+                      <div class="row margin-top-10">
+                        <div class="col">
+                          <label for="cardholderName">Nome no cartão</label>
+                          <input class="form-control" id="cardholderName" data-checkout="cardholderName" type="text">
+                        </div>
+                        <div class="col">
+                            <label for="cardNumber">Número do cartão</label>
+                            <input class="form-control" type="text" id="cardNumber" data-checkout="cardNumber"
+                              onselectstart="return false" onpaste="return false"
+                              oncopy="return false" oncut="return false"
+                              ondrag="return false" ondrop="return false" autocomplete=off>
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row margin-top-10">
+                        <div class="col">
+                          <label for="">Data de vencimento</label>
+                          <div class="col">
+                            <input class="form-control" type="text" placeholder="MM" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
+                              onselectstart="return false" onpaste="return false"
+                              oncopy="return false" oncut="return false"
+                              ondrag="return false" ondrop="return false" autocomplete=off>
+                            <span class="date-separator">/</span>
+                            <input class="form-control" type="text" placeholder="YY" id="cardExpirationYear" data-checkout="cardExpirationYear"
+                              onselectstart="return false" onpaste="return false"
+                              oncopy="return false" oncut="return false"
+                              ondrag="return false" ondrop="return false" autocomplete=off>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row margin-top-10">
+                        <div class="col">
+                          <label for="securityCode">Código de segurança</label>
+                          <input class="form-control" id="securityCode" data-checkout="securityCode" type="text"
+                            onselectstart="return false" onpaste="return false"
+                            oncopy="return false" oncut="return false"
+                            ondrag="return false" ondrop="return false" autocomplete=off>
+                        </div>
+                        <div class="col" id="issuerInput">
+                          <label for="issuer">Banco emissor</label>
+                          <select id="issuer" name="issuer" data-checkout="issuer"></select>
+                        </div>
+                        <div class="col">
+                          <label for="installments">Parcelas</label>
+                          <select type="text" id="installments" name="installments"></select>
+                        </div>
+                        <div class="col">
+                          <input type="hidden" name="transactionAmount" id="transactionAmount" value="100" />
+                          <input type="hidden" name="paymentMethodId" id="paymentMethodId" />
+                          <input type="hidden" name="description" id="description" />
+                          <br>
+                          <br>
+                        </div>
+                    </div>
+                    <br>
+                    <input class="btn btn-primary" type="submit" value="Salvar">
+                  </form>
             </div>
         </div>
     </div>

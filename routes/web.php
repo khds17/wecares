@@ -60,6 +60,9 @@ Route::put('/recusarProspostaSolicitante/{id}', 'servicosController@recusarProsp
 Route::resource('/solicitante','solicitantesController');
 Route::get('/solicitanteCadastro','solicitantesController@dadosCadastrais')->middleware('auth');
 Route::get('/propostas','solicitantesController@solicitantePropostas')->middleware('auth');
+// ===========================================
+Route::post('/processPayment','pagamentosController@processPayment');
+
 
 Auth::routes(['register' => false]);
 
