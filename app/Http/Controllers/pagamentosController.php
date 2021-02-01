@@ -30,7 +30,8 @@ class pagamentosController extends Controller
     public function processPayment(Request $request)
     {
         \MercadoPago\SDK::setAccessToken("TEST-2933194983833876-020323-4c2e29596cb229a47df6e98bfd6efb24-200979127");
-
+       
+        // Enviando o pagamento para mercado pago
         $payment = new \MercadoPago\Payment();
         $payment->transaction_amount = (float)$request->transactionAmount;
         $payment->token = $request->token;
@@ -54,25 +55,26 @@ class pagamentosController extends Controller
             'status_detail' => $payment->status_detail,
             'id' => $payment->id
         );
-        
-        echo json_encode($response);
 
-        // $customer = new \MercadoPago\Customer();
-        // $customer->email = $request->email;
-        // dd($customer);
-        // $customer->save();
+        // Armazenando os dados de cartão do cliente
+        $customer = new \MercadoPago\Customer();
+        $customer->email = $request->email;
+        $customer->save();
 
-        // // dd($customer);
+        dd($customer);
       
-        // $card = new \MercadoPago\Card();
-        // $card->token = $request->token;
+        $card = new \MercadoPago\Card();
+        $card->token = $request->token;
 
-        // if($request->paymentMethodId == "master") {
-        //     $card->issuer = $request->issuer;
-        // }
-        // $card->customer_id = $customer->id();
+        if($request->paymentMethodId == "master") {
 
-        // $card->save();
+            $card->issuer = $request->issuer;
+        }
+
+        $card->customer_id = $customer->id();
+        
+        dd($card);
+        $card->save();
 
     }
 
