@@ -78,17 +78,17 @@ class pagamentosController extends Controller
         $card->customer_id = $customer->id;
         $card->save();
 
-        DB::table('CARTOES')->insert([
-            'ID_CUSTOMER' => $customer->id,
-            'ID_CARTAO' => $card->id, 
-            'INICIO_CARTAO' => $card->first_six_digits,
-            'FIM_CARTAO' => $card->last_four_digits,
-            'MES_VENCIMENTO' => $card->expiration_month, 
-            'ANO_VENCIMENTO' => $card->expiration_year, 
-            'CVV' => $request->securityCode,
-            'BANDEIRA' => $request->paymentMethodId,
-            'STATUS' => $servico->ID_PACIENTE,
-        ]);
+        // DB::table('CARTOES')->insert([
+        //     'ID_CUSTOMER' => $customer->id,
+        //     'ID_CARTAO' => $card->id, 
+        //     'INICIO_CARTAO' => $card->first_six_digits,
+        //     'FIM_CARTAO' => $card->last_four_digits,
+        //     'MES_VENCIMENTO' => $card->expiration_month, 
+        //     'ANO_VENCIMENTO' => $card->expiration_year, 
+        //     'CVV' => $request->securityCode,
+        //     'BANDEIRA' => $request->paymentMethodId,
+        //     'STATUS' => $servico->ID_PACIENTE,
+        // ]);
 
         dd($customer,$card,$request,$card->payment_method,$payer,$payment);
 
