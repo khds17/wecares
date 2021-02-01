@@ -17,7 +17,8 @@ class CreateCartoesTable extends Migration
             $table->increments('ID');
             $table->string('ID_CUSTOMER',30);
             $table->string('ID_CARTAO',15);            
-            $table->string('NUMERO',20);
+            $table->string('INICIO_CARTAO',6);
+            $table->string('FIM_CARTAO',4);
             $table->unsignedSmallInteger('MES_VENCIMENTO');
             $table->unsignedSmallInteger('ANO_VENCIMENTO');
             $table->unsignedSmallInteger('CCV');
