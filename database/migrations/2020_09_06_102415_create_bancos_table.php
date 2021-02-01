@@ -15,8 +15,7 @@ class CreateBancosTable extends Migration
     {
         Schema::create('BANCOS', function (Blueprint $table) {
             $table->increments('ID');
-            $table->string('BANCO',20);
-            $table->string('COD_BANCO',20);
+            $table->string('BANCO',50);
             
         });
     }
