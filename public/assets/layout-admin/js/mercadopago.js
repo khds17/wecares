@@ -45,7 +45,6 @@ function getIssuers(paymentMethodId) {
             issuerSelect.value
         );
     } else {
-        console.log('Deu ruim');
         alert(`issuers method info error: ${response}`);
     }
  }
@@ -73,7 +72,9 @@ function getIssuers(paymentMethodId) {
  }
 
 doSubmit = false;
+
 document.getElementById('paymentForm').addEventListener('submit', getCardToken);
+
 function getCardToken(event){
    event.preventDefault();
    if(!doSubmit){
@@ -84,7 +85,6 @@ function getCardToken(event){
 };
 
 function setCardTokenAndPay(status, response) {
-    console.log(status);
    if (status == 200 || status == 201) {
        let form = document.getElementById('paymentForm');
        let card = document.createElement('input');

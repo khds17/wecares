@@ -31,22 +31,48 @@ class pagamentosController extends Controller
     {
         \MercadoPago\SDK::setAccessToken("TEST-2933194983833876-020323-4c2e29596cb229a47df6e98bfd6efb24-200979127");
 
-        $customer = new \MercadoPago\Customer();
-        $customer->email = $request->email;
-        dd($customer);
-        $customer->save();
+        $payment = new \MercadoPago\Payment();
+        $payment->transaction_amount = (float)$request->transactionAmount;
+        $payment->token = $request->token;
+        $payment->description = $request->description;
+        $payment->installments = (int)$request->installments;
+        $payment->payment_method_id = $request->paymentMethodId;
+        $payment->issuer_id = (int)$request->issuer;
 
+        $payer = new \MercadoPago\Payer();
+        $payer->email = $request->email;
+        $payer->identification = array(
+            "type" => $request->docType,
+            "number" => $request->docNumber,
+        );
+
+        $payment->payer = $payer;
+        $payment->save();
+    
+        $response = array(
+            'status' => $payment->status,
+            'status_detail' => $payment->status_detail,
+            'id' => $payment->id
+        );
+        
+        echo json_encode($response);
+
+        // $customer = new \MercadoPago\Customer();
+        // $customer->email = $request->email;
         // dd($customer);
+        // $customer->save();
+
+        // // dd($customer);
       
-        $card = new \MercadoPago\Card();
-        $card->token = $request->token;
+        // $card = new \MercadoPago\Card();
+        // $card->token = $request->token;
 
-        if($request->paymentMethodId == "master") {
-            $card->issuer = $request->issuer;
-        }
-        $card->customer_id = $customer->id();
+        // if($request->paymentMethodId == "master") {
+        //     $card->issuer = $request->issuer;
+        // }
+        // $card->customer_id = $customer->id();
 
-        $card->save();
+        // $card->save();
 
     }
 
