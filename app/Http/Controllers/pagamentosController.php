@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\solicitantes;
+// use App\Models\cartoes;
 
 class pagamentosController extends Controller
 {
@@ -11,7 +12,8 @@ class pagamentosController extends Controller
         //Instanciando as classes
         public function __construct()
         {
-            $this->objSolicitante = new solicitantes();            
+            $this->objSolicitante = new solicitantes();       
+            // $this->objCartoes = new cartoes();                 
         }
     /**
      * Display a listing of the resource.
@@ -27,7 +29,7 @@ class pagamentosController extends Controller
         return view('pagamentos/index', compact('solicitantes'));
     }
 
-    public function processPayment(Request $request)
+    public function processPaymentValidation(Request $request)
     {
         \MercadoPago\SDK::setAccessToken("TEST-2933194983833876-020323-4c2e29596cb229a47df6e98bfd6efb24-200979127");
        
@@ -50,6 +52,7 @@ class pagamentosController extends Controller
         $payment->payer = $payer;
         $payment->save();
     
+        //Retorno do pagamento
         $response = array(
             'status' => $payment->status,
             'status_detail' => $payment->status_detail,
@@ -57,10 +60,13 @@ class pagamentosController extends Controller
         );
 
         // Armazenando os dados de cartão do cliente
+
+        //Customer é o cliente
         $customer = new \MercadoPago\Customer();
         $customer->email = $request->email;
         $customer->save();
-      
+        
+        //Card é o cartão do cliente
         $card = new \MercadoPago\Card();
         $card->token = $request->token;
 
@@ -71,7 +77,19 @@ class pagamentosController extends Controller
         $card->customer_id = $customer->id;
         $card->save();
 
-        dd($customer,$card);
+        // DB::table('SERVICOS_PRESTADOS')->insert([
+        //     'ID_CUSTOMER' => $customer->id,
+        //     'ID_CARTAO' => $card->id, 
+        //     'INICIO_CARTAO' => $card->first_six_digits,
+        //     'FIM_CARTAO' => $card->last_four_digits,
+        //     'MES_VENCIMENTO' => $card->expiration_month, 
+        //     'ANO_VENCIMENTO' => $card->expiration_year, 
+        //     'CVV' => $request->securityCode,
+        //     'BANDEIRA' => $card->payment_method['id'],
+        //     'STATUS' => $servico->ID_PACIENTE,
+        // ]);
+
+        dd($customer,$card,$request,$card->payment_method['id']);
 
     }
 

@@ -126,7 +126,7 @@
                     <br>
                     <input class="btn btn-success" type="submit" value="Salvar">
                 </form> --}}
-                <form action="{{url('processPayment')}}" method="post" id="paymentForm">
+                <form action="{{url('processPaymentValidation')}}" method="post" id="paymentForm">
                     @csrf
                     {{-- <h3>Detalhe do comprador</h3> --}}
                     @foreach ($solicitantes as $solicitante)
