@@ -89,7 +89,7 @@ class pagamentosController extends Controller
         //     'STATUS' => $servico->ID_PACIENTE,
         // ]);
 
-        dd($customer,$card,$request,$card->payment_method['id']);
+        dd($customer,$card,$request,$card->payment_method);
 
     }
 
