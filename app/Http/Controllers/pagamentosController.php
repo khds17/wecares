@@ -60,20 +60,17 @@ class pagamentosController extends Controller
         $customer = new \MercadoPago\Customer();
         $customer->email = $request->email;
         $customer->save();
-
-        dd($customer);
       
         $card = new \MercadoPago\Card();
         $card->token = $request->token;
 
         if($request->paymentMethodId == "master") {
-
             $card->issuer = $request->issuer;
         }
 
         $card->customer_id = $customer->id();
         
-        dd($card);
+        dd($customer,$card);
         $card->save();
 
     }
