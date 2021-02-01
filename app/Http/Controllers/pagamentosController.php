@@ -68,7 +68,7 @@ class pagamentosController extends Controller
             $card->issuer = $request->issuer;
         }
 
-        $card->customer_id = $customer->id();
+        $card->customer_id = $customer->id;
         
         dd($customer,$card);
         $card->save();
