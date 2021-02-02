@@ -60,7 +60,6 @@ class pagamentosController extends Controller
         $status = $payment->status;
         $dtCriacao = $payment->date_created;
         $dtAprovacao = $payment->date_approved;
-
     
         //Retorno do pagamento
         $response = array(
@@ -86,8 +85,7 @@ class pagamentosController extends Controller
 
         $card->customer_id = $customer->id;
         $card->save();
-        
-        dd($payment,$payer,$response,$customer,$card,$payment->id,$payment->status,$payment->date_created,$payment->date_approved);
+
         //Gravando os dados do cartão do nosso lado
         $cartao = $this->objCartoes->create([
             'ID_CUSTOMER' => $customer->id,
