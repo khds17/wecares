@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\solicitantes;
 use App\Models\cartoes;
-use App\Models\pagamentos;
 use App\Models\valida_cartao;
 use Illuminate\Support\Facades\DB;
 
@@ -17,8 +16,7 @@ class pagamentosController extends Controller
         {
             $this->objSolicitante = new solicitantes();       
             $this->objCartoes = new cartoes();   
-            $this->objValidaCartao = new valida_cartao(); 
-            $this->objPagamentos = new pagamentos();              
+            $this->objValidaCartao = new valida_cartao();             
         }
     /**
      * Display a listing of the resource.
@@ -96,7 +94,7 @@ class pagamentosController extends Controller
             'STATUS' => 1
         ]);
         
-        //Gravando os dados do pagamento do nosso lado
+        //Gravando os dados do pagamento de validação para estorno.
         $validaCartao = $this->objValidaCartao->create([
             'ID_PAGAMENTO' => $payment->id,
             'ID_CARTAO' => $cartao->id,
