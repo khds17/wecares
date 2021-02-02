@@ -91,7 +91,7 @@ class pagamentosController extends Controller
             'ANO_VENCIMENTO' => $card->expiration_year, 
             'CVV' => 123,
             'BANDEIRA' => $request->paymentMethodId,
-            'STATUS' => 'approved'
+            'STATUS' => 1
         ]);
         
         //Gravando os dados do pagamento do nosso lado
