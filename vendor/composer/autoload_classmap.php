@@ -62,6 +62,7 @@ return array(
     'App\\Models\\servicos_prestados' => $baseDir . '/app/Models/servicos_prestados.php',
     'App\\Models\\sexo' => $baseDir . '/app/Models/sexo.php',
     'App\\Models\\solicitantes' => $baseDir . '/app/Models/solicitantes.php',
+    'App\\Models\\valida_cartao' => $baseDir . '/app/Models/valida_cartao.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

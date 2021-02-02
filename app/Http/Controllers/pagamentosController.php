@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\solicitantes;
 use App\Models\cartoes;
 use App\Models\pagamentos;
+use App\Models\valida_cartao;
 use Illuminate\Support\Facades\DB;
 
 class pagamentosController extends Controller
@@ -16,6 +17,7 @@ class pagamentosController extends Controller
         {
             $this->objSolicitante = new solicitantes();       
             $this->objCartoes = new cartoes();   
+            $this->objValidaCartao = new valida_cartao(); 
             $this->objPagamentos = new pagamentos();              
         }
     /**
@@ -55,11 +57,6 @@ class pagamentosController extends Controller
 
         $payment->payer = $payer;
         $payment->save();
-
-        $idPayment = $payment->id;
-        $status = $payment->status;
-        $dtCriacao = $payment->date_created;
-        $dtAprovacao = $payment->date_approved;
     
         //Retorno do pagamento
         $response = array(
@@ -100,16 +97,14 @@ class pagamentosController extends Controller
         ]);
         
         //Gravando os dados do pagamento do nosso lado
-        $pagamento = $this->objPagamentos->create([
-            'ID_PAGAMENTO' => $idPayment,
-            'ID_SERVICO_PRESTADO' => 0,
+        $validaCartao = $this->objValidaCartao->create([
+            'ID_PAGAMENTO' => $payment->id,
             'ID_CARTAO' => $cartao->id,
-            'STATUS' => $status,
-            'DT_CRIACAO' => $dtCriacao, 
-            'DT_APROVACAO' => $dtAprovacao, 
+            'STATUS' => $payment->status,
+            'DT_CRIACAO' => $payment->date_created, 
+            'DT_APROVACAO' => $payment->date_approved, 
         ]);
 
-        
         // } catch (\Throwable $th) {
         //     DB::rollback();
         //     dd('Deu ruim');
