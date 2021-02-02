@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\solicitantes;
+use App\Models\cartoes;
+use App\Models\pagamentos;
 use Illuminate\Support\Facades\DB;
-// use App\Models\cartoes;
 
 class pagamentosController extends Controller
 {
@@ -14,7 +15,8 @@ class pagamentosController extends Controller
         public function __construct()
         {
             $this->objSolicitante = new solicitantes();       
-            // $this->objCartoes = new cartoes();                 
+            $this->objCartoes = new cartoes();   
+            $this->objPagamentos = new pagamentos();              
         }
     /**
      * Display a listing of the resource.
@@ -34,7 +36,8 @@ class pagamentosController extends Controller
     {
         \MercadoPago\SDK::setAccessToken("TEST-2933194983833876-020323-4c2e29596cb229a47df6e98bfd6efb24-200979127");
        
-        // Enviando o pagamento para mercado pago
+        try {
+             // Enviando o pagamento para mercado pago
         $payment = new \MercadoPago\Payment();
         $payment->transaction_amount = (float)$request->transactionAmount;
         $payment->token = $request->token;
@@ -78,20 +81,33 @@ class pagamentosController extends Controller
         $card->customer_id = $customer->id;
         $card->save();
 
-        // DB::table('CARTOES')->insert([
-        //     'ID_CUSTOMER' => $customer->id,
-        //     'ID_CARTAO' => $card->id, 
-        //     'INICIO_CARTAO' => $card->first_six_digits,
-        //     'FIM_CARTAO' => $card->last_four_digits,
-        //     'MES_VENCIMENTO' => $card->expiration_month, 
-        //     'ANO_VENCIMENTO' => $card->expiration_year, 
-        //     'CVV' => $request->securityCode,
-        //     'BANDEIRA' => $request->paymentMethodId,
-        //     'STATUS' => $servico->ID_PACIENTE,
-        // ]);
-
-        dd($customer,$card,$request,$card->payment_method,$payer,$payment);
-
+        //Gravando os dados do cartão do nosso lado
+        $cartao = $this->objCartoes->create([
+            'ID_CUSTOMER' => $customer->id,
+            'ID_CARTAO' => $card->id, 
+            'INICIO_CARTAO' => $card->first_six_digits,
+            'FIM_CARTAO' => $card->last_four_digits,
+            'MES_VENCIMENTO' => $card->expiration_month, 
+            'ANO_VENCIMENTO' => $card->expiration_year, 
+            'CVV' => 123,
+            'BANDEIRA' => $request->paymentMethodId,
+            'STATUS' => $payment->date_approved,
+        ]);
+        
+        //Gravando os dados do pagamento do nosso lado
+        $pagamento = $this->objPagamentos->create([
+            'ID_PAGAMENTO' => $payment->id,
+            'ID_SERVICO_PRESTADO' => 0,
+            'ID_CARTAO' => $cartao->id,
+            'STATUS' => $payment->status,
+            'DT_CRIACAO' => $payment->date_created, 
+            'DT_APROVACAO' => $payment->date_approved, 
+        ]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd('Deu ruim');
+        }
+       
     }
 
     /**
