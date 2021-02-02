@@ -80,30 +80,28 @@ class pagamentosController extends Controller
 
         $card->customer_id = $customer->id;
         $card->save();
-
-        dd($payer,$payment);
         
         // Gravando os dados do cartão do nosso lado
-        // $cartao = $this->objCartoes->create([
-        //     'ID_CUSTOMER' => $customer->id,
-        //     'ID_CARTAO' => $card->id, 
-        //     'INICIO_CARTAO' => $card->first_six_digits,
-        //     'FIM_CARTAO' => $card->last_four_digits,
-        //     'MES_VENCIMENTO' => $card->expiration_month, 
-        //     'ANO_VENCIMENTO' => $card->expiration_year, 
-        //     'CVV' => 123,
-        //     'BANDEIRA' => $request->paymentMethodId,
-        //     'STATUS' => 1
-        // ]);
+        $cartao = $this->objCartoes->create([
+            'ID_CUSTOMER' => $customer->id,
+            'ID_CARTAO' => $card->id, 
+            'INICIO_CARTAO' => $card->first_six_digits,
+            'FIM_CARTAO' => $card->last_four_digits,
+            'MES_VENCIMENTO' => $card->expiration_month, 
+            'ANO_VENCIMENTO' => $card->expiration_year, 
+            'CVV' => 123,
+            'BANDEIRA' => $request->paymentMethodId,
+            'STATUS' => 1
+        ]);
         
-        // //Gravando os dados do pagamento de validação para estorno.
-        // $validaCartao = $this->objValidaCartao->create([
-        //     'ID_PAGAMENTO' => $payment->id,
-        //     'ID_CARTAO' => $cartao->id,
-        //     'STATUS' => $payment->status,
-        //     'DT_CRIACAO' => $payment->date_created, 
-        //     'DT_APROVACAO' => $payment->date_approved, 
-        // ]);
+        //Gravando os dados do pagamento de validação para estorno.
+        $validaCartao = $this->objValidaCartao->create([
+            'ID_PAGAMENTO' => $payment->id,
+            'ID_CARTAO' => $cartao->id,
+            'STATUS' => $payment->status,
+            'DT_CRIACAO' => $payment->date_created, 
+            'DT_APROVACAO' => $payment->date_approved, 
+        ]);
 
         // } catch (\Throwable $th) {
         //     DB::rollback();
