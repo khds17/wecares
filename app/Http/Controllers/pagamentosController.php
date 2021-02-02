@@ -55,6 +55,12 @@ class pagamentosController extends Controller
 
         $payment->payer = $payer;
         $payment->save();
+
+        $idPayment = $payment->id;
+        $status = $payment->status;
+        $dtCriacao = $payment->date_created;
+        $dtAprovacao = $payment->date_approved;
+
     
         //Retorno do pagamento
         $response = array(
@@ -80,7 +86,7 @@ class pagamentosController extends Controller
 
         $card->customer_id = $customer->id;
         $card->save();
-
+        dump($payment,$payer,$response,$customer,$card);
         //Gravando os dados do cartão do nosso lado
         $cartao = $this->objCartoes->create([
             'ID_CUSTOMER' => $customer->id,
@@ -96,18 +102,18 @@ class pagamentosController extends Controller
         
         //Gravando os dados do pagamento do nosso lado
         $pagamento = $this->objPagamentos->create([
-            'ID_PAGAMENTO' => $payment->id,
+            'ID_PAGAMENTO' => $idPayment,
             'ID_SERVICO_PRESTADO' => 0,
             'ID_CARTAO' => $cartao->id,
-            'STATUS' => $payment->status,
-            'DT_CRIACAO' => $payment->date_created, 
-            'DT_APROVACAO' => $payment->date_approved, 
+            'STATUS' => $tatus,
+            'DT_CRIACAO' => $dtCriacao, 
+            'DT_APROVACAO' => $dtAprovacao, 
         ]);
         // } catch (\Throwable $th) {
         //     DB::rollback();
         //     dd('Deu ruim');
         // }
-       
+        
     }
 
     /**
