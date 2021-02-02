@@ -69,7 +69,7 @@ class pagamentosController extends Controller
         $customer = new \MercadoPago\Customer();
         $customer->email = $request->email;
         $customer->save();
-        dd('Deu certo?',$response, $customer);
+        
         //Card é o cartão do cliente
         $card = new \MercadoPago\Card();
         $card->token = $request->token;
@@ -81,7 +81,9 @@ class pagamentosController extends Controller
         $card->customer_id = $customer->id;
         $card->save();
 
-        //Gravando os dados do cartão do nosso lado
+        dd('Deu certo?',$payment,$response, $customer,$card);
+        
+        // Gravando os dados do cartão do nosso lado
         // $cartao = $this->objCartoes->create([
         //     'ID_CUSTOMER' => $customer->id,
         //     'ID_CARTAO' => $card->id, 
@@ -107,6 +109,8 @@ class pagamentosController extends Controller
         //     DB::rollback();
         //     dd('Deu ruim');
         // }
+
+        // dd('Deu certo?',$response, $customer);
         
     }
 
