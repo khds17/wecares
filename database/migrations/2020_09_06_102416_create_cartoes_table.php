@@ -21,7 +21,7 @@ class CreateCartoesTable extends Migration
             $table->string('FIM_CARTAO',4);
             $table->unsignedSmallInteger('MES_VENCIMENTO');
             $table->unsignedSmallInteger('ANO_VENCIMENTO');
-            $table->unsignedSmallInteger('CCV');
+            $table->unsignedSmallInteger('CVV');
             $table->string('BANDEIRA',30);
             $table->unsignedSmallInteger('STATUS');
         });
