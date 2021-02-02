@@ -269,9 +269,7 @@ class prestadoresController extends Controller
             return redirect()->action('indexController@agradecimento');
             
         } catch (\Exception $e) {
-            dd('Deu ruim');
             DB::rollback();
-
             return redirect()->action('prestadoresController@create');
 
         }
