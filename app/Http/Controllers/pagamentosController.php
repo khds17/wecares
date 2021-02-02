@@ -62,14 +62,14 @@ class pagamentosController extends Controller
             'status_detail' => $payment->status_detail,
             'id' => $payment->id
         );
-        dd($response);
+        
         // Armazenando os dados de cartão do cliente
 
         //Customer é o cliente
         $customer = new \MercadoPago\Customer();
         $customer->email = $request->email;
         $customer->save();
-        
+        dd('Deu certo?',$response, $customer);
         //Card é o cartão do cliente
         $card = new \MercadoPago\Card();
         $card->token = $request->token;
