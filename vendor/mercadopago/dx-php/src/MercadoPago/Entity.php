@@ -255,8 +255,6 @@ abstract class Entity
         
         $response = self::$_manager->execute($this, 'post', $options);
 
-        dd($response);
-
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
             $this->_last = clone $this;
@@ -267,6 +265,7 @@ abstract class Entity
             return false;
         } else {
             // Trigger an exception
+            dd($response);
             throw new Exception ("Internal API Error");
         }
     }
