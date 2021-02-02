@@ -81,7 +81,7 @@ class pagamentosController extends Controller
         $card->customer_id = $customer->id;
         $card->save();
 
-        dd('Deu certo?',$payment,$response, $customer,$card);
+        dd($payer,$payment);
         
         // Gravando os dados do cartão do nosso lado
         // $cartao = $this->objCartoes->create([
