@@ -36,7 +36,7 @@ class pagamentosController extends Controller
     {
         \MercadoPago\SDK::setAccessToken("TEST-2933194983833876-020323-4c2e29596cb229a47df6e98bfd6efb24-200979127");
        
-        try {
+        // try {
              // Enviando o pagamento para mercado pago
         $payment = new \MercadoPago\Payment();
         $payment->transaction_amount = (float)$request->transactionAmount;
@@ -103,10 +103,10 @@ class pagamentosController extends Controller
             'DT_CRIACAO' => $payment->date_created, 
             'DT_APROVACAO' => $payment->date_approved, 
         ]);
-        } catch (\Throwable $th) {
-            DB::rollback();
-            dd('Deu ruim');
-        }
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        //     dd('Deu ruim');
+        // }
        
     }
 
