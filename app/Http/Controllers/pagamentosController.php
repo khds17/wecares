@@ -55,6 +55,8 @@ class pagamentosController extends Controller
 
         $payment->payer = $payer;
         $payment->save();
+
+        dd('Chegou');
     
         //Retorno do pagamento
         $response = array(
