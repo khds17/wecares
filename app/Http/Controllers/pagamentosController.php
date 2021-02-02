@@ -86,7 +86,7 @@ class pagamentosController extends Controller
 
         $card->customer_id = $customer->id;
         $card->save();
-        dump($payment,$payer,$response,$customer,$card);
+        
         //Gravando os dados do cartão do nosso lado
         $cartao = $this->objCartoes->create([
             'ID_CUSTOMER' => $customer->id,
@@ -109,6 +109,8 @@ class pagamentosController extends Controller
             'DT_CRIACAO' => $dtCriacao, 
             'DT_APROVACAO' => $dtAprovacao, 
         ]);
+
+        dd($payment,$payer,$response,$customer,$card,$payment->id,$payment->status,$payment->date_created,$payment->date_approved);
         // } catch (\Throwable $th) {
         //     DB::rollback();
         //     dd('Deu ruim');
