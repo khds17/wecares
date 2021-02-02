@@ -55,8 +55,6 @@ class pagamentosController extends Controller
 
         $payment->payer = $payer;
         $payment->save();
-
-        dd('Chegou');
     
         //Retorno do pagamento
         $response = array(
@@ -64,7 +62,7 @@ class pagamentosController extends Controller
             'status_detail' => $payment->status_detail,
             'id' => $payment->id
         );
-
+        dd($response);
         // Armazenando os dados de cartão do cliente
 
         //Customer é o cliente
