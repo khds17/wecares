@@ -255,7 +255,7 @@ abstract class Entity
         
         $response = self::$_manager->execute($this, 'post', $options);
 
-        dd($response)
+        dd($response);
 
         if ($response['code'] == "200" || $response['code'] == "201") {
             $this->_fillFromArray($this, $response['body']);
