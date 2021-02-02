@@ -105,7 +105,7 @@ class pagamentosController extends Controller
             'ID_PAGAMENTO' => $idPayment,
             'ID_SERVICO_PRESTADO' => 0,
             'ID_CARTAO' => $cartao->id,
-            'STATUS' => $tatus,
+            'STATUS' => $status,
             'DT_CRIACAO' => $dtCriacao, 
             'DT_APROVACAO' => $dtAprovacao, 
         ]);
