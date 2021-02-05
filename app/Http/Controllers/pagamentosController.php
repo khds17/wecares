@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\solicitantes;
 use App\Models\cartoes;
 use App\Models\valida_cartao;
+use App\Config\constants;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class pagamentosController extends Controller
 {
@@ -34,10 +36,11 @@ class pagamentosController extends Controller
 
     public function processPaymentValidation(Request $request)
     {
+        //Acess token para utilizar o mercado pago
         \MercadoPago\SDK::setAccessToken("TEST-2933194983833876-020323-4c2e29596cb229a47df6e98bfd6efb24-200979127");
        
         // try {
-             // Enviando o pagamento para mercado pago
+        // Enviando o pagamento para mercado pago
         $payment = new \MercadoPago\Payment();
         $payment->transaction_amount = (float)$request->transactionAmount;
         $payment->token = $request->token;
@@ -80,6 +83,9 @@ class pagamentosController extends Controller
 
         $card->customer_id = $customer->id;
         $card->save();
+
+        // Pegando o valor da constant para colocar no cartão
+        $statusAtivo = \Config::get('constants.STATUS.ATIVO');
         
         // Gravando os dados do cartão do nosso lado
         $cartao = $this->objCartoes->create([
@@ -89,9 +95,9 @@ class pagamentosController extends Controller
             'FIM_CARTAO' => $card->last_four_digits,
             'MES_VENCIMENTO' => $card->expiration_month, 
             'ANO_VENCIMENTO' => $card->expiration_year, 
-            'CVV' => 123,
+            'CVV' => Crypt::encryptString($request->cvv),
             'BANDEIRA' => $request->paymentMethodId,
-            'STATUS' => 1
+            'STATUS' => $statusAtivo,
         ]);
         
         //Gravando os dados do pagamento de validação para estorno.

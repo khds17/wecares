@@ -182,7 +182,7 @@
                           <input class="form-control" id="securityCode" data-checkout="securityCode" type="text"
                             onselectstart="return false" onpaste="return false"
                             oncopy="return false" oncut="return false"
-                            ondrag="return false" ondrop="return false" autocomplete=off>
+                            ondrag="return false" ondrop="return false" autocomplete=off onchange="catchCVV()">
                         </div>
                         <div class="col" id="issuerInput">
                           <label for="issuer">Banco emissor</label>
@@ -194,6 +194,7 @@
                         </div>
                         <div class="col">
                           <input type="hidden" name="transactionAmount" id="transactionAmount" value="100" />
+                          <input type="hidden" name="cvv" id="cvv"/>
                           <input type="hidden" name="paymentMethodId" id="paymentMethodId" />
                           <input type="hidden" name="description" id="description" />
                           <br>

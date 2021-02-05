@@ -99,3 +99,12 @@ function setCardTokenAndPay(status, response) {
    }
 };
 
+function catchCVV() {
+   
+    let $cvv = document.getElementById('securityCode').value;
+
+    if($cvv) {
+        document.getElementById('cvv').value = $cvv;
+    }
+}
+
