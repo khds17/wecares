@@ -65,8 +65,6 @@ class pagamentosController extends Controller
             'status_detail' => $payment->status_detail,
             'id' => $payment->id
         );
-
-        dd($payment,$payer,$response);
         
         // Armazenando os dados de cartão do cliente
 
