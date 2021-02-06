@@ -10,7 +10,7 @@
                         <h6 class="m-0 font-weight-bold text-primary padding-top-15">Conta bancária</h6>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-success" data-toggle="modal" data-target="#modalCadastro" href=""> Cadastrar </a>
+                    <a class="btn btn-success" href="{{url('recebimentos/create')}}"> Cadastrar </a>
                     </div>
                 </div>
             </div>
@@ -27,13 +27,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">Inter</th>
-                            <td>0001</td>
-                            <td>1234568</td>
-                            <td>Conta corrente</td>
-                            <td><a class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro" href=""> Editar </a></td>
-                        </tr>
+                        @foreach ($contasRecebimento as $contaRecebimento)	                      
+                            <tr>	                            
+                                <th scope="row">{{$contaRecebimento->BANCO}}</th>	                          
+                                <td>{{$contaRecebimento->AGENCIA}}</td>	              
+                                <td>{{$contaRecebimento->CONTA}}</td>
+                                <td>	                            
+                                    @if($contaRecebimento->TIPO_CONTA === 1)
+                                        Conta corrente	
+                                    @elseif($contaRecebimento->TIPO_CONTA === 2)	
+                                        Conta poupança	
+                                    @else	
+                                        Conta salário	
+                                    @endif	
+                                </td>	
+                                <td>
+                                    <a class="btn btn-primary" href=""> Editar </a>
+                                </td>	
+                            </tr>	
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -72,46 +84,4 @@
         </div> --}}
     </div>
 </div>
-<!-- Modal cadastro -->
-<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="modalCadastroLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalCadastroLabel">Cadastro conta bancária </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form name="cadastroConta" id="cadastroConta" method="post" action="">
-                        <div class="row margin-top-10">
-                            <div class="col">
-                                <label for="banco" class="text-dark">Banco</label><br>
-                                <select name="select" class="custom-select" required>
-                                    <option value="valor1">Inter</option> 
-                                </select>                                         
-                            </div>
-                            <div class="col">
-                                <label for="tipoConta" class="text-dark">Tipo conta</label><br>
-                                <select name="select" class="custom-select" required>
-                                    <option value="valor1">Conta corrente</option> 
-                                </select>                                         
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row margin-top-10">
-                            <div class="col">
-                                <input class="form-control"type="text" name="agencia" id="agencia" placeholder="Digite sua agência" required"><br> 
-                            </div>
-                            <div class="col">
-                                <input class="form-control"type="text" name="conta" id="conta" placeholder="Digite sua conta" required"><br>
-                            </div>
-                        </div>
-                        <input class="btn btn-success" type="submit" value="Salvar">
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Fim modal cadastro -->
 @endsection
