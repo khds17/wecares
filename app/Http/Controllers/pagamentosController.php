@@ -65,7 +65,7 @@ class pagamentosController extends Controller
             'status_detail' => $payment->status_detail,
             'id' => $payment->id
         );
-        
+        dd($payer,$payment,$response);
         // Armazenando os dados de cartão do cliente
 
         //Customer é o cliente
@@ -108,7 +108,7 @@ class pagamentosController extends Controller
             //Gravando os dados do pagamento de validação para estorno.
             $validaCartao = $this->objValidaCartao->create([
                 'ID_PAGAMENTO' => $payment->id,
-                'ID_CARTAO' => $cartao->id,
+                'ID_CARTAO' => $card->id,
                 'STATUS' => $payment->status,
                 'DT_CRIACAO' => $payment->date_created,
                 'DT_APROVACAO' => $payment->date_approved,
