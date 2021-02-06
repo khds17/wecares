@@ -72,42 +72,50 @@ class pagamentosController extends Controller
         $customer = new \MercadoPago\Customer();
         $customer->email = $request->email;
         $customer->save();
-        
-        //Card é o cartão do cliente
-        $card = new \MercadoPago\Card();
-        $card->token = $request->token;
 
-        if($request->paymentMethodId == "master") {
-            $card->issuer = $request->issuer;
+        if($customer) {
+            //Card é o cartão do cliente
+            $card = new \MercadoPago\Card();
+            $card->token = $request->token;
+
+            if($request->paymentMethodId == "master") {
+                $card->issuer = $request->issuer;
+            }
+
+            $card->customer_id = $customer->id;
+            $card->save();
         }
-
-        $card->customer_id = $customer->id;
-        $card->save();
 
         // Pegando o valor da constant para colocar no cartão
         $statusAtivo = \Config::get('constants.STATUS.ATIVO');
         
-        // Gravando os dados do cartão do nosso lado
-        $cartao = $this->objCartoes->create([
-            'ID_CUSTOMER' => $customer->id,
-            'ID_CARTAO' => $card->id, 
-            'INICIO_CARTAO' => $card->first_six_digits,
-            'FIM_CARTAO' => $card->last_four_digits,
-            'MES_VENCIMENTO' => $card->expiration_month, 
-            'ANO_VENCIMENTO' => $card->expiration_year, 
-            'CVV' => Crypt::encryptString($request->cvv),
-            'BANDEIRA' => $request->paymentMethodId,
-            'STATUS' => $statusAtivo,
-        ]);
+        if($card) {
+            // Gravando os dados do cartão do nosso lado
+            $cartao = $this->objCartoes->create([
+                'ID_CUSTOMER' => $customer->id,
+                'ID_CARTAO' => $card->id,
+                'INICIO_CARTAO' => $card->first_six_digits,
+                'FIM_CARTAO' => $card->last_four_digits,
+                'MES_VENCIMENTO' => $card->expiration_month,
+                'ANO_VENCIMENTO' => $card->expiration_year,
+                'CVV' => Crypt::encryptString($request->cvv),
+                'BANDEIRA' => $request->paymentMethodId,
+                'STATUS' => $statusAtivo,
+            ]);
+        }
+
+        if($payment) {
+            //Gravando os dados do pagamento de validação para estorno.
+            $validaCartao = $this->objValidaCartao->create([
+                'ID_PAGAMENTO' => $payment->id,
+                'ID_CARTAO' => $cartao->id,
+                'STATUS' => $payment->status,
+                'DT_CRIACAO' => $payment->date_created,
+                'DT_APROVACAO' => $payment->date_approved,
+            ]);
+        }
         
-        //Gravando os dados do pagamento de validação para estorno.
-        $validaCartao = $this->objValidaCartao->create([
-            'ID_PAGAMENTO' => $payment->id,
-            'ID_CARTAO' => $cartao->id,
-            'STATUS' => $payment->status,
-            'DT_CRIACAO' => $payment->date_created, 
-            'DT_APROVACAO' => $payment->date_approved, 
-        ]);
+
 
         // } catch (\Throwable $th) {
         //     DB::rollback();
