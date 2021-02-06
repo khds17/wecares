@@ -2,6 +2,7 @@
 @section('content')
 <div id="content">
     <div class="container-fluid">
+        <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="row">
@@ -9,7 +10,7 @@
                         <h6 class="m-0 font-weight-bold text-primary padding-top-15">Conta bancária</h6>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-success" data-toggle="modal" data-target="#modalCadastroContaBancaria" href=""> Cadastrar </a>
+                        <a class="btn btn-success" data-toggle="modal" data-target="#modalCadastro" href=""> Cadastrar </a>
                     </div>
                 </div>
             </div>
@@ -26,23 +27,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($contasRecebimento as $contaRecebimento)
-                            <tr>
-                                <th scope="row">{{$contaRecebimento->BANCO}}</th>
-                                <td>{{$contaRecebimento->AGENCIA}}</td>
-                                <td>{{$contaRecebimento->CONTA}}</td>
-                                <td>
-                                    @if($contaRecebimento->TIPO_CONTA === 1)
-                                        Conta corrente
-                                    @elseif($contaRecebimento->TIPO_CONTA === 2)
-                                        Conta poupança
-                                    @else
-                                        Conta salário
-                                    @endif
-                                </td>
-                                <td><a class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro" href=""> Editar </a></td>
-                            </tr>
-                        @endforeach
+                        <tr>
+                            <th scope="row">Inter</th>
+                            <td>0001</td>
+                            <td>1234568</td>
+                            <td>Conta corrente</td>
+                            <td><a class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro" href=""> Editar </a></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -82,7 +73,7 @@
     </div>
 </div>
 <!-- Modal cadastro -->
-<div class="modal fade" id="modalCadastroContaBancaria" tabindex="-1" role="dialog" aria-labelledby="modalCadastroLabel" aria-hidden="true">
+<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="modalCadastroLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -92,37 +83,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form name="cadastroConta" id="cadastroConta" method="post" action="{{url('recebimentos')}}">
-                    @csrf
+                <form name="cadastroConta" id="cadastroConta" method="post" action="">
                         <div class="row margin-top-10">
                             <div class="col">
-                                <label for="banco" class="text-dark">Banco</label><br> 
-                                <select class ="form-control" name="banco" class="banco" required>
-                                    <option value=""></option> 
-                                    @foreach($bancos as $banco)
-                                        <option value="{{$banco->ID}}">{{$banco->BANCO}}</option>
-                                    @endforeach
+                                <label for="banco" class="text-dark">Banco</label><br>
+                                <select name="select" class="custom-select" required>
+                                    <option value="valor1">Inter</option> 
                                 </select>                                         
                             </div>
                             <div class="col">
                                 <label for="tipoConta" class="text-dark">Tipo conta</label><br>
-                                <select name="tipo_conta" class="custom-select" required>
-                                    <option value=""></option> 
-                                    <option value="1">Conta corrente</option>
-                                    <option value="2">Conta poupança</option>  
-                                    <option value="3">Conta salário</option>
+                                <select name="select" class="custom-select" required>
+                                    <option value="valor1">Conta corrente</option> 
                                 </select>                                         
                             </div>
                         </div>
                         <br>
                         <div class="row margin-top-10">
                             <div class="col">
-                                <label for="agencia" class="text-dark">Agência</label><br>
-                                <input class="form-control"type="text" name="agencia" id="agencia"required><br> 
+                                <input class="form-control"type="text" name="agencia" id="agencia" placeholder="Digite sua agência" required"><br> 
                             </div>
                             <div class="col">
-                                <label for="conta" class="text-dark">Conta</label><br>
-                                <input class="form-control"type="text" name="conta" id="conta" required><br>
+                                <input class="form-control"type="text" name="conta" id="conta" placeholder="Digite sua conta" required"><br>
                             </div>
                         </div>
                         <input class="btn btn-success" type="submit" value="Salvar">
