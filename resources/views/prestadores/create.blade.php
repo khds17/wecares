@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <h1 class="text-center padding-top-50">Preencha os campos abaixo para se tornar um cuidador</h1>
+                    <h1 class="text-center padding-top-50">Cadastra-se como cuidador</h1>
                     <div class="card-body">
                         {{-- Inicio do formulario --}}
                         <form name="formPrestador" id="formPrestador" method="post" enctype="multipart/form-data" action="{{url('prestador')}}">   
@@ -35,15 +35,15 @@
                             </div>    
                             <br>
                             <div class="row margin-top-10">   
-                                <div class="font-color-gray col"> 
-                                    <label for="sexo">Data de nascimento:</label>
+                                <div class="col"> 
+                                    <label for="nascimento" class="text-dark">Data de nascimento:</label>
                                     <input class="form-control" type="date" name="prestadorNascimento" id="prestadorNascimento" placeholder="Data de nascimento" value="{{old('prestadorNascimento')}}">
                                     @error('prestadorNascimento')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
                                 <div class="font-color-gray col">
-                                    <label for="sexo">Sexo:</label> &nbsp;&nbsp; <br>
+                                    <label for="sexo">Sexo</label> &nbsp;&nbsp; <br>
                                     @foreach($sexos as $sexo)
                                         <input type="radio" name="sexo" id="sexo" value="{{$sexo->ID}}"> {{$sexo->SEXO}} <br> 
                                     @endforeach
