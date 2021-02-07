@@ -169,7 +169,10 @@
                                 <label for="formacao">Paciente toma medicamentos?</label><br>
                                 <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
                                 <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
-                                <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="">  
+                            </div>
+                            <div class="col font-color-gray">
+                                <label for="formacao">Quais medicamentos?</label><br>
+                                <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="">  
                             </div>
                         </div>
                         <br> 
