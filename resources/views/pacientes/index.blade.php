@@ -21,7 +21,7 @@
                         <tr>
                             <th scope="col">Nome</th>
                             <th scope="col">Tipo paciente</th>
-                            <th scope="col">Hospedado em</th>
+                            <th scope="col">Residindo em</th>
                         </tr>
                     </thead>
                     <tbody>
