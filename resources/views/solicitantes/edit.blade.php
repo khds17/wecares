@@ -1,14 +1,14 @@
 @extends('templates.template-admin')
 @section('content')
-    {{-- Inicio do formulario --}}
+<h1 class="text-center">Edição dados do solicitante</h1>
     <form name="formSolicitanteEdit" id="formSolicitanteEdit" method="post" enctype="multipart/form-data" action="{{url("solicitante/$solicitantes->ID")}}">   
         @csrf
         @method('PUT') 
         <div class="card-body"> 
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">Nome:</label>
-                    <input class="form-control" type="text" name="solicitanteNome" id="solicitanteNome" placeholder="Nome completo" value="{{$solicitantes->NOME}}">
+                    <label for="nome">Nome completo</label>
+                    <input class="form-control" type="text" name="solicitanteNome" id="solicitanteNome" value="{{$solicitantes->NOME}}">
                     @error('solicitanteNome')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -17,15 +17,15 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">CPF:</label>
-                    <input class="form-control" type="solicitanteCPF" name="solicitanteCPF" id="cpf" placeholder="CPF" value="{{$solicitantes->CPF}}"> 
+                    <label for="cpf">CPF</label>
+                    <input class="form-control" type="solicitanteCPF" name="solicitanteCPF" id="cpf" value="{{$solicitantes->CPF}}"> 
                     @error('solicitanteCPF')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="">Número celular</label>
-                    <input class="form-control" type="text" name="solicitanteTelefone" id="solicitanteTelefone" placeholder="Número do celular" value="{{$solicitantes->TELEFONE}}">
+                    <label for="telefone">Número celular</label>
+                    <input class="form-control" type="text" name="solicitanteTelefone" id="solicitanteTelefone" value="{{$solicitantes->TELEFONE}}">
                     @error('solicitanteTelefone')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -34,8 +34,8 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">E-mail:</label>
-                    <input class="form-control" type="email" name="solicitanteEmail" id="solicitanteEmail" placeholder="E-mail" value="{{$solicitantes->EMAIL}}" disabled>
+                    <label for="email">E-mail</label>
+                    <input class="form-control" type="email" name="solicitanteEmail" id="solicitanteEmail" value="{{$solicitantes->EMAIL}}" disabled>
                     @error('solicitanteEmail')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -44,22 +44,22 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">Senha:</label>
-                    <input class="form-control" type="password" name="solicitanteSenha" id="solicitanteSenha" placeholder="Senha" value="{{$users->password}}" disabled>
+                    <label for="senha">Senha</label>
+                    <input class="form-control" type="password" name="solicitanteSenha" id="solicitanteSenha" value="{{$users->password}}" disabled>
                     @error('solicitanteSenha')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
                 </div>
                 <div class="col">
                     <br><br>
-                    <a href="">Alterar senha</a>
+                <a href="{{url('/password/reset')}}" target="_blank">Alterar senha</a>
                 </div>
             </div>
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">CEP:</label>
-                    <input class="form-control" type="text" name="solicitanteCep" id="solicitanteCep" placeholder="CEP" value="{{$enderecos->CEP}}">
+                    <label for="cep">CEP</label>
+                    <input class="form-control" type="text" name="solicitanteCep" id="solicitanteCep" value="{{$enderecos->CEP}}">
                     @error('solicitanteCep')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -68,15 +68,15 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">Endereço:</label>
-                    <input class="form-control" type="text" name="solicitanteEndereco" id="solicitanteEndereco" placeholder="Endereço" value="{{$enderecos->ENDERECO}}">
+                    <label for="endereco">Endereço</label>
+                    <input class="form-control" type="text" name="solicitanteEndereco" id="solicitanteEndereco" value="{{$enderecos->ENDERECO}}">
                     @error('solicitanteEndereco')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="">Número:</label>
-                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" placeholder="Número" value="{{$enderecos->NUMERO}}">
+                    <label for="numero">Número</label>
+                    <input class="form-control" type="text" name="solicitanteNumero" id="solicitanteNumero" value="{{$enderecos->NUMERO}}">
                     @error('solicitanteNumero')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -85,7 +85,7 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">Cidade:</label>
+                    <label for="cidade">Cidade</label>
                     <select class ="form-control" name="solicitanteCidade" id="solicitanteCidade" value="">
                         <option value="">Cidade</option>
                         @foreach($cidades as $cidade)         
@@ -97,8 +97,8 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="">Bairro:</label>
-                    <input class="form-control" type="text" name="solicitanteBairro" id="solicitanteBairro" placeholder="Bairro" value="{{$enderecos->BAIRRO}}">
+                    <label for="bairro">Bairro</label>
+                    <input class="form-control" type="text" name="solicitanteBairro" id="solicitanteBairro" value="{{$enderecos->BAIRRO}}">
                     @error('solicitanteBairro')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -107,7 +107,7 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">UF</label>
+                    <label for="estado">Estado</label>
                     <select class ="form-control"name="solicitanteEstado" id="solicitanteEstado" value="">
                         <option value="">Estado</option>
                         @foreach($estados as $estado)
@@ -119,8 +119,8 @@
                     @enderror           
                 </div>
                 <div class="col">
-                    <label for="">Complemento:</label>
-                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento" placeholder="Complemento" value="{{$enderecos->COMPLEMENTO}}">
+                    <label for="complemento">Complemento</label>
+                    <input class="form-control" type="text" name="solicitanteComplemento" id="solicitanteComplemento"  value="{{$enderecos->COMPLEMENTO}}">
                     @error('solicitanteComplemento')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
