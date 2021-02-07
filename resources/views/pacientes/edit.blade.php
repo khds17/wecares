@@ -1,14 +1,14 @@
 @extends('templates.template-admin')
 @section('content')
-    {{-- Inicio do formulario --}}
+<h1 class="text-center">Edição dos dados do paciente</h1>
     <form name="formPacienteEdit" id="formPacienteEdit" method="post" enctype="multipart/form-data" action="{{url("paciente/$paciente->ID")}}">   
         @csrf
         @method('PUT')
         <div class="card-body"> 
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">Nome:</label>
-                    <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" placeholder="Nome do paciente" value="{{$paciente->NOME}}">
+                    <label for="">Nome completo</label>
+                    <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" value="{{$paciente->NOME}}">
                     @error('pacienteNome')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -17,7 +17,7 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="pacienteTipo" class="text-dark">O paciente é?</label><br>
+                    <label for="pacienteTipo">O paciente é?</label><br>
                     <select name="pacienteTipo" class="custom-select">
                         @foreach($pacientesTipos as $tipo)
                                 <option value="{{$tipo->ID}}" {{($paciente->ID_TIPO == $tipo->ID) ? 'selected' : ''}}>{{$tipo->TIPO}}</option>
@@ -31,7 +31,7 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="localidadePaciente" class="text-dark">Onde o paciente está localizado?</label><br>
+                    <label for="localidadePaciente">Onde o paciente está localizado?</label><br>
                     <select name="pacienteLocalizacao" class="custom-select">
                         @foreach($pacientesLocalizacao as $localizacao)
                                 <option value="{{$localizacao->ID}}" {{($paciente->ID_LOCALIZACAO == $localizacao->ID) ? 'selected' : ''}}>{{$localizacao->LOCALIZACAO}}</option>
@@ -45,8 +45,8 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">CEP:</label>
-                    <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" value="{{$endereco->CEP}}">
+                    <label for="cep">CEP</label>
+                    <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" value="{{$endereco->CEP}}">
                     @error('pacienteCep')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -55,15 +55,15 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="">Endereço:</label>
-                    <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" value="{{$endereco->ENDERECO}}">
+                    <label for="endereco">Endereço</label>
+                    <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" value="{{$endereco->ENDERECO}}">
                     @error('pacienteEndereco')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="">Número:</label>
-                    <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" value="{{$endereco->NUMERO}}">
+                    <label for="numero">Número</label>
+                    <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" value="{{$endereco->NUMERO}}">
                     @error('pacienteNumero')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -72,6 +72,7 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
+                    <label for="cidade">Cidade</label>
                     <select class ="form-control"name="pacienteCidade" id="pacienteCidade">
                         <option value="">Cidade</option>
                         @foreach($cidades as $cidade)
@@ -83,7 +84,8 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" value="{{$endereco->BAIRRO}}">
+                    <label for="bairro">Bairro</label>
+                    <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" value="{{$endereco->BAIRRO}}">
                     @error('pacienteBairro')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -92,6 +94,7 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
+                    <label for="estado">Estado</label>
                     <select class ="form-control"name="pacienteEstado" id="pacienteEstado" value="{{old('pacienteEstado')}}">
                         <option value="">Estado</option>
                         @foreach($estados as $estado)
@@ -103,19 +106,23 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" value="{{$endereco->COMPLEMENTO}}">
+                    <label for="complemento">Complemento</label>
+                    <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" value="{{$endereco->COMPLEMENTO}}">
                 </div>
             </div>
             <br>
             <div class="row margin-top-10">
-                <div class="col font-color-gray">
+                <div class="col">
                     <label for="formacao">Paciente toma medicamentos?</label><br>
                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1" {{($paciente->TOMA_MEDICAMENTOS == 1) ? 'checked' : ''}}> Sim <br> 
-                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0" {{($paciente->TOMA_MEDICAMENTOS == 0) ? 'checked' : ''}}> Não
-                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="{{$paciente->TIPO_MEDICAMENTOS}}">                    
+                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0" {{($paciente->TOMA_MEDICAMENTOS == 0) ? 'checked' : ''}}> Não                    
                     @error('tomaMedicamento')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
+                </div>
+                <div class="col">
+                    <label for="formacao">Quais remédios?</label><br>
+                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="{{$paciente->TIPO_MEDICAMENTOS}}">
                 </div>
             </div>
             <br>
