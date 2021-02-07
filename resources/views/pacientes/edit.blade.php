@@ -128,7 +128,7 @@
             <br>
             <div class="row margin-top-10">
                 <div class="col">
-                    <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label>
+                    <label for="familiaridade">Qual seu nível de familiaridade com o paciente?</label>
                     <select name="familiaridade" class="custom-select" value="{{old('familiaridade')}}">
                         @foreach($familiaridades as $familiaridade)
                             <option value="{{$familiaridade->ID}}" {{($paciente->ID_FAMILIARIDADE == $familiaridade->ID) ? 'selected' : ''}}>{{$familiaridade->FAMILIARIDADE}}</option>
@@ -139,7 +139,7 @@
                     @enderror     
                 </div>
                 <div class="col">
-                    <label for="familiaridade" class="text-dark">Descreva o que é do paciente</label>
+                    <label for="familiaridade">Descreva o que é do paciente</label>
                     <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" value="{{$solicitante->FAMILIAR_OUTROS}}">
                 </div>
             </div>
