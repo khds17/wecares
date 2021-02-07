@@ -10,7 +10,7 @@
                         <h6 class="m-0 font-weight-bold text-primary padding-top-15">Dados cadastrais</h6>
                     </div>
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-success" href="{{url("paciente/create")}}"> Cadastrar novo paciente</a>
+                        <a class="btn btn-success" href="{{url("paciente/create")}}"> Cadastrar</a>
                     </div>
                 </div>
             </div>
