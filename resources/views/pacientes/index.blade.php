@@ -31,7 +31,7 @@
                                     <td>{{$paciente->TIPO}}</td>
                                     <td>{{$paciente->LOCALIZACAO}}</td>
                                     <td>                
-                                        <a class="btn btn-primary" href="{{"paciente/$paciente->ID/edit"}}"> Editar </a>
+                                        <a class="btn btn-primary" href="{{"paciente/$paciente->ID/edit"}}" target="_blank"> Editar </a>
                                     </td>
                                 </tr>
                         @endforeach

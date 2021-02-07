@@ -216,17 +216,21 @@ class pacientesController extends Controller
         //Pegando todas as localizações
         $pacientesLocalizacao = $this->objPacienteLocalizacao->all();
 
-        //Encontrando o endereço da localização dos pacientes
+        //Pegando o endereço da localização dos pacientes
         $endereco = $paciente->find($paciente->ID)
-        ->relEndereco;
+                            ->relEndereco;
 
+        //Pegando o solicitante do paciente
         $solicitante = $paciente->find($paciente->ID)
                                 ->relSolicitante;        
 
+        //Pegando todas as cidades
         $cidades = $this->objCidades->all();
 
+        //Pegando todos os estados
         $estados = $this->objEstados->all();
 
+        //Pegando todos os tipos de familiaridade
         $familiaridades = $this->objFamiliaridades->all();
 
         return view('pacientes/edit', compact("paciente", "pacientesTipos", "pacientesLocalizacao", "solicitante","familiaridades", "endereco", "cidades", "estados"));
