@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <h1 class="text-center padding-top-50">@if(isset($edit)) Editar @else Preencha os dados do solicitante @endif</h1>
+                    <h1 class="text-center padding-top-50">Cadastra-se como solicitante</h1>
                     <div class="card-body">
                         <!-- Abertura do formulário -->
                         <form name="formSolictante" id="formSolictante" method="post" action="{{url('solicitante')}}">       
@@ -121,6 +121,7 @@
                                 <div class="col">
                                 <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label>
                                 <select name="familiaridade" class="custom-select" value="{{old('familiaridade')}}">
+                                    <option value=""></option>
                                     @foreach($familiaridades as $familiaridade)
                                        <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
                                     @endforeach
@@ -130,13 +131,15 @@
                                     @enderror     
                                 </div>
                                 <div class="col">
-                                    <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" placeholder="Descreva o que é do paciente" value="{{old('familiaridadeOutros')}}">
+                                    <label for="familiaridadeOutros" class="text-dark">Descreva o que é do paciente</label>
+                                    <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" value="{{old('familiaridadeOutros')}}">
                                 </div>
                             </div>
                             <br>
                             <hr>
                             <br>
                             <h1 class="text-center">Preencha os dados do paciente</h1>
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" placeholder="Nome do paciente" value="{{old('pacienteNome')}}">
@@ -150,6 +153,7 @@
                                 <div class="col">
                                     <label for="pacienteTipo" class="text-dark">O paciente é?</label><br>
                                     <select name="pacienteTipo" class="custom-select" value="{{old('pacienteTipo')}}">
+                                        <option value=""></option>
                                         @foreach($pacienteTipo as $tipo)
                                             <option value="{{$tipo->ID}}">{{$tipo->TIPO}}</option>
                                         @endforeach
@@ -164,6 +168,7 @@
                                 <div class="col">
                                     <label for="localidadePaciente" class="text-dark">Onde o paciente está localizado?</label><br>
                                     <select name="pacienteLocalizacao" class="custom-select" value="{{old('pacienteLocalizacao')}}">
+                                        <option value=""></option>
                                         @foreach($pacienteLocalizacao as $localizacao)
                                             <option value="{{$localizacao->ID}}">{{$localizacao->LOCALIZACAO}}</option>
                                         @endforeach
@@ -237,13 +242,16 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <label for="formacao">Paciente toma medicamentos?</label><br>
+                                    <label for="medicamentos">Paciente toma medicamentos?</label><br>
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
-                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" placeholder="Quais?" value="{{old('tipoMedicamento')}}">
                                     @error('tomaMedicamento')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
+                                </div>
+                                <div class="col font-color-gray">
+                                    <label for="medicamentos">Quais medicamentos?</label>
+                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="{{old('tipoMedicamento')}}">
                                 </div>
                             </div>
                             <br>
