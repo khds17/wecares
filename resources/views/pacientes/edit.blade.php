@@ -1,6 +1,6 @@
 @extends('templates.template-admin')
 @section('content')
-<h1 class="text-center">Edição dos dados do paciente</h1>
+<h1 class="text-center">Edição dos dados cadastrais</h1>
     <form name="formPacienteEdit" id="formPacienteEdit" method="post" enctype="multipart/form-data" action="{{url("paciente/$paciente->ID")}}">   
         @csrf
         @method('PUT')

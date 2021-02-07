@@ -1,6 +1,6 @@
 @extends('templates.template-admin')
 @section('content')
-    {{-- Inicio do formulario --}}
+<h1 class="text-center">Edição dos dados cadastrais</h1>
     <form name="formPrestadorEdit" id="formPrestadorEdit" method="post" enctype="multipart/form-data" action="{{url("prestador/$prestadores->ID")}}">   
         @csrf
         @method('PUT') 
