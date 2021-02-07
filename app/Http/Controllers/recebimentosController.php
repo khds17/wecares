@@ -39,6 +39,7 @@ class recebimentosController extends Controller
         $contasRecebimento = $this->objContasPagamentos	
                                 ->join('BANCOS','CONTA_PAGAMENTOS.ID_BANCO','=','BANCOS.ID')	
                                 ->where('CONTA_PAGAMENTOS.ID_PRESTADOR','=',$prestador->ID)	
+                                ->select('CONTA_PAGAMENTOS.*','BANCOS.BANCO')
                                 ->get();
 
         return view('recebimentos/index',compact('contasRecebimento'));
@@ -118,7 +119,14 @@ class recebimentosController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Pegando todos os bancos para disponibilizar na view
+        $bancos = $this->objBancos->all();
+
+        //Pegando todas as contas de recebimento que o cliente informou
+        $contaRecebimento = $this->objContasPagamentos->find($id);
+    
+        
+        return view('recebimentos/edit',compact('bancos','contaRecebimento'));
     }
 
     /**
@@ -130,7 +138,27 @@ class recebimentosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        DB::beginTransaction();
+
+        try {	
+            //Cadastro da conta de recebimento dos prestadores	
+            $this->objContasPagamentos->where(['ID' => $id])->update([
+                'AGENCIA' => $request->agencia,	
+                'CONTA' => $request->conta,	
+                'TIPO_CONTA' => $request->tipo_conta,	
+                'ID_BANCO' => $request->banco,	
+            ]);	
+
+            DB::commit();	
+
+            return redirect('/recebimentos');	
+
+        } catch (\Throwable $th) {	
+            DB::rollback();	
+            return redirect('/recebimentos');	
+        }
+
     }
 
     /**

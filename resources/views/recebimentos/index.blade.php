@@ -42,7 +42,7 @@
                                     @endif	
                                 </td>	
                                 <td>
-                                    <a class="btn btn-primary" href=""> Editar </a>
+                                    <a class="btn btn-primary" href="{{url("recebimentos/$contaRecebimento->ID/edit")}}" target="_blank"> Editar </a>
                                 </td>	
                             </tr>	
                         @endforeach
