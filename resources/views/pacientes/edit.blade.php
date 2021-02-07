@@ -121,7 +121,7 @@
                     @enderror
                 </div>
                 <div class="col">
-                    <label for="formacao">Quais remédios?</label><br>
+                    <label for="formacao">Quais medicamentos?</label><br>
                     <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="{{$paciente->TIPO_MEDICAMENTOS}}">
                 </div>
             </div>
