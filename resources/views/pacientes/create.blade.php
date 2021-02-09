@@ -115,13 +115,13 @@
             <div class="row margin-top-10">
                 <div class="col">
                     <label for="medicamento">Paciente toma medicamentos?</label><br>
-                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
-                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
+                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1" onclick="exibirTipoMedicamentos(this.value)"> Sim <br> 
+                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0" onclick="exibirTipoMedicamentos(this.value)"> Não
                         @error('tomaMedicamento')
                             <span class="text-danger"><small>{{$message}}</small></span>
                         @enderror
                 </div>
-                <div class="col">
+                <div class="col d-none" id="medicamentos">
                     <label for="tipoMedicamento">Quais remédios?</label>
                     <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="">
                 </div>
@@ -130,7 +130,7 @@
             <div class="row margin-top-10">
                 <div class="col">
                 <label for="familiaridade" >Qual seu nível de familiaridade com o paciente?</label>
-                <select name="familiaridade" class="custom-select" value="">
+                <select name="familiaridade" class="custom-select" onchange="exibirOutrosFamiliaridade(this.value)">
                     <option value=""></option>
                     @foreach($familiaridades as $familiaridade)
                         <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
@@ -140,7 +140,7 @@
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror     
                 </div>
-                <div class="col">
+                <div class="col d-none" id="familiaridadeOutros">
                     <label for="familiaridadeOutros">Descreva o que é do paciente</label>
                     <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" value="">
                 </div>
