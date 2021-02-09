@@ -10265,7 +10265,7 @@ button.bg-danger-soft:focus {
 }
 
 .d-none {
-  display: none !important;
+  display: none;
 }
 
 .d-inline {

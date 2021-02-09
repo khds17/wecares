@@ -118,19 +118,19 @@
                             </div>
                             <br>
                             <div class="row margin-top-10">
-                                <div class="col">
+                                <div class="col ">
                                 <label for="familiaridade" class="text-dark">Qual seu nível de familiaridade com o paciente?</label>
-                                <select name="familiaridade" class="custom-select" value="{{old('familiaridade')}}">
-                                    <option value=""></option>
-                                    @foreach($familiaridades as $familiaridade)
-                                       <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
-                                    @endforeach
-                                </select>    
+                                    <select name="familiaridade" class="custom-select" value="{{old('familiaridade')}}" onchange="exibirOutrosFamiliaridade(this.value)">
+                                        <option value=""></option>
+                                        @foreach($familiaridades as $familiaridade)
+                                            <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
+                                        @endforeach
+                                    </select>    
                                     @error('familiaridade')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror     
                                 </div>
-                                <div class="col">
+                                <div class="col d-none" id="familiaridadeOutros">
                                     <label for="familiaridadeOutros" class="text-dark">Descreva o que é do paciente</label>
                                     <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" value="{{old('familiaridadeOutros')}}">
                                 </div>
@@ -243,14 +243,14 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="medicamentos">Paciente toma medicamentos?</label><br>
-                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
-                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
+                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1" onclick="exibirTipoMedicamentos(this.value)"> Sim <br> 
+                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0" onclick="exibirTipoMedicamentos(this.value)"> Não
                                     @error('tomaMedicamento')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
-                                <div class="col font-color-gray">
-                                    <label for="medicamentos">Quais medicamentos?</label>
+                                <div class="col d-none" id="medicamentos">
+                                    <label for="medicamentos" class="text-dark">Quais medicamentos?</label>
                                     <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="{{old('tipoMedicamento')}}">
                                 </div>
                             </div>

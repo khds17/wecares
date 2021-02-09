@@ -469,6 +469,7 @@
         <script src="{{url('assets/layout-admin/js/javascript.js')}}"></script>
         <script src="{{url('assets/layout-admin/js/validacaoPrestador.js')}}"></script>
         <script src="{{url('assets/layout/js/solicitacaoServico.js')}}"></script>
+        <script src="{{url('assets/layout/js/camposOcultos.js')}}"></script>
         
 
         <!-- Page level plugins -->
