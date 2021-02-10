@@ -55,8 +55,9 @@ class pagamentosController extends Controller
             "type" => $request->docType,
             "number" => $request->docNumber,
         );
-        dd($payment, $payer);
+        
         $payment->payer = $payer;
+        dd($payment, $payer);
 
         $payment->save();
         
