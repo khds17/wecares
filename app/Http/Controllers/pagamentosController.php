@@ -62,7 +62,7 @@ class pagamentosController extends Controller
             $responseArray = $payment->toArray();
             echo json_encode ($responseArray);
         } else {
-            $errorArray = (array)$payment->Error;
+            $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
         }
         
