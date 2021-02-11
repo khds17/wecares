@@ -57,7 +57,7 @@ class pagamentosController extends Controller
         );
         
         $payment->payer = $payer;
-        dd($request,$payment,$payer);
+        // dd($request,$payment,$payer);
         if($payment->save()) {
             $responseArray = $payment->toArray();
             echo json_encode ($responseArray);
@@ -65,8 +65,7 @@ class pagamentosController extends Controller
             $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
         }
-        
-
+        dd('Parou');
         //Retorno do pagamento
         $response = array(
             'status' => $payment->status,
