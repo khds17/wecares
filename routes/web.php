@@ -62,6 +62,7 @@ Route::get('/solicitanteCadastro','solicitantesController@dadosCadastrais')->mid
 Route::get('/propostas','solicitantesController@solicitantePropostas')->middleware('auth');
 // ===========================================
 Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation');
+Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation');
 
 
 Auth::routes(['register' => false]);
