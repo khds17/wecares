@@ -37,8 +37,8 @@ class pagamentosController extends Controller
     public function processPaymentValidation(Request $request)
     {
         //Acess token para utilizar o mercado pago
-        \MercadoPago\SDK::setAccessToken("TEST-2933194983833876-020323-4c2e29596cb229a47df6e98bfd6efb24-200979127");
-       
+        \MercadoPago\SDK::setAccessToken("TEST-3508208613949405-021316-3288de42a43e89f96ce0a4a54a85533c-713881257");
+               
         // Enviando o pagamento para mercado pago
         $payment = new \MercadoPago\Payment();
         $payment->transaction_amount = (float)$request->transactionAmount;

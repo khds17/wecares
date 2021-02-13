@@ -1,4 +1,4 @@
-window.Mercadopago.setPublishableKey("TEST-cbc0dfec-f94e-4852-a5d3-29bfd6ea3470");
+window.Mercadopago.setPublishableKey("TEST-efa70036-c084-4daa-be2d-441bd3e74123");
 
 document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
 
