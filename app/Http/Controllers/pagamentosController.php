@@ -71,10 +71,10 @@ class pagamentosController extends Controller
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
                 $idCustomer = $solicitanteCustomer;
             }
-            dd($idCustomer);
+            // dd($idCustomer); Retornou NULL
             //Verifico se já existe um id de customer, caso não eu crio
             if(isset($idCustomer)){
-
+                dd('Entrou aqui');
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
                 $customer->save();
@@ -120,8 +120,8 @@ class pagamentosController extends Controller
                         ]);
                     }
                 }
-            dd($payment,$customer,$card,$cartao,$validaCartao);
             } else {
+                dd('Entrou aqui 2');
                 //Caso já exista um customer, eu apenas gravo os dados do cartão.
                 $card = new \MercadoPago\Card();
                 $card->token = $request->token;
@@ -158,7 +158,6 @@ class pagamentosController extends Controller
                         'DT_APROVACAO' => $payment->date_approved,
                     ]);
                 }
-            dd($payment,$idCustomer,$card,$cartao,$validaCartao);
             }
         } else {
             $errorArray = (array)$payment->error;
