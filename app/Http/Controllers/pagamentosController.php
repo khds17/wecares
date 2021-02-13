@@ -71,15 +71,17 @@ class pagamentosController extends Controller
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
                 $customer = $solicitanteCustomer;
             }
-            dump($customer, $customer->ID_CUSTOMER);
-            //Verifico se já existe um id de customer, caso não eu crio
+
+            //Verifico se já existe um id de customer, se não existir, criamos.
             if(empty($customer->ID_CUSTOMER)){
-                dd('Entrou aqui');
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
                 $customer->save();
 
+                dump($customer);
+
                 if($customer) {
+                    dump('Entrou pra criar o card');
                     //Card é o cartão do cliente
                     $card = new \MercadoPago\Card();
                     $card->token = $request->token;
@@ -90,8 +92,9 @@ class pagamentosController extends Controller
 
                     $card->customer_id = $customer->id;
                     $card->save();
-                    
+                    dump($card);
                     if($card) {
+                        dump('Entrou pra criar o cartao');
                         // Pegando o valor da constant para colocar no cartão
                         $statusAtivo = \Config::get('constants.STATUS.ATIVO');
 
@@ -110,6 +113,7 @@ class pagamentosController extends Controller
                     }
 
                     if($payment) {
+                        dump('Entrou pra criar o validar cartao');
                         //Gravando os dados do pagamento de validação para estorno.
                         $validaCartao = $this->objValidaCartao->create([
                             'ID_PAGAMENTO' => $payment->id,
