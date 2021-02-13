@@ -56,9 +56,11 @@ class pagamentosController extends Controller
         );
         
         $payment->payer = $payer;
+        $payment->save();
         
         // Se der certo o payment vai armazenar os dados de cartão do cliente
-        if($payment->save()) {
+        if($payment) {
+            dd('Entrou');
             // Select para ver se o solicitante já possui um id de customer
             //Customer é o cliente no mercado pago
             $solicitantesCustomer = $this->objSolicitante
@@ -69,14 +71,14 @@ class pagamentosController extends Controller
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
                 $idCustomer = $solicitanteCustomer;
             }
-
             //Verifico se já existe um id de customer, caso não eu crio
             if(isset($idCustomer)){
 
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
+                $customer->save();
 
-                if($customer->save()) {
+                if($customer) {
                     //Card é o cartão do cliente
                     $card = new \MercadoPago\Card();
                     $card->token = $request->token;
@@ -86,8 +88,9 @@ class pagamentosController extends Controller
                     }
 
                     $card->customer_id = $customer->id;
+                    $card->save();
                     
-                    if($card->save()) {
+                    if($card) {
                         // Pegando o valor da constant para colocar no cartão
                         $statusAtivo = \Config::get('constants.STATUS.ATIVO');
 
@@ -126,8 +129,9 @@ class pagamentosController extends Controller
                 }
 
                 $card->customer_id = $idCustomer;
+                $card->save();
                 
-                if($card->save()) {
+                if($card) {
                     // Gravando os dados do cartão do nosso lado
                     $cartao = $this->objCartoes->create([
                         'ID_CUSTOMER' => $customer->id,
