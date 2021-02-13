@@ -60,7 +60,6 @@ class pagamentosController extends Controller
         
         // Se der certo o payment vai armazenar os dados de cartão do cliente
         if($payment) {
-            dd('Entrou');
             // Select para ver se o solicitante já possui um id de customer
             //Customer é o cliente no mercado pago
             $solicitantesCustomer = $this->objSolicitante
@@ -71,6 +70,7 @@ class pagamentosController extends Controller
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
                 $idCustomer = $solicitanteCustomer;
             }
+
             //Verifico se já existe um id de customer, caso não eu crio
             if(isset($idCustomer)){
 
@@ -119,6 +119,7 @@ class pagamentosController extends Controller
                         ]);
                     }
                 }
+            dd($payment,$customer,$card,$cartao,$validaCartao);
             } else {
                 //Caso já exista um customer, eu apenas gravo os dados do cartão.
                 $card = new \MercadoPago\Card();
@@ -156,8 +157,8 @@ class pagamentosController extends Controller
                         'DT_APROVACAO' => $payment->date_approved,
                     ]);
                 }
+            dd($payment,$idCustomer,$card,$cartao,$validaCartao);
             }
-            dd('Deu certo!');
         } else {
             $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
