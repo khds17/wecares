@@ -73,7 +73,7 @@ class pagamentosController extends Controller
             }
             // dd($idCustomer); Retornou NULL
             //Verifico se já existe um id de customer, caso não eu crio
-            if(empty($idCustomer)){
+            if(isset($idCustomer)){
                 dd('Entrou aqui');
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
