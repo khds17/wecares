@@ -71,9 +71,9 @@ class pagamentosController extends Controller
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
                 $customer = $solicitanteCustomer;
             }
-            // dd($idCustomer); Retornou NULL
+            dump($customer, $customer->ID_CUSTOMER);
             //Verifico se já existe um id de customer, caso não eu crio
-            if($customer->ID_CUSTOMER){
+            if(empty($customer->ID_CUSTOMER)){
                 dd('Entrou aqui');
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
