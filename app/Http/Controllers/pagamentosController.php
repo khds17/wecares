@@ -60,7 +60,7 @@ class pagamentosController extends Controller
         
         // Se der certo o payment vai armazenar os dados de cartão do cliente
         if($payment) {
-            dd($payment);
+            // dd($payment); DEU CERTO
             // Select para ver se o solicitante já possui um id de customer
             //Customer é o cliente no mercado pago
             $solicitantesCustomer = $this->objSolicitante
@@ -71,7 +71,7 @@ class pagamentosController extends Controller
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
                 $idCustomer = $solicitanteCustomer;
             }
-
+            dd($idCustomer);
             //Verifico se já existe um id de customer, caso não eu crio
             if(isset($idCustomer)){
 
