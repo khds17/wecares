@@ -153,6 +153,7 @@ class pagamentosController extends Controller
                     ]);
                 }
             }
+            dd('Deu certo!');
         } else {
             $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
