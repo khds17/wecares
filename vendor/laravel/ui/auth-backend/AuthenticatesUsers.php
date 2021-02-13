@@ -45,10 +45,23 @@ trait AuthenticatesUsers
             return $this->sendLockoutResponse($request);
         }
 
-        if ($this->attemptLogin($request)) {
-            return $this->sendLoginResponse($request);
+        // Pegando o valor da constant para colocar no solicitante
+        $status = \Config::get('constants.STATUS.ATIVO');
+
+        $arrayUsers = DB::table('users')
+                ->where('users.email','=',$request->email)
+                ->where('users.status','=',$status)
+                ->get();
+
+        foreach ($arrayUsers as $arrayUser) {
+            $user = $arrayUser;
         }
 
+        if(isset($user)) {
+            if ($this->attemptLogin($request)) {
+                return $this->sendLoginResponse($request);
+            }
+        }
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
@@ -188,9 +201,27 @@ trait AuthenticatesUsers
      */
     protected function sendFailedLoginResponse(Request $request)
     {
-        throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
-        ]);
+        // Pegando o valor da constant para colocar no solicitante
+        $status = \Config::get('constants.STATUS.ATIVO');
+
+        $arrayUsers = DB::table('users')
+                ->where('users.email','=',$request->email)
+                ->where('users.status','=',$status)
+                ->get();
+
+        foreach ($arrayUsers as $arrayUser) {
+            $user = $arrayUser;
+        }
+
+        if(isset($user)) {
+            throw ValidationException::withMessages([
+                $this->username() => [trans('auth.failed')],
+            ]);
+        } else {
+            throw ValidationException::withMessages([
+                $this->username() => [trans('auth.invalid')],
+            ]);
+        }        
     }
 
     /**
