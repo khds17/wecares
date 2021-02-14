@@ -118,25 +118,25 @@ class adminController extends Controller
             ]);
 
             // Pegando informações para popular no registro
-            $dataHora = date('d/m/Y \à\s H:i:s');
+            // $dataHora = date('d/m/Y \à\s H:i:s');
 
-            $nomeUsuario = $usuario->name;
+            // $nomeUsuario = $usuario->name;
 
-            $arrayUsuariosAdmins = $this->objAdmin
-                                    ->where('ID_USUARIO', auth()->user()->id)
-                                    ->get();
+            // $arrayUsuariosAdmins = $this->objAdmin
+            //                         ->where('ID_USUARIO', auth()->user()->id)
+            //                         ->get();
 
-            foreach ($arrayUsuariosAdmins as $arrayUsuarioAdmin) {
-                $usuarioAdmin = $arrayUsuarioAdmin;
-            }
+            // foreach ($arrayUsuariosAdmins as $arrayUsuarioAdmin) {
+            //     $usuarioAdmin = $arrayUsuarioAdmin;
+            // }
                 
-            $textoRegistro = 'Cadastro de '.$nomeUsuario.' realizado com sucesso pelo administrator '.$usuarioAdmin->NOME.''; 
+            // $textoRegistro = 'Cadastro de '.$nomeUsuario.' realizado com sucesso pelo administrator '.$usuarioAdmin->NOME.''; 
 
-            $registro = $this->objRegistros->create([
-                'DATA' => $dataHora,
-                'TEXTO' => $textoRegistro,
-                'ID_USUARIO' => $idUsuario
-            ]);
+            // $registro = $this->objRegistros->create([
+            //     'DATA' => $dataHora,
+            //     'TEXTO' => $textoRegistro,
+            //     'ID_USUARIO' => $idUsuario
+            // ]);
 
             DB::commit();
 
