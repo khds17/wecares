@@ -21,11 +21,9 @@ class CreateSolicitantesTable extends Migration
             $table->string('TELEFONE',15);
             $table->unsignedInteger('ID_USUARIO');
             $table->unsignedInteger('ID_ENDERECO');
-            $table->unsignedInteger('ID_CARTAO')->nullable();
             $table->string('ID_CUSTOMER',30)->nullable();
             $table->foreign('ID_USUARIO')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');   
-            $table->foreign('ID_CARTAO')->references('ID')->on('CARTOES')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
