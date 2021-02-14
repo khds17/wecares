@@ -45,7 +45,7 @@ return array(
     'App\\Models\\cartoes' => $baseDir . '/app/Models/cartoes.php',
     'App\\Models\\certificados' => $baseDir . '/app/Models/certificados.php',
     'App\\Models\\cidades' => $baseDir . '/app/Models/cidades.php',
-    'App\\Models\\contas_pagamento' => $baseDir . '/app/Models/contas_pagamento.php',
+    'App\\Models\\conta_recebimento' => $baseDir . '/app/Models/conta_recebimento.php',
     'App\\Models\\contatos' => $baseDir . '/app/Models/contatos.php',
     'App\\Models\\enderecos' => $baseDir . '/app/Models/enderecos.php',
     'App\\Models\\estados' => $baseDir . '/app/Models/estados.php',

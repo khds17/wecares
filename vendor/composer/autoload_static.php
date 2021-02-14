@@ -576,7 +576,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'App\\Models\\cartoes' => __DIR__ . '/../..' . '/app/Models/cartoes.php',
         'App\\Models\\certificados' => __DIR__ . '/../..' . '/app/Models/certificados.php',
         'App\\Models\\cidades' => __DIR__ . '/../..' . '/app/Models/cidades.php',
-        'App\\Models\\contas_pagamento' => __DIR__ . '/../..' . '/app/Models/contas_pagamento.php',
+        'App\\Models\\conta_recebimento' => __DIR__ . '/../..' . '/app/Models/conta_recebimento.php',
         'App\\Models\\contatos' => __DIR__ . '/../..' . '/app/Models/contatos.php',
         'App\\Models\\enderecos' => __DIR__ . '/../..' . '/app/Models/enderecos.php',
         'App\\Models\\estados' => __DIR__ . '/../..' . '/app/Models/estados.php',

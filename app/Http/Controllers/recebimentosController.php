@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\prestadores;	
 use App\Models\bancos;	
-use App\Models\contas_pagamento;	
+use App\Models\conta_recebimento;	
 use App\Config\constants;	
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +17,7 @@ class recebimentosController extends Controller
     {	
         $this->objPrestador = new prestadores();	
         $this->objBancos = new bancos();   	
-        $this->objContasPagamentos = new contas_pagamento(); 	
+        $this->objContaRecebimento = new conta_recebimento(); 	
     }
 
     /**
@@ -36,10 +36,10 @@ class recebimentosController extends Controller
         }	
 
         //Pegando todas as contas de recebimento que o cliente informou	
-        $contasRecebimento = $this->objContasPagamentos	
-                                ->join('BANCOS','CONTA_PAGAMENTOS.ID_BANCO','=','BANCOS.ID')	
-                                ->where('CONTA_PAGAMENTOS.ID_PRESTADOR','=',$prestador->ID)	
-                                ->select('CONTA_PAGAMENTOS.*','BANCOS.BANCO')
+        $contasRecebimento = $this->objContaRecebimento	
+                                ->join('BANCOS','CONTA_RECEBIMENTO.ID_BANCO','=','BANCOS.ID')	
+                                ->where('CONTA_RECEBIMENTO.ID_PRESTADOR','=',$prestador->ID)	
+                                ->select('CONTA_RECEBIMENTO.*','BANCOS.BANCO')
                                 ->get();
 
         return view('recebimentos/index',compact('contasRecebimento'));
@@ -81,11 +81,12 @@ class recebimentosController extends Controller
 
         try {	
             //Cadastro da conta de recebimento dos prestadores	
-            $contaPagamento = $this->objContasPagamentos->create([	
+            $contaPagamento = $this->objContaRecebimento->create([	
                 'AGENCIA' => $request->agencia,	
                 'CONTA' => $request->conta,	
                 'TIPO_CONTA' => $request->tipo_conta,	
                 'STATUS' => $status,	
+                'PRINCIPAL' => $request->contaRecebimentoPrincipal,
                 'ID_BANCO' => $request->banco,	
                 'ID_PRESTADOR' => $prestador->ID,	
             ]);	
@@ -123,9 +124,8 @@ class recebimentosController extends Controller
         $bancos = $this->objBancos->all();
 
         //Pegando todas as contas de recebimento que o cliente informou
-        $contaRecebimento = $this->objContasPagamentos->find($id);
-    
-        
+        $contaRecebimento = $this->objContaRecebimento->find($id);
+                
         return view('recebimentos/edit',compact('bancos','contaRecebimento'));
     }
 
@@ -143,11 +143,12 @@ class recebimentosController extends Controller
 
         try {	
             //Cadastro da conta de recebimento dos prestadores	
-            $this->objContasPagamentos->where(['ID' => $id])->update([
+            $this->objContaRecebimento->where(['ID' => $id])->update([
                 'AGENCIA' => $request->agencia,	
                 'CONTA' => $request->conta,	
                 'TIPO_CONTA' => $request->tipo_conta,	
                 'ID_BANCO' => $request->banco,	
+                'PRINCIPAL' => $request->contaRecebimentoPrincipal,
             ]);	
 
             DB::commit();	

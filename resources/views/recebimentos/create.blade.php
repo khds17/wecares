@@ -35,6 +35,14 @@
                     <input class="form-control"type="text" name="conta" id="conta" required><br>
                 </div>
             </div>
+            <div class="row margin-top-10">
+                <div class="col">
+                    <label for="tipoConta">Conta principal?</label><br>
+                    <input type="radio" name="contaRecebimentoPrincipal" id="contaRecebimentoPrincipal" value="1"> Sim<br> 
+                    <input type="radio" name="contaRecebimentoPrincipal" id="contaRecebimentoPrincipal" value="0"> Não<br> 
+                </div>
+            </div>
+            <br>
             <input class="btn btn-success" type="submit" value="Salvar">
         </div>
     </form>
