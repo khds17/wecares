@@ -78,7 +78,7 @@ class pagamentosController extends Controller
                 $customer->email = $request->email;
                 $customer->save();
 
-                dump($customer);
+                dd($customer);
 
                 if($customer) {
                     dump('Entrou pra criar o card');
