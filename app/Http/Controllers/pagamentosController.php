@@ -109,6 +109,7 @@ class pagamentosController extends Controller
                             'CVV' => Crypt::encryptString($request->cvv),
                             'BANDEIRA' => $request->paymentMethodId,
                             'STATUS' => $statusAtivo,
+                            'PRINCIPAL' => $request->cartaoPrincipal,
                         ]);
                     }
 

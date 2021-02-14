@@ -23,6 +23,7 @@ class CreateCartoesTable extends Migration
             $table->unsignedSmallInteger('ANO_VENCIMENTO');
             $table->string('CVV',255);
             $table->string('BANDEIRA',30);
+            $table->unsignedSmallInteger('PRINCIPAL');
             $table->unsignedSmallInteger('STATUS');
         });
     }
