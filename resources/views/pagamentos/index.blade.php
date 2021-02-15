@@ -202,6 +202,15 @@
                         </div>
                     </div>
                     <br>
+                    <div class="row margin-top-10">
+                        <div class="col">
+                            <label for="tipoConta">Favoritar cartão?</label><br>
+                            <input type="radio" name="cartaoPrincipal" id="cartaoPrincipal" value="1"> Sim<br> 
+                            <input type="radio" name="cartaoPrincipal" id="cartaoPrincipal" value="0"> Não<br> 
+                        </div>
+                    </div>
+                    <br>
+                    <br>
                     <input class="btn btn-primary" type="submit" value="Salvar">
                   </form>
             </div>
