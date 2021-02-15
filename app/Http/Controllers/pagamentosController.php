@@ -69,11 +69,11 @@ class pagamentosController extends Controller
                                 ->get();
                                 
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
-                $customer = $solicitanteCustomer;
+                $customerSolicitante = $solicitanteCustomer;
             }
 
             //Verifico se já existe um id de customer, se não existir, criamos.
-            if(empty($customer->ID_CUSTOMER)){
+            if(empty($customerSolicitante->ID_CUSTOMER)){
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
                 $customer->save();
