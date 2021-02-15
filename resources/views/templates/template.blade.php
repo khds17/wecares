@@ -48,23 +48,78 @@
                                     <a class="text-white" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }}</a>
                                     <!-- Dropdown - User Information -->
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Profile
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Settings
-                                        </a>
-                                        <a class="dropdown-item" href="#">
+                                        {{-- Dropdown solicitante --}}
+                                        @role('solicitante')
+                                            <a class="dropdown-item" href="{{url("/solicitanteCadastro")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Dados cadastrais
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/paciente")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Dados do paciente
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/servicosContratados")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Serviços contratados
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/propostas")}}">
+                                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Propostas pendentes
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/pagamentos")}}">
+                                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Pagamentos
+                                            </a>
+                                        @endrole
+                                        @role('cuidador/enfermeiro')
+                                            <a class="dropdown-item" href="{{url("/prestadorCadastro")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Dados cadastrais
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/servicosPrestados")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Serviços prestados
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/novaspropostas")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Propostas de serviço
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/recebimentos")}}">
+                                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Recebimentos
+                                            </a>
+                                        @endrole
+                                        @role('administrador')
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Dashboard
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/adminCadastro")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Dados cadastrais
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/listagemAdmin")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Lista de administradores
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("/prestadoresLista")}}">
+                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Lista de prestadores
+                                            </a>
+                                            <a class="dropdown-item" href="{{url("listagemServicos")}}">
+                                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                                Lista de serviços prestados
+                                            </a>
+                                        @endrole
+                                        <a class="dropdown-item" href="{{url("/registros")}}">
                                             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                            Activity Log
+                                            Registro de atividades
                                         </a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
+                                            {{ __('Sair') }}
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
