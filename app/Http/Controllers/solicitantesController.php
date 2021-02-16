@@ -202,6 +202,8 @@ class solicitantesController extends Controller
                   
             DB::commit();
 
+            return redirect('/login');
+
         } catch (\Throwable $e) {
             DB::rollback();
             report($e);
