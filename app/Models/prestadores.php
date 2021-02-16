@@ -8,7 +8,7 @@ class prestadores extends Model
 {
     public $timestamps = false;
     protected $table='PRESTADORES';
-    protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','ID_SEXO','EMAIL','ID_USUARIO','ID_ENDERECO','ID_FORMACAO','ID_CERTIFICADO','ID_ANTECEDENTE'];
+    protected $fillable=['NOME','CPF','TELEFONE','DT_NASCIMENTO','ID_SEXO','EMAIL','ID_USUARIO','ID_ENDERECO','ID_FORMACAO','ID_CERTIFICADO','ID_ANTECEDENTE','ID_FOTO'];
 
     // Criando relacionamento entre as tabelas prestadores e sexo
     public function relSexo(){
@@ -38,6 +38,11 @@ class prestadores extends Model
     // Criando relacionamento entre as tabelas prestadores e antecedentes
     public function relAntecedentes(){
         return $this->hasMany('App\Models\antecedentes', 'ID','ID_ANTECEDENTE');
+    }
+
+    // Criando relacionamento entre as tabelas prestadores e fotos
+    public function relFotos(){
+        return $this->hasOne('App\Models\foto', 'ID','ID_FOTO');
     }
 
 }

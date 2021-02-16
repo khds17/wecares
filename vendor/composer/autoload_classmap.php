@@ -51,6 +51,7 @@ return array(
     'App\\Models\\estados' => $baseDir . '/app/Models/estados.php',
     'App\\Models\\familiaridade' => $baseDir . '/app/Models/familiaridade.php',
     'App\\Models\\formacao' => $baseDir . '/app/Models/formacao.php',
+    'App\\Models\\foto' => $baseDir . '/app/Models/foto.php',
     'App\\Models\\paciente_localizacao' => $baseDir . '/app/Models/paciente_localizacao.php',
     'App\\Models\\paciente_tipo' => $baseDir . '/app/Models/paciente_tipo.php',
     'App\\Models\\pacientes' => $baseDir . '/app/Models/pacientes.php',

@@ -41,6 +41,7 @@ class requestPrestador extends FormRequest
             'formacao'=>'required',
             'certificadoFormacao'=>'bail|required|mimes:jpeg,png,pdf',
             'antecedentes'=>'bail|required|mimes:jpeg,png,pdf',
+            'foto'=>'bail|required|mimes:jpeg,png',
             'termos'=>'required'
         ];
     }
@@ -79,6 +80,8 @@ class requestPrestador extends FormRequest
             'certificadoFormacao.mimes'=>'Só são aceitos arquivos JPEG, PNG ou PDF',
             'antecedentes.required'=>'Antecedentes é um documento obrigatório',
             'antecedentes.mimes'=>'Só são aceitos arquivos JPEG, PNG ou PDF',
+            'foto.required'=>'A foto  de perfil é obrigatória',
+            'foto.mimes'=>'Só são aceitos arquivos JPEG, JPG ou PNG',
             'termos.required'=>'Termos e aceite são obrigatórios'
 
         ];

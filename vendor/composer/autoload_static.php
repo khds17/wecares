@@ -582,6 +582,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'App\\Models\\estados' => __DIR__ . '/../..' . '/app/Models/estados.php',
         'App\\Models\\familiaridade' => __DIR__ . '/../..' . '/app/Models/familiaridade.php',
         'App\\Models\\formacao' => __DIR__ . '/../..' . '/app/Models/formacao.php',
+        'App\\Models\\foto' => __DIR__ . '/../..' . '/app/Models/foto.php',
         'App\\Models\\paciente_localizacao' => __DIR__ . '/../..' . '/app/Models/paciente_localizacao.php',
         'App\\Models\\paciente_tipo' => __DIR__ . '/../..' . '/app/Models/paciente_tipo.php',
         'App\\Models\\pacientes' => __DIR__ . '/../..' . '/app/Models/pacientes.php',

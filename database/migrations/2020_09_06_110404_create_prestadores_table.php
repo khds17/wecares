@@ -26,12 +26,14 @@ class CreatePrestadoresTable extends Migration
             $table->unsignedInteger('ID_FORMACAO');
             $table->unsignedInteger('ID_CERTIFICADO');
             $table->unsignedInteger('ID_ANTECEDENTE');
+            $table->unsignedInteger('ID_FOTO');
             $table->foreign('ID_USUARIO')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_ENDERECO')->references('ID')->on('ENDERECOS')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_CERTIFICADO')->references('ID')->on('CERTIFICADOS')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_ANTECEDENTE')->references('ID')->on('ANTECEDENTES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_FORMACAO')->references('ID')->on('FORMACAO')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_SEXO')->references('ID')->on('SEXOS')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('ID_FOTO')->references('ID')->on('FOTOS')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
