@@ -19,13 +19,13 @@
                 <div class="col-lg-4 col-md-6 mb-5">
                     <a class="card card-link border-top border-top-lg border-primary h-100 lift">
                         <div class="card-body p-5">
-                            <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div>
-
+                            {{-- <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div> --}}
+                            <input type="image" src="{{url("storage/{$foto->FOTO}")}}" width="100" height="100">
                             <input type="hidden" id="idPrestador[{{$prestador->ID}}]" name="idPrestador" value="{{$prestador->ID}}">
                             <h6>{{$prestador->NOME}}</h6>
                             <div class="small text-gray-500 text-left">Formação:{{$prestador->FORMACAO}}</div>
-                            {{-- <div class="small text-gray-500 text-left">Distância:</div>
-                            <div class="small text-gray-500 text-left">Avaliação</div>    --}}
+                            <div class="small text-gray-500 text-left">Serviço realizados:</div>
+                            <div class="small text-gray-500 text-left">Avaliação</div>   
                                 
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
@@ -159,7 +159,7 @@
                             <div class="col font-color-gray">
                                 <label for="formacao">Serviços que deverão ser realizados</label><br>
                                 @foreach($servicos as $servico)
-                                    <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
+                                    <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}" onchange="calcularServicos(this.value)"> {{$servico->TIPO}} <br> 
                                 @endforeach
                                 <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
                             </div>
@@ -189,10 +189,10 @@
                         <br>
                         <div class="row margin-top-10">
                             <div class="col">
-                                <input class="form-control" type="datetime" name="horaInicio" id="horaInicio" placeholder="Horário de início ">
+                                <input class="form-control" type="time" name="horaInicio" id="horaInicio" placeholder="Horário de início ">
                             </div>
                             <div class="col">
-                                <input class="form-control" type="datetime" name="horaFim" id="horaFim" placeholder="Horário do fim">
+                                <input class="form-control" type="time" name="horaFim" id="horaFim" placeholder="Horário do fim">
                             </div>
                         </div>
                         <br>
@@ -202,9 +202,10 @@
                             </div>
                         </div>
                         <br> -->
-                        <div class="row margin-top-10">
+                        <div class="row margin-top-10" id="servicos" >
                             <div class="col font-color-gray">
-                                <label class ="" for="formacao">Valor total do serviço:</label><br>                                
+                                <label class ="" for="formacao">Valor total do serviço: R$</label>
+                                <input type="text" name="precoServico" id="precoServico" value="" disabled="disabled">                                
                             </div>
                         </div>
                         <div class="modal-footer">
