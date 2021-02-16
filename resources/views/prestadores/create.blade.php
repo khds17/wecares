@@ -168,6 +168,13 @@
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
                                 </div>
+                                <div class="col font-color-gray">
+                                    <label for="foto">Foto de perfil</label><br>
+                                    <input type="file" name="foto" id="foto" value="{{old('perfil')}}"><br>
+                                    @error('foto')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
+                                </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
