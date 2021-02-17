@@ -36,6 +36,7 @@ class pagamentosController extends Controller
 
     public function processPaymentValidation(Request $request)
     {
+        dump($request);
         //Access token para utilizar o mercado pago
         \MercadoPago\SDK::setAccessToken("TEST-3508208613949405-021316-3288de42a43e89f96ce0a4a54a85533c-713881257");
                
@@ -78,7 +79,7 @@ class pagamentosController extends Controller
                 $customer->email = $request->email;
                 $customer->save();
 
-                dd($request,$customer);
+                dump($customer);
 
                 if($customer) {
                     dump('Entrou pra criar o card');
@@ -95,9 +96,6 @@ class pagamentosController extends Controller
                     dump($card);
                     if($card) {
                         dump('Entrou pra criar o cartao');
-                        // Pegando o valor da constant para colocar no cartão
-                        $statusAtivo = \Config::get('constants.STATUS.ATIVO');
-
                         // Gravando os dados do cartão do nosso lado
                         $cartao = $this->objCartoes->create([
                             'ID_CUSTOMER' => $customer->id,
@@ -108,7 +106,7 @@ class pagamentosController extends Controller
                             'ANO_VENCIMENTO' => $card->expiration_year,
                             'CVV' => Crypt::encryptString($request->cvv),
                             'BANDEIRA' => $request->paymentMethodId,
-                            'STATUS' => $statusAtivo,
+                            'STATUS' => \Config::get('constants.STATUS.ATIVO'),
                             'PRINCIPAL' => $request->cartaoPrincipal,
                         ]);
                     }
@@ -149,7 +147,7 @@ class pagamentosController extends Controller
                         'ANO_VENCIMENTO' => $card->expiration_year,
                         'CVV' => Crypt::encryptString($request->cvv),
                         'BANDEIRA' => $request->paymentMethodId,
-                        'STATUS' => $statusAtivo,
+                        'STATUS' => \Config::get('constants.STATUS.ATIVO'),
                     ]);
                 }
 
