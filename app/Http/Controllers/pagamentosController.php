@@ -78,9 +78,7 @@ class pagamentosController extends Controller
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
                 $customer->save();
-
-                dd($customer);
-
+                dump($customer);
                 if($customer) {
                     dump('Entrou pra criar o card');
                     //Card é o cartão do cliente
@@ -93,7 +91,7 @@ class pagamentosController extends Controller
 
                     $card->customer_id = $customer->id;
                     $card->save();
-                    dump($card);
+                    dd($card);
                     if($card) {
                         dump('Entrou pra criar o cartao');
                         // Gravando os dados do cartão do nosso lado
