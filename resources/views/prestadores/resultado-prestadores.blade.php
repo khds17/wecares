@@ -159,7 +159,7 @@
                             <div class="col font-color-gray">
                                 <label for="formacao">Serviços que deverão ser realizados</label><br>
                                 @foreach($servicos as $servico)
-                                    <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}" onchange="calcularServicos(this.value)"> {{$servico->TIPO}} <br> 
+                                    <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}" onclick="calcularServicos(this.value)"> {{$servico->TIPO}} <br> 
                                 @endforeach
                                 <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
                             </div>

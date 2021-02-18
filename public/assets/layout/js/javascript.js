@@ -28,3 +28,18 @@
         }
     }
 })(window,document);
+
+function calcularServicos(id) {
+
+    let valorTotal = 0; 
+
+    $("input[id*='servicos[']").each(function (chave, elemento) {
+
+        if($(elemento).is(':checked')) {
+            valorTotal += 20;
+        } 
+    });
+
+    document.getElementById('precoServico').value = valorTotal;
+
+}
