@@ -59,7 +59,7 @@ class pagamentosController extends Controller
         $payment->save();
 
         // Se der certo o payment vai armazenar os dados de cartão do cliente
-        if($payment) {
+        if(!empty($payment->id)) {
             // Select para ver se o solicitante já possui um id de customer
             //Customer é o cliente no mercado pago
             $solicitantesCustomer = $this->objSolicitante
