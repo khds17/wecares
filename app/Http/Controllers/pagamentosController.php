@@ -59,7 +59,7 @@ class pagamentosController extends Controller
         $payment->payer = $payer;
         $payment->save();
 
-        file_put_contents('/home/wecares/storage/logs/teste.txt', print_r($payment, TRUE), FILE_APPEND);
+        file_put_contents('/home/wecares/storage/logs/laravel.log', print_r($payment, TRUE), FILE_APPEND);
 
         // Se der certo o payment vai armazenar os dados de cartão do cliente
         if($payment) {
@@ -73,14 +73,14 @@ class pagamentosController extends Controller
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
                 $customerSolicitante = $solicitanteCustomer;
             }
-            file_put_contents('/home/wecares/storage/logs/teste.txt', print_r($customerSolicitante, TRUE), FILE_APPEND);
+            file_put_contents('/home/wecares/storage/logs/laravel.log', print_r($customerSolicitante, TRUE), FILE_APPEND);
             //Verifico se já existe um id de customer, se não existir, criamos.
             if(empty($customerSolicitante->ID_CUSTOMER)){
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
                 $customer->save();
                 dump($customer);
-                file_put_contents('/home/wecares/storage/logs/teste.txt', print_r($customer, TRUE), FILE_APPEND);
+                file_put_contents('/home/wecares/storage/logs/laravel.log', print_r($customer, TRUE), FILE_APPEND);
                 if($customer) {
                     dump('Entrou pra criar o card');
                     //Card é o cartão do cliente
@@ -94,7 +94,7 @@ class pagamentosController extends Controller
                     $card->customer_id = $customer->id;
                     $card->save();
                     dump($card);
-                    file_put_contents('/home/wecares/storage/logs/teste.txt', print_r($card, TRUE), FILE_APPEND);
+                    file_put_contents('/home/wecares/storage/logs/laravel.log', print_r($card, TRUE), FILE_APPEND);
                     if($card) {
                         dump('Entrou pra criar o cartao');
                         // Gravando os dados do cartão do nosso lado
@@ -111,7 +111,7 @@ class pagamentosController extends Controller
                             'PRINCIPAL' => $request->cartaoPrincipal,
                         ]);
                     }
-                    file_put_contents('/home/wecares/storage/logs/teste.txt', print_r($cartao, TRUE), FILE_APPEND);
+                    file_put_contents('/home/wecares/storage/logs/laravel.log', print_r($cartao, TRUE), FILE_APPEND);
 
                     if($payment) {
                         dump('Entrou pra criar o validar cartao');
@@ -124,7 +124,7 @@ class pagamentosController extends Controller
                             'DT_APROVACAO' => $payment->date_approved,
                         ]);
                     }
-                    file_put_contents('/home/wecares/storage/logs/teste.txt', print_r($validaCartao, TRUE), FILE_APPEND);
+                    file_put_contents('/home/wecares/storage/logs/laravel.log', print_r($validaCartao, TRUE), FILE_APPEND);
 
                 }
             } else {
