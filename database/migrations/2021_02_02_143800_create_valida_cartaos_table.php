@@ -16,11 +16,10 @@ class CreateValidaCartaosTable extends Migration
         Schema::create('VALIDA_CARTAO', function (Blueprint $table) {
             $table->increments('ID');
             $table->string('ID_PAGAMENTO',11);
-            $table->unsignedInteger('ID_CARTAO');
+            $table->string('ID_CARTAO',15);
             $table->string('STATUS',20);
             $table->string('DT_CRIACAO',35);
             $table->string('DT_APROVACAO',35);
-            $table->foreign('ID_CARTAO')->references('ID')->on('CARTOES')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
