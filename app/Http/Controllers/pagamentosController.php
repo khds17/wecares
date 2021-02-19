@@ -61,7 +61,6 @@ class pagamentosController extends Controller
         
         // Se der certo o payment vai armazenar os dados de cartão do cliente
         if($payment) {
-            // dd($payment); DEU CERTO
             // Select para ver se o solicitante já possui um id de customer
             //Customer é o cliente no mercado pago
             $solicitantesCustomer = $this->objSolicitante
@@ -160,11 +159,12 @@ class pagamentosController extends Controller
                     ]);
                 }
             }
-            dd('Deu tudo certo!');
         } else {
             $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
-        }        
+        }     
+        
+        return redirect()->action('pagamentosController@pagamentos');
     }
 
     public function estornoPaymentValidation()
