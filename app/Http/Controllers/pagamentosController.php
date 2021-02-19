@@ -58,10 +58,10 @@ class pagamentosController extends Controller
         $payment->payer = $payer;
         $payment->save();
 
-        // Se der certo o payment vai armazenar os dados de cartão do cliente
+        //Verifica se criou o id do payment para ter certeza que houve sucesso com o pagamento.
         if(!empty($payment->id)) {
-            // Select para ver se o solicitante já possui um id de customer
-            //Customer é o cliente no mercado pago
+
+            // Pega o id do customer do solicitante para validação.
             $solicitantesCustomer = $this->objSolicitante
                                 ->where('ID_USUARIO', auth()->user()->id)
                                 ->select('SOLICITANTES.ID_CUSTOMER')
@@ -71,16 +71,14 @@ class pagamentosController extends Controller
                 $customerSolicitante = $solicitanteCustomer;
             }
 
-            //Verifico se já existe um id de customer, se não existir, criamos.
+            //Verifica se já existe um id de customer(cliente).
             if(empty($customerSolicitante->ID_CUSTOMER)){
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
                 $customer->save();
-                dump($customer);
 
-                if($customer) {
-                    dump('Entrou pra criar o card');
-                    //Card é o cartão do cliente
+                //Verifica se existe o id do customer
+                if(!empty($customer->id)) {
                     $card = new \MercadoPago\Card();
                     $card->token = $request->token;
 
@@ -90,11 +88,10 @@ class pagamentosController extends Controller
 
                     $card->customer_id = $customer->id;
                     $card->save();
-                    dump($card);
 
-                    if($card) {
-                        dump('Entrou pra criar o cartao');
-                        // Gravando os dados do cartão do nosso lado
+                    //Verifica se existe o id do card
+                    if(!empty($card->id)) {
+                        // Grava os dados do cartão do nosso lado
                         $cartao = $this->objCartoes->create([
                             'ID_CUSTOMER' => $customer->id,
                             'ID_CARTAO' => $card->id,
@@ -107,11 +104,8 @@ class pagamentosController extends Controller
                             'STATUS' => \Config::get('constants.STATUS.ATIVO'),
                             'PRINCIPAL' => $request->cartaoPrincipal,
                         ]);
-                    }
-                    dd($payment);
-                    if($payment) {
-                        dump('Entrou pra criar o validar cartao');
-                        //Gravando os dados do pagamento de validação para estorno.
+
+                        //Grava os dados do pagamento de validação para estorno.
                         $validaCartao = $this->objValidaCartao->create([
                             'ID_PAGAMENTO' => $payment->id,
                             'ID_CARTAO' => $card->id,
@@ -119,11 +113,16 @@ class pagamentosController extends Controller
                             'DT_CRIACAO' => $payment->date_created,
                             'DT_APROVACAO' => $payment->date_approved,
                         ]);
+                    } else {
+                        $errorArray = (array)$card->error;
+                        echo json_encode ($errorArray);
                     }
+                } else {
+                    $errorArray = (array)$customer->error;
+                    echo json_encode ($errorArray);
                 }
             } else {
-                dd('Entrou aqui 2');
-                //Caso já exista um customer, eu apenas gravo os dados do cartão.
+                //Caso já exista um customer, grava os dados do cartão.
                 $card = new \MercadoPago\Card();
                 $card->token = $request->token;
 
@@ -134,8 +133,9 @@ class pagamentosController extends Controller
                 $card->customer_id = $idCustomer;
                 $card->save();
                 
-                if($card) {
-                    // Gravando os dados do cartão do nosso lado
+                //Verifica se existe o id do card
+                if(!empty($card->id)) {
+                    // Grava os dados do cartão do nosso lado
                     $cartao = $this->objCartoes->create([
                         'ID_CUSTOMER' => $customer->id,
                         'ID_CARTAO' => $card->id,
@@ -147,10 +147,8 @@ class pagamentosController extends Controller
                         'BANDEIRA' => $request->paymentMethodId,
                         'STATUS' => \Config::get('constants.STATUS.ATIVO'),
                     ]);
-                }
 
-                if($payment) {
-                    //Gravando os dados do pagamento de validação para estorno.
+                    //Grava os dados do pagamento de validação para estorno.
                     $validaCartao = $this->objValidaCartao->create([
                         'ID_PAGAMENTO' => $payment->id,
                         'ID_CARTAO' => $card->id,
