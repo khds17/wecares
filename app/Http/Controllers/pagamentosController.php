@@ -91,7 +91,7 @@ class pagamentosController extends Controller
 
                     $card->customer_id = $customer->id;
                     $card->save();
-                    dd($card);
+                    dump($card);
                     if($card) {
                         dump('Entrou pra criar o cartao');
                         // Gravando os dados do cartão do nosso lado
@@ -160,6 +160,7 @@ class pagamentosController extends Controller
                     ]);
                 }
             }
+            dd('Deu tudo certo!');
         } else {
             $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
