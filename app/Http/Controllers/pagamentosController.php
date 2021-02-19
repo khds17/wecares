@@ -108,7 +108,7 @@ class pagamentosController extends Controller
                             'PRINCIPAL' => $request->cartaoPrincipal,
                         ]);
                     }
-
+                    dd($payment);
                     if($payment) {
                         dump('Entrou pra criar o validar cartao');
                         //Gravando os dados do pagamento de validação para estorno.
