@@ -168,6 +168,8 @@ class pagamentosController extends Controller
 
     public function estornoPaymentValidation()
     {
+        \MercadoPago\SDK::setAccessToken("TEST-3508208613949405-021316-3288de42a43e89f96ce0a4a54a85533c-713881257");
+
         $cartoesEstorno = $this->objValidaCartao
                             ->where('VALIDA_CARTAO.STATUS', '=', 'approved')
                             ->get();
