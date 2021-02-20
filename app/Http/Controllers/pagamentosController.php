@@ -178,6 +178,8 @@ class pagamentosController extends Controller
             $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
             $payment->status = "cancelled";
             $payment->update();
+
+            dd($payment);
         }
     }
 
