@@ -47,6 +47,7 @@ Route::resource('/recebimentos','recebimentosController')->middleware('auth');
 // ===========================================
 Route::resource('/servico','servicosController');
 Route::post('/proposta','servicosController@propostas')->middleware('auth');
+Route::get('/propostaAgradecimento','servicosController@propostaAgradecimento');
 Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
 Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth');
 Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');

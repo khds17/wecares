@@ -35,6 +35,7 @@ class servicos_prestados extends Model
         'HORA_INICIO',
         'HORA_FIM',
         'VALOR',
-        'STATUS'
+        'STATUS_SERVICO',
+        'STATUS_APROVACAO'
     ];
 }

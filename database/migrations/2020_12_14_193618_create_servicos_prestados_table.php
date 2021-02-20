@@ -41,7 +41,8 @@ class CreateServicosPrestadosTable extends Migration
             $table->time('HORA_INICIO',0);
             $table->time('HORA_FIM',0);
             $table->float('VALOR',8,2);
-            $table->unsignedSmallInteger('STATUS');
+            $table->unsignedSmallInteger('STATUS_SERVICO');
+            $table->string('STATUS_APROVACAO',20)->nullable();
             $table->foreign('ID_PROPOSTA')->references('ID')->on('PROPOSTAS')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_PRESTADOR')->references('ID')->on('PRESTADORES')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('ID_SOLICITANTE')->references('ID')->on('SOLICITANTES')->onDelete('cascade')->onUpdate('cascade');

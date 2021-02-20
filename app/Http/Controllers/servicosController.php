@@ -46,108 +46,114 @@ class servicosController extends Controller
 
     public function propostas(Request $request)
     {
-    // Todos os select estão em um array dentro de um array, para isso, criei um foreach para remover todos do array
+        // Todos os select estão em um array dentro de um array, para isso, criei um foreach para remover todos do array
 
-    $arraySolicitantes = $this->objSolicitante
-                        ->where('ID_USUARIO', auth()->user()->id)
-                        ->get();
+        $arraySolicitantes = $this->objSolicitante
+                            ->where('ID_USUARIO', auth()->user()->id)
+                            ->get();
 
-    foreach ($arraySolicitantes as $arraySolicitante) {
-        $solicitante = $arraySolicitante;
-    }
-
-    $arrayPacientes = $this->objPaciente
-                    ->where('PACIENTES.ID', '=', $request->selectPaciente)
-                    ->get();
-
-    foreach ($arrayPacientes as $arrayPaciente) {
-        $paciente = $arrayPaciente;
-    }
-
-    $arrayPacientesTipos = $this->objPacienteTipo
-                        ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
-                        ->where('PACIENTES_TIPOS.ID', '=', $paciente->ID_TIPO)
-                        ->select('PACIENTES_TIPOS.*')
-                        ->get();
-
-    foreach ($arrayPacientesTipos as $arrayPacienteTipos) {
-        $pacienteTipo = $arrayPacienteTipos;
-    }
-
-    $arrayPacientesLocalizacao = $this->objPacienteLocalizacao
-                                ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
-                                ->where('PACIENTE_LOCALIZACAO.ID', '=', $paciente->ID_LOCALIZACAO)
-                                ->select('PACIENTE_LOCALIZACAO.*')
-                                ->get();
-
-    foreach ($arrayPacientesLocalizacao as $arrayPacienteLocalizacao) {
-        $pacienteLocalizacao = $arrayPacienteLocalizacao;
-    }
-
-    $arrayCidades = $this->objCidades
-                ->where('CIDADES.ID','=', $request->pacienteCidade)
-                ->get();
-
-    
-    foreach ($arrayCidades as $arrayCidade) {
-        $cidade = $arrayCidade;
-    }
-
-    //Aqui precisar fazer a logica para calcular os valores da propostas.
-    $valor = 100;
-
-    DB::beginTransaction();
-        
-        try {
-
-            $idPrestadores = explode(",",$request->idPrestadores);
-
-            $idServicos = implode(",",$request->servicos);
-            
-            foreach ($idPrestadores as $idPrestador) {
-                
-                $arrayPrestadores = $this->objPrestador
-                    ->where('PRESTADORES.ID', '=', $idPrestador)
-                    ->get();
-                
-                foreach ($arrayPrestadores as $arrayPrestador) {
-                    $prestador = $arrayPrestador;
-
-                    $proposta = $this->objProposta->create([
-                        'ID_PRESTADOR' => $prestador->ID,
-                        'NOME_PRESTADOR' =>$prestador->NOME,
-                        'ID_SOLICITANTE' => $solicitante->ID,
-                        'NOME_SOLICITANTE' => $solicitante->NOME,
-                        'ID_FAMILIARIDADE' => $request->familiaridade,
-                        'OUTROS_FAMILIARIDADE' => $request->familiaridadeOutros,
-                        'ID_PACIENTE' => $paciente->ID,
-                        'NOME_PACIENTE' => $paciente->NOME,
-                        'TIPO' => $pacienteTipo->TIPO,
-                        'LOCALIZACAO' => $pacienteLocalizacao->LOCALIZACAO,
-                        'CEP' => $request->pacienteCep, 
-                        'ENDERECO' => $request->pacienteEndereco,
-                        'NUMERO' => $request->pacienteNumero,
-                        'COMPLEMENTO' => $request->pacienteComplemento,
-                        'BAIRRO' => $request->pacienteBairro,
-                        'CIDADE' => $cidade->CIDADE,
-                        'UF' => $cidade->UF,
-                        'SERVICOS' => $idServicos,
-                        'SERVICOS_OUTROS' => $request->servicoOutros,
-                        'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
-                        'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
-                        'DATA_SERVICO' => $request->dataServico,
-                        'HORA_INICIO' => $request->horaInicio,
-                        'HORA_FIM' => $request->horaFim,
-                        'VALOR' => $valor
-                    ]);
-                }
-               DB::commit();
-            };
-        } catch (\Throwable $th) {
-            //throw $th;
-            DB::rollback();
-            dd('Deu ruim');
+        foreach ($arraySolicitantes as $arraySolicitante) {
+            $solicitante = $arraySolicitante;
         }
+
+        $arrayPacientes = $this->objPaciente
+                        ->where('PACIENTES.ID', '=', $request->selectPaciente)
+                        ->get();
+
+        foreach ($arrayPacientes as $arrayPaciente) {
+            $paciente = $arrayPaciente;
+        }
+
+        $arrayPacientesTipos = $this->objPacienteTipo
+                            ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
+                            ->where('PACIENTES_TIPOS.ID', '=', $paciente->ID_TIPO)
+                            ->select('PACIENTES_TIPOS.*')
+                            ->get();
+
+        foreach ($arrayPacientesTipos as $arrayPacienteTipos) {
+            $pacienteTipo = $arrayPacienteTipos;
+        }
+
+        $arrayPacientesLocalizacao = $this->objPacienteLocalizacao
+                                    ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
+                                    ->where('PACIENTE_LOCALIZACAO.ID', '=', $paciente->ID_LOCALIZACAO)
+                                    ->select('PACIENTE_LOCALIZACAO.*')
+                                    ->get();
+
+        foreach ($arrayPacientesLocalizacao as $arrayPacienteLocalizacao) {
+            $pacienteLocalizacao = $arrayPacienteLocalizacao;
+        }
+
+        $arrayCidades = $this->objCidades
+                    ->where('CIDADES.ID','=', $request->pacienteCidade)
+                    ->get();
+
+        
+        foreach ($arrayCidades as $arrayCidade) {
+            $cidade = $arrayCidade;
+        }
+
+        //Aqui precisar fazer a logica para calcular os valores da propostas.
+        $valor = 100;
+
+        DB::beginTransaction();
+            
+            try {
+
+                $idPrestadores = explode(",",$request->idPrestadores);
+
+                $idServicos = implode(",",$request->servicos);
+                
+                foreach ($idPrestadores as $idPrestador) {
+                    
+                    $arrayPrestadores = $this->objPrestador
+                        ->where('PRESTADORES.ID', '=', $idPrestador)
+                        ->get();
+                    
+                    foreach ($arrayPrestadores as $arrayPrestador) {
+                        $prestador = $arrayPrestador;
+
+                        $proposta = $this->objProposta->create([
+                            'ID_PRESTADOR' => $prestador->ID,
+                            'NOME_PRESTADOR' =>$prestador->NOME,
+                            'ID_SOLICITANTE' => $solicitante->ID,
+                            'NOME_SOLICITANTE' => $solicitante->NOME,
+                            'ID_FAMILIARIDADE' => $request->familiaridade,
+                            'OUTROS_FAMILIARIDADE' => $request->familiaridadeOutros,
+                            'ID_PACIENTE' => $paciente->ID,
+                            'NOME_PACIENTE' => $paciente->NOME,
+                            'TIPO' => $pacienteTipo->TIPO,
+                            'LOCALIZACAO' => $pacienteLocalizacao->LOCALIZACAO,
+                            'CEP' => $request->pacienteCep, 
+                            'ENDERECO' => $request->pacienteEndereco,
+                            'NUMERO' => $request->pacienteNumero,
+                            'COMPLEMENTO' => $request->pacienteComplemento,
+                            'BAIRRO' => $request->pacienteBairro,
+                            'CIDADE' => $cidade->CIDADE,
+                            'UF' => $cidade->UF,
+                            'SERVICOS' => $idServicos,
+                            'SERVICOS_OUTROS' => $request->servicoOutros,
+                            'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
+                            'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
+                            'DATA_SERVICO' => $request->dataServico,
+                            'HORA_INICIO' => $request->horaInicio,
+                            'HORA_FIM' => $request->horaFim,
+                            'VALOR' => $valor
+                        ]);
+                    }
+                DB::commit();
+                return redirect()->action('servicosController@propostaAgradecimento');
+                };
+            } catch (\Throwable $th) {
+                //throw $th;
+                DB::rollback();
+                dd('Deu ruim');
+            }
+    }
+
+    public function propostaAgradecimento()
+    {
+        return view('servicos/propostaAgradecimento');
     }
 
     public function servicosPrestados()
@@ -232,7 +238,7 @@ class servicosController extends Controller
                 'HORA_INICIO' => $servico->HORA_INICIO,
                 'HORA_FIM' => $servico->HORA_FIM,
                 'VALOR' => $servico->VALOR,
-                'STATUS' => $servicoPendente
+                'STATUS_SERVICO' => $servicoPendente
             ]);
 
         }                      
