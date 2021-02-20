@@ -168,14 +168,15 @@ class pagamentosController extends Controller
 
     public function estornoPaymentValidation()
     {
-        $cartoesEstorno = $this->objValidaCartao->all();
+        $cartoesEstorno = $this->objValidaCartao
+                            ->where('VALIDA_CARTAO.STATUS', '=', 'approved')
+                            ->get();
 
         foreach ($cartoesEstorno as $cartaoEstorno) {
             $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
             $payment->status = "cancelled";
             $payment->update();
         }
-        dd('Passou');
     }
 
     /**
