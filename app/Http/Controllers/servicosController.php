@@ -47,7 +47,6 @@ class servicosController extends Controller
     public function propostas(Request $request)
     {
         // Todos os select estão em um array dentro de um array, para isso, criei um foreach para remover todos do array
-
         $arraySolicitantes = $this->objSolicitante
                             ->where('ID_USUARIO', auth()->user()->id)
                             ->get();
@@ -93,9 +92,6 @@ class servicosController extends Controller
             $cidade = $arrayCidade;
         }
 
-        //Aqui precisar fazer a logica para calcular os valores da propostas.
-        $valor = 100;
-
         DB::beginTransaction();
             
             try {
@@ -138,7 +134,7 @@ class servicosController extends Controller
                             'DATA_SERVICO' => $request->dataServico,
                             'HORA_INICIO' => $request->horaInicio,
                             'HORA_FIM' => $request->horaFim,
-                            'VALOR' => $valor
+                            'VALOR' => $request->precoServico
                         ]);
                     }
                 DB::commit();
