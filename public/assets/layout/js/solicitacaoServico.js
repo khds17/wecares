@@ -33,14 +33,13 @@ function getPaciente(id) {
         },
         success: function (data) {
             if (data != null) {
-                console.log(data);
                 //Limpa todos os select selecionados
                 $("#pacienteTipo").find('option').attr("selected",false);
                 $("#pacienteLocalizacao").find('option').attr("selected",false);
                 $("#pacienteCidade").find('option').attr("selected",false);
                 $("#pacienteEstado").find('option').attr("selected",false);
                 $("#familiaridade").find('option').attr("selected",false);
-                // $("#tomaMedicamento").find('input[type="radio"]').attr("checked",false);
+                $("#tomaMedicamento").find('input[type="radio"]').attr("checked",false);
 
                 //Atualiza os dados do formulário de solicitação conforme o paciente selecionado
                 $("#familiaridade option[value="+data.paciente.ID_FAMILIARIDADE+"]").attr("selected", "selected");
@@ -55,7 +54,7 @@ function getPaciente(id) {
                 $("#pacienteEstado option[value="+data.endereco.ID_ESTADO+"]").attr("selected", "selected");
                 $('#pacienteComplemento').val(data.endereco.COMPLEMENTO);
                 $("#pacienteCidade option[value="+data.endereco.ID_CIDADE+"]").attr("selected", "selected");
-                // $("#tomaMedicamento").val(data.paciente.TOMA_MEDICAMENTOS).attr("checked", "checked");
+                $("input[name=tomaMedicamento][value="+data.paciente.TOMA_MEDICAMENTOS+"]").attr("checked", true);
                 $('#tipoMedicamento').val(data.paciente.TIPO_MEDICAMENTOS);
                 
             } 
