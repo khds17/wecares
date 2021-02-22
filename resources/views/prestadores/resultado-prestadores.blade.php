@@ -168,7 +168,7 @@
                                 <div class="col font-color-gray">
                                     <label for="formacao">Paciente toma medicamentos?</label><br>
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
-                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não
+                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não
                                 </div>
                                 <div class="col font-color-gray">
                                     <label for="formacao">Quais medicamentos?</label><br>
@@ -205,7 +205,7 @@
                             <div class="row margin-top-10" id="servicos" >
                                 <div class="col font-color-gray">
                                     <label class ="" for="formacao">Valor total do serviço: R$</label>
-                                    <input type="text" name="precoServico" id="precoServico" value="" disabled="disabled">                                
+                                    <input type="text" name="precoServico" id="precoServico" value="">                                
                                 </div>
                             </div>
                             <div class="modal-footer">
