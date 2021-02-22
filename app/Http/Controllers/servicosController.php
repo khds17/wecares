@@ -154,10 +154,20 @@ class servicosController extends Controller
 
     public function selectProposta($id)
     {
-
         $propostas = $this->objProposta->find($id);
 
-        return $propostas;
+        $prestador = $this->objPrestador
+                            ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
+                            ->where('PRESTADORES.ID','=',$propostas->ID_PRESTADOR)
+                            ->select('PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
+                            ->get();
+
+        $dadosProposta = [
+            'propostas' => $propostas,
+            'prestador' => $prestador,
+        ];
+
+        return $dadosProposta;
     }
 
     public function servicosPrestados()

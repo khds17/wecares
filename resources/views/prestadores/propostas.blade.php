@@ -147,7 +147,7 @@
                             </div>
                             <div class="col">
                                 <label for="">Serviços outros</label>
-                                <input class="form-control"type="text" name="" id="" value=""><br>      
+                                <input class="form-control"type="text" name="servicoOutros" id="servicoOutros" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">

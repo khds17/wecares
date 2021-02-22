@@ -161,31 +161,33 @@ function getProposta(id) {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         success: function (data) {
-            console.log(data);
             if (data != null) {
-
                 //Atualiza os dados do formulário de solicitação conforme o paciente selecionado
-                $('#solicitanteNome').val(data.NOME_SOLICITANTE);
-                $('#pacienteNome').val(data.NOME_PACIENTE);
-                $("#familiaridade option[value="+data.ID_FAMILIARIDADE+"]").attr("selected", "selected");
-                $('#familiaridadeOutros').val(data.FAMILIAR_OUTROS);
-                $('#pacienteTipo').val(data.TIPO);
-                $('#pacienteLocalizacao').val(data.LOCALIZACAO);
-                $('#pacienteCep').val(data.CEP);
-                $('#pacienteEndereco').val(data.ENDERECO);
-                $('#pacienteBairro').val(data.BAIRRO);
-                $('#pacienteNumero').val(data.NUMERO);
-                $('#pacienteCidade').val(data.CIDADE);
-                $('#pacienteEstado').val(data.UF);
-                $('#pacienteComplemento').val(data.COMPLEMENTO);
-                $('#servicoDataPrestacao').val(data.DATA_SERVICO);
-                $('#servicoValor').val(data.VALOR);
-                $('#servicoInicio').val(data.HORA_INICIO);
-                $('#servicoFim').val(data.HORA_FIM);
-                $("input[name=tomaMedicamento][value="+data.TOMA_MEDICAMENTOS+"]").attr("checked", true);
-                $('#tipoMedicamento').val(data.TIPO_MEDICAMENTOS);
+                $('#solicitanteNome').val(data.propostas.NOME_SOLICITANTE);
+                $('#pacienteNome').val(data.propostas.NOME_PACIENTE);
+                $('#prestadorNome').val(data.propostas.NOME_PRESTADOR);
+                $("#familiaridade option[value="+data.propostas.ID_FAMILIARIDADE+"]").attr("selected", "selected");
+                $('#familiaridadeOutros').val(data.propostas.FAMILIAR_OUTROS);
+                $('#pacienteTipo').val(data.propostas.TIPO);
+                $('#pacienteLocalizacao').val(data.propostas.LOCALIZACAO);
+                $('#pacienteCep').val(data.propostas.CEP);
+                $('#pacienteEndereco').val(data.propostas.ENDERECO);
+                $('#pacienteBairro').val(data.propostas.BAIRRO);
+                $('#pacienteNumero').val(data.propostas.NUMERO);
+                $('#pacienteCidade').val(data.propostas.CIDADE);
+                $('#pacienteEstado').val(data.propostas.UF);
+                $('#pacienteComplemento').val(data.propostas.COMPLEMENTO);
+                $('#servicoDataPrestacao').val(data.propostas.DATA_SERVICO);
+                $('#servicoValor').val(data.propostas.VALOR);
+                $('#servicoInicio').val(data.propostas.HORA_INICIO);
+                $('#servicoFim').val(data.propostas.HORA_FIM);
+                $("input[name=tomaMedicamento][value="+data.propostas.TOMA_MEDICAMENTOS+"]").attr("checked", true);
+                $('#tipoMedicamento').val(data.propostas.TIPO_MEDICAMENTOS);
+                $('#servicoOutros').val(data.propostas.SERVICOS_OUTROS);
+                $('#formacao').val(data.prestador[0].FORMACAO);
+                $('#prestadorTelefone').val(data.prestador[0].TELEFONE);
 
-                let servicos = data.SERVICOS.split([',']);
+                let servicos = data.propostas.SERVICOS.split([',']);
 
                 servicos.forEach(function(elemento){
                     console.log(elemento);
