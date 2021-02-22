@@ -38,7 +38,7 @@
                                     <td>R${{$proposta->VALOR}}</td>
                                     <td>
                                         <a data-toggle="modal" data-target="#modalVisualizarProposta" href="">
-                                            <button class="btn btn-primary">Visualizar</button>
+                                            <button class="btn btn-primary" onclick="getProposta({{$proposta->ID}})">Visualizar</button>
                                         </a>
                                         <a href="">
                                             <button class="btn btn-success" onclick="aceitarProspostaPrestador({{$proposta->ID}})">Aceitar</button>
@@ -71,109 +71,114 @@
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Nome do solicitante</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->NOME_SOLICITANTE}}" disabled><br>                                         
+                                <input class="form-control"type="text" name="solicitanteNome" id="solicitanteNome" value=""><br>                                         
                             </div>
                             <div class="col">
                                 <label for="">Nome do paciente</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->NOME_PACIENTE}}" disabled><br>                                       
+                                <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" value=""><br>                                       
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Familiaridade do solicitante</label>
-                                <select name="familiaridade" class="custom-select" value="{{old('familiaridade')}}" disabled>
+                                <select name="familiaridade" id="familiaridade" class="custom-select">
                                     @foreach($familiaridades as $familiaridade)
-                                        <option value="{{$familiaridade->ID}}" {{($proposta->ID_FAMILIARIDADE == $familiaridade->ID) ? 'selected' : ''}} >{{$familiaridade->FAMILIARIDADE}}</option>
+                                        <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
                                     @endforeach
                                 </select>                                       
                             </div>
                             <div class="col">
                                 <label for="">Familiaridade Outros</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->OUTROS_FAMILIARIDADE}}" disabled><br>                                       
+                                <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" value=""><br>                                       
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Tipo paciente</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->TIPO}}" disabled><br>     
+                                <input class="form-control"type="text" name="pacienteTipo" id="pacienteTipo" value=""><br>     
                             </div>
                             <div class="col">
                                 <label for="">Localização do paciente</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->LOCALIZACAO}}" disabled><br>      
+                                <input class="form-control"type="text" name="pacienteLocalizacao" id="pacienteLocalizacao" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">CEP</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->CEP}}" disabled><br>     
+                                <input class="form-control"type="text" name="pacienteCep" id="pacienteCep" value=""><br>     
                             </div>
                             <div class="col">
                                 <label for="">Endereço</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->ENDERECO}}" disabled><br> 
+                                <input class="form-control"type="text" name="pacienteEndereco" id="pacienteEndereco" value=""><br> 
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Bairro</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->BAIRRO}}" disabled><br>       
+                                <input class="form-control"type="text" name="pacienteBairro" id="pacienteBairro" value=""><br>       
                             </div>
                             <div class="col">
                                 <label for="">Número</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->NUMERO}}" disabled><br>      
+                                <input class="form-control"type="text" name="pacienteNumero" id="pacienteNumero" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Cidade</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->CIDADE}}" disabled><br>     
+                                <input class="form-control"type="text" name="pacienteCidade" id="pacienteCidade" value=""><br>     
                             </div>
                             <div class="col">
                                 <label for="">Estado</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->UF}}" disabled><br>      
+                                <input class="form-control"type="text" name="pacienteEstado" id="pacienteEstado" value=""><br>      
+                            </div>
+                        </div>
+                        <div class="row margin-top-10">
+                            <div class="col">
+                                <label for="">Complemento</label>
+                                <input class="form-control"type="text" name="pacienteComplemento" id="pacienteComplemento" value=""><br>     
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Serviços a serem realizados</label><br>
                                 @foreach($servicos as $servico)
-                                    <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
+                                    <input type="checkbox" name="servicos" id="servicos" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
                                 @endforeach  
                             </div>
                             <div class="col">
                                 <label for="">Serviços outros</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->SERVICOS_OUTROS}}" disabled><br>      
+                                <input class="form-control"type="text" name="" id="" value=""><br>      
                             </div>
                         </div>
-                        <br>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Toma medicamentos?</label><br>
-                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1" {{($proposta->TOMA_MEDICAMENTOS == 1) ? 'checked' : ''}}> Sim <br> 
-                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0" {{($proposta->TOMA_MEDICAMENTOS == 0) ? 'checked' : ''}}> Não    
+                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
+                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não    
                             </div>
                             <div class="col">
                                 <label for="">Tipo medicamentos</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->TIPO_MEDICAMENTOS}}" disabled><br>      
+                                <input class="form-control"type="text" name="tipoMedicamento" id="tipoMedicamento" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Data serviço</label><br>  
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->DATA_SERVICO}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoDataPrestacao" id="servicoDataPrestacao" value=""><br>      
                             </div>
                             <div class="col">
                                 <label for="">Valor</label><br>  
-                                <input class="form-control"type="text" name="" id="" value="R${{$proposta->VALOR}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoValor" id="servicoValor" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Hora de início</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->HORA_INICIO}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoInicio" id="servicoInicio" value=""><br>      
                             </div>
                             <div class="col">
                                 <label for="">Hora de fim</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$proposta->HORA_FIM}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoFim" id="servicoFim" value=""><br>      
                             </div>
                         </div>
                     </form>

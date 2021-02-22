@@ -56,6 +56,7 @@ Route::put('/aceitarProspostaPrestador/{id}', 'servicosController@aceitarProspos
 Route::put('/recusarProspostaPrestador/{id}', 'servicosController@recusarProspostaPrestador')->middleware('auth');
 Route::put('/aceitarPropostaSolicitante/{id}', 'servicosController@aceitarPropostaSolicitante')->middleware('auth');
 Route::put('/recusarProspostaSolicitante/{id}', 'servicosController@recusarProspostaSolicitante')->middleware('auth');
+Route::post('/selectproposta/{id}','servicosController@selectproposta');
 
 // ===========================================
 Route::resource('/solicitante','solicitantesController');

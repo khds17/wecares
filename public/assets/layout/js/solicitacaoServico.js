@@ -150,3 +150,49 @@ function recusarProspostaSolicitante(id)
         })
     }
 }
+
+function getProposta(id) {
+    
+    $.ajax({
+        url: "selectproposta/" + id,
+        type: "post",
+        dataType: 'json',
+        headers:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data) {
+            console.log(data);
+            if (data != null) {
+
+                //Atualiza os dados do formulário de solicitação conforme o paciente selecionado
+                $('#solicitanteNome').val(data.NOME_SOLICITANTE);
+                $('#pacienteNome').val(data.NOME_PACIENTE);
+                $("#familiaridade option[value="+data.ID_FAMILIARIDADE+"]").attr("selected", "selected");
+                $('#familiaridadeOutros').val(data.FAMILIAR_OUTROS);
+                $('#pacienteTipo').val(data.TIPO);
+                $('#pacienteLocalizacao').val(data.LOCALIZACAO);
+                $('#pacienteCep').val(data.CEP);
+                $('#pacienteEndereco').val(data.ENDERECO);
+                $('#pacienteBairro').val(data.BAIRRO);
+                $('#pacienteNumero').val(data.NUMERO);
+                $('#pacienteCidade').val(data.CIDADE);
+                $('#pacienteEstado').val(data.UF);
+                $('#pacienteComplemento').val(data.COMPLEMENTO);
+                $('#servicoDataPrestacao').val(data.DATA_SERVICO);
+                $('#servicoValor').val(data.VALOR);
+                $('#servicoInicio').val(data.HORA_INICIO);
+                $('#servicoFim').val(data.HORA_FIM);
+                $("input[name=tomaMedicamento][value="+data.TOMA_MEDICAMENTOS+"]").attr("checked", true);
+                $('#tipoMedicamento').val(data.TIPO_MEDICAMENTOS);
+
+                let servicos = data.SERVICOS.split([',']);
+
+                servicos.forEach(function(elemento){
+                    console.log(elemento);
+                    $("input[name=servicos][value="+elemento+"]").attr("checked", true);
+                });
+                
+            } 
+        }
+    });
+}

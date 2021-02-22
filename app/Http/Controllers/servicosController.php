@@ -152,6 +152,14 @@ class servicosController extends Controller
         return view('servicos/propostaAgradecimento');
     }
 
+    public function selectProposta($id)
+    {
+
+        $propostas = $this->objProposta->find($id);
+
+        return $propostas;
+    }
+
     public function servicosPrestados()
     {
         $servicosPrestados = $this->objServicosPrestados
