@@ -17,7 +17,7 @@
                     @if (!empty($propostas))
                         <thead>
                             <tr>
-                                <th scope="col">Número da proposta</th>
+                                {{-- <th scope="col">Número da proposta</th> --}}
                                 <th scope="col">Nome do profissional</th>
                                 <th scope="col">Paciente</th>
                                 <th scope="col">Valor</th>
@@ -32,7 +32,7 @@
                         {{-- Só crio esse foreach para percorrer e jogar os valores dentro do td do foreach de baixo --}}           
                         @foreach($propostas as $proposta) 
                                 <tr>
-                                    <th scope="row">{{$proposta->ID}}</th>
+                                    {{-- <th scope="row">{{$proposta->ID}}</th> --}}
                                     <td>{{$proposta->NOME_PRESTADOR}}</td>
                                     <td>{{$proposta->NOME_PACIENTE}}</td>
                                     <td>R${{$proposta->VALOR}}</td>
