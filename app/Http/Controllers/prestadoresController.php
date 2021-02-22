@@ -105,14 +105,6 @@ class prestadoresController extends Controller
                         ->select('PROPOSTAS.*')
                         ->get();
 
-        // $servicos = DB::table('PROPOSTAS')
-        //                 ->join('PRESTADORES','PROPOSTAS.ID_PRESTADOR','=','PRESTADORES.ID')
-        //                 ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
-        //                 ->whereNull('PROPOSTAS.APROVACAO_PRESTADOR')
-        //                 ->select('PROPOSTAS.SERVICOS')
-        //                 ->get();
-
-
         $servicos=$this->objServico->all();
 
         $familiaridades=$this->objFamiliaridades->all(); 
