@@ -189,13 +189,16 @@ class pagamentosController extends Controller
             var_dump($payment);
             $payment->status = "cancelled";
             $payment->update();
-            dd($payment);
+            var_dump($payment);
 
             if($payment->status == "cancelled") {
+                var_dump('Entrou');
                 $this->objValidaCartao->where(['ID' => $cartaoEstorno->ID_PAGAMENTO])->update([
                     'STATUS' => $payment->status,
                 ]);
             }
+            dd($payment);
+
         }
     }
 
