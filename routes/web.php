@@ -65,7 +65,8 @@ Route::get('/propostas','solicitantesController@solicitantePropostas')->middlewa
 // ===========================================
 Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation');
 Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation');
-
+Route::get('/paymentForm','pagamentosController@paymentForm');
+Route::post('/payment','pagamentosController@payment');
 
 Auth::routes(['register' => false]);
 

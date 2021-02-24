@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\solicitantes;
 use App\Models\cartoes;
 use App\Models\valida_cartao;
+use App\Models\servicos_prestados;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -18,7 +19,8 @@ class pagamentosController extends Controller
         {
             $this->objSolicitante = new solicitantes();       
             $this->objCartoes = new cartoes();   
-            $this->objValidaCartao = new valida_cartao();             
+            $this->objValidaCartao = new valida_cartao();
+            $this->objServicosPrestados = new servicos_prestados();              
         }
     /**
      * Display a listing of the resource.
@@ -186,6 +188,46 @@ class pagamentosController extends Controller
             }
         }
     }
+
+    public function paymentForm()
+    {  
+        $servicos = $this->objServicosPrestados
+                        ->join('SOLICITANTES', 'SERVICOS_PRESTADOS.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+                        ->join('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
+                        ->whereNull('SERVICOS_PRESTADOS.STATUS_APROVACAO')
+                        ->orWhere('SERVICOS_PRESTADOS.STATUS_APROVACAO', '=', '')
+                        ->select('SERVICOS_PRESTADOS.VALOR','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
+                        ->get();
+
+        // dd($servicos);
+                    
+        return view('pagamentos/pagamentos',compact('servicos'));
+    }
+
+    public function payment(Request $request)
+    {
+        MercadoPago\SDK::setAccessToken("TEST-3508208613949405-021316-3288de42a43e89f96ce0a4a54a85533c-713881257");
+
+        $payment = new MercadoPago\Payment();
+      
+        $payment->transaction_amount = $request->transactionAmount;
+        $payment->token = $request->token;
+        $payment->installments = 1;
+        $payment->payer = array(
+              "type" => "customer",
+              "id" => $request->customerId
+          );
+      
+        $payment->save();
+        
+        //Validando pagamento
+        if(!empty($payment->id)) {
+            dd('Deu certo');
+        } else {
+            dd('Deu ruim');
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.

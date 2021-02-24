@@ -470,6 +470,7 @@
         <script src="{{url('assets/layout-admin/js/validacaoPrestador.js')}}"></script>
         <script src="{{url('assets/layout/js/solicitacaoServico.js')}}"></script>
         <script src="{{url('assets/layout/js/camposOcultos.js')}}"></script>
+        
 
         <!-- Page level plugins -->
         {{-- <script src="{{url('assets/layout-admin/vendor/chart.js/Chart.min.js')}}"></script> --}}
@@ -483,7 +484,8 @@
 
         {{-- Mercado pago --}}
         <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
-        <script src="{{url('assets/layout-admin/js/mercadopago.js')}}"></script>
+        <script src="{{url('assets/layout-admin/js/paymentValidation.js')}}"></script>
+        <script src="{{url('assets/layout-admin/js/payment.js')}}"></script>
 
     </body>
 </html>
