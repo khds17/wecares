@@ -81,6 +81,14 @@ class pagamentosController extends Controller
 
                 //Verifica se existe o id do customer
                 if(!empty($customer->id)) {
+
+                    //Coloca o id do customer no solicitante
+                    $solicitante = $this->objSolicitante
+                                        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                                        ->update([
+                                            'ID_CUSTOMER' => $customer->id,
+                                        ]);
+                    
                     $card = new \MercadoPago\Card();
                     $card->token = $request->token;
 
@@ -165,7 +173,7 @@ class pagamentosController extends Controller
             echo json_encode ($errorArray);
         }     
         
-        return redirect()->action('pagamentosController@pagamentos');
+        return redirect()->action('pagamentosController@payment');
     }
 
     public function estornoPaymentValidation()
