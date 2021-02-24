@@ -186,8 +186,10 @@ class pagamentosController extends Controller
 
         foreach ($cartoesEstorno as $cartaoEstorno) {
             $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
+            var_dump($payment);
             $payment->status = "cancelled";
             $payment->update();
+            dd($payment);
 
             if($payment->status == "cancelled") {
                 $this->objValidaCartao->where(['ID' => $cartaoEstorno->ID_PAGAMENTO])->update([
