@@ -193,7 +193,7 @@ class pagamentosController extends Controller
 
             dd($payment, $refunds);
 
-            if($payment->status == "cancelled") {
+            if($payment->status == "refunded") {
                 var_dump('Entrou');
                 $this->objValidaCartao->where(['ID' => $cartaoEstorno->ID_PAGAMENTO])->update([
                     'STATUS' => $payment->status,
