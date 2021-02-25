@@ -188,7 +188,7 @@ class pagamentosController extends Controller
             $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
             $payment->refund();
 
-            $payment = MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
+            $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
             $refunds = $payment->refund();
 
             dd($payment, $refunds);
