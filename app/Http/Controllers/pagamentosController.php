@@ -186,13 +186,8 @@ class pagamentosController extends Controller
 
         foreach ($cartoesEstorno as $cartaoEstorno) {
             $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
+            $payment->refund();
             dd($payment);
-            var_dump($payment);
-            $payment->status = "cancelled";
-            $payment->update();
-            var_dump($payment);
-
-            var_dump($payment->status);
 
             if($payment->status == "cancelled") {
                 var_dump('Entrou');
