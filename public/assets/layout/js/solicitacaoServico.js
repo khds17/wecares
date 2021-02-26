@@ -1,26 +1,28 @@
-$(document).ready(function() {
-    $( "#cidade" ).autocomplete({
-         source: function(request, response) {
-            $.ajax({
-            url: '/cuidadorcidades',
-            type: 'get',
-            data: {
-                    term : request.term
-             },
-            dataType: "json",
-            success: function(data){
-               var resp = $.map(data,function(obj){
-                    $( "#id" ).val(obj.ID);
-                    return obj.CIDADE;
-               }); 
- 
-               response(resp);
-            }
-        });
-    },
-    minLength: 1
- });
-});
+if (document.getElementById('cidade') !== null) {
+    $(document).ready(function() {
+        $( "#cidade" ).autocomplete({
+             source: function(request, response) {
+                $.ajax({
+                url: '/cuidadorcidades',
+                type: 'get',
+                data: {
+                        term : request.term
+                 },
+                dataType: "json",
+                success: function(data){
+                   var resp = $.map(data,function(obj){
+                        $( "#id" ).val(obj.ID);
+                        return obj.CIDADE;
+                   }); 
+     
+                   response(resp);
+                }
+            });
+        },
+        minLength: 1
+     });
+    });
+}
 
 function getPaciente(id) {
     

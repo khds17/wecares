@@ -1,5 +1,7 @@
-doSubmit = false;
-document.getElementById('pay').addEventListener('submit', getCardTokenPayment);
+if (document.getElementById('pay') !== null) {
+    doSubmit = false;
+    document.getElementById('pay').addEventListener('submit', getCardTokenPayment);
+}
 
 function getCardTokenPayment(event){
     event.preventDefault();

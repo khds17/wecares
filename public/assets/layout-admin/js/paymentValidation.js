@@ -1,6 +1,8 @@
 window.Mercadopago.setPublishableKey("TEST-efa70036-c084-4daa-be2d-441bd3e74123");
 
-document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
+if (document.getElementById('cardNumber') !== null) {
+    document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
+}
 
 function guessPaymentMethod(event) {
    let cardnumber = document.getElementById("cardNumber").value;
@@ -71,9 +73,11 @@ function getIssuers(paymentMethodId) {
     }
  }
 
-doSubmit = false;
+ if (document.getElementById('paymentForm') !== null) {
+    doSubmit = false;
+    document.getElementById('paymentForm').addEventListener('submit', getCardToken);
+}
 
-document.getElementById('paymentForm').addEventListener('submit', getCardToken);
 
 function getCardToken(event){
    event.preventDefault();
