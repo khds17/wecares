@@ -232,7 +232,7 @@ class pagamentosController extends Controller
                 'ID_PAGAMENTO' => $payment->id,
                 'ID_SERVICO_PRESTADO' => $request->idServico,
                 'ID_CARTAO' => $request->idCartao,
-                'STATUS' => \Config::get('constants.SERVICOS.APROVADO'),
+                'STATUS' => $payment->status,
                 'DT_CRIACAO' => $payment->date_created,
                 'DT_APROVACAO' => $payment->date_approved
             ]);
