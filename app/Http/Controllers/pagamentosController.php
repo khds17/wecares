@@ -173,7 +173,7 @@ class pagamentosController extends Controller
             echo json_encode ($errorArray);
         }     
         
-        return redirect()->action('pagamentosController@payment');
+        return redirect('/pagamentos');
     }
 
     public function estornoPaymentValidation()
@@ -205,9 +205,7 @@ class pagamentosController extends Controller
                         ->orWhere('SERVICOS_PRESTADOS.STATUS_APROVACAO', '=', '')
                         ->select('SERVICOS_PRESTADOS.VALOR','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
                         ->get();
-
-        // dd($servicos);
-                    
+                   
         return view('pagamentos/pagamentos',compact('servicos'));
     }
 
