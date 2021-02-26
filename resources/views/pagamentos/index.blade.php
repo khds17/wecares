@@ -22,17 +22,45 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Cartão de crédito</th>
-                            <th scope="col">Bandeira</th>
+                            <th scope="col"><center>Cartão de crédito</center></th>
+                            <th scope="col"><center>Bandeira</center></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($solicitantes as $solicitante)
                         <tr>
-                            <td>5343293366872006</td>
-                            <td> Master Card <img src="https://img.icons8.com/color/30/000000/mastercard.png"/></td>
+                            <td>
+                                <center>{{$solicitante->INICIO_CARTAO}}******{{$solicitante->FIM_CARTAO}}</center>
+                            </td>
+                            @if($solicitante->BANDEIRA == "master")
+                                <td> 
+                                    <center> <img src="https://img.icons8.com/color/40/000000/mastercard.png"/> </center>
+                                </td>
+                            @elseif($solicitante->BANDEIRA == "visa")
+                                <td> 
+                                    <center> <img src="https://img.icons8.com/color/40/000000/visa.png"/> </center>
+                                </td>
+                            @elseif($solicitante->BANDEIRA == "amex")
+                                <td> 
+                                   <center> <img src="https://img.icons8.com/color/40/000000/amex.png"/> </center>
+                                </td>   
+                            @elseif($solicitante->BANDEIRA == "discover")
+                                <td>
+                                     <center> <img src="https://img.icons8.com/color/40/000000/discover.png"/> </center>
+                                </td> 
+                            @elseif($solicitante->BANDEIRA == "maestro")
+                                <td> 
+                                 <center> <img src="https://img.icons8.com/color/40/000000/maestro.png"/> </center>
+                                </td>   
+                            @else
+                                <td> {
+                                   <center> {$solicitante->BANDEIRA}} <img src="https://img.icons8.com/color/40/000000/bank-card-back-side.png"/> </center>
+                                </td>                        
+                            @endif
                             <td><a class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro" href=""> Editar </a></td>
-                        </tr>
+                        </tr>                              
+                        @endforeach
                     </tbody>
                 </table>
             </div>

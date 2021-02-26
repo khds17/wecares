@@ -31,9 +31,11 @@ class pagamentosController extends Controller
      */
     public function index()
     {
-
         // Encontra o solicitante pelo usuario logado.
-        $solicitantes = $this->objSolicitante->where('ID_USUARIO', auth()->user()->id)->get();
+        $solicitantes = $this->objSolicitante
+                            ->join('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
+                            ->where('ID_USUARIO', auth()->user()->id)
+                            ->get();
 
         return view('pagamentos/index', compact('solicitantes'));
     }
