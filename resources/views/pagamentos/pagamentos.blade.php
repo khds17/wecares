@@ -32,6 +32,8 @@
             <input class="form-control" name="customerId" id="customerId" type="text" value="{{$servico->ID_CUSTOMER}}">
           </div>
       </div>
+      <input class="form-control" type="hidden" name="idCartao"  id="idCartao" value="{{$servico->ID_CARTAO}}">
+      <input class="form-control" type="hidden" name="idServico" id="idServico" value="{{$servico->ID}}">
       <br>
       <input class="btn btn-primary" type="submit" value="Pagar">
     </form>

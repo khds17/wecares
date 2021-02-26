@@ -7,6 +7,7 @@ use App\Models\solicitantes;
 use App\Models\cartoes;
 use App\Models\valida_cartao;
 use App\Models\servicos_prestados;
+use App\Models\pagamentos;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -18,7 +19,8 @@ class pagamentosController extends Controller
         public function __construct()
         {
             $this->objSolicitante = new solicitantes();       
-            $this->objCartoes = new cartoes();   
+            $this->objCartoes = new cartoes();  
+            $this->objPagamentos = new pagamentos();    
             $this->objValidaCartao = new valida_cartao();
             $this->objServicosPrestados = new servicos_prestados();              
         }
@@ -203,9 +205,9 @@ class pagamentosController extends Controller
                         ->join('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
                         ->whereNull('SERVICOS_PRESTADOS.STATUS_APROVACAO')
                         ->orWhere('SERVICOS_PRESTADOS.STATUS_APROVACAO', '=', '')
-                        ->select('SERVICOS_PRESTADOS.VALOR','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
+                        ->select('SERVICOS_PRESTADOS.VALOR','SERVICOS_PRESTADOS.ID','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
                         ->get();
-                   
+                  
         return view('pagamentos/pagamentos',compact('servicos'));
     }
 
@@ -213,7 +215,7 @@ class pagamentosController extends Controller
     {
         MercadoPago\SDK::setAccessToken("TEST-3508208613949405-021316-3288de42a43e89f96ce0a4a54a85533c-713881257");
 
-        $payment = new MercadoPago\Payment();
+        $payment = new \MercadoPago\Payment();
       
         $payment->transaction_amount = $request->transactionAmount;
         $payment->token = $request->token;
@@ -224,13 +226,25 @@ class pagamentosController extends Controller
           );
       
         $payment->save();
+
+        if(!empty($payment->id)) {
+            $pagamentos = $this->objPagamentos->create([
+                'ID_PAGAMENTO' => $payment->id,
+                'ID_SERVICO_PRESTADO' => $request->idServico,
+                'ID_CARTAO' => $request->idCartao,
+                'STATUS' => \Config::get('constants.SERVICOS.APROVADO'),
+                'DT_CRIACAO' => $payment->date_created,
+                'DT_APROVACAO' => $payment->date_approved
+            ]);
+        }
         
         //Validando pagamento
         if(!empty($payment->id)) {
-            dd('Deu certo');
+            dd('Deu certo', $payment);
         } else {
-            dd('Deu ruim');
+            dd('Deu ruim', $payment);
         }
+
     }
 
 
