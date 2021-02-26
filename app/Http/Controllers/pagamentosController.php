@@ -203,8 +203,11 @@ class pagamentosController extends Controller
         $servicos = $this->objServicosPrestados
                         ->join('SOLICITANTES', 'SERVICOS_PRESTADOS.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
                         ->join('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
+                        ->join('PAGAMENTOS', 'SERVICOS_PRESTADOS.ID', '=', 'PAGAMENTOS.ID_SERVICO_PRESTADO')
                         ->whereNull('SERVICOS_PRESTADOS.STATUS_APROVACAO')
                         ->orWhere('SERVICOS_PRESTADOS.STATUS_APROVACAO', '=', '')
+                        ->whereNull('PAGAMENTOS.ID_SERVICO_PRESTADO')
+                        ->orWhere('PAGAMENTOS.ID_SERVICO_PRESTADO', '=', '')
                         ->select('SERVICOS_PRESTADOS.VALOR','SERVICOS_PRESTADOS.ID','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
                         ->get();
                   
@@ -238,13 +241,7 @@ class pagamentosController extends Controller
             ]);
         }
         
-        //Validando pagamento
-        if(!empty($payment->id)) {
-            dd('Deu certo', $payment);
-        } else {
-            dd('Deu ruim', $payment);
-        }
-
+        return redirect('/pagamentos');
     }
 
 
