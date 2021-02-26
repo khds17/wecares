@@ -17,12 +17,11 @@ class CreatePagamentosTable extends Migration
             $table->increments('ID');
             $table->string('ID_PAGAMENTO',11);
             $table->unsignedInteger('ID_SERVICO_PRESTADO');
-            $table->unsignedInteger('ID_CARTAO');
+            $table->string('ID_CARTAO',15);
             $table->string('STATUS',20);
             $table->string('DT_CRIACAO',35);
             $table->string('DT_APROVACAO',35);
             $table->foreign('ID_SERVICO_PRESTADO')->references('ID')->on('SERVICOS_PRESTADOS')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('ID_CARTAO')->references('ID')->on('CARTOES')->onDelete('cascade')->onUpdate('cascade');
         });
         
     }
