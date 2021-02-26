@@ -203,11 +203,8 @@ class pagamentosController extends Controller
         $servicos = $this->objServicosPrestados
                         ->join('SOLICITANTES', 'SERVICOS_PRESTADOS.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
                         ->join('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
-                        ->join('PAGAMENTOS', 'SERVICOS_PRESTADOS.ID', '=', 'PAGAMENTOS.ID_SERVICO_PRESTADO')
                         ->whereNull('SERVICOS_PRESTADOS.STATUS_APROVACAO')
                         ->orWhere('SERVICOS_PRESTADOS.STATUS_APROVACAO', '=', '')
-                        ->whereNull('PAGAMENTOS.ID_SERVICO_PRESTADO')
-                        ->orWhere('PAGAMENTOS.ID_SERVICO_PRESTADO', '=', '')
                         ->select('SERVICOS_PRESTADOS.VALOR','SERVICOS_PRESTADOS.ID','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
                         ->get();
                   
@@ -230,6 +227,7 @@ class pagamentosController extends Controller
       
         $payment->save();
 
+          // Salva os dados do pagamento e atualiza os status do serviço
         if(!empty($payment->id)) {
             $pagamentos = $this->objPagamentos->create([
                 'ID_PAGAMENTO' => $payment->id,
@@ -238,6 +236,11 @@ class pagamentosController extends Controller
                 'STATUS' => $payment->status,
                 'DT_CRIACAO' => $payment->date_created,
                 'DT_APROVACAO' => $payment->date_approved
+            ]);
+            
+            $this->objServicosPrestados->where(['ID' => $request->idServico])->update([
+                'STATUS_APROVACAO' => $payment->status,
+                'STATUS_SERVICO' => \Config::get('constants.SERVICOS.APROVADO'),
             ]);
         }
         
