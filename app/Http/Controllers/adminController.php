@@ -78,9 +78,6 @@ class adminController extends Controller
      */
     public function store(requestAdmin $request)
     {
-        // Pegando o valor da constant para colocar no prestador
-        $status = \Config::get('constants.STATUS.ATIVO');
-
         DB::beginTransaction();
 
         try {
@@ -93,49 +90,30 @@ class adminController extends Controller
                 'ID_CIDADE' => $request->adminCidade,
                 'ID_ESTADO' => $request->adminEstado,
             ]);
-            
-            $idEnderecoAdmin = $enderecoAdmin->id;
-            
+                        
             $usuario = $this->objUsers->create([
                 'name' => $request->adminNome,
                 'email' => $request->adminEmail,
                 'password' => Hash::make($request['adminSenha']),
-                'status' => $status
+                'status' => \Config::get('constants.STATUS.ATIVO')
             ]);
 
             $usuario->assignRole('administrador');
-
-            //Gravando o id do usuario
-            $idUsuario = $usuario->id;
 
             $admin = $this->objAdmin->create([
                 'NOME' => $request->adminNome,
                 'CPF' => $request->adminCPF,
                 'EMAIL' => $request->adminEmail,
                 'TELEFONE' => $request->adminTelefone,
-                'ID_ENDERECO' => $idEnderecoAdmin,
-                'ID_USUARIO' => $idUsuario,
+                'ID_ENDERECO' => $enderecoAdmin->id,
+                'ID_USUARIO' => $usuario->id,
             ]);
 
-            // Pegando informações para popular no registro
-            $dataHora = date('d/m/Y \à\s H:i:s');
-
-            $nomeUsuario = $usuario->name;
-
-            $arrayUsuariosAdmins = $this->objAdmin
-                                    ->where('ID_USUARIO', auth()->user()->id)
-                                    ->get();
-
-            foreach ($arrayUsuariosAdmins as $arrayUsuarioAdmin) {
-                $usuarioAdmin = $arrayUsuarioAdmin;
-            }
-                
-            $textoRegistro = 'Cadastro de '.$nomeUsuario.' realizado com sucesso pelo administrator '.$usuarioAdmin->NOME.''; 
-
+            //Registro de criação                
             $registro = $this->objRegistros->create([
-                'DATA' => $dataHora,
-                'TEXTO' => $textoRegistro,
-                'ID_USUARIO' => $idUsuario
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso pelo administrator '.auth()->user()->name.'',
+                'ID_USUARIO' => $usuario->id
             ]);
 
             DB::commit();
