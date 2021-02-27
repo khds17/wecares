@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
         <!-- Custom styles for this template-->
-        <link href="/assets/layout-admin/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="/assets/layout-admin/css/style.css" rel="stylesheet">
     </head>
     <body id="page-top">
         <!-- Page Wrapper -->
@@ -424,7 +424,7 @@
             @role('solicitante')
                 <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
                     <div class="float-right">
-                        <a class="btn-purple btn rounded-pill px-4 ml-lg-4" href="{{url("/encontrecuidador")}}">Encontre cuidadores</a>
+                        <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" href="{{url("/encontrecuidador")}}">Encontre cuidadores</a>
                     </div>
                 </div>  
             @endrole
