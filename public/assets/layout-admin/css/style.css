@@ -10868,6 +10868,24 @@ form.user .btn-user {
   animation: noise-anim 2s infinite linear alternate-reverse;
 }
 
+
+/*============= INFORMAÇÕES CADASTROS CARTÃO  PRESTADOR ==================*/
+
+.info-cartao-prestador{
+  margin-bottom: 20px;
+}
+
+.vencimentoCampoInput{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.date-separator{
+  margin: 0 10px;
+}
+.
 @-webkit-keyframes noise-anim-2 {
   0% {
     clip: rect(12px, 9999px, 52px, 0);

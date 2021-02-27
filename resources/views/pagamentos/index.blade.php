@@ -174,7 +174,7 @@
                       </div>
                     @endforeach
                     {{-- <h3>Detalhes do cartão</h3> --}}
-                      <div class="row margin-top-10">
+                      <div class="row margin-top-10 info-cartao-prestador">
                         <div class="col">
                           <label for="cardholderName">Nome no cartão</label>
                           <input class="form-control" id="cardholderName" data-checkout="cardholderName" type="text">
@@ -187,48 +187,47 @@
                               ondrag="return false" ondrop="return false" autocomplete=off>
                           </div>
                       </div>
-                      <br>
-                      <div class="row margin-top-10">
-                        <div class="col">
-                          <label for="">Data de vencimento</label>
-                          <div class="col">
-                            <input class="form-control" type="text" placeholder="MM" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
-                              onselectstart="return false" onpaste="return false"
-                              oncopy="return false" oncut="return false"
-                              ondrag="return false" ondrop="return false" autocomplete=off>
-                            <span class="date-separator">/</span>
-                            <input class="form-control" type="text" placeholder="YY" id="cardExpirationYear" data-checkout="cardExpirationYear"
-                              onselectstart="return false" onpaste="return false"
-                              oncopy="return false" oncut="return false"
-                              ondrag="return false" ondrop="return false" autocomplete=off>
-                          </div>
+                        <div class="row margin-top-10">
+                            <div class="col">
+                            <label for="">Data de vencimento</label>
+                                <div class ="vencimentoCampoInput">
+                                    <input class="form-control " type="text" placeholder="MM" id="cardExpirationMonth" data-checkout="cardExpirationMonth"
+                                    onselectstart="return false" onpaste="return false"
+                                    oncopy="return false" oncut="return false"
+                                    ondrag="return false" ondrop="return false" autocomplete=off>
+                                    <span class="date-separator"> / </span>
+                                    <input class="form-control" type="text" placeholder="YY" id="cardExpirationYear" data-checkout="cardExpirationYear"
+                                    onselectstart="return false" onpaste="return false"
+                                    oncopy="return false" oncut="return false"
+                                    ondrag="return false" ondrop="return false" autocomplete=off>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="row margin-top-10">
-                        <div class="col">
-                          <label for="securityCode">Código de segurança</label>
-                          <input class="form-control" id="securityCode" data-checkout="securityCode" type="text"
-                            onselectstart="return false" onpaste="return false"
-                            oncopy="return false" oncut="return false"
-                            ondrag="return false" ondrop="return false" autocomplete=off onchange="catchCVV()">
+                        <div class="row margin-top-10">
+                            <div class="col">
+                            <label for="securityCode">Código de segurança</label>
+                            <input class="form-control" id="securityCode" data-checkout="securityCode" type="text"
+                                onselectstart="return false" onpaste="return false"
+                                oncopy="return false" oncut="return false"
+                                ondrag="return false" ondrop="return false" autocomplete=off onchange="catchCVV()">
+                            </div>
+                            <div class="col" id="issuerInput">
+                                <label for="issuer">Banco emissor</label>
+                                <select id="issuer" name="issuer" data-checkout="issuer"></select>
+                            </div>
+                            <div class="col">
+                                <label for="installments">Parcelas</label>
+                                <select type="text" id="installments" name="installments"></select>
+                            </div>
+                            <div class="col">
+                                <input type="hidden" name="transactionAmount" id="transactionAmount" value="1" />
+                                <input type="hidden" name="cvv" id="cvv"/>
+                                <input type="hidden" name="paymentMethodId" id="paymentMethodId" />
+                                <input type="hidden" name="description" id="description" />
+                            <br>
+                            <br>
+                            </div>
                         </div>
-                        <div class="col" id="issuerInput">
-                          <label for="issuer">Banco emissor</label>
-                          <select id="issuer" name="issuer" data-checkout="issuer"></select>
-                        </div>
-                        <div class="col">
-                          <label for="installments">Parcelas</label>
-                          <select type="text" id="installments" name="installments"></select>
-                        </div>
-                        <div class="col">
-                          <input type="hidden" name="transactionAmount" id="transactionAmount" value="1" />
-                          <input type="hidden" name="cvv" id="cvv"/>
-                          <input type="hidden" name="paymentMethodId" id="paymentMethodId" />
-                          <input type="hidden" name="description" id="description" />
-                          <br>
-                          <br>
-                        </div>
-                    </div>
                     <br>
                     <div class="row margin-top-10">
                         <div class="col">
