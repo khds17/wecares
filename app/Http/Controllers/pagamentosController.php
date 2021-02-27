@@ -151,7 +151,7 @@ class pagamentosController extends Controller
                 if(!empty($card->id)) {
                     // Grava os dados do cartão do nosso lado
                     $cartao = $this->objCartoes->create([
-                        'ID_CUSTOMER' => $customer->id,
+                        'ID_CUSTOMER' => $customerSolicitante->ID_CUSTOMER,
                         'ID_CARTAO' => $card->id,
                         'INICIO_CARTAO' => $card->first_six_digits,
                         'FIM_CARTAO' => $card->last_four_digits,
