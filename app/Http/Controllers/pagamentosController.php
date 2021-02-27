@@ -144,7 +144,7 @@ class pagamentosController extends Controller
                     $card->issuer = $request->issuer;
                 }
 
-                $card->customer_id = $idCustomer;
+                $card->customer_id = $customerSolicitante->ID_CUSTOMER;
                 $card->save();
                 
                 //Verifica se existe o id do card
@@ -160,6 +160,7 @@ class pagamentosController extends Controller
                         'CVV' => Crypt::encryptString($request->cvv),
                         'BANDEIRA' => $request->paymentMethodId,
                         'STATUS' => \Config::get('constants.STATUS.ATIVO'),
+                        'PRINCIPAL' => $request->cartaoPrincipal,
                     ]);
 
                     //Grava os dados do pagamento de validação para estorno.
@@ -248,5 +249,5 @@ class pagamentosController extends Controller
         
         return redirect('/pagamentos');
     }
-    
+
 }
