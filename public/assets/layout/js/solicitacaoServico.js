@@ -91,7 +91,7 @@ function aceitarProspostaPrestador(id)
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (result) {
-                window.location.replace('/servicosPrestados');
+                window.location.replace('/novaspropostas');
          }
         })
     }
@@ -109,7 +109,6 @@ function recusarProspostaPrestador(id)
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (result) {
-                console.log('Entrou');
                 window.location.replace('/novaspropostas');
          }
         })
@@ -128,7 +127,7 @@ function aceitarPropostaSolicitante(id)
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (result) {
-                window.location.replace('/servicosPrestados');
+                window.location.replace('/propostas');
          }
         })
     }
@@ -146,8 +145,7 @@ function recusarProspostaSolicitante(id)
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (result) {
-                console.log('Entrou');
-                window.location.replace('/novaspropostas');
+                window.location.replace('/propostas');
          }
         })
     }
@@ -188,14 +186,13 @@ function getProposta(id) {
                 $('#servicoOutros').val(data.propostas.SERVICOS_OUTROS);
                 $('#formacao').val(data.prestador[0].FORMACAO);
                 $('#prestadorTelefone').val(data.prestador[0].TELEFONE);
-
+                
                 let servicos = data.propostas.SERVICOS.split([',']);
 
                 servicos.forEach(function(elemento){
                     console.log(elemento);
                     $("input[name=servicos][value="+elemento+"]").attr("checked", true);
                 });
-                
             } 
         }
     });
