@@ -17,9 +17,9 @@
                     <thead>
                         <tr>
                             <th scope="col">Nome do prestador</th>
-                            <th scope="col">Formação</th>
                             <th scope="col">Data do serviço</th>
                             <th scope="col">Valor</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Pagamento </th>
                         </tr>
                     </thead>
@@ -27,15 +27,22 @@
                         @foreach ($servicosContratados as $servicoContrado)
                         <tr>
                             <th scope="row">{{$servicoContrado->NOME_PRESTADOR}}</th>
-                            <td>{{$servicoContrado->FORMACAO}}</td>
                             <td>{{$servicoContrado->DATA_SERVICO}}</td>
                             <td>R${{$servicoContrado->VALOR}}</td>
 
-                            @if ($servicoContrado->STATUS === 3)
+                            @if ($servicoContrado->STATUS_SERVICO === 3)
                                 <td>Pendente</td>
-                            @elseif ($servicoContrado->STATUS === 4)
+                            @elseif ($servicoContrado->STATUS_SERVICO === 4)
                                 <td>Aprovado</td>
-                            @else
+                            @elseif ($servicoContrado->STATUS_SERVICO === 5)
+                                <td>Cancelado</td>
+                            @endif
+
+                            @if ($servicoContrado->STATUS_APROVACAO == '' || $servicoContrado->STATUS_APROVACAO == null)
+                                <td>Pendente</td>
+                            @elseif ($servicoContrado->STATUS_APROVACAO == 'approved')
+                                <td>Aprovado</td>
+                            @elseif ($servicoContrado->STATUS_APROVACAO === 'refunded')
                                 <td>Cancelado</td>
                             @endif
                             <td>
