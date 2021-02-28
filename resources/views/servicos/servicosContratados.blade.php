@@ -47,7 +47,7 @@
                             @endif
                             <td>
                                 <a data-toggle="modal" data-target="#modalVisualizarServico" href="">
-                                    <button class="btn btn-primary">Visualizar</button>
+                                    <button class="btn btn-primary" onclick="getProposta({{$servicoContrado->ID_PROPOSTA}})">Visualizar</button>
                                 </a>
                                 <a href="">
                                     <button class="btn btn-danger">Cancelar</button>
@@ -77,107 +77,107 @@
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Nome do profissional</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->NOME_PRESTADOR}}" disabled><br>                                       
+                                <input class="form-control"type="text" name="prestadorNome" id="prestadorNome" value=""><br>                                       
                             </div>
                             <div class="col">
                                 <label for="">Formação</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->FORMACAO}}" disabled><br>     
+                                <input class="form-control"type="text" name="formacao" id="formacao" value=""><br>     
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Telefone para contato</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->TELEFONE}}" disabled><br>                                       
+                                <input class="form-control"type="text" name="prestadorTelefone" id="prestadorTelefone" value=""><br>                                       
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Nome do paciente</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->NOME_PACIENTE}}" disabled><br>                                       
+                                <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" value=""><br>                                       
                             </div>
                             <div class="col">
                                 <label for="">Tipo paciente</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->TIPO}}" disabled><br>     
+                                <input class="form-control"type="text" name="pacienteTipo" id="pacienteTipo" value=""><br>     
                             </div>
                         </div>
                         <div class="row margin-top-10">
                              <div class="col">
                                 <label for="">Localização do paciente</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->LOCALIZACAO}}" disabled><br>      
+                                <input class="form-control"type="text" name="pacienteLocalizacao" id="pacienteLocalizacao" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">CEP</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->CEP}}" disabled><br>     
+                                <input class="form-control"type="text" name="pacienteCep" id="pacienteCep" value=""><br>     
                             </div>
                             <div class="col">
                                 <label for="">Endereço</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->ENDERECO}}" disabled><br> 
+                                <input class="form-control"type="text" name="pacienteEndereco" id="pacienteEndereco" value=""><br> 
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Bairro</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->BAIRRO}}" disabled><br>       
+                                <input class="form-control"type="text" name="pacienteBairro" id="pacienteBairro" value=""><br>       
                             </div>
                             <div class="col">
                                 <label for="">Número</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->NUMERO}}" disabled><br>      
+                                <input class="form-control"type="text" name="pacienteNumero" id="pacienteNumero" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Cidade</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->CIDADE}}" disabled><br>     
+                                <input class="form-control"type="text" name="pacienteCidade" id="pacienteCidade" value=""><br>     
                             </div>
                             <div class="col">
                                 <label for="">Estado</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->UF}}" disabled><br>      
+                                <input class="form-control"type="text" name="pacienteEstado" id="pacienteEstado" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Serviços a serem realizados</label><br>
                                 @foreach($servicos as $servico)
-                                    <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
+                                    <input type="checkbox" name="servicos" id="servicos" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
                                 @endforeach  
                             </div>
                             <div class="col">
                                 <label for="">Serviços outros</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->SERVICOS_OUTROS}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoOutros" id="servicoOutros" value=""><br>      
                             </div>
                         </div>
                         <br>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Toma medicamentos?</label><br>
-                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1" {{($servicoContrado->TOMA_MEDICAMENTOS == 1) ? 'checked' : ''}}> Sim <br> 
-                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0" {{($servicoContrado->TOMA_MEDICAMENTOS == 0) ? 'checked' : ''}}> Não    
+                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
+                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não    
                             </div>
                             <div class="col">
                                 <label for="">Tipo medicamentos</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->TIPO_MEDICAMENTOS}}" disabled><br>      
+                                <input class="form-control"type="text" name="tipoMedicamento" id="tipoMedicamento" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Data serviço</label><br>  
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->DATA_SERVICO}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoDataPrestacao" id="servicoDataPrestacao" value=""><br>      
                             </div>
                             <div class="col">
                                 <label for="">Valor</label><br>  
-                                <input class="form-control"type="text" name="" id="" value="R${{$servicoContrado->VALOR}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoValor" id="servicoValor" value=""><br>      
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Hora de início</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->HORA_INICIO}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoInicio" id="servicoInicio" value=""><br>      
                             </div>
                             <div class="col">
                                 <label for="">Hora de fim</label>
-                                <input class="form-control"type="text" name="" id="" value="{{$servicoContrado->HORA_FIM}}" disabled><br>      
+                                <input class="form-control"type="text" name="servicoFim" id="servicoFim" value=""><br>      
                             </div>
                         </div>
                     </form>
