@@ -26,3 +26,21 @@ function getCardTokenPayment(event){
         alert("Verify filled data!\n"+JSON.stringify(response, null, 4));
     }
  };
+
+ function estorno(id) {
+
+    event.preventDefault();
+    if(confirm("Deseja mesmo cancelar o serviço? ")){
+        $.ajax({
+            url:'/estornoPayment/' + id,
+            type: 'POST',
+            dataType: 'json',
+            headers:{
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (result) {
+                window.location.replace('/servicosContratados');
+         }
+        })
+    }     
+ };
