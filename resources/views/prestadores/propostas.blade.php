@@ -154,7 +154,7 @@
                             <div class="col">
                                 <label for="">Toma medicamentos?</label><br>
                                 <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
-                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento"value="0"> Não    
+                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não    
                             </div>
                             <div class="col">
                                 <label for="">Tipo medicamentos</label>
