@@ -50,7 +50,7 @@
                                     <button class="btn btn-primary" onclick="getProposta({{$servicoPrestado->ID_PROPOSTA}})">Visualizar</button>
                                 </a>
                                 <a href="">
-                                    <button class="btn btn-danger">Cancelar</button>
+                                    <button class="btn btn-danger" onclick="estorno({{$servicoPrestado->ID_PAGAMENTO}})">Cancelar</button>
                                 </a>
                             </td>  
                         </tr>

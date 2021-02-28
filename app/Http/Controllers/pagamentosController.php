@@ -250,4 +250,35 @@ class pagamentosController extends Controller
         return redirect('/pagamentos');
     }
 
+    public function estornoPayment($id)
+    {
+        \MercadoPago\SDK::setAccessToken("TEST-3508208613949405-021316-3288de42a43e89f96ce0a4a54a85533c-713881257");
+
+        $payment = \MercadoPago\Payment::find_by_id($id);
+        $payment->refund();
+
+        if($payment->status == "refunded") {
+            $this->objPagamentos->where(['ID_PAGAMENTO' => $id])->update([
+                'STATUS' => $payment->status,
+            ]);
+
+            $pagamentos = $this->objPagamentos
+                            ->where('PAGAMENTOS.ID_PAGAMENTO', '=', $id)
+                            ->get();
+
+            foreach ($pagamentos as $pagamento) {
+                $idServicoPrestado = $pagamento->ID_SERVICO_PRESTADO;
+            }
+
+            $this->objServicosPrestados->where(['ID' => $idServicoPrestado])->update([
+                'STATUS_APROVACAO' => $payment->status,
+                'STATUS_SERVICO' => \Config::get('constants.SERVICOS.CANCELADO'),
+            ]);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

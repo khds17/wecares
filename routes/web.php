@@ -67,6 +67,7 @@ Route::post('/processPaymentValidation','pagamentosController@processPaymentVali
 Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation');
 Route::get('/paymentForm','pagamentosController@paymentForm');
 Route::post('/payment','pagamentosController@payment');
+Route::post('/estornoPayment/{id}','pagamentosController@estornoPayment');
 
 Auth::routes(['register' => false]);
 
