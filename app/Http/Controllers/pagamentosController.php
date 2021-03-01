@@ -257,6 +257,8 @@ class pagamentosController extends Controller
         $payment = \MercadoPago\Payment::find_by_id($id);
         $payment->refund();
 
+        dd($payment->status);
+
         if($payment->status == "refunded") {
             $this->objPagamentos->where(['ID_PAGAMENTO' => $id])->update([
                 'STATUS' => $payment->status,
