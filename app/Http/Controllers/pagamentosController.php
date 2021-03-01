@@ -278,8 +278,6 @@ class pagamentosController extends Controller
 
             $servico = $this->objServicosPrestados->find($idServicoPrestado);
 
-            dd($pagamentos, $servico);
-
             return true;
         } else {
             return false;
