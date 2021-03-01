@@ -258,12 +258,11 @@ class pagamentosController extends Controller
         $payment->refund();
 
         if($payment->status == "refunded") {
-            dd('ENTROU');
 
             $this->objPagamentos->where(['ID_PAGAMENTO' => $id])->update([
                 'STATUS' => $payment->status,
             ]);
-
+            
             $pagamentos = $this->objPagamentos
                             ->where('PAGAMENTOS.ID_PAGAMENTO', '=', $id)
                             ->get();
@@ -276,6 +275,10 @@ class pagamentosController extends Controller
                 'STATUS_APROVACAO' => $payment->status,
                 'STATUS_SERVICO' => \Config::get('constants.SERVICOS.CANCELADO'),
             ]);
+
+            $servico = $this->objServicosPrestados->find($idServicoPrestado);
+
+            dd($pagamentos, $servico);
 
             return true;
         } else {
