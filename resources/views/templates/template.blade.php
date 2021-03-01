@@ -120,24 +120,43 @@
                                         @endrole
                                         @role('administrador')
                                             <a class="dropdown-item" href="#">
-                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Dashboard
+                                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                                    <path d="M0,172v-172h172v172z" fill="#456bd8"></path><g fill="#ffffff">
+                                                    <path d="M26.875,10.32c-1.65281,0.30906 -2.83531,1.76031 -2.795,3.44v134.16c0,1.89469 1.54531,3.44 3.44,3.44h48.16c1.89469,0 3.44,-1.54531 3.44,-3.44v-134.16c0,-1.89469 -1.54531,-3.44 -3.44,-3.44zM30.96,17.2h41.28v127.28h-41.28zM96.32,44.72c-1.89469,0 -3.44,1.54531 -3.44,3.44v99.76c0,1.89469 1.54531,3.44 3.44,3.44h48.16c1.89469,0 3.44,-1.54531 3.44,-3.44v-99.76c0,-1.89469 -1.54531,-3.44 -3.44,-3.44zM10.32,158.24v6.88h151.36v-6.88z"></path></g></g>
+                                                </svg>
+                                                &nbsp&nbsp
+                                                <span>Dashboard</span>
                                             </a>
                                             <a class="dropdown-item" href="{{url("/adminCadastro")}}">
                                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 Dados cadastrais
                                             </a>
                                             <a class="dropdown-item" href="{{url("/listagemAdmin")}}">
-                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Lista de administradores
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+                                                    <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+                                                    <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                                </svg>
+                                                &nbsp&nbsp
+                                                <span>Lista de administradores</span>                                                
                                             </a>
                                             <a class="dropdown-item" href="{{url("/prestadoresLista")}}">
-                                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Lista de prestadores
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+                                                    <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+                                                    <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                                </svg>
+                                                &nbsp&nbsp
+                                                <span> Lista de prestadores</span>                                               
                                             </a>
                                             <a class="dropdown-item" href="{{url("listagemServicos")}}">
-                                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                Lista de serviços prestados
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+                                                    <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+                                                    <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                                </svg>
+                                                &nbsp&nbsp
+                                                <span>Lista de serviços prestados</span>                                                
                                             </a>
                                         @endrole
                                         <a class="dropdown-item" href="{{url("/registros")}}">
