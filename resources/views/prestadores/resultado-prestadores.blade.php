@@ -24,8 +24,8 @@
                             <input type="hidden" id="idPrestador[{{$prestador->ID}}]" name="idPrestador" value="{{$prestador->ID}}">
                             <h6>{{$prestador->NOME}}</h6>
                             <div class="small text-gray-500 text-left">Formação:{{$prestador->FORMACAO}}</div>
-                            <div class="small text-gray-500 text-left">Serviço realizados:</div>
-                            <div class="small text-gray-500 text-left">Avaliação</div>   
+                            {{-- <div class="small text-gray-500 text-left">Serviço realizados:</div>
+                            <div class="small text-gray-500 text-left">Avaliação</div>    --}}
                                 
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
