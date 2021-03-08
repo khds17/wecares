@@ -181,6 +181,8 @@ class servicosController extends Controller
                                 ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
                                 ->get();
 
+        dd($servicosPrestados);
+
         $servicos=$this->objServico->all();
 
         $familiaridades=$this->objFamiliaridades->all(); 
