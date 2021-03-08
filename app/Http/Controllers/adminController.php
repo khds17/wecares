@@ -100,7 +100,7 @@ class adminController extends Controller
 
             $usuario->assignRole('administrador');
 
-            $admin = $this->objAdmin->create([
+            $this->objAdmin->create([
                 'NOME' => $request->adminNome,
                 'CPF' => $request->adminCPF,
                 'EMAIL' => $request->adminEmail,
@@ -110,7 +110,7 @@ class adminController extends Controller
             ]);
 
             //Registro de criação                
-            $registro = $this->objRegistros->create([
+            $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
                 'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso pelo administrator '.auth()->user()->name.'',
                 'ID_USUARIO' => $usuario->id
