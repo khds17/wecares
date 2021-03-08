@@ -176,7 +176,7 @@ class servicosController extends Controller
                                 ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
                                 ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
                                 ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
-                                ->join('PAGAMENTOS','SERVICOS_PRESTADOS.ID','=','PAGAMENTOS.ID_SERVICO_PRESTADO')
+                                ->leftJoin('PAGAMENTOS','SERVICOS_PRESTADOS.ID','=','PAGAMENTOS.ID_SERVICO_PRESTADO')
                                 ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
                                 ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
                                 ->get();
@@ -197,7 +197,7 @@ class servicosController extends Controller
                                 ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
                                 ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
                                 ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
-                                ->join('PAGAMENTOS','SERVICOS_PRESTADOS.ID','=','PAGAMENTOS.ID_SERVICO_PRESTADO')
+                                ->leftJoin('PAGAMENTOS','SERVICOS_PRESTADOS.ID','=','PAGAMENTOS.ID_SERVICO_PRESTADO')
                                 ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
                                 ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
                                 ->get();
