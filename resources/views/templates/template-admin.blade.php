@@ -383,7 +383,12 @@
                                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Settings
                                     </a> --}}
-                                    <a class="dropdown-item" href="{{url("/registros")}}">
+                                    <a class="dropdown-item" href="{{url("")}}">
+                                        <img src="https://img.icons8.com/fluent-systems-regular/15/000000/home-screen.png"/>
+                                        &nbsp
+                                        Tela inicial
+                                    </a>
+                                    <a class="dropdown-item" href="{{url("/")}}">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Registro de atividades
                                     </a>
@@ -414,6 +419,11 @@
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
                             <span>Copyright &copy; WeCares 2020</span>
+                        </div>
+                        <div class="copyright text-right my-auto">
+                            <a href="{{url("/termos")}}" target="_blank">Termos</a>
+                            &middot;
+                            <a href="{{url("/conduta")}}" target="_blank">Código de conduta</a>
                         </div>
                     </div>
                 </footer>
