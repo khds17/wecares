@@ -92,16 +92,13 @@
                 <hr class="my-5" />
                 <h2 class="mb-3">11. Práticas vedadas</h2>
                 <p>1. Você não poderá: (i) remover qualquer aviso de direito autoral, direito de marca ou outro aviso de direito de propriedade de qualquer parte dos serviços; (ii) reproduzir, modificar, preparar obras derivadas, distribuir, licenciar, locar, vender, revender, transferir, exibir, veicular, transmitir ou, de qualquer outro modo, explorar os serviços, exceto da forma expressamente permitida pela WeCares; (iii) decompilar, realizar engenharia reversa ou desmontar os serviços, exceto conforme permitido pela legislação aplicável; (iv) conectar, espelhar ou recortar qualquer parte dos serviços; (v) fazer ou lançar quaisquer programas ou scripts com a finalidade de sobrecarregar ou prejudicar indevidamente a operação e/ou funcionalidade de qualquer aspecto dos serviços; ou (vi) tentar obter acesso não autorizado aos serviços ou prejudicar qualquer aspecto dos serviços ou seus sistemas ou redes correlatas.</p>
-                <hr class="my-5" />
-                <h2 class="mb-3">4. Obrigações dos usuários</h2>
-                <p></p>
-                <hr class="my-5" />
+                {{-- <hr class="my-5" />
                 <div class="card z-1 mb-n10">
                     <div class="card-body text-center py-5">
                         <h2 class="mb-3">We're here to help</h2>
                         <a class="btn btn-primary btn-marketing rounded-pill" href="#!">Contact Us</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

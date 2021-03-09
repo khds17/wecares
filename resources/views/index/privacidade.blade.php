@@ -46,13 +46,13 @@
                 <p>1. É terminantemente vedado aos Usuários, entre outras atitudes previstas nestes Termos, manipular, direta ou indiretamente, os preços dos serviços anunciados.</p>
                 <p>2. Os Usuários não poderão: (i) Obter, guardar, divulgar, comercializar e/ou utilizar dados pessoais sobre outros Usuários para fins comerciais ou ilícitos; (ii) Usar meios automáticos, incluindo spiders, robôs, crawlers, ferramentas de captação de dados ou similares para baixar dados do site (exceto ferramentas de busca na Internet e arquivos públicos não comerciais); (iii) Burlar, ou tentar burlar, de qualquer forma que seja, o sistema, mecanismo e/ou a plataforma do site; e (iv) incluir meios de contato como telefone, e-mail, endereço e outras formas de comunicação nas ofertas.</p>
                 <p>3. É vedada a utilização de dispositivo, software ou outro recurso que possa interferir nas atividades e nas operações de Plataforma, bem como nos anúncios, nas descrições, nas contas ou em seus bancos de dados. Qualquer intromissão, tentativa de, ou atividade que viole ou contrarie as leis de direito de propriedade intelectual e as proibições estipuladas nestes Termos tornará o responsável passível de sofrer os efeitos das ações legais pertinentes, bem como das sanções aqui previstas, sendo ainda responsável por indenizar WeCares ou seus Usuários por eventuais danos causados.</p>
-                <hr class="my-5" />
+                {{-- <hr class="my-5" />
                 <div class="card z-1 mb-n10">
                     <div class="card-body text-center py-5">
                         <h2 class="mb-3">We're here to help</h2>
                         <a class="btn btn-primary btn-marketing rounded-pill" href="#!">Contact Us</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
