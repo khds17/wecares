@@ -300,9 +300,9 @@
                             <div class="col-md-6 text-md-right small">
                                 {{-- <a href="{{url("/privacidade")}}">Privacidade</a> --}}
                                 &middot;
-                                <a href="{{url("/termos")}}">Termos</a>
+                                <a href="{{url("/termos")}}">Termos de uso</a>
                                 &middot;
-                                <a href="{{url("/conduta")}}">Código de conduta</a>
+                                <a href="{{url("/privacidade")}}">Termos de privacidade</a>
                             </div>
                         </div>
                     </div>
