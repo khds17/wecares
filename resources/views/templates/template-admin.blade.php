@@ -416,14 +416,15 @@
                 <!-- End of Main Content -->
                 <!-- Footer -->
                 <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; WeCares 2020</span>
-                        </div>
-                        <div class="copyright text-right my-auto">
-                            <a href="{{url("/termos")}}" target="_blank">Termos</a>
-                            &middot;
-                            <a href="{{url("/conduta")}}" target="_blank">Código de conduta</a>
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 small">Copyright &copy; WeCares 2020</div>
+                            <div class="col-md-6 text-md-right small">
+                                {{-- <a href="{{url("/privacidade")}}">Privacidade</a> --}}
+                                <a href="{{url("/termos")}}" target="_blank">Termos de uso</a>
+                                &middot;
+                                <a href="{{url("/privacidade")}}" target="_blank">Termos de privacidade</a>
+                            </div>
                         </div>
                     </div>
                 </footer>
