@@ -178,7 +178,7 @@ class pagamentosController extends Controller
             echo json_encode ($errorArray);
         }     
         
-        return redirect('/pagamentos');
+        // return redirect('/pagamentos');
     }
 
     public function estornoPaymentValidation()
