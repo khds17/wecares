@@ -15,6 +15,7 @@ function guessPaymentMethod(event) {
 };
 
 function setPaymentMethod(status, response) {
+    console.log(status);
    if (status == 200) {
        let paymentMethod = response[0];
        document.getElementById('paymentMethodId').value = paymentMethod.id;
