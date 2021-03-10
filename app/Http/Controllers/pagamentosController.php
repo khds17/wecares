@@ -42,6 +42,7 @@ class pagamentosController extends Controller
 
     public function processPaymentValidation(Request $request)
     {
+        dd($request);
         //Access token para utilizar o mercado pago
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
                
