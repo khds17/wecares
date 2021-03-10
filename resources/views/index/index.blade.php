@@ -28,7 +28,7 @@
                                             <h2>O que somos?</h2>
                                             <p>Wecares é uma plataforma que conecta pessoas à profissionais que prestam serviços de cuidados pessoais.
                                                Queremos ajudar você a encontrar profissionais de todo Brasil que ofereçam serviços com qualidade e segurança</p>
-                                            <p>Quer entender como contratar um profissional? Então <a href="{{url("/")}}">clique aqui</a>(*Abrir modal com video*)</p>                                            <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> -->
+                                            {{-- <p>Quer entender como contratar um profissional? Então <a href="{{url("/")}}">clique aqui</a>(*Abrir modal com video*)</p>                                            <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> --> --}}
                                         </div>
                                         <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/layout/img/cuidados.png" /></div>
                                     </div>
@@ -43,7 +43,7 @@
                                     <div class="col-lg-6" data-aos="fade-up">
                                         <h2>Compromisso com a segurança</h2>
                                         <p>Cada recurso de segurança implantado e cada orientação em nosso código de conduta representa nosso compromisso com a sua proteção.</p>
-                                        <p>Saiba mais sobre nosso <a href="{{url("/conduta")}}">código de conduta</a></p>                                            <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> -->
+                                        <p>Saiba mais sobre nosso <a href="{{url("/termos")}}">termo de uso</a> e <a href="{{url("/privacidade")}}">privacidade</a> </p>                                            <!-- <p class="page-header-text mb-5">Welcome to SB UI Kit Pro, a toolkit for building beautiful web interfaces, created by the developmet team at Start Bootstrap</p> -->
                                     </div>
                                     <div class="col-lg-6 d-none d-lg-block" data-aos="fade-up" data-aos-delay="50"><img class="img-fluid" src="assets/layout/img/seguranca.svg" /></div>
                                 </div>
