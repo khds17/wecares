@@ -42,7 +42,6 @@ class pagamentosController extends Controller
 
     public function processPaymentValidation(Request $request)
     {
-        dd($request);
         //Access token para utilizar o mercado pago
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
                
@@ -64,6 +63,8 @@ class pagamentosController extends Controller
         
         $payment->payer = $payer;
         $payment->save();
+        dd($payment);
+
 
         //Verifica se criou o id do payment para ter certeza que houve sucesso com o pagamento.
         if(!empty($payment->id)) {
