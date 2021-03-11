@@ -63,6 +63,7 @@ class pagamentosController extends Controller
         
         $payment->payer = $payer;
         $payment->save();
+        dump($payment);
 
         //Verifica se criou o id do payment para ter certeza que houve sucesso com o pagamento.
         if(!empty($payment->id)) {
@@ -79,13 +80,14 @@ class pagamentosController extends Controller
 
             //Verifica se já existe um id de customer(cliente).
             if(empty($customerSolicitante->ID_CUSTOMER)){
+                dump('Não tem Customer');
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
                 $customer->save();
-
+                dump($customer);
                 //Verifica se existe o id do customer
                 if(!empty($customer->id)) {
-
+                    dump('Deu certo');
                     //Coloca o id do customer no solicitante
                     $this->objSolicitante
                         ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
@@ -102,11 +104,12 @@ class pagamentosController extends Controller
 
                     $card->customer_id = $customer->id;
                     $card->save();
-
+                    dump($card);
                     //Verifica se existe o id do card
                     if(!empty($card->id)) {
+                        dump('Entrou 2');
                         // Grava os dados do cartão do nosso lado
-                        $cartao = $this->objCartoes->create([
+                        $this->objCartoes->create([
                             'ID_CUSTOMER' => $customer->id,
                             'ID_CARTAO' => $card->id,
                             'INICIO_CARTAO' => $card->first_six_digits,
@@ -120,7 +123,7 @@ class pagamentosController extends Controller
                         ]);
 
                         //Grava os dados do pagamento de validação para estorno.
-                        $validaCartao = $this->objValidaCartao->create([
+                        $this->objValidaCartao->create([
                             'ID_PAGAMENTO' => $payment->id,
                             'ID_CARTAO' => $card->id,
                             'STATUS' => $payment->status,
@@ -128,14 +131,17 @@ class pagamentosController extends Controller
                             'DT_APROVACAO' => $payment->date_approved,
                         ]);
                     } else {
+                        dump('Deu ruim 2');
                         $errorArray = (array)$card->error;
                         echo json_encode ($errorArray);
                     }
                 } else {
+                    dump('Deu ruim 1');
                     $errorArray = (array)$customer->error;
                     echo json_encode ($errorArray);
                 }
             } else {
+                dump('Tem Customer');
                 //Caso já exista um customer, grava os dados do cartão.
                 $card = new \MercadoPago\Card();
                 $card->token = $request->token;
@@ -146,11 +152,12 @@ class pagamentosController extends Controller
 
                 $card->customer_id = $customerSolicitante->ID_CUSTOMER;
                 $card->save();
-                
+                dump($card);
                 //Verifica se existe o id do card
                 if(!empty($card->id)) {
+                    dump('Entrou');
                     // Grava os dados do cartão do nosso lado
-                    $cartao = $this->objCartoes->create([
+                    $this->objCartoes->create([
                         'ID_CUSTOMER' => $customerSolicitante->ID_CUSTOMER,
                         'ID_CARTAO' => $card->id,
                         'INICIO_CARTAO' => $card->first_six_digits,
@@ -164,7 +171,7 @@ class pagamentosController extends Controller
                     ]);
 
                     //Grava os dados do pagamento de validação para estorno.
-                    $validaCartao = $this->objValidaCartao->create([
+                    $this->objValidaCartao->create([
                         'ID_PAGAMENTO' => $payment->id,
                         'ID_CARTAO' => $card->id,
                         'STATUS' => $payment->status,
@@ -174,10 +181,11 @@ class pagamentosController extends Controller
                 }
             }
         } else {
+            dump('Não criou o pagamento');
             $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
         }     
-        
+        dd('Fim');
         return redirect('/pagamentos');
     }
 
