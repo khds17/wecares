@@ -1,4 +1,4 @@
-window.Mercadopago.setPublishableKey("TEST-efa70036-c084-4daa-be2d-441bd3e74123");
+window.Mercadopago.setPublishableKey("APP_USR-0a3a3ea2-f003-4d88-8b81-13623a21f08b");
 
 if (document.getElementById('cardNumber') !== null) {
     document.getElementById('cardNumber').addEventListener('change', guessPaymentMethod);
@@ -15,7 +15,6 @@ function guessPaymentMethod(event) {
 };
 
 function setPaymentMethod(status, response) {
-    console.log(status);
    if (status == 200) {
        let paymentMethod = response[0];
        document.getElementById('paymentMethodId').value = paymentMethod.id;
@@ -26,7 +25,6 @@ function setPaymentMethod(status, response) {
 }
 
 function getIssuers(paymentMethodId) {
-    console.log(paymentMethodId);
     window.Mercadopago.getIssuers(
         paymentMethodId,
         setIssuers
@@ -34,7 +32,6 @@ function getIssuers(paymentMethodId) {
  }
 
  function setIssuers(status, response) {
-    console.log(status);
     if (status == 200) {
         let issuerSelect = document.getElementById('issuer');
 
@@ -55,7 +52,6 @@ function getIssuers(paymentMethodId) {
  }
 
  function getInstallments(paymentMethodId, transactionAmount, issuerId){
-    console.log(paymentMethodId, transactionAmount, issuerId);
     window.Mercadopago.getInstallments({
         "payment_method_id": paymentMethodId,
         "amount": parseFloat(transactionAmount),
@@ -64,7 +60,6 @@ function getIssuers(paymentMethodId) {
  }
  
  function setInstallments(status, response){
-     console.log(status);
     if (status == 200) {
         document.getElementById('installments').options.length = 0;
         response[0].payer_costs.forEach( payerCost => {
@@ -85,7 +80,6 @@ function getIssuers(paymentMethodId) {
 
 
 function getCardToken(event){
-    console.log(event);
    event.preventDefault();
    if(!doSubmit){
        let $form = document.getElementById('paymentForm');
@@ -95,7 +89,6 @@ function getCardToken(event){
 };
 
 function setCardTokenAndPay(status, response) {
-    console.log(status);
    if (status == 200 || status == 201) {
        let form = document.getElementById('paymentForm');
        let card = document.createElement('input');
