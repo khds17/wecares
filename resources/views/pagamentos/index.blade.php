@@ -160,7 +160,7 @@
                             <div class="col">
                                 <input type="hidden" name="transactionAmount" id="transactionAmount" value="1" />
                                 <input type="hidden" name="cvv" id="cvv"/>
-                                <input type="text" name="paymentMethodId" id="paymentMethodId" />
+                                <input type="hidden" name="paymentMethodId" id="paymentMethodId" />
                                 <input type="hidden" name="description" id="description" />
                             </div>
                         </div>
