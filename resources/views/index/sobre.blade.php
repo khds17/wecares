@@ -25,7 +25,7 @@
                 <h2 class="mb-4">Nossa história</h2>
                 <p>O início da nossa história começou já no mundo digital em 2016, após um de nossos idealizadores Charleston Rafael participar de uma palestra sobre o universo de statups. 
                     Charleston então se aprofundou nos estudos sobre as necessidades da população brasileira e encontrou a dificuldade que as pessoas tem em encontrar profissionais que realizam os cuidados físicos de outras pessoas.
-                    Charleston compartilhou a ideia com Kauan Henrique, Lucas Reis e Juliene Gomes e juntos idealizaram o WeCares. 
+                    Charleston compartilhou a ideia com Kauan Henrique e juntos idealizaram o WeCares. 
                 <hr class="my-5" />
                 {{-- <h2 class="mb-4">Missão</h2>
                 <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum culpa optio nihil id distinctio excepturi dignissimos, iure totam minima, natus ducimus.</p>
