@@ -180,7 +180,7 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <input type="checkbox" name="termos" id="termos" value="aceito">
-                                    <a href="{{url("/termos")}}" target="_blank">Termos </a><label>e</label><a href="{{url("/conduta")}}" target="_blank"> Código de conduta</a><br>
+                                    <a href="{{url("/termos")}}" target="_blank">Termos de uso </a><label>e</label><a href="{{url("/privacidade")}}" target="_blank"> privacidade</a><br>
                                     @error('termos')
                                         <span class="text-danger"><small>{{$message}}</small></span>
                                     @enderror
