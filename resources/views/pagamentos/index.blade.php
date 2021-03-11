@@ -147,9 +147,9 @@
                                     ondrag="return false" ondrop="return false" autocomplete=off onchange="catchCVV()">
                             </div>
                             <div class="col" id="issuerInput">
-                                <label for="issuer">Bandeira</label>
+                                <label for="issuer">Banco emissor</label>
                                 <br>
-                                <select id="issuer" name="issuer" data-checkout="issuer"></select>
+                                <select class="form-control" id="issuer" name="issuer" data-checkout="issuer"></select>
                             </div>
                         </div>
                         <div class="row margin-top-10">

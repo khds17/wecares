@@ -89,6 +89,7 @@ function getCardToken(event){
 };
 
 function setCardTokenAndPay(status, response) {
+    console.log(status);
    if (status == 200 || status == 201) {
        let form = document.getElementById('paymentForm');
        let card = document.createElement('input');
@@ -99,7 +100,7 @@ function setCardTokenAndPay(status, response) {
        doSubmit=true;
        form.submit();
    } else {
-       alert("Verify filled data!\n"+JSON.stringify(response, null, 4));
+        alert("Dados do cartão inválido! Verifique as informações");
    }
 };
 
