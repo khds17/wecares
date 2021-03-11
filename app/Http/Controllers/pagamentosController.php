@@ -43,7 +43,7 @@ class pagamentosController extends Controller
     public function processPaymentValidation(Request $request)
     {
         //Access token para utilizar o mercado pago
-        \MercadoPago\SDK::setAccessToken("APP_USR-2933194983833876-020323-21f3edbc3d0d99c6a0307b59535daca1-200979127");
+        \MercadoPago\SDK::setAccessToken("TEST-3508208613949405-021316-3288de42a43e89f96ce0a4a54a85533c-713881257");
                
         // Enviando o pagamento para mercado pago
         $payment = new \MercadoPago\Payment();
