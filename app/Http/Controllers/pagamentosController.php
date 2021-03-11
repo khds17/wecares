@@ -87,11 +87,11 @@ class pagamentosController extends Controller
                 if(!empty($customer->id)) {
 
                     //Coloca o id do customer no solicitante
-                    $solicitante = $this->objSolicitante
-                                        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                                        ->update([
-                                            'ID_CUSTOMER' => $customer->id,
-                                        ]);
+                    $this->objSolicitante
+                        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                        ->update([
+                            'ID_CUSTOMER' => $customer->id,
+                        ]);
                     
                     $card = new \MercadoPago\Card();
                     $card->token = $request->token;
@@ -178,7 +178,7 @@ class pagamentosController extends Controller
             echo json_encode ($errorArray);
         }     
         
-        // return redirect('/pagamentos');
+        return redirect('/pagamentos');
     }
 
     public function estornoPaymentValidation()
