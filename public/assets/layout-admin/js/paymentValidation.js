@@ -82,8 +82,11 @@ function getIssuers(paymentMethodId) {
 function getCardToken(event){
    event.preventDefault();
    if(!doSubmit){
-       let $form = document.getElementById('paymentForm');
-       window.Mercadopago.createToken($form, setCardTokenAndPay);
+       let form = document.getElementById('paymentForm');
+       console.log(form);
+       window.Mercadopago.createToken(form, setCardTokenAndPay);
+       console.log(window.Mercadopago.createToken(form, setCardTokenAndPay));
+
        return false;
    }
 };
