@@ -13,6 +13,7 @@ use App\Models\servicos;
 use App\Models\servicos_prestados;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
+use App\Models\registros_log;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
@@ -22,27 +23,19 @@ class servicosController extends Controller
         //Instanciando as classes
         public function __construct()
         {
-            $this->objProposta = new proposta();  
+            $this->objProposta = new proposta();
             $this->objPrestador = new prestadores();
             $this->objSolicitante = new solicitantes();
             $this->objPaciente = new pacientes();
             $this->objPacienteTipo = new paciente_tipo();
             $this->objCidades = new cidades();
-            $this->objPacienteLocalizacao = new paciente_localizacao(); 
-            $this->objServicosPrestados = new servicos_prestados(); 
+            $this->objPacienteLocalizacao = new paciente_localizacao();
+            $this->objServicosPrestados = new servicos_prestados();
             $this->objServico = new servicos();
-            $this->objFamiliaridades = new familiaridade(); 
-                  
+            $this->objFamiliaridades = new familiaridade();
+            $this->objRegistros = new registros_log();
+
         }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     public function propostas(Request $request)
     {
@@ -56,60 +49,59 @@ class servicosController extends Controller
         }
 
         $arrayPacientes = $this->objPaciente
-                        ->where('PACIENTES.ID', '=', $request->selectPaciente)
-                        ->get();
+                            ->where('PACIENTES.ID', '=', $request->selectPaciente)
+                            ->get();
 
         foreach ($arrayPacientes as $arrayPaciente) {
             $paciente = $arrayPaciente;
         }
 
         $arrayPacientesTipos = $this->objPacienteTipo
-                            ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
-                            ->where('PACIENTES_TIPOS.ID', '=', $paciente->ID_TIPO)
-                            ->select('PACIENTES_TIPOS.*')
-                            ->get();
+                                ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
+                                ->where('PACIENTES_TIPOS.ID', '=', $paciente->ID_TIPO)
+                                ->select('PACIENTES_TIPOS.*')
+                                ->get();
 
         foreach ($arrayPacientesTipos as $arrayPacienteTipos) {
             $pacienteTipo = $arrayPacienteTipos;
         }
 
         $arrayPacientesLocalizacao = $this->objPacienteLocalizacao
-                                    ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
-                                    ->where('PACIENTE_LOCALIZACAO.ID', '=', $paciente->ID_LOCALIZACAO)
-                                    ->select('PACIENTE_LOCALIZACAO.*')
-                                    ->get();
+                                        ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
+                                        ->where('PACIENTE_LOCALIZACAO.ID', '=', $paciente->ID_LOCALIZACAO)
+                                        ->select('PACIENTE_LOCALIZACAO.*')
+                                        ->get();
 
         foreach ($arrayPacientesLocalizacao as $arrayPacienteLocalizacao) {
             $pacienteLocalizacao = $arrayPacienteLocalizacao;
         }
 
         $arrayCidades = $this->objCidades
-                    ->where('CIDADES.ID','=', $request->pacienteCidade)
-                    ->get();
+                        ->where('CIDADES.ID','=', $request->pacienteCidade)
+                        ->get();
 
-        
+
         foreach ($arrayCidades as $arrayCidade) {
             $cidade = $arrayCidade;
         }
 
         DB::beginTransaction();
-            
-            try {
 
+            try {
                 $idPrestadores = explode(",",$request->idPrestadores);
 
                 $idServicos = implode(",",$request->servicos);
-                
+
                 foreach ($idPrestadores as $idPrestador) {
-                    
+
                     $arrayPrestadores = $this->objPrestador
-                        ->where('PRESTADORES.ID', '=', $idPrestador)
-                        ->get();
-                    
+                                            ->where('PRESTADORES.ID', '=', $idPrestador)
+                                            ->get();
+
                     foreach ($arrayPrestadores as $arrayPrestador) {
                         $prestador = $arrayPrestador;
 
-                        $proposta = $this->objProposta->create([
+                        $this->objProposta->create([
                             'ID_PRESTADOR' => $prestador->ID,
                             'NOME_PRESTADOR' =>$prestador->NOME,
                             'ID_SOLICITANTE' => $solicitante->ID,
@@ -120,7 +112,7 @@ class servicosController extends Controller
                             'NOME_PACIENTE' => $paciente->NOME,
                             'TIPO' => $pacienteTipo->TIPO,
                             'LOCALIZACAO' => $pacienteLocalizacao->LOCALIZACAO,
-                            'CEP' => $request->pacienteCep, 
+                            'CEP' => $request->pacienteCep,
                             'ENDERECO' => $request->pacienteEndereco,
                             'NUMERO' => $request->pacienteNumero,
                             'COMPLEMENTO' => $request->pacienteComplemento,
@@ -136,14 +128,21 @@ class servicosController extends Controller
                             'HORA_FIM' => $request->horaFim,
                             'VALOR' => $request->precoServico
                         ]);
+
+                        $this->objRegistros->create([
+                            'DATA' => date('d/m/Y \à\s H:i:s'),
+                            'TEXTO' => 'Proposta feita pelo solicitante '.$solicitante->NOME.' foi enviada com sucesso',
+                            'ID_USUARIO' => auth()->user()->id
+                        ]);
                     }
-                DB::commit();
-                return redirect()->action('servicosController@propostaAgradecimento');
-                };
+
+                    DB::commit();
+
+                    return redirect()->action('servicosController@propostaAgradecimento');
+                }
             } catch (\Throwable $th) {
-                //throw $th;
                 DB::rollback();
-                dd('Deu ruim');
+                return redirect()->action('servicosController@propostas');
             }
     }
 
@@ -181,9 +180,9 @@ class servicosController extends Controller
                                 ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
                                 ->get();
 
-        $servicos=$this->objServico->all();
+        $servicos = $this->objServico->all();
 
-        $familiaridades=$this->objFamiliaridades->all(); 
+        $familiaridades = $this->objFamiliaridades->all();
 
         return view('servicos/servicosPrestados', compact('servicosPrestados','servicos','familiaridades'));
     }
@@ -199,7 +198,7 @@ class servicosController extends Controller
                                 ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
                                 ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
                                 ->get();
-                                
+
         $servicos=$this->objServico->all();
 
         return view('servicos/servicosContratados', compact('servicosContratados','servicos'));
@@ -223,85 +222,45 @@ class servicosController extends Controller
                         ->get();
 
         // Percorre o select e cria o serviço a ser prestado para todas as propostas que não possuem essa serviço.
-        foreach ($servicos as $ojbServico) {
+        try {
+            DB::beginTransaction();
 
-            $servico = $ojbServico;
-
-            DB::table('SERVICOS_PRESTADOS')->insert([
-                'ID_PROPOSTA' => $servico->ID,
-                'ID_PRESTADOR' => $servico->ID_PRESTADOR, 
-                'NOME_PRESTADOR' => $servico->NOME_PRESTADOR,
-                'ID_SOLICITANTE' => $servico->ID_SOLICITANTE,
-                'NOME_SOLICITANTE' => $servico->NOME_SOLICITANTE,
-                'ID_FAMILIARIDADE' => $servico->ID_FAMILIARIDADE,
-                'OUTROS_FAMILIARIDADE' => $servico->OUTROS_FAMILIARIDADE,
-                'ID_PACIENTE' => $servico->ID_PACIENTE,
-                'NOME_PACIENTE' => $servico->NOME_PACIENTE, 
-                'TIPO' => $servico->TIPO,
-                'LOCALIZACAO' => $servico->LOCALIZACAO,
-                'CEP' => $servico->CEP,
-                'ENDERECO' => $servico->ENDERECO,
-                'NUMERO' => $servico->NUMERO,
-                'COMPLEMENTO' => $servico->COMPLEMENTO, 
-                'BAIRRO' => $servico->BAIRRO,
-                'CIDADE' => $servico->CIDADE,
-                'UF' => $servico->UF,
-                'SERVICOS' => $servico->SERVICOS,
-                'SERVICOS_OUTROS' => $servico->SERVICOS_OUTROS,
-                'TOMA_MEDICAMENTOS' => $servico->TOMA_MEDICAMENTOS, 
-                'TIPO_MEDICAMENTOS' => $servico->TIPO_MEDICAMENTOS,
-                'DATA_SERVICO' => $servico->DATA_SERVICO,
-                'HORA_INICIO' => $servico->HORA_INICIO,
-                'HORA_FIM' => $servico->HORA_FIM,
-                'VALOR' => $servico->VALOR,
-                'STATUS_SERVICO' => $servicoPendente
-            ]);
-
-        }                      
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+            foreach ($servicos as $servico) {
+                DB::table('SERVICOS_PRESTADOS')->insert([
+                    'ID_PROPOSTA' => $servico->ID,
+                    'ID_PRESTADOR' => $servico->ID_PRESTADOR,
+                    'NOME_PRESTADOR' => $servico->NOME_PRESTADOR,
+                    'ID_SOLICITANTE' => $servico->ID_SOLICITANTE,
+                    'NOME_SOLICITANTE' => $servico->NOME_SOLICITANTE,
+                    'ID_FAMILIARIDADE' => $servico->ID_FAMILIARIDADE,
+                    'OUTROS_FAMILIARIDADE' => $servico->OUTROS_FAMILIARIDADE,
+                    'ID_PACIENTE' => $servico->ID_PACIENTE,
+                    'NOME_PACIENTE' => $servico->NOME_PACIENTE,
+                    'TIPO' => $servico->TIPO,
+                    'LOCALIZACAO' => $servico->LOCALIZACAO,
+                    'CEP' => $servico->CEP,
+                    'ENDERECO' => $servico->ENDERECO,
+                    'NUMERO' => $servico->NUMERO,
+                    'COMPLEMENTO' => $servico->COMPLEMENTO,
+                    'BAIRRO' => $servico->BAIRRO,
+                    'CIDADE' => $servico->CIDADE,
+                    'UF' => $servico->UF,
+                    'SERVICOS' => $servico->SERVICOS,
+                    'SERVICOS_OUTROS' => $servico->SERVICOS_OUTROS,
+                    'TOMA_MEDICAMENTOS' => $servico->TOMA_MEDICAMENTOS,
+                    'TIPO_MEDICAMENTOS' => $servico->TIPO_MEDICAMENTOS,
+                    'DATA_SERVICO' => $servico->DATA_SERVICO,
+                    'HORA_INICIO' => $servico->HORA_INICIO,
+                    'HORA_FIM' => $servico->HORA_FIM,
+                    'VALOR' => $servico->VALOR,
+                    'STATUS_SERVICO' => $servicoPendente
+                ]);
+                echo "Serviço criado com sucesso";
+            }
+        } catch (\Throwable $th) {
+            DB::rollback();
+            echo "Erro ao criar serviço";
+        }
     }
 
     public function aceitarProspostaPrestador($id)
@@ -342,26 +301,4 @@ class servicosController extends Controller
         return true;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
