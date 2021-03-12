@@ -103,6 +103,7 @@ function setCardTokenAndPay(status, response) {
        doSubmit=true;
        form.submit();
    } else {
+        alert("Verify filled data!\n"+JSON.stringify(response, null, 4));
         alert("Dados do cartão inválido! Verifique as informações");
    }
 };
