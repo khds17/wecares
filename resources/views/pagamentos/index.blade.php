@@ -31,46 +31,48 @@
                     <tbody>
                         @foreach ($solicitantes as $solicitante)
                         <tr>
-                            <td>
-                                <center>{{$solicitante->INICIO_CARTAO}}******{{$solicitante->FIM_CARTAO}}</center>
-                            </td>
-                            @if($solicitante->BANDEIRA == "master")
-                                <td> 
-                                    <center> <img src="https://img.icons8.com/color/40/000000/mastercard.png"/> </center>
-                                </td>
-                            @elseif($solicitante->BANDEIRA == "visa")
-                                <td> 
-                                    <center> <img src="https://img.icons8.com/color/40/000000/visa.png"/> </center>
-                                </td>
-                            @elseif($solicitante->BANDEIRA == "amex")
-                                <td> 
-                                   <center> <img src="https://img.icons8.com/color/40/000000/amex.png"/> </center>
-                                </td>   
-                            @elseif($solicitante->BANDEIRA == "discover")
+                            @if($solicitante->ID_CUSTOMER) {
                                 <td>
-                                     <center> <img src="https://img.icons8.com/color/40/000000/discover.png"/> </center>
-                                </td> 
-                            @elseif($solicitante->BANDEIRA == "maestro")
-                                <td> 
-                                 <center> <img src="https://img.icons8.com/color/40/000000/maestro.png"/> </center>
-                                </td>   
-                            @else
-                                <td> {
-                                   <center> {$solicitante->BANDEIRA}} <img src="https://img.icons8.com/color/40/000000/bank-card-back-side.png"/> </center>
-                                </td>                        
-                            @endif
-                            @if ($solicitante->PRINCIPAL === 1)
-                                <td>
-                                    <center> <img src="https://img.icons8.com/fluent/25/000000/star.png"/> </center>
+                                    <center>{{$solicitante->INICIO_CARTAO}}******{{$solicitante->FIM_CARTAO}}</center>
                                 </td>
-                            @else
-                                <td></td>
-                            @endif
-                            <td>
-                                <a class="btn btn-primary" href=""> Editar </a>
-                                <a class="btn btn-danger" href=""> Desativar </a>
-                            </td>
-                        </tr>                              
+                                @if($solicitante->BANDEIRA == "master")
+                                    <td>
+                                        <center> <img src="https://img.icons8.com/color/40/000000/mastercard.png"/> </center>
+                                    </td>
+                                @elseif($solicitante->BANDEIRA == "visa")
+                                    <td>
+                                        <center> <img src="https://img.icons8.com/color/40/000000/visa.png"/> </center>
+                                    </td>
+                                @elseif($solicitante->BANDEIRA == "amex")
+                                    <td>
+                                    <center> <img src="https://img.icons8.com/color/40/000000/amex.png"/> </center>
+                                    </td>
+                                @elseif($solicitante->BANDEIRA == "discover")
+                                    <td>
+                                        <center> <img src="https://img.icons8.com/color/40/000000/discover.png"/> </center>
+                                    </td>
+                                @elseif($solicitante->BANDEIRA == "maestro")
+                                    <td>
+                                    <center> <img src="https://img.icons8.com/color/40/000000/maestro.png"/> </center>
+                                    </td>
+                                @else
+                                    <td> {
+                                    <center> {$solicitante->BANDEIRA}} <img src="https://img.icons8.com/color/40/000000/bank-card-back-side.png"/> </center>
+                                    </td>
+                                @endif
+                                @if ($solicitante->PRINCIPAL === 1)
+                                    <td>
+                                        <center> <img src="https://img.icons8.com/fluent/25/000000/star.png"/> </center>
+                                    </td>
+                                @else
+                                    <td></td>
+                                @endif
+                                <td>
+                                    <a class="btn btn-primary" href=""> Editar </a>
+                                    <a class="btn btn-danger" href=""> Desativar </a>
+                                </td>
+                            } @endif
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
