@@ -270,6 +270,7 @@ class solicitantesController extends Controller
                         ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
                         ->where('PROPOSTAS.APROVACAO_PRESTADOR', '=', $propostaAceita)
                         ->whereNull('PROPOSTAS.APROVACAO_SOLICITANTE')
+                        ->orWhere('PROPOSTAS.APROVACAO_SOLICITANTE', '=', 0)
                         ->select('PROPOSTAS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
                         ->get();
 

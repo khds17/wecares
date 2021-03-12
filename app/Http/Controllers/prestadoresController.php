@@ -102,6 +102,7 @@ class prestadoresController extends Controller
                         ->join('PRESTADORES','PROPOSTAS.ID_PRESTADOR','=','PRESTADORES.ID')
                         ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
                         ->whereNull('PROPOSTAS.APROVACAO_PRESTADOR')
+                        ->orWhere('PROPOSTAS.APROVACAO_PRESTADOR', '=', 0)
                         ->select('PROPOSTAS.*')
                         ->get();
 
