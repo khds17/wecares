@@ -265,8 +265,17 @@ class servicosController extends Controller
 
     public function aceitarProspostaPrestador($id)
     {
+
         $this->objProposta->where(['ID'=>$id])->update([
             'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.ACEITADO')
+        ]);
+
+        $proposta = $this->objProposta->find($id);
+
+        $this->objRegistros->create([
+            'DATA' => date('d/m/Y \à\s H:i:s'),
+            'TEXTO' => 'Proposta#'.$proposta->ID.' do solicitante '.$proposta->NOME_SOLICITANTE.' aceita',
+            'ID_USUARIO' => auth()->user()->id
         ]);
 
         return true;
@@ -279,6 +288,14 @@ class servicosController extends Controller
             'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.RECUSADO'),
         ]);
 
+        $proposta = $this->objProposta->find($id);
+
+        $this->objRegistros->create([
+            'DATA' => date('d/m/Y \à\s H:i:s'),
+            'TEXTO' => 'Proposta#'.$proposta->ID.' do solicitante '.$proposta->NOME_SOLICITANTE.' recusada',
+            'ID_USUARIO' => auth()->user()->id
+        ]);
+
         return true;
     }
 
@@ -286,6 +303,14 @@ class servicosController extends Controller
     {
         $this->objProposta->where(['ID'=>$id])->update([
             'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.ACEITADO'),
+        ]);
+
+        $proposta = $this->objProposta->find($id);
+
+        $this->objRegistros->create([
+            'DATA' => date('d/m/Y \à\s H:i:s'),
+            'TEXTO' => 'Proposta#'.$proposta->ID.' aceita',
+            'ID_USUARIO' => auth()->user()->id
         ]);
 
         return true;
@@ -296,6 +321,14 @@ class servicosController extends Controller
 
         $this->objProposta->where(['ID'=>$id])->update([
             'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
+        ]);
+
+        $proposta = $this->objProposta->find($id);
+
+        $this->objRegistros->create([
+            'DATA' => date('d/m/Y \à\s H:i:s'),
+            'TEXTO' => 'Proposta#'.$proposta->ID.' recusada',
+            'ID_USUARIO' => auth()->user()->id
         ]);
 
         return true;
