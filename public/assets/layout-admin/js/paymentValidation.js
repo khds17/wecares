@@ -83,9 +83,7 @@ function getCardToken(event){
    event.preventDefault();
    if(!doSubmit){
        let form = document.getElementById('paymentForm');
-       console.log(form);
        window.Mercadopago.createToken(form, setCardTokenAndPay);
-       console.log(window.Mercadopago.createToken(form, setCardTokenAndPay));
 
        return false;
    }
@@ -103,13 +101,12 @@ function setCardTokenAndPay(status, response) {
        doSubmit=true;
        form.submit();
    } else {
-        alert("Verify filled data!\n"+JSON.stringify(response, null, 4));
-        alert("Dados do cartão inválido! Verifique as informações");
+        alert("Erro ao cadastrar cartão! Verifique os dados, por favor!");
    }
 };
 
 function catchCVV() {
-   
+
     let $cvv = document.getElementById('securityCode').value;
 
     if($cvv) {
