@@ -16,20 +16,18 @@ use Illuminate\Support\Facades\DB;
 
 class pacientesController extends Controller
 {
-
     //Instanciando as classes
     public function __construct()
     {
         $this->objSolicitante = new solicitantes();
         $this->objPaciente = new pacientes();
         $this->objPacienteTipo = new paciente_tipo();
-        $this->objPacienteLocalizacao = new paciente_localizacao(); 
+        $this->objPacienteLocalizacao = new paciente_localizacao();
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();
-        $this->objFamiliaridades = new familiaridade(); 
-        $this->objRegistros = new registros_log();   
-              
+        $this->objFamiliaridades = new familiaridade();
+        $this->objRegistros = new registros_log();
     }
 
     /**
@@ -59,7 +57,6 @@ class pacientesController extends Controller
      */
     public function create()
     {
-
         $estados = $this->objEstados->all();
 
         $cidades = $this->objCidades->orderBy('CIDADE','asc')->get();
@@ -81,9 +78,6 @@ class pacientesController extends Controller
      */
     public function store(Request $request)
     {
-        // Pegando o valor da constant para colocar no solicitante
-        $status = \Config::get('constants.STATUS.ATIVO');
-        
         //Pega o solicitante logado
         $solicitantesArray = $this->objSolicitante->where('ID_USUARIO', auth()->user()->id)->get();
 
@@ -95,9 +89,6 @@ class pacientesController extends Controller
                 $solicitante = $solicitanteArray;
             }
 
-            //Gravando o id do solicitante
-            $idSolicitante = $solicitante->ID;
-            
             $enderecoPaciente = $this->objEndereco->create([
                 'CEP' => $request->pacienteCep,
                 'ENDERECO' => $request->pacienteEndereco,
@@ -107,33 +98,23 @@ class pacientesController extends Controller
                 'ID_CIDADE' => $request->pacienteCidade,
                 'ID_ESTADO' => $request->pacienteEstado,
             ]);
-            
-            //Gravando o id do endereco
-            $idEnderecoPaciente = $enderecoPaciente->id;
-            
+
             $paciente = $this->objPaciente->create([
                 'NOME' => $request->pacienteNome,
                 'ID_TIPO' => $request->pacienteTipo,
                 'ID_LOCALIZACAO' => $request->pacienteLocalizacao,
-                'ID_ENDERECO' => $idEnderecoPaciente,
+                'ID_ENDERECO' => $enderecoPaciente->id,
                 'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
                 'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
-                'ID_SOLICITANTE' => $idSolicitante,
-                'STATUS' => $status,
+                'ID_SOLICITANTE' => $solicitante->ID,
+                'STATUS' => \Config::get('constants.STATUS.ATIVO'),
                 'ID_FAMILIARIDADE' => $request->familiaridade,
                 'FAMILIAR_OUTROS' => $request->familiaridadeOutros,
                 ]);
 
-            // Pegando informações para popular no registro
-            $dataHora = date('d/m/Y \à\s H:i:s');
-
-            $nomeUsuario = $paciente->NOME;
-                
-            $textoRegistro = 'Cadastro do paciente '.$nomeUsuario.' realizado com sucesso'; 
-
-            $registro = $this->objRegistros->create([
-                'DATA' => $dataHora,
-                'TEXTO' => $textoRegistro,
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Cadastro do paciente '.$paciente->NOME.' realizado com sucesso',
                 'ID_USUARIO' => $solicitante->ID_USUARIO
             ]);
 
@@ -143,30 +124,14 @@ class pacientesController extends Controller
 
         } catch (\Throwable $e) {
             DB::rollback();
-            report($e);
-            return false;
-    
+            return redirect()->action('pacientesController@create');
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
     public function selectPacientes($id)
     {
-
         //Encontrando os pacientes do solicitante logado
         $paciente = $this->objPaciente->find($id);
 
-        
         //Pegando todos os tipos de pacientes
         $pacientesTipos = $this->objPacienteTipo
                             ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
@@ -181,7 +146,7 @@ class pacientesController extends Controller
                                     ->select('PACIENTE_LOCALIZACAO.*')
                                     ->get();
 
-        
+
         // //Encontrando o endereço da localização dos pacientes
         $endereco = $paciente->find($paciente->ID)
                             ->relEndereco;
@@ -222,7 +187,7 @@ class pacientesController extends Controller
 
         //Pegando o solicitante do paciente
         $solicitante = $paciente->find($paciente->ID)
-                                ->relSolicitante;        
+                                ->relSolicitante;
 
         //Pegando todas as cidades
         $cidades = $this->objCidades->all();
@@ -247,9 +212,12 @@ class pacientesController extends Controller
     {
         $paciente = $this->objPaciente->find($id);
 
+        $solicitante = $paciente->find($paciente->ID)
+                                ->relSolicitante;
+
         DB::beginTransaction();
 
-        try {          
+        try {
             $this->objEndereco->where(['ID' => $paciente->ID_ENDERECO])->update([
                 'CEP' => $request->pacienteCep,
                 'ENDERECO' => $request->pacienteEndereco,
@@ -258,7 +226,7 @@ class pacientesController extends Controller
                 'BAIRRO' => $request->pacienteBairro,
                 'ID_CIDADE' => $request->pacienteCidade,
                 'ID_ESTADO' => $request->pacienteEstado,
-            ]);            
+            ]);
 
             $this->objPaciente->where(['ID' => $paciente->ID])->update([
                 'NOME' => $request->pacienteNome,
@@ -270,19 +238,9 @@ class pacientesController extends Controller
                 'FAMILIAR_OUTROS' => $request->familiaridadeOutros,
                 ]);
 
-            // Pegando informações para popular no registro
-            $solicitante = $paciente->find($paciente->ID)
-                                    ->relSolicitante;  
-            
-            $dataHora = date('d/m/Y \à\s H:i:s');
-
-            $nomeUsuario = $paciente->NOME;
-                
-            $textoRegistro = 'Cadastro do paciente '.$nomeUsuario.' alterado com sucesso'; 
-
-            $registro = $this->objRegistros->create([
-                'DATA' => $dataHora,
-                'TEXTO' => $textoRegistro,
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Cadastro do paciente '.$paciente->NOME.' alterado com sucesso',
                 'ID_USUARIO' => $solicitante->ID_USUARIO
             ]);
 
@@ -290,24 +248,10 @@ class pacientesController extends Controller
 
             return redirect("/paciente");
 
-            
         } catch (\Throwable $e) {
-
             DB::rollback();
-            report($e);
-            return false;
-    
+            //Validar se funciona esse edit para o cadastro do paciente
+            return redirect()->action('pacientesController@edit');
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
