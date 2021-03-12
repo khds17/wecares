@@ -80,7 +80,7 @@ class prestadoresController extends Controller
     {
         // Encontra o prestador pelo usuario logado.
         $prestadores = $this->objPrestador->where('ID_USUARIO', auth()->user()->id)->get();
-        
+
         $formacoes = $this->objFormacao
                          ->join('PRESTADORES', 'FORMACAO.ID', '=', 'PRESTADORES.ID_FORMACAO')
                          ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
@@ -122,7 +122,7 @@ class prestadoresController extends Controller
                             ->select('PRESTADORES.*','FORMACAO.FORMACAO')
                             ->where('ENDERECOS.ID_CIDADE', '=', $idCidade)
                             ->get();
-        
+
         //Verifica se há algum prestador
         if(count($prestadores) >= 1) {
 
@@ -170,7 +170,7 @@ class prestadoresController extends Controller
         } else {
             return view('prestadores/resultado-prestadores',compact('prestadores'));
         }
-       
+
     }
 
     public function recebimentos()
@@ -202,11 +202,10 @@ class prestadoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(requestPrestador $request)
-    {   
-       
+    {
         DB::beginTransaction();
 
-        // Cadastro do endereço, certificado, antecedentes crimimais e prestador
+        // Cadastra endereço, certificado, antecedentes crimimais, prestador, foto, função do prestador e log.
         try {
             $endereco = $this->objEndereco->create([
                 'CEP' => $request->prestadorCep,
@@ -217,19 +216,19 @@ class prestadoresController extends Controller
                 'ID_CIDADE' => $request->prestadorCidade,
                 'ID_ESTADO' => $request->prestadorEstado,
             ]);
-            
+
             $certificado = $this->objCertificado->create([
                 'CERTIFICADO' => $request->certificadoFormacao->store('certificados')
             ]);
-    
+
             $antecedente = $this->objAntecedente->create([
                 'ANTECEDENTE' => $request->antecedentes->store('antecedentes')
             ]);
-            
+
             $foto = $this->objFotos->create([
                 'FOTO' => $request->foto->store('fotos')
             ]);
-            
+
             $usuario = $this->objUsers->create([
                 'name' => $request->prestadorNome,
                 'email' => $request->prestadorEmail,
@@ -237,10 +236,9 @@ class prestadoresController extends Controller
                 'status'=> \Config::get('constants.STATUS.PENDENTE'),
             ]);
 
-            //Gravando a função do usuario
             $usuario->assignRole('cuidador/enfermeiro');
-            
-            $prestador = $this->objPrestador->create([
+
+            $this->objPrestador->create([
                 'NOME' => $request->prestadorNome,
                 'CPF' => $request->prestadorCPF,
                 'TELEFONE' => $request->prestadorTelefone,
@@ -255,24 +253,20 @@ class prestadoresController extends Controller
                 'ID_FOTO' => $foto->id,
             ]);
 
-            $registro = $this->objRegistros->create([
+            $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
                 'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso',
                 'ID_USUARIO' => $usuario->id
             ]);
 
             DB::commit();
-                
+
             return redirect()->action('indexController@agradecimento');
-            
+
         } catch (\Exception $e) {
-            dd('Deu merda');
             DB::rollback();
             return redirect()->action('prestadoresController@create');
-
         }
-
-        
     }
 
     /**
@@ -304,7 +298,7 @@ class prestadoresController extends Controller
     public function edit($id)
     {
         $prestadores= $this->objPrestador->find($id);
-        
+
         $users = $prestadores->find($prestadores->ID)
                         ->relUsuario;
 
@@ -320,11 +314,11 @@ class prestadoresController extends Controller
         $arrayFotos = $this->objFotos
                     ->where('FOTOS.ID', '=', $prestadores->ID_FOTO)
                     ->get();
-        
+
         foreach ($arrayFotos as $arrayFoto) {
             $foto = $arrayFoto;
         }
-        
+
         $formacoes = $this->objFormacao->all();
 
         $sexos = $this->objSexos->all();
@@ -348,9 +342,8 @@ class prestadoresController extends Controller
         $prestadores = $this->objPrestador->find($id);
 
         DB::beginTransaction();
-
+        // Atualiza endereço, certificado, antecedentes crimimais, prestador, foto, função do prestador e cria log de atualização.
         try {
-
             $this->objEndereco->where(['ID' => $prestadores->ID_ENDERECO])->update([
                 'CEP' => $request->prestadorCep,
                 'ENDERECO' => $request->prestadorEndereco,
@@ -360,7 +353,7 @@ class prestadoresController extends Controller
                 'ID_CIDADE' => $request->prestadorCidade,
                 'ID_ESTADO' => $request->prestadorEstado,
             ]);
-            
+
             if($request->certificadoFormacao) {
                 $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
                     'CERTIFICADO' => $request->certificadoFormacao->store('certificados')
@@ -378,7 +371,7 @@ class prestadoresController extends Controller
                     'FOTO' => $request->foto->store('fotos')
                 ]);
             }
-            
+
             $this->objUsers->where(['id' => $prestadores->ID_USUARIO])->update([
                 'name' => $request->prestadorNome,
             ]);
@@ -391,17 +384,10 @@ class prestadoresController extends Controller
                 'DT_NASCIMENTO' => $request->prestadorNascimento,
                 'ID_FORMACAO' => $request->formacao,
             ]);
-            
-            // Pegando informações para popular no registro
-            $dataHora = date('d/m/Y \à\s H:i:s');
 
-            $nomeUsuario = $prestadores->NOME;
-                
-            $textoRegistro = 'Cadastro de '.$nomeUsuario.' alterado com sucesso'; 
-
-            $registro = $this->objRegistros->create([
-                'DATA' => $dataHora,
-                'TEXTO' => $textoRegistro,
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Cadastro de '.$prestadores->NOME.' alterado com sucesso',
                 'ID_USUARIO' => $prestadores->ID_USUARIO
             ]);
 
@@ -411,6 +397,7 @@ class prestadoresController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
+            return redirect()->action('prestadoresController@dadosCadastrais');
         }
     }
 
@@ -433,16 +420,5 @@ class prestadoresController extends Controller
             'status' => $statusReprovado
         ]);
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
