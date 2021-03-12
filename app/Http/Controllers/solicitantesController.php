@@ -38,7 +38,7 @@ class solicitantesController extends Controller
     public function __construct()
     {
         $this->objSolicitante = new solicitantes();
-        $this->objProposta = new proposta();  
+        $this->objProposta = new proposta();
         $this->objPaciente = new pacientes();
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
@@ -46,19 +46,17 @@ class solicitantesController extends Controller
         $this->objServico = new servicos();
         $this->objPacienteTipo = new paciente_tipo();
         $this->objPacienteLocalizacao = new paciente_localizacao();
-        $this->objFamiliaridade = new familiaridade(); 
+        $this->objFamiliaridade = new familiaridade();
         $this->objUsers = new user();
-        $this->objRegistros = new registros_log(); 
-        
+        $this->objRegistros = new registros_log();
+
     }
-    
+
     public function index()
     {
-           
         $solicitante = $this->objSolicitante->all();
 
         return view('solicitantes/index',compact('solicitante'));
-        
     }
 
     public function dadosCadastrais()
@@ -84,7 +82,7 @@ class solicitantesController extends Controller
 
         $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
 
-        $familiaridades=$this->objFamiliaridade->all(); 
+        $familiaridades=$this->objFamiliaridade->all();
 
         return view('solicitantes/create',compact('estados','cidades','familiaridades','pacienteTipo','pacienteLocalizacao'));
     }
@@ -97,13 +95,10 @@ class solicitantesController extends Controller
      */
     public function store(requestSolicitantePaciente $request)
     {
-        // Pegando o valor da constant para colocar no solicitante
-        $status = \Config::get('constants.STATUS.ATIVO');
-
         DB::beginTransaction();
 
-        try {           
-            
+        // Cadastra endereço, usuario, solicitante, função do solicitante, cadastro do paciente e log.
+        try {
             $enderecoSolicitante = $this->objEndereco->create([
                 'CEP' => $request->solicitanteCep,
                 'ENDERECO' => $request->solicitanteEndereco,
@@ -114,50 +109,31 @@ class solicitantesController extends Controller
                 'ID_ESTADO' => $request->solicitanteEstado,
             ]);
 
-            //Gravando o id do endereco
-            $idEnderecoSolicitante = $enderecoSolicitante->id;
-
             $usuario = $this->objUsers->create([
                 'name' => $request->solicitanteNome,
                 'email' => $request->solicitanteEmail,
                 'password' => Hash::make($request['solicitanteSenha']),
-                'status' => $status,
+                'status' => \Config::get('constants.STATUS.ATIVO'),
             ]);
-            
+
             //Gravando a função no usuario
             $usuario->assignRole('solicitante');
-            
-            //Gravando o id do usuario
-            $idUsuario = $usuario->id;
-    
+
             $solicitante = $this->objSolicitante->create([
                 'NOME' => $request->solicitanteNome,
                 'CPF' => $request->solicitanteCPF,
                 'EMAIL' => $request->solicitanteEmail,
                 'TELEFONE' => $request->solicitanteTelefone,
-                'ID_USUARIO' => $idUsuario,
-                'ID_ENDERECO' => $idEnderecoSolicitante,
+                'ID_USUARIO' => $usuario->id,
+                'ID_ENDERECO' => $enderecoSolicitante->id,
                 ]);
 
-            //Gravando o id do solicitante
-            $idSolicitante = $solicitante->id;
-
-            if($solicitante) {
-            // Pegando informações para popular no registro
-            $dataHora = date('d/m/Y \à\s H:i:s');
-
-            $nomeUsuario = $usuario->name;
-                
-            $textoRegistro = 'Cadastro de '.$nomeUsuario.' realizado com sucesso'; 
-
-            $registro = $this->objRegistros->create([
-                'DATA' => $dataHora,
-                'TEXTO' => $textoRegistro,
-                'ID_USUARIO' => $idUsuario
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso',
+                'ID_USUARIO' => $usuario->id
             ]);
 
-            }
-            
             $enderecoPaciente = $this->objEndereco->create([
                 'CEP' => $request->pacienteCep,
                 'ENDERECO' => $request->pacienteEndereco,
@@ -167,51 +143,34 @@ class solicitantesController extends Controller
                 'ID_CIDADE' => $request->pacienteCidade,
                 'ID_ESTADO' => $request->pacienteEstado,
             ]);
-            
-            //Gravando o id do endereco
-            $idEnderecoPaciente = $enderecoPaciente->id;
-            
+
             $paciente = $this->objPaciente->create([
                 'NOME' => $request->pacienteNome,
                 'ID_TIPO' => $request->pacienteTipo,
                 'ID_LOCALIZACAO' => $request->pacienteLocalizacao,
-                'ID_ENDERECO' => $idEnderecoPaciente,
+                'ID_ENDERECO' => $enderecoPaciente->id,
                 'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
                 'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
-                'ID_SOLICITANTE' => $idSolicitante,
-                'STATUS' => $status,
+                'ID_SOLICITANTE' => $solicitante->id,
+                'STATUS' => \Config::get('constants.STATUS.ATIVO'),
                 'ID_FAMILIARIDADE' => $request->familiaridade,
                 'FAMILIAR_OUTROS' => $request->familiaridadeOutros,
                 ]);
-            
-            if($paciente) {
-                // Pegando informações para popular no registro
-                $dataHora = date('d/m/Y \à\s H:i:s');
-    
-                $nomeUsuario = $paciente->NOME;
-                    
-                $textoRegistro = 'Cadastro do paciente '.$nomeUsuario.' realizado com sucesso'; 
-    
-                $registro = $this->objRegistros->create([
-                    'DATA' => $dataHora,
-                    'TEXTO' => $textoRegistro,
-                    'ID_USUARIO' => $idUsuario
+
+                $this->objRegistros->create([
+                    'DATA' => date('d/m/Y \à\s H:i:s'),
+                    'TEXTO' => 'Cadastro do paciente '.$paciente->NOME.' realizado com sucesso',
+                    'ID_USUARIO' => $usuario->id
                 ]);
-    
-                }
-                  
+
             DB::commit();
 
             return redirect('/login');
 
         } catch (\Throwable $e) {
             DB::rollback();
-            report($e);
-            return false;
-    
+            return redirect()->action('solicitantesController@create');
         }
-
-        
     }
 
     /**
@@ -222,9 +181,8 @@ class solicitantesController extends Controller
      */
     public function show($id)
     {
-        
         $solicitante=$this->objSolicitante->find($id);
-        
+
         return view('solicitantes/information',compact('solicitante'));
     }
 
@@ -239,10 +197,10 @@ class solicitantesController extends Controller
         $solicitantes= $this->objSolicitante->find($id);
 
         $users = $solicitantes->find($solicitantes->ID)
-        ->relUsuario;
+                            ->relUsuario;
 
         $enderecos = $solicitantes->find($solicitantes->ID)
-        ->relEndereco;
+                                ->relEndereco;
 
         $cidades = $this->objCidades->all();
 
@@ -265,8 +223,7 @@ class solicitantesController extends Controller
 
         DB::beginTransaction();
 
-        try {           
-
+        try {
             $this->objEndereco->where(['ID' => $solicitantes->ID_ENDERECO])->update([
                 'CEP' => $request->solicitanteCep,
                 'ENDERECO' => $request->solicitanteEndereco,
@@ -287,33 +244,18 @@ class solicitantesController extends Controller
                 'TELEFONE' => $request->solicitanteTelefone,
                 ]);
 
-            // Pegando informações para popular no registro
-            $dataHora = date('d/m/Y \à\s H:i:s');
-
-            $nomeUsuario = $solicitantes->NOME;
-                
-            $textoRegistro = 'Cadastro de '.$nomeUsuario.' alterado com sucesso'; 
-
-            $registro = $this->objRegistros->create([
-                'DATA' => $dataHora,
-                'TEXTO' => $textoRegistro,
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Cadastro de '.$solicitantes->NOME.' alterado com sucesso',
                 'ID_USUARIO' => $solicitantes->ID_USUARIO
             ]);
-            
+
             DB::commit();
 
-            return redirect()->action('solicitantesController@dadosCadastrais');
-
-            
         } catch (\Throwable $e) {
-
-
             DB::rollback();
-            report($e);
-            return false;
-    
         }
-        return redirect('solicitantes');
+        return redirect()->action('solicitantesController@dadosCadastrais');
     }
 
     public function solicitantePropostas()
@@ -331,20 +273,9 @@ class solicitantesController extends Controller
                         ->select('PROPOSTAS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
                         ->get();
 
-        $servicos=$this->objServico->all();
+        $servicos = $this->objServico->all();
 
         return view('solicitantes/propostas',compact('propostas','servicos'));
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
 
     }
 }

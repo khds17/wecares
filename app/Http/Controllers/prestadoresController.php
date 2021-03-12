@@ -205,7 +205,7 @@ class prestadoresController extends Controller
     {
         DB::beginTransaction();
 
-        // Cadastra endereço, certificado, antecedentes crimimais, prestador, foto, função do prestador e log.
+        // Cadastra endereço, certificado, antecedentes crimimais, prestador, usuário, foto, função do prestador e log.
         try {
             $endereco = $this->objEndereco->create([
                 'CEP' => $request->prestadorCep,
