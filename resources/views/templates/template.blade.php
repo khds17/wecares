@@ -254,9 +254,9 @@
                                     <a class="icon-list-social-link" href="javascript:void(0);">
                                         <i class="fab fa-linkedin"></i>
                                     </a>
-                                    {{-- <a class="icon-list-social-link" href="javascript:void(0);">
-                                        <i class="fab fa-twitter"></i>
-                                    </a> --}}
+                                    <a class="icon-list-social-link" href="javascript:void(0);">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-lg-9">
@@ -287,8 +287,8 @@
                                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                                         <div class="text-uppercase-expanded text-xs mb-4">Contato</div>
                                         <ul class="list-unstyled mb-0">
-                                            <li class="mb-2"><a>wecares99@gmail.com</a></li>
-                                            <li class="mb-2"><a>(19) 99558-3696</a></li>
+                                            <li class="mb-2"><a>contato@wecares.com.br</a></li>
+                                            {{-- <li class="mb-2"><a>(19) 99558-3696</a></li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -296,7 +296,7 @@
                         </div>
                         <hr class="my-5" />
                         <div class="row align-items-center">
-                            <div class="col-md-6 small">Copyright &copy; WeCares 2020</div>
+                            <div class="col-md-6 small">Copyright &copy; WeCares 2021</div>
                             <div class="col-md-6 text-md-right small">
                                 {{-- <a href="{{url("/privacidade")}}">Privacidade</a> --}}
                                 &middot;

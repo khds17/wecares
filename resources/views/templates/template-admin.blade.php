@@ -418,7 +418,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container">
                         <div class="row align-items-center">
-                            <div class="col-md-6 small">Copyright &copy; WeCares 2020</div>
+                            <div class="col-md-6 small">Copyright &copy; WeCares 2021</div>
                             <div class="col-md-6 text-md-right small">
                                 {{-- <a href="{{url("/privacidade")}}">Privacidade</a> --}}
                                 <a href="{{url("/termos")}}" target="_blank">Termos de uso</a>
