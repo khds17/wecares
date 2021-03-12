@@ -33,7 +33,7 @@ class pagamentosController extends Controller
     {
         // Encontra o solicitante pelo usuario logado.
         $solicitantes = $this->objSolicitante
-                            ->join('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
+                            ->leftJoin('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
                             ->where('ID_USUARIO', auth()->user()->id)
                             ->get();
 
