@@ -18,11 +18,11 @@ class pagamentosController extends Controller
         //Instanciando as classes
         public function __construct()
         {
-            $this->objSolicitante = new solicitantes();       
-            $this->objCartoes = new cartoes();  
-            $this->objPagamentos = new pagamentos();    
+            $this->objSolicitante = new solicitantes();
+            $this->objCartoes = new cartoes();
+            $this->objPagamentos = new pagamentos();
             $this->objValidaCartao = new valida_cartao();
-            $this->objServicosPrestados = new servicos_prestados();              
+            $this->objServicosPrestados = new servicos_prestados();
         }
     /**
      * Display a listing of the resource.
@@ -44,7 +44,7 @@ class pagamentosController extends Controller
     {
         //Access token para utilizar o mercado pago
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
-               
+
         // Enviando o pagamento para mercado pago
         $payment = new \MercadoPago\Payment();
         $payment->transaction_amount = (float)$request->transactionAmount;
@@ -60,10 +60,9 @@ class pagamentosController extends Controller
             "type" => $request->docType,
             "number" => $request->docNumber,
         );
-        
+
         $payment->payer = $payer;
         $payment->save();
-        dump($payment);
 
         //Verifica se criou o id do payment para ter certeza que houve sucesso com o pagamento.
         if(!empty($payment->id)) {
@@ -73,28 +72,27 @@ class pagamentosController extends Controller
                                 ->where('ID_USUARIO', auth()->user()->id)
                                 ->select('SOLICITANTES.ID_CUSTOMER')
                                 ->get();
-                                
+
             foreach ($solicitantesCustomer as $solicitanteCustomer) {
                 $customerSolicitante = $solicitanteCustomer;
             }
 
             //Verifica se já existe um id de customer(cliente).
             if(empty($customerSolicitante->ID_CUSTOMER)){
-                dump('Não tem Customer');
+
                 $customer = new \MercadoPago\Customer();
                 $customer->email = $request->email;
                 $customer->save();
-                dump($customer);
+
                 //Verifica se existe o id do customer
                 if(!empty($customer->id)) {
-                    dump('Deu certo');
                     //Coloca o id do customer no solicitante
                     $this->objSolicitante
                         ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
                         ->update([
                             'ID_CUSTOMER' => $customer->id,
                         ]);
-                    
+
                     $card = new \MercadoPago\Card();
                     $card->token = $request->token;
 
@@ -107,7 +105,6 @@ class pagamentosController extends Controller
                     dump($card);
                     //Verifica se existe o id do card
                     if(!empty($card->id)) {
-                        dump('Entrou 2');
                         // Grava os dados do cartão do nosso lado
                         $this->objCartoes->create([
                             'ID_CUSTOMER' => $customer->id,
@@ -131,17 +128,14 @@ class pagamentosController extends Controller
                             'DT_APROVACAO' => $payment->date_approved,
                         ]);
                     } else {
-                        dump('Deu ruim 2');
                         $errorArray = (array)$card->error;
                         echo json_encode ($errorArray);
                     }
                 } else {
-                    dump('Deu ruim 1');
                     $errorArray = (array)$customer->error;
                     echo json_encode ($errorArray);
                 }
             } else {
-                dump('Tem Customer');
                 //Caso já exista um customer, grava os dados do cartão.
                 $card = new \MercadoPago\Card();
                 $card->token = $request->token;
@@ -152,10 +146,9 @@ class pagamentosController extends Controller
 
                 $card->customer_id = $customerSolicitante->ID_CUSTOMER;
                 $card->save();
-                dump($card);
+
                 //Verifica se existe o id do card
                 if(!empty($card->id)) {
-                    dump('Entrou');
                     // Grava os dados do cartão do nosso lado
                     $this->objCartoes->create([
                         'ID_CUSTOMER' => $customerSolicitante->ID_CUSTOMER,
@@ -181,11 +174,10 @@ class pagamentosController extends Controller
                 }
             }
         } else {
-            dump('Não criou o pagamento');
             $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
-        }     
-        dd('Fim');
+        }
+
         return redirect('/pagamentos');
     }
 
@@ -210,7 +202,7 @@ class pagamentosController extends Controller
     }
 
     public function paymentForm()
-    {  
+    {
         $servicos = $this->objServicosPrestados
                         ->join('SOLICITANTES', 'SERVICOS_PRESTADOS.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
                         ->join('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
@@ -218,7 +210,7 @@ class pagamentosController extends Controller
                         ->orWhere('SERVICOS_PRESTADOS.STATUS_APROVACAO', '=', '')
                         ->select('SERVICOS_PRESTADOS.VALOR','SERVICOS_PRESTADOS.ID','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
                         ->get();
-                  
+
         return view('pagamentos/pagamentos',compact('servicos'));
     }
 
@@ -227,7 +219,6 @@ class pagamentosController extends Controller
         \MercadoPago\SDK::setAccessToken("TEST-3508208613949405-021316-3288de42a43e89f96ce0a4a54a85533c-713881257");
 
         $payment = new \MercadoPago\Payment();
-      
         $payment->transaction_amount = $request->transactionAmount;
         $payment->token = $request->token;
         $payment->installments = 1;
@@ -235,7 +226,7 @@ class pagamentosController extends Controller
               "type" => "customer",
               "id" => $request->customerId
           );
-      
+
         $payment->save();
 
           // Salva os dados do pagamento e atualiza os status do serviço
@@ -248,13 +239,13 @@ class pagamentosController extends Controller
                 'DT_CRIACAO' => $payment->date_created,
                 'DT_APROVACAO' => $payment->date_approved
             ]);
-            
+
             $this->objServicosPrestados->where(['ID' => $request->idServico])->update([
                 'STATUS_APROVACAO' => $payment->status,
                 'STATUS_SERVICO' => \Config::get('constants.SERVICOS.APROVADO'),
             ]);
         }
-        
+
         return redirect('/pagamentos');
     }
 
@@ -270,7 +261,7 @@ class pagamentosController extends Controller
             $this->objPagamentos->where(['ID_PAGAMENTO' => $id])->update([
                 'STATUS' => $payment->status,
             ]);
-            
+
             $pagamentos = $this->objPagamentos
                             ->where('PAGAMENTOS.ID_PAGAMENTO', '=', $id)
                             ->get();
