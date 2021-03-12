@@ -13,8 +13,6 @@ function aprovar(id)
                 window.location.replace('/prestadoresLista');
          }
         })
-    }else{
-        // 
     }
 }
 
@@ -30,11 +28,9 @@ function reprovar(id)
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (result) {
-                window.location.replace('/prestadoreslista');
+                window.location.replace('/prestadoresLista');
          }
-                
+
          })
-    }else{
-        // 
     }
 }

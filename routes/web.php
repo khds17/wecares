@@ -17,6 +17,9 @@ Route::resource('/admin','adminController');
 Route::get('/listagemAdmin','adminController@listaAdmins');
 Route::get('/listagemServicos','adminController@listaServicosPrestados');
 Route::get('/adminCadastro','adminController@dadosCadastrais');
+Route::put('/aprovar/{id}', 'adminController@aprovar')->middleware('auth');
+Route::put('/reprovar/{id}', 'adminController@reprovar')->middleware('auth');
+Route::get('/prestadoresLista','adminController@prestadoreslista')->middleware('auth');
 // ===========================================
 Route::resource('/','indexController');
 Route::get('/sobre','indexController@sobre');
@@ -37,10 +40,8 @@ Route::resource('/pagamentos','pagamentosController')->middleware('auth');
 Route::resource('/prestador','prestadoresController');
 Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 Route::get('/resultado','prestadoresController@resultado')->middleware('auth')->middleware('role:solicitante');
-Route::get('/prestadoresLista','prestadoresController@prestadoreslista')->middleware('auth');
 Route::get('/novaspropostas','prestadoresController@prestadoresPropostas')->middleware('auth');
-Route::put('/aprovar/{id}', 'prestadoresController@aprovar')->middleware('auth');
-Route::put('/reprovar/{id}', 'prestadoresController@reprovar')->middleware('auth');
+
 
 // ===========================================
 Route::resource('/recebimentos','recebimentosController')->middleware('auth');

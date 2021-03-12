@@ -6,6 +6,7 @@ use App\Http\Requests\requestAdmin;
 use Illuminate\Http\Request;
 use App\Models\admin;
 use App\Models\user;
+use App\Models\prestadores;
 use App\Models\estados;
 use App\Models\cidades;
 use App\Models\enderecos;
@@ -28,8 +29,8 @@ class adminController extends Controller
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();
-        $this->objRegistros = new registros_log(); 
-
+        $this->objRegistros = new registros_log();
+        $this->objPrestador = new prestadores();
     }
     public function index()
     {
@@ -53,8 +54,6 @@ class adminController extends Controller
         $arrayAdmin = $this->objAdmin->where('ID_USUARIO', auth()->user()->id)->get();
         return view('admin/cadastro',compact('arrayAdmin'));
     }
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -90,7 +89,7 @@ class adminController extends Controller
                 'ID_CIDADE' => $request->adminCidade,
                 'ID_ESTADO' => $request->adminEstado,
             ]);
-                        
+
             $usuario = $this->objUsers->create([
                 'name' => $request->adminNome,
                 'email' => $request->adminEmail,
@@ -109,7 +108,7 @@ class adminController extends Controller
                 'ID_USUARIO' => $usuario->id,
             ]);
 
-            //Registro de criação                
+            //Registro de criação
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
                 'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso pelo administrator '.auth()->user()->name.'',
@@ -121,7 +120,7 @@ class adminController extends Controller
             return redirect()->action('adminController@listaAdmins');
 
         } catch (\Throwable $th) {
-            
+
             DB::rollback();
             report($e);
             return false;
@@ -182,5 +181,56 @@ class adminController extends Controller
     {
         $del=$this->objAdmin->destroy($id);
         return($del)?"sim":"não";
+    }
+
+    public function prestadoresLista()
+    {
+        $prestadores = $this->objPrestador
+                        ->join('users','PRESTADORES.ID_USUARIO','=','users.id')
+                        ->where('users.status', '=', 0)
+                        ->select('PRESTADORES.*')
+                        ->get();
+
+        return view('prestadores/lista-prestadores',compact('prestadores'));
+    }
+
+    public function aprovar($id)
+    {
+        $this->objUsers->where(['ID'=>$id])->update([
+            'status' => \Config::get('constants.STATUS.ATIVO')
+        ]);
+
+        $user = $this->objUsers->find($id);
+
+        $prestador = $user->find($id)
+                            ->relPrestador;
+
+        $this->objRegistros->create([
+            'DATA' => date('d/m/Y \à\s H:i:s'),
+            'TEXTO' => 'Prestador#'.$prestador->ID.' '.$prestador->NOME.' aprovado pelo administrador '.auth()->user()->name,
+            'ID_USUARIO' => auth()->user()->id
+        ]);
+
+        return true;
+    }
+
+    public function reprovar($id)
+    {
+        $this->objUsers->where(['ID'=>$id])->update([
+            'status' => \Config::get('constants.STATUS.REPROVADO')
+        ]);
+
+        $user = $this->objUsers->find($id);
+
+        $prestador = $user->find($id)
+                            ->relPrestador;
+
+        $this->objRegistros->create([
+            'DATA' => date('d/m/Y \à\s H:i:s'),
+            'TEXTO' => 'Prestador#'.$prestador->ID.' '.$prestador->NOME.' reprovada pelo administrador '.auth()->user()->name,
+            'ID_USUARIO' => auth()->user()->id
+        ]);
+
+        return true;
     }
 }

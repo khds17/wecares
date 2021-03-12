@@ -89,13 +89,6 @@ class prestadoresController extends Controller
         return view('prestadores/cadastro',compact('prestadores','formacoes'));
     }
 
-
-    public function prestadoresLista(prestadores $prestadores)
-    {
-        $prestadores = $this->objPrestador->all();
-        return view('prestadores/lista-prestadores',compact('prestadores'));
-    }
-
     public function prestadoresPropostas()
     {
         $propostas = $this->objProposta
@@ -400,26 +393,5 @@ class prestadoresController extends Controller
             DB::rollback();
             return redirect()->action('prestadoresController@dadosCadastrais');
         }
-    }
-
-    public function aprovar($id)
-    {
-        // Pegando o valor da constant para colocar no prestador
-        $statusAprovado = \Config::get('constants.STATUS.ATIVO');
-
-        $this->objUsers->where(['ID'=>$id])->update([
-            'status' => $statusAprovado
-        ]);
-    }
-
-    public function reprovar($id)
-    {
-        // Pegando o valor da constant para colocar no prestador
-        $statusReprovado = \Config::get('constants.STATUS.REPROVADO');
-
-        $this->objUsers->where(['ID'=>$id])->update([
-            'status' => $statusReprovado
-        ]);
-
     }
 }
