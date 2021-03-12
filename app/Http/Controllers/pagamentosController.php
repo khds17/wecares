@@ -197,6 +197,9 @@ class pagamentosController extends Controller
                 $this->objValidaCartao->where(['ID_PAGAMENTO' => $cartaoEstorno->ID_PAGAMENTO])->update([
                     'STATUS' => $payment->status,
                 ]);
+                echo "Estorno realizado com sucesso";
+            } else {
+                echo "O estorno não foi realizado";
             }
         }
     }
