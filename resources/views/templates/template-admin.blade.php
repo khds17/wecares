@@ -388,7 +388,7 @@
                                         &nbsp
                                         Tela inicial
                                     </a>
-                                    <a class="dropdown-item" href="{{url("/")}}">
+                                    <a class="dropdown-item" href="{{url("/registros")}}">
                                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Registro de atividades
                                     </a>
