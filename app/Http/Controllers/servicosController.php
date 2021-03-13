@@ -257,7 +257,8 @@ class servicosController extends Controller
                     'VALOR' => $servico->VALOR,
                     'STATUS_SERVICO' => $servicoPendente
                 ]);
-                dd($teste);
+                dump($teste);
+                DB::commit();
                 echo "Serviço criado com sucesso";
             }
         } catch (\Throwable $th) {
