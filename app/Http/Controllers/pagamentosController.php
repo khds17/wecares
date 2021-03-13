@@ -189,9 +189,7 @@ class pagamentosController extends Controller
                             ->where('VALIDA_CARTAO.STATUS', '=', 'approved')
                             ->get();
 
-        dump($cartoesEstorno[0]);
-
-        if(!empty($cartoesEstorno[0])){
+        if(count($cartoesEstorno) >= 1){
             dd('ENtrou');
             foreach ($cartoesEstorno as $cartaoEstorno) {
                 $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
