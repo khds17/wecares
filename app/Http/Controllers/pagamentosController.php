@@ -183,14 +183,13 @@ class pagamentosController extends Controller
 
     public function estornoPaymentValidation()
     {
-        // \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
+        \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
         $cartoesEstorno = $this->objValidaCartao
                             ->where('VALIDA_CARTAO.STATUS', '=', 'approved')
                             ->get();
 
         if(count($cartoesEstorno) >= 1){
-            dd('ENtrou');
             foreach ($cartoesEstorno as $cartaoEstorno) {
                 $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
                 $payment->refund();
