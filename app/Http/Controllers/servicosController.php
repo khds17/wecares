@@ -224,40 +224,43 @@ class servicosController extends Controller
         // Percorre o select e cria o serviço a ser prestado para todas as propostas que não possuem essa serviço.
         try {
             DB::beginTransaction();
+            if(count($servicos) >= 1) {
+                foreach ($servicos as $servico) {
+                    $this->objServicosPrestados->create([
+                        'ID_PROPOSTA' => $servico->ID,
+                        'ID_PRESTADOR' => $servico->ID_PRESTADOR,
+                        'NOME_PRESTADOR' => $servico->NOME_PRESTADOR,
+                        'ID_SOLICITANTE' => $servico->ID_SOLICITANTE,
+                        'NOME_SOLICITANTE' => $servico->NOME_SOLICITANTE,
+                        'ID_FAMILIARIDADE' => $servico->ID_FAMILIARIDADE,
+                        'OUTROS_FAMILIARIDADE' => $servico->OUTROS_FAMILIARIDADE,
+                        'ID_PACIENTE' => $servico->ID_PACIENTE,
+                        'NOME_PACIENTE' => $servico->NOME_PACIENTE,
+                        'TIPO' => $servico->TIPO,
+                        'LOCALIZACAO' => $servico->LOCALIZACAO,
+                        'CEP' => $servico->CEP,
+                        'ENDERECO' => $servico->ENDERECO,
+                        'NUMERO' => $servico->NUMERO,
+                        'COMPLEMENTO' => $servico->COMPLEMENTO,
+                        'BAIRRO' => $servico->BAIRRO,
+                        'CIDADE' => $servico->CIDADE,
+                        'UF' => $servico->UF,
+                        'SERVICOS' => $servico->SERVICOS,
+                        'SERVICOS_OUTROS' => $servico->SERVICOS_OUTROS,
+                        'TOMA_MEDICAMENTOS' => $servico->TOMA_MEDICAMENTOS,
+                        'TIPO_MEDICAMENTOS' => $servico->TIPO_MEDICAMENTOS,
+                        'DATA_SERVICO' => $servico->DATA_SERVICO,
+                        'HORA_INICIO' => $servico->HORA_INICIO,
+                        'HORA_FIM' => $servico->HORA_FIM,
+                        'VALOR' => $servico->VALOR,
+                        'STATUS_SERVICO' => $servicoPendente
+                    ]);
 
-            foreach ($servicos as $servico) {
-                $this->objServicosPrestados->create([
-                    'ID_PROPOSTA' => $servico->ID,
-                    'ID_PRESTADOR' => $servico->ID_PRESTADOR,
-                    'NOME_PRESTADOR' => $servico->NOME_PRESTADOR,
-                    'ID_SOLICITANTE' => $servico->ID_SOLICITANTE,
-                    'NOME_SOLICITANTE' => $servico->NOME_SOLICITANTE,
-                    'ID_FAMILIARIDADE' => $servico->ID_FAMILIARIDADE,
-                    'OUTROS_FAMILIARIDADE' => $servico->OUTROS_FAMILIARIDADE,
-                    'ID_PACIENTE' => $servico->ID_PACIENTE,
-                    'NOME_PACIENTE' => $servico->NOME_PACIENTE,
-                    'TIPO' => $servico->TIPO,
-                    'LOCALIZACAO' => $servico->LOCALIZACAO,
-                    'CEP' => $servico->CEP,
-                    'ENDERECO' => $servico->ENDERECO,
-                    'NUMERO' => $servico->NUMERO,
-                    'COMPLEMENTO' => $servico->COMPLEMENTO,
-                    'BAIRRO' => $servico->BAIRRO,
-                    'CIDADE' => $servico->CIDADE,
-                    'UF' => $servico->UF,
-                    'SERVICOS' => $servico->SERVICOS,
-                    'SERVICOS_OUTROS' => $servico->SERVICOS_OUTROS,
-                    'TOMA_MEDICAMENTOS' => $servico->TOMA_MEDICAMENTOS,
-                    'TIPO_MEDICAMENTOS' => $servico->TIPO_MEDICAMENTOS,
-                    'DATA_SERVICO' => $servico->DATA_SERVICO,
-                    'HORA_INICIO' => $servico->HORA_INICIO,
-                    'HORA_FIM' => $servico->HORA_FIM,
-                    'VALOR' => $servico->VALOR,
-                    'STATUS_SERVICO' => $servicoPendente
-                ]);
-
-                DB::commit();
-                echo "Serviço criado com sucesso";
+                    DB::commit();
+                    echo "Serviço criado com sucesso";
+                }
+            } else {
+                echo "Não há serviços para serem criados";
             }
         } catch (\Throwable $th) {
             DB::rollback();
