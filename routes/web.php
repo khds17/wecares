@@ -47,7 +47,7 @@ Route::post('/proposta','servicosController@propostas')->middleware('auth');
 Route::get('/propostaAgradecimento','servicosController@propostaAgradecimento');
 Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
 Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth');
-Route::get('/servicos','servicosController@servicos')->middleware('auth');
+Route::get('/criarServicos','servicosController@criarServicos')->middleware('auth')->middleware('role:administrador');
 Route::put('/aceitarProspostaPrestador/{id}', 'servicosController@aceitarProspostaPrestador')->middleware('auth');
 Route::put('/recusarProspostaPrestador/{id}', 'servicosController@recusarProspostaPrestador')->middleware('auth');
 Route::put('/aceitarPropostaSolicitante/{id}', 'servicosController@aceitarPropostaSolicitante')->middleware('auth');

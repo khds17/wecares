@@ -204,7 +204,7 @@ class servicosController extends Controller
         return view('servicos/servicosContratados', compact('servicosContratados','servicos'));
     }
 
-    public function servicos()
+    public function criarServicos()
     {
         // Constant para validar os servicos que foram aceitados por prestadores e solicitantes
         $propostaAceita = \Config::get('constants.SERVICOS.ACEITADO');
