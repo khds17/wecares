@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('/menu','adminController');
+Route::resource('/admin','adminController');
 // Route::resource('/menu','adminController')->middleware('auth')->middleware('role:administrador');
 Route::get('/listaAdmins','adminController@listaAdmins')->middleware('auth')->middleware('role:administrador');
 Route::get('/listaServicosPrestados','adminController@listaServicosPrestados')->middleware('auth')->middleware('role:administrador');

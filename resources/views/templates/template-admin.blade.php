@@ -27,7 +27,7 @@
                 @role('administrador')
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url("/menu")}}">
+                    <a class="nav-link" href="{{url("/admin")}}">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
                             <path d="M0,172v-172h172v172z" fill="#456bd8"></path><g fill="#ffffff">
                             <path d="M26.875,10.32c-1.65281,0.30906 -2.83531,1.76031 -2.795,3.44v134.16c0,1.89469 1.54531,3.44 3.44,3.44h48.16c1.89469,0 3.44,-1.54531 3.44,-3.44v-134.16c0,-1.89469 -1.54531,-3.44 -3.44,-3.44zM30.96,17.2h41.28v127.28h-41.28zM96.32,44.72c-1.89469,0 -3.44,1.54531 -3.44,3.44v99.76c0,1.89469 1.54531,3.44 3.44,3.44h48.16c1.89469,0 3.44,-1.54531 3.44,-3.44v-99.76c0,-1.89469 -1.54531,-3.44 -3.44,-3.44zM10.32,158.24v6.88h151.36v-6.88z"></path></g></g>

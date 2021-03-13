@@ -120,7 +120,7 @@ class adminController extends Controller
 
             DB::commit();
 
-            return redirect()->action('adminController@listaAdmins');
+            // return redirect()->action('adminController@listaAdmins');
 
         } catch (\Throwable $th) {
             DB::rollback();
