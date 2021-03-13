@@ -226,6 +226,8 @@ class pagamentosController extends Controller
                         ->select('SERVICOS_PRESTADOS.VALOR','SERVICOS_PRESTADOS.ID','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
                         ->get();
 
+        dd($servicos);
+
         return view('pagamentos/pagamentos',compact('servicos'));
     }
 
