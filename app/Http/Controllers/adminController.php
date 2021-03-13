@@ -34,13 +34,13 @@ class adminController extends Controller
     }
     public function index()
     {
-        $admin = $this->objAdmin->all();
-        return view('admin/index',compact('admin'));
+        return view('admin/index');
     }
 
     public function listaAdmins()
     {
         $admin = $this->objAdmin->all();
+
         return view('admin/lista-admins',compact('admin'));
     }
 
@@ -51,7 +51,10 @@ class adminController extends Controller
 
     public function dadosCadastrais()
     {
-        $arrayAdmin = $this->objAdmin->where('ID_USUARIO', auth()->user()->id)->get();
+        $arrayAdmin = $this->objAdmin
+                        ->where('ID_USUARIO', auth()->user()->id)
+                        ->get();
+
         return view('admin/cadastro',compact('arrayAdmin'));
     }
 
@@ -120,10 +123,9 @@ class adminController extends Controller
             return redirect()->action('adminController@listaAdmins');
 
         } catch (\Throwable $th) {
-
             DB::rollback();
-            report($e);
-            return false;
+
+            return redirect()->action('adminController@create');
         }
 
 
@@ -137,7 +139,8 @@ class adminController extends Controller
      */
     public function show($id)
     {
-        $admin=$this->objAdmin->find($id);
+        $admin = $this->objAdmin->find($id);
+
         return view('admin/information',compact('admin'));
     }
 
@@ -149,7 +152,8 @@ class adminController extends Controller
      */
     public function edit($id)
     {
-        $admin=$this->objAdmin->find($id);
+        $admin = $this->objAdmin->find($id);
+
         return view('admin/edit',compact('admin'));
     }
 
