@@ -247,7 +247,7 @@ class pagamentosController extends Controller
 
         $payment->save();
 
-          // Salva os dados do pagamento e atualiza os status do serviço
+        // Salva os dados do pagamento e atualiza os status do serviço
         if(!empty($payment->id)) {
             $this->objPagamentos->create([
                 'ID_PAGAMENTO' => $payment->id,
@@ -302,6 +302,20 @@ class pagamentosController extends Controller
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function estorno($id)
+    {
+        \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
+
+        $payment = \MercadoPago\Payment::find_by_id(14010470614);
+        $payment->refund();
+
+        if($payment->status == "refunded") {
+            echo "Cancelamento deu certo";
+        } else {
+            echo "Cancelamento não deu certo";
         }
     }
 

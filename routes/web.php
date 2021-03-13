@@ -62,6 +62,7 @@ Route::get('/propostas','solicitantesController@solicitantePropostas')->middlewa
 Route::resource('/pagamentos','pagamentosController')->middleware('auth');
 Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation');
 Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation');
+Route::get('/estorno','pagamentosController@estorno');
 Route::get('/paymentForm','pagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
 Route::post('/payment','pagamentosController@payment');
 Route::post('/estornoPayment/{id}','pagamentosController@estornoPayment');
