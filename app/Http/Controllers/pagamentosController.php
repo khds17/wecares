@@ -305,7 +305,7 @@ class pagamentosController extends Controller
         }
     }
 
-    public function estorno($id)
+    public function estorno()
     {
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
