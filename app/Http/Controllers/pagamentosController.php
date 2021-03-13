@@ -183,25 +183,33 @@ class pagamentosController extends Controller
 
     public function estornoPaymentValidation()
     {
-        \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
+        // \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
         $cartoesEstorno = $this->objValidaCartao
                             ->where('VALIDA_CARTAO.STATUS', '=', 'approved')
                             ->get();
 
-        foreach ($cartoesEstorno as $cartaoEstorno) {
-            $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
-            $payment->refund();
+        dump($cartoesEstorno);
 
-            if($payment->status == "refunded") {
-                $this->objValidaCartao->where(['ID_PAGAMENTO' => $cartaoEstorno->ID_PAGAMENTO])->update([
-                    'STATUS' => $payment->status,
-                ]);
-                echo "Estorno realizado com sucesso";
-            } else {
-                echo "O estorno não foi realizado";
+        if(empty($cartoesEstorno)){
+            dd('ENtrou');
+            foreach ($cartoesEstorno as $cartaoEstorno) {
+                $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
+                $payment->refund();
+
+                if($payment->status == "refunded") {
+                    $this->objValidaCartao->where(['ID_PAGAMENTO' => $cartaoEstorno->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                    ]);
+                    echo "O cancelamento do pagamento#".$cartaoEstorno->ID_PAGAMENTO." foi realizado com sucesso";
+                } else {
+                    echo "O cancelamento do pagamento#".$cartaoEstorno->ID_PAGAMENTO." não foi realizado";
+                }
             }
+        } else {
+            echo "Não há cobranças para cancelar";
         }
+
     }
 
     public function paymentForm()
