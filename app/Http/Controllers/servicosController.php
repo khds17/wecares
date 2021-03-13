@@ -221,12 +221,14 @@ class servicosController extends Controller
                         ->select('PROPOSTAS.*')
                         ->get();
 
+        dump($servicos);
+
         // Percorre o select e cria o serviço a ser prestado para todas as propostas que não possuem essa serviço.
         try {
             DB::beginTransaction();
 
             foreach ($servicos as $servico) {
-                DB::table('SERVICOS_PRESTADOS')->insert([
+                $teste = $this->objServicosPrestados->create([
                     'ID_PROPOSTA' => $servico->ID,
                     'ID_PRESTADOR' => $servico->ID_PRESTADOR,
                     'NOME_PRESTADOR' => $servico->NOME_PRESTADOR,
@@ -255,6 +257,7 @@ class servicosController extends Controller
                     'VALOR' => $servico->VALOR,
                     'STATUS_SERVICO' => $servicoPendente
                 ]);
+                dd($teste);
                 echo "Serviço criado com sucesso";
             }
         } catch (\Throwable $th) {
