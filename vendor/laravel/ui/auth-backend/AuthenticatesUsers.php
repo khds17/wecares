@@ -186,9 +186,8 @@ trait AuthenticatesUsers
         } else if (isset($userSolicitante)) {
             return '/solicitanteCadastro';
         } else if (isset($userAdmin)) {
-            return '/adminCadastro';
+            return '/cadastroAdmin';
         }
-                    
     }
 
     /**
