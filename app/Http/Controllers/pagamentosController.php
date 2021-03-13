@@ -189,11 +189,10 @@ class pagamentosController extends Controller
                             ->where('VALIDA_CARTAO.STATUS', '=', 'approved')
                             ->get();
 
-        dump($cartoesEstorno);
-
-        foreach ($cartoesEstorno as $cartaoEstorno) {
-            if(!empty($cartaoEstorno)){
-                dd('ENtrou');
+        dd($cartoesEstorno[0]);
+        if(empty($cartoesEstorno)){
+            dd('ENtrou');
+            foreach ($cartoesEstorno as $cartaoEstorno) {
                 $payment = \MercadoPago\Payment::find_by_id($cartaoEstorno->ID_PAGAMENTO);
                 $payment->refund();
 
@@ -206,10 +205,10 @@ class pagamentosController extends Controller
                     echo "O cancelamento do pagamento#".$cartaoEstorno->ID_PAGAMENTO." não foi realizado";
                 }
             }
-            else {
-                echo "Não há cobranças para cancelar";
-            }
+        } else {
+            echo "Não há cobranças para cancelar";
         }
+
     }
 
     public function paymentForm()
