@@ -8,6 +8,7 @@ use App\Models\cartoes;
 use App\Models\valida_cartao;
 use App\Models\servicos_prestados;
 use App\Models\pagamentos;
+use App\Models\registros_log;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
@@ -23,6 +24,7 @@ class pagamentosController extends Controller
             $this->objPagamentos = new pagamentos();
             $this->objValidaCartao = new valida_cartao();
             $this->objServicosPrestados = new servicos_prestados();
+            $this->objRegistros = new registros_log();
         }
     /**
      * Display a listing of the resource.
@@ -66,7 +68,6 @@ class pagamentosController extends Controller
 
         //Verifica se criou o id do payment para ter certeza que houve sucesso com o pagamento.
         if(!empty($payment->id)) {
-
             // Pega o id do customer do solicitante para validação.
             $solicitantesCustomer = $this->objSolicitante
                                 ->where('ID_USUARIO', auth()->user()->id)
@@ -102,7 +103,7 @@ class pagamentosController extends Controller
 
                     $card->customer_id = $customer->id;
                     $card->save();
-                    dump($card);
+
                     //Verifica se existe o id do card
                     if(!empty($card->id)) {
                         // Grava os dados do cartão do nosso lado
@@ -173,6 +174,13 @@ class pagamentosController extends Controller
                     ]);
                 }
             }
+            //Registro adicionando o cartão
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Cartão com inicio '.$card->first_six_digits.' e final '.$card->last_four_digits.' adicionado',
+                'ID_USUARIO' => auth()->user()->id
+            ]);
+
         } else {
             $errorArray = (array)$payment->error;
             echo json_encode ($errorArray);
@@ -206,7 +214,6 @@ class pagamentosController extends Controller
         } else {
             echo "Não há cobranças para cancelar";
         }
-
     }
 
     public function paymentForm()
@@ -239,7 +246,7 @@ class pagamentosController extends Controller
 
           // Salva os dados do pagamento e atualiza os status do serviço
         if(!empty($payment->id)) {
-            $pagamentos = $this->objPagamentos->create([
+            $this->objPagamentos->create([
                 'ID_PAGAMENTO' => $payment->id,
                 'ID_SERVICO_PRESTADO' => $request->idServico,
                 'ID_CARTAO' => $request->idCartao,
@@ -283,7 +290,11 @@ class pagamentosController extends Controller
                 'STATUS_SERVICO' => \Config::get('constants.SERVICOS.CANCELADO'),
             ]);
 
-            $servico = $this->objServicosPrestados->find($idServicoPrestado);
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Cancelamento do pagamento#'.$id.' realizado com sucesso',
+                'ID_USUARIO' => auth()->user()->id
+            ]);
 
             return true;
         } else {
