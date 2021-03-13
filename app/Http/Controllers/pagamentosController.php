@@ -218,18 +218,16 @@ class pagamentosController extends Controller
 
     public function paymentForm()
     {
-        $cartaoAtivo = \Config::get('constants.STATUS.ATIVO');
+        $cartaoPrincipal = \Config::get('constants.STATUS.ATIVO');
 
         $servicos = $this->objServicosPrestados
                         ->join('SOLICITANTES', 'SERVICOS_PRESTADOS.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
                         ->join('CARTOES', 'SOLICITANTES.ID_CUSTOMER', '=', 'CARTOES.ID_CUSTOMER')
                         ->whereNull('SERVICOS_PRESTADOS.STATUS_APROVACAO')
-                        ->where('CARTOES.PRINCIPAL', '=', $cartaoAtivo)
+                        ->where('CARTOES.PRINCIPAL', '=', $cartaoPrincipal)
                         ->orWhere('SERVICOS_PRESTADOS.STATUS_APROVACAO', '=', '')
                         ->select('SERVICOS_PRESTADOS.VALOR','SERVICOS_PRESTADOS.ID','CARTOES.ID_CARTAO','CARTOES.CVV','SOLICITANTES.ID_CUSTOMER')
                         ->get();
-
-        dd($servicos);
 
         return view('pagamentos/pagamentos',compact('servicos'));
     }
