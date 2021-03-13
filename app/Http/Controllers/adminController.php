@@ -112,11 +112,11 @@ class adminController extends Controller
             ]);
 
             //Registro de criação
-            $this->objRegistros->create([
-                'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso pelo administrator '.auth()->user()->name.'',
-                'ID_USUARIO' => $usuario->id
-            ]);
+            // $this->objRegistros->create([
+            //     'DATA' => date('d/m/Y \à\s H:i:s'),
+            //     'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso pelo administrator '.auth()->user()->name.'',
+            //     'ID_USUARIO' => $usuario->id
+            // ]);
 
             DB::commit();
 
