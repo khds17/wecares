@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::resource('/menu','adminController')->middleware('auth')->middleware('role:administrador');;
-Route::get('/listaAdmins','adminController@listaAdmins')->middleware('auth')->middleware('role:administrador');;
-Route::get('/listaServicosPrestados','adminController@listaServicosPrestados')->middleware('auth')->middleware('role:administrador');;
+Route::resource('/menu','adminController')->middleware('auth')->middleware('role:administrador');
+Route::get('/listaAdmins','adminController@listaAdmins')->middleware('auth')->middleware('role:administrador');
+Route::get('/listaServicosPrestados','adminController@listaServicosPrestados')->middleware('auth')->middleware('role:administrador');
 Route::get('/cadastroAdmin','adminController@cadastroAdmin')->middleware('auth')->middleware('role:administrador');
 Route::put('/aprovarPrestador/{id}', 'adminController@aprovarPrestador')->middleware('auth')->middleware('role:administrador');
 Route::put('/reprovarPrestador/{id}', 'adminController@reprovarPrestador')->middleware('auth')->middleware('role:administrador');
@@ -34,14 +34,10 @@ Route::get('/agradecimento','indexController@agradecimento');
 Route::resource('/paciente','pacientesController')->middleware('auth');
 Route::post('/selectpacientes/{id}','pacientesController@selectPacientes');
 // ===========================================
-Route::resource('/pagamentos','pagamentosController')->middleware('auth');
-// ===========================================
 Route::resource('/prestador','prestadoresController');
 Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 Route::get('/resultado','prestadoresController@resultado')->middleware('auth')->middleware('role:solicitante');
 Route::get('/novaspropostas','prestadoresController@prestadoresPropostas')->middleware('auth');
-
-
 // ===========================================
 Route::resource('/recebimentos','recebimentosController')->middleware('auth');
 // ===========================================
@@ -50,7 +46,6 @@ Route::post('/proposta','servicosController@propostas')->middleware('auth');
 Route::get('/propostaAgradecimento','servicosController@propostaAgradecimento');
 Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
 Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth');
-Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
 Route::get('/servicos','servicosController@servicos')->middleware('auth');
 Route::put('/aceitarProspostaPrestador/{id}', 'servicosController@aceitarProspostaPrestador')->middleware('auth');
 Route::put('/recusarProspostaPrestador/{id}', 'servicosController@recusarProspostaPrestador')->middleware('auth');
@@ -63,9 +58,10 @@ Route::resource('/solicitante','solicitantesController');
 Route::get('/solicitanteCadastro','solicitantesController@dadosCadastrais')->middleware('auth');
 Route::get('/propostas','solicitantesController@solicitantePropostas')->middleware('auth');
 // ===========================================
+Route::resource('/pagamentos','pagamentosController')->middleware('auth');
 Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation');
 Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation');
-Route::get('/paymentForm','pagamentosController@paymentForm');
+Route::get('/paymentForm','pagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
 Route::post('/payment','pagamentosController@payment');
 Route::post('/estornoPayment/{id}','pagamentosController@estornoPayment');
 
