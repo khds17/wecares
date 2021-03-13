@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::resource('/menu','adminController')->middleware('auth')->middleware('role:administrador');;
-Route::get('/listagemAdmin','adminController@listaAdmins')->middleware('auth')->middleware('role:administrador');;
-Route::get('/listagemServicos','adminController@listaServicosPrestados')->middleware('auth')->middleware('role:administrador');;
-Route::get('/adminCadastro','adminController@dadosCadastrais')->middleware('auth')->middleware('role:administrador');
-Route::put('/aprovar/{id}', 'adminController@aprovar')->middleware('auth')->middleware('role:administrador');
-Route::put('/reprovar/{id}', 'adminController@reprovar')->middleware('auth')->middleware('role:administrador');
-Route::get('/prestadoresLista','adminController@prestadoreslista')->middleware('auth')->middleware('role:administrador');
+Route::get('/listaAdmins','adminController@listaAdmins')->middleware('auth')->middleware('role:administrador');;
+Route::get('/listaServicosPrestados','adminController@listaServicosPrestados')->middleware('auth')->middleware('role:administrador');;
+Route::get('/cadastroAdmin','adminController@cadastroAdmin')->middleware('auth')->middleware('role:administrador');
+Route::put('/aprovarPrestador/{id}', 'adminController@aprovarPrestador')->middleware('auth')->middleware('role:administrador');
+Route::put('/reprovarPrestador/{id}', 'adminController@reprovarPrestador')->middleware('auth')->middleware('role:administrador');
+Route::get('/prestadoresLista','adminController@prestadoresLista')->middleware('auth')->middleware('role:administrador');
 // ===========================================
 Route::resource('/','indexController');
 Route::get('/sobre','indexController@sobre');

@@ -1,9 +1,9 @@
-function aprovar(id)
+function aprovarPrestador(id)
  {
     event.preventDefault();
     if(confirm("Deseja mesmo aprovar?")){
         $.ajax({
-            url:'/aprovar/' + id,
+            url:'/aprovarPrestador/' + id,
             type: 'PUT',
             dataType: 'json',
             headers:{
@@ -16,12 +16,12 @@ function aprovar(id)
     }
 }
 
-function reprovar(id)
+function reprovarPrestador(id)
  {
      event.preventDefault();
     if(confirm("Deseja mesmo reprovar?")){
         $.ajax({
-            url:'/reprovar/' + id,
+            url:'/reprovarPrestador/' + id,
             type: 'PUT',
             dataType: 'json',
             headers:{

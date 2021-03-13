@@ -49,7 +49,7 @@ class adminController extends Controller
         return view('admin/lista-servicos-prestados');
     }
 
-    public function dadosCadastrais()
+    public function cadastroAdmin()
     {
         $arrayAdmin = $this->objAdmin
                         ->where('ID_USUARIO', auth()->user()->id)
@@ -198,7 +198,7 @@ class adminController extends Controller
         return view('prestadores/lista-prestadores',compact('prestadores'));
     }
 
-    public function aprovar($id)
+    public function aprovarPrestador($id)
     {
         $this->objUsers->where(['ID'=>$id])->update([
             'status' => \Config::get('constants.STATUS.ATIVO')
@@ -218,7 +218,7 @@ class adminController extends Controller
         return true;
     }
 
-    public function reprovar($id)
+    public function reprovarPrestador($id)
     {
         $this->objUsers->where(['ID'=>$id])->update([
             'status' => \Config::get('constants.STATUS.REPROVADO')
