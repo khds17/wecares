@@ -283,7 +283,7 @@ class pagamentosController extends Controller
             }
         }
 
-        return redirect('/pagamentos');
+        return redirect('/paymentForm');
     }
 
     public function estornoPayment($id)
@@ -328,7 +328,7 @@ class pagamentosController extends Controller
     {
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
-        $payment = \MercadoPago\Payment::find_by_id(14040188537);
+        $payment = \MercadoPago\Payment::find_by_id(14049089636);
         $payment->refund();
 
         if($payment->status == "refunded") {
