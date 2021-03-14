@@ -37,7 +37,7 @@ class servicosController extends Controller
 
         }
 
-    public function propostas(Request $request)
+    public function proposta(Request $request)
     {
         // Todos os select estão em um array dentro de um array, para isso, criei um foreach para remover todos do array
         $arraySolicitantes = $this->objSolicitante

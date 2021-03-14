@@ -59,7 +59,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    <form name="formProposta" id="formProposta" method="post" enctype="multipart/form-data" action="{{url('propostas')}}">   
+                    <form name="formProposta" id="formProposta" method="post" enctype="multipart/form-data" action="{{url('proposta')}}">   
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" id="idPrestadores" name="idPrestadores">

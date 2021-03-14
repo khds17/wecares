@@ -22,7 +22,7 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto mr-lg-5">
                                     <li class="nav-item dropdown no-caret">
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("/encontrecuidador")}}" role="button" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("/encontreCuidador")}}" role="button" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("prestador/create")}}" role="button" aria-haspopup="true" aria-expanded="false">Seja um cuidador</a>
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("solicitante/create")}}" role="button" aria-haspopup="true" aria-expanded="false">Seja um solicitante</a>
                                     </li>

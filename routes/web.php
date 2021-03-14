@@ -32,17 +32,17 @@ Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
 Route::get('/resultado','indexController@resultado')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
-Route::resource('/paciente','pacientesController')->middleware('auth');
-Route::post('/selectPacientes/{id}','pacientesController@selectPacientes');
+Route::resource('/paciente','pacientesController')->middleware('auth')->middleware('role:solicitante');
+Route::post('/selectPacientes/{id}','pacientesController@selectPacientes')->middleware('role:solicitante');
 // ===========================================
 Route::resource('/prestador','prestadoresController');
 Route::get('/cadastroPrestador','prestadoresController@cadastroPrestador')->middleware('auth')->middleware('role:cuidador/enfermeiro');
-Route::get('/novaspropostas','prestadoresController@prestadoresPropostas')->middleware('auth');
+Route::get('/novaspropostas','prestadoresController@prestadoresPropostas')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 // ===========================================
-Route::resource('/recebimentos','recebimentosController')->middleware('auth');
+Route::resource('/recebimentos','recebimentosController')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 // ===========================================
 Route::resource('/servico','servicosController');
-Route::post('/propostas','servicosController@propostas')->middleware('auth');
+Route::post('/proposta','servicosController@proposta')->middleware('auth');
 Route::get('/propostaAgradecimento','servicosController@propostaAgradecimento');
 Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
 Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth');
@@ -55,7 +55,7 @@ Route::post('/selectProposta/{id}','servicosController@selectProposta');
 
 // ===========================================
 Route::resource('/solicitante','solicitantesController');
-Route::get('/cadastroSolicitante','solicitantesController@cadastroSolicitante')->middleware('auth');
+Route::get('/cadastroSolicitante','solicitantesController@cadastroSolicitante')->middleware('auth')->middleware('role:solicitante');
 Route::get('/propostas','solicitantesController@propostas')->middleware('auth');
 // ===========================================
 Route::resource('/pagamentos','pagamentosController')->middleware('auth');
