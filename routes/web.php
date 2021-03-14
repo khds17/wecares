@@ -25,7 +25,7 @@ Route::resource('/','indexController');
 Route::get('/sobre','indexController@sobre');
 Route::get('/termos','indexController@termos');
 Route::get('/conduta','indexController@conduta');
-Route::get('/encontrecuidador','indexController@encontrecuidador');
+Route::get('/encontreCuidador','indexController@encontreCuidador');
 Route::get('/registros','indexController@registros');
 Route::get('/cuidadorCidades','indexController@cuidadorCidades');
 Route::get('/privacidade','indexController@privacidade');

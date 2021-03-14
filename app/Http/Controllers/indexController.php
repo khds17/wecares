@@ -57,7 +57,7 @@ class indexController extends Controller
         return view('index/agradecimento-cadastro');
     }
 
-    public function encontrecuidador()
+    public function encontreCuidador()
     {
         return view('index/encontre-cuidador');
     }

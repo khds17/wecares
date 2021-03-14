@@ -435,7 +435,7 @@
             @role('solicitante')
                 <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
                     <div class="float-right">
-                        <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" href="{{url("/encontrecuidador")}}">Encontre cuidadores</a>
+                        <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" href="{{url("/encontreCuidador")}}">Encontre cuidadores</a>
                     </div>
                 </div>  
             @endrole

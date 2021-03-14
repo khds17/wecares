@@ -218,7 +218,7 @@
     @else 
         <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
             <div class="float-right">
-            <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" href="{{url('/encontrecuidador')}}">Encontrar cuidadores</a>
+            <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" href="{{url('/encontreCuidador')}}">Encontrar cuidadores</a>
             </div>
         </div>
     @endif
