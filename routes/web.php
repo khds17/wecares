@@ -42,7 +42,7 @@ Route::get('/novaspropostas','prestadoresController@prestadoresPropostas')->midd
 Route::resource('/recebimentos','recebimentosController')->middleware('auth');
 // ===========================================
 Route::resource('/servico','servicosController');
-Route::post('/proposta','servicosController@propostas')->middleware('auth');
+Route::post('/propostas','servicosController@propostas')->middleware('auth');
 Route::get('/propostaAgradecimento','servicosController@propostaAgradecimento');
 Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
 Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth');
@@ -51,11 +51,11 @@ Route::put('/aceitarProspostaPrestador/{id}', 'servicosController@aceitarProspos
 Route::put('/recusarProspostaPrestador/{id}', 'servicosController@recusarProspostaPrestador')->middleware('auth');
 Route::put('/aceitarPropostaSolicitante/{id}', 'servicosController@aceitarPropostaSolicitante')->middleware('auth');
 Route::put('/recusarProspostaSolicitante/{id}', 'servicosController@recusarProspostaSolicitante')->middleware('auth');
-Route::post('/selectproposta/{id}','servicosController@selectproposta');
+Route::post('/selectProposta/{id}','servicosController@selectProposta');
 
 // ===========================================
 Route::resource('/solicitante','solicitantesController');
-Route::get('/cadastroSolicitante','solicitantesController@dadosCadastrais')->middleware('auth');
+Route::get('/cadastroSolicitante','solicitantesController@cadastroSolicitante')->middleware('auth');
 Route::get('/propostas','solicitantesController@propostas')->middleware('auth');
 // ===========================================
 Route::resource('/pagamentos','pagamentosController')->middleware('auth');

@@ -154,7 +154,7 @@ function recusarProspostaSolicitante(id)
 function getProposta(id) {
 
     $.ajax({
-        url: "selectproposta/" + id,
+        url: "selectProposta/" + id,
         type: "post",
         dataType: 'json',
         headers:{

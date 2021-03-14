@@ -59,7 +59,7 @@ class solicitantesController extends Controller
         return view('solicitantes/index',compact('solicitante'));
     }
 
-    public function dadosCadastrais()
+    public function cadastroSolicitante()
     {
         // Encontra o solicitante pelo usuario logado.
         $solicitantes = $this->objSolicitante->where('ID_USUARIO', auth()->user()->id)->get();
@@ -255,7 +255,7 @@ class solicitantesController extends Controller
         } catch (\Throwable $e) {
             DB::rollback();
         }
-        return redirect()->action('solicitantesController@dadosCadastrais');
+        return redirect()->action('solicitantesController@cadastroSolicitante');
     }
 
     public function propostas()
