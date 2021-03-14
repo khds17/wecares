@@ -26,15 +26,15 @@
                             <div class="small text-gray-500 text-left">Formação:{{$prestador->FORMACAO}}</div>
                             {{-- <div class="small text-gray-500 text-left">Serviço realizados:</div>
                             <div class="small text-gray-500 text-left">Avaliação</div>    --}}
-                                
+
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
-                            <input type="checkbox" name="checkPrestador" id="checkPrestador[{{$prestador->ID}}]" value="{{$prestador->ID}}">&nbsp
+                            <input type="checkbox" name="checkPrestador" id="checkPrestador[{{$prestador->ID}}]" value="{{$prestador->ID}}" style="cursor: pointer">&nbsp
                             <div class="small text-primary">Selecionar</div>
                         </div>
                     </a>
                 </div>
-                @endforeach                        
+                @endforeach
             </div>
         </div>
         <div class="svg-border-rounded text-white">
@@ -59,27 +59,27 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    <form name="formProposta" id="formProposta" method="post" enctype="multipart/form-data" action="{{url('proposta')}}">   
+                    <form name="formProposta" id="formProposta" method="post" enctype="multipart/form-data" action="{{url('proposta')}}">
                             @csrf
                             <div class="form-group">
                                 <input type="hidden" id="idPrestadores" name="idPrestadores">
                                 <label for="paciente" class="text-dark">Paciente</label><br>
                                 <select name="selectPaciente" class="custom-select" onchange="getPaciente(this.value)">
-                                    <option value="">Escolha um paciente</option> 
+                                    <option value="">Escolha um paciente</option>
                                     @foreach ($pacientes as $paciente)
-                                        <option value="{{$paciente->ID}}">{{$paciente->NOME}}</option> 
+                                        <option value="{{$paciente->ID}}">{{$paciente->NOME}}</option>
                                     @endforeach
-                                </select>                      
+                                </select>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
                                     <label for="paciente" class="text-dark">O paciente é?</label><br>
                                     <select name="pacienteTipo" id="pacienteTipo" class="custom-select">
-                                        <option value=""></option> 
+                                        <option value=""></option>
                                         @foreach($pacientesTipos as $tipo)
                                                 <option value="{{$tipo->ID}}">{{$tipo->TIPO}}</option>
                                         @endforeach
-                                    </select>                                 
+                                    </select>
                                 </div>
                             </div>
                             <br>
@@ -87,11 +87,11 @@
                                 <div class="col">
                                     <label for="paciente" class="text-dark">Qual a sua familiaridade com o paciente?</label><br>
                                     <select name="familiaridade" id="familiaridade" class="custom-select" value="">
-                                        <option value=""></option> 
+                                        <option value=""></option>
                                         @foreach($familiaridades as $familiaridade)
                                             <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
                                         @endforeach
-                                    </select>                               
+                                    </select>
                                 </div>
                                 <div class="col">
                                     <label for="familiaridade" class="text-dark">Descreva o que é do paciente</label>
@@ -103,11 +103,11 @@
                                 <div class="col">
                                     <label for="paciente" class="text-dark">Onde o paciente está localizado?</label><br>
                                     <select name="pacienteLocalizacao" id="pacienteLocalizacao" class="custom-select">
-                                        <option value=""></option> 
+                                        <option value=""></option>
                                         @foreach($pacientesLocalizacao as $localizacao)
                                                 <option value="{{$localizacao->ID}}" >{{$localizacao->LOCALIZACAO}}</option>
                                         @endforeach
-                                    </select>     
+                                    </select>
                                 </div>
                             </div>
                             <br>
@@ -133,7 +133,7 @@
                                                 @foreach($cidades as $cidade)
                                                     <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
                                                 @endforeach
-                                            </select>   
+                                            </select>
                                         </div>
                                         <div class="col">
                                             <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" value=""><br>
@@ -149,7 +149,7 @@
                                                 @foreach($estados as $estado)
                                                     <option value="{{$estado->ID}}">{{$estado->UF}}</option>
                                                 @endforeach
-                                            </select>  
+                                            </select>
                                         </div>
                                     </div>
                                 @endif
@@ -159,7 +159,7 @@
                                 <div class="col font-color-gray">
                                     <label for="formacao">Serviços que deverão ser realizados</label><br>
                                     @foreach($servicos as $servico)
-                                        <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}" onclick="calcularServicos(this.value)"> {{$servico->TIPO}} <br> 
+                                        <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}" onclick="calcularServicos(this.value)"> {{$servico->TIPO}} <br>
                                     @endforeach
                                     <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
                                 </div>
@@ -167,15 +167,15 @@
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label for="formacao">Paciente toma medicamentos?</label><br>
-                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
+                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br>
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não
                                 </div>
                                 <div class="col font-color-gray">
                                     <label for="formacao">Quais medicamentos?</label><br>
-                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="">  
+                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="">
                                 </div>
                             </div>
-                            <br> 
+                            <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <label class ="" for="formacao">Data e hora do serviço:</label><br>
@@ -198,14 +198,14 @@
                             <br>
                             <!-- <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <label class ="" for="">Adicionar mais</label><br>        
+                                    <label class ="" for="">Adicionar mais</label><br>
                                 </div>
                             </div>
                             <br> -->
                             <div class="row margin-top-10" id="servicos" >
                                 <div class="col font-color-gray">
                                     <label class ="" for="formacao">Valor total do serviço: R$</label>
-                                    <input type="text" name="precoServico" id="precoServico" value="">                                
+                                    <input type="text" name="precoServico" id="precoServico" value="">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -215,7 +215,7 @@
                 </div>
             </div>
         </div>
-    @else 
+    @else
         <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
             <div class="float-right">
             <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" href="{{url('/encontreCuidador')}}">Encontrar cuidadores</a>
