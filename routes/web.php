@@ -59,12 +59,12 @@ Route::get('/cadastroSolicitante','solicitantesController@cadastroSolicitante')-
 Route::get('/propostas','solicitantesController@propostas')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
 Route::resource('/pagamentos','pagamentosController')->middleware('auth')->middleware('role:solicitante');
-Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation');
+Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation')->middleware('role:solicitante');
 Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
-Route::get('/estorno','pagamentosController@estorno');
 Route::get('/paymentForm','pagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
-Route::post('/payment','pagamentosController@payment');
-Route::post('/estornoPayment/{id}','pagamentosController@estornoPayment');
+Route::post('/payment','pagamentosController@payment')->middleware('auth')->middleware('role:administrador');
+Route::post('/estornoPayment/{id}','pagamentosController@estornoPayment')->middleware('role:solicitante');
+// Route::get('/estorno','pagamentosController@estorno');
 
 Auth::routes(['register' => false]);
 
