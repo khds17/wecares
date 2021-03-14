@@ -71,7 +71,7 @@ class indexController extends Controller
         return view('registros/registros',compact('registros'));
     }
 
-    public function getCidades(Request $request)
+    public function cuidadorCidades(Request $request)
     {
         $search = $request->search;
 

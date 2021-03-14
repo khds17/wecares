@@ -3,7 +3,7 @@ if (document.getElementById('cidade') !== null) {
         $( "#cidade" ).autocomplete({
              source: function(request, response) {
                 $.ajax({
-                url: '/cuidadorcidades',
+                url: '/cuidadorCidades',
                 type: 'get',
                 data: {
                         term : request.term
@@ -13,8 +13,8 @@ if (document.getElementById('cidade') !== null) {
                    var resp = $.map(data,function(obj){
                         $( "#id" ).val(obj.ID);
                         return obj.CIDADE;
-                   }); 
-     
+                   });
+
                    response(resp);
                 }
             });
@@ -25,7 +25,7 @@ if (document.getElementById('cidade') !== null) {
 }
 
 function getPaciente(id) {
-    
+
     $.ajax({
         url: "selectpacientes/" + id,
         type: "post",
@@ -58,14 +58,14 @@ function getPaciente(id) {
                 $("#pacienteCidade option[value="+data.endereco.ID_CIDADE+"]").attr("selected", "selected");
                 $("input[name=tomaMedicamento][value="+data.paciente.TOMA_MEDICAMENTOS+"]").attr("checked", true);
                 $('#tipoMedicamento').val(data.paciente.TIPO_MEDICAMENTOS);
-                
-            } 
+
+            }
         }
     });
 }
 
 function selectPrestadores() {
-    
+
     let prestadores = [];
 
     $("input[id*='checkPrestador[']").each(function (chave, elemento) {
@@ -152,7 +152,7 @@ function recusarProspostaSolicitante(id)
 }
 
 function getProposta(id) {
-    
+
     $.ajax({
         url: "selectproposta/" + id,
         type: "post",
@@ -186,14 +186,14 @@ function getProposta(id) {
                 $('#servicoOutros').val(data.propostas.SERVICOS_OUTROS);
                 $('#formacao').val(data.prestador[0].FORMACAO);
                 $('#prestadorTelefone').val(data.prestador[0].TELEFONE);
-                
+
                 let servicos = data.propostas.SERVICOS.split([',']);
 
                 servicos.forEach(function(elemento){
                     console.log(elemento);
                     $("input[name=servicos][value="+elemento+"]").attr("checked", true);
                 });
-            } 
+            }
         }
     });
 }

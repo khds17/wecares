@@ -27,7 +27,7 @@ Route::get('/termos','indexController@termos');
 Route::get('/conduta','indexController@conduta');
 Route::get('/encontrecuidador','indexController@encontrecuidador');
 Route::get('/registros','indexController@registros');
-Route::get('/cuidadorcidades','indexController@getCidades');
+Route::get('/cuidadorCidades','indexController@cuidadorCidades');
 // Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
@@ -61,7 +61,7 @@ Route::get('/propostas','solicitantesController@solicitantePropostas')->middlewa
 // ===========================================
 Route::resource('/pagamentos','pagamentosController')->middleware('auth');
 Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation');
-Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation');
+Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
 Route::get('/estorno','pagamentosController@estorno');
 Route::get('/paymentForm','pagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
 Route::post('/payment','pagamentosController@payment');
