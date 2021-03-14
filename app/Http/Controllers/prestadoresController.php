@@ -106,67 +106,6 @@ class prestadoresController extends Controller
         return view('prestadores/propostas',compact('propostas','servicos','familiaridades'));
     }
 
-    public function resultado(Request $request)
-    {
-        $idCidade = $request->id;
-
-        $prestadores = $this->objPrestador
-                            ->join('ENDERECOS', 'PRESTADORES.ID_ENDERECO', '=', 'ENDERECOS.ID')
-                            ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
-                            ->select('PRESTADORES.*','FORMACAO.FORMACAO')
-                            ->where('ENDERECOS.ID_CIDADE', '=', $idCidade)
-                            ->get();
-
-        //Verifica se há algum prestador
-        if(count($prestadores) >= 1) {
-
-            $pacientes = $this->objPacientes
-                    ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-                    ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                    ->select('PACIENTES.*')
-                    ->get();
-
-            foreach ($prestadores as $prestador) {
-            $idFoto = $prestador->ID_FOTO;
-            }
-
-            $arrayFotos = $this->objFotos
-                    ->where('FOTOS.ID', '=', $idFoto)
-                    ->get();
-
-            foreach ($arrayFotos as $arrayFoto) {
-            $foto = $arrayFoto;
-            }
-
-            $servicos=$this->objServico->all();
-
-            //Pegando todos os tipos de pacientes
-            $pacientesTipos = $this->objPacienteTipo->all();
-
-            //Pegando todas as localizações
-            $pacientesLocalizacao = $this->objPacienteLocalizacao->all();
-
-            //Encontrando o endereço da localização dos pacientes
-            $enderecos = $this->objEndereco
-                        ->join('PACIENTES', 'ENDERECOS.ID', '=', 'PACIENTES.ID_ENDERECO')
-                        ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-                        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                        ->select('ENDERECOS.*')
-                        ->get();
-
-            $cidades = $this->objCidade->all();
-
-            $estados = $this->objEstado->all();
-
-            $familiaridades=$this->objFamiliaridades->all(); 
-
-            return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientes','pacientesTipos','pacientesLocalizacao', 'enderecos', 'cidades','estados','familiaridades','foto'));
-        } else {
-            return view('prestadores/resultado-prestadores',compact('prestadores'));
-        }
-
-    }
-
     public function recebimentos()
     {
         return view('prestadores/recebimentos');

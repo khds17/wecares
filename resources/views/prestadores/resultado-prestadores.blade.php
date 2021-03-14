@@ -20,7 +20,7 @@
                     <a class="card card-link border-top border-top-lg border-primary h-100 lift">
                         <div class="card-body p-5">
                             {{-- <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div> --}}
-                            <input type="image" src="{{url("storage/{$foto->FOTO}")}}" width="100" height="100">
+                            <input type="image" src="{{url("storage/{$prestador->FOTO}")}}" width="100" height="100">
                             <input type="hidden" id="idPrestador[{{$prestador->ID}}]" name="idPrestador" value="{{$prestador->ID}}">
                             <h6>{{$prestador->NOME}}</h6>
                             <div class="small text-gray-500 text-left">Formação:{{$prestador->FORMACAO}}</div>

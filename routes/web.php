@@ -30,13 +30,13 @@ Route::get('/registros','indexController@registros');
 Route::get('/cuidadorCidades','indexController@cuidadorCidades');
 Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
+Route::get('/resultado','indexController@resultado')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
 Route::resource('/paciente','pacientesController')->middleware('auth');
 Route::post('/selectPacientes/{id}','pacientesController@selectPacientes');
 // ===========================================
 Route::resource('/prestador','prestadoresController');
 Route::get('/cadastroPrestador','prestadoresController@cadastroPrestador')->middleware('auth')->middleware('role:cuidador/enfermeiro');
-Route::get('/resultado','prestadoresController@resultado')->middleware('auth')->middleware('role:solicitante');
 Route::get('/novaspropostas','prestadoresController@prestadoresPropostas')->middleware('auth');
 // ===========================================
 Route::resource('/recebimentos','recebimentosController')->middleware('auth');
