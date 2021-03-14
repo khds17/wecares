@@ -76,7 +76,7 @@ class prestadoresController extends Controller
         echo "Teste";
     }
 
-    public function dadosCadastrais()
+    public function cadastroPrestador()
     {
         // Encontra o prestador pelo usuario logado.
         $prestadores = $this->objPrestador->where('ID_USUARIO', auth()->user()->id)->get();
@@ -387,11 +387,11 @@ class prestadoresController extends Controller
 
             DB::commit();
 
-            return redirect()->action('prestadoresController@dadosCadastrais');
+            return redirect()->action('prestadoresController@cadastroPrestador');
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect()->action('prestadoresController@dadosCadastrais');
+            return redirect()->action('prestadoresController@edit');
         }
     }
 }

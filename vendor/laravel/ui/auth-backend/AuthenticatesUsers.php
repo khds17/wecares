@@ -182,9 +182,9 @@ trait AuthenticatesUsers
 
         // Verifica o tipo do usuario e redireciona
         if (isset($userPrestador)) {
-            return '/prestadorCadastro';
+            return '/cadastroPrestador';
         } else if (isset($userSolicitante)) {
-            return '/solicitanteCadastro';
+            return '/cadastroSolicitante';
         } else if (isset($userAdmin)) {
             return '/cadastroAdmin';
         }

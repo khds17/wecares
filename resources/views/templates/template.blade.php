@@ -50,7 +50,7 @@
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                         {{-- Dropdown solicitante --}}
                                         @role('solicitante')
-                                            <a class="dropdown-item" href="{{url("/solicitanteCadastro")}}">
+                                            <a class="dropdown-item" href="{{url("/cadastroSolicitante")}}">
                                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 Dados cadastrais
                                             </a>
@@ -87,7 +87,7 @@
                                             </a>
                                         @endrole
                                         @role('cuidador/enfermeiro')
-                                            <a class="dropdown-item" href="{{url("/prestadorCadastro")}}">
+                                            <a class="dropdown-item" href="{{url("/cadastroPrestador")}}">
                                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 Dados cadastrais
                                             </a>
