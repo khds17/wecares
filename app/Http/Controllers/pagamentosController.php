@@ -165,13 +165,22 @@ class pagamentosController extends Controller
                     ]);
 
                     //Grava os dados do pagamento de validação para estorno.
-                    $this->objValidaCartao->create([
-                        'ID_PAGAMENTO' => $payment->id,
-                        'ID_CARTAO' => $card->id,
-                        'STATUS' => $payment->status,
-                        'DT_CRIACAO' => $payment->date_created,
-                        'DT_APROVACAO' => $payment->date_approved,
-                    ]);
+                    if($payment->status == 'approved') {
+                        $this->objValidaCartao->create([
+                            'ID_PAGAMENTO' => $payment->id,
+                            'ID_CARTAO' => $card->id,
+                            'STATUS' => $payment->status,
+                            'DT_CRIACAO' => $payment->date_created,
+                            'DT_APROVACAO' => $payment->date_approved,
+                        ]);
+                    } else {
+                        $this->objValidaCartao->create([
+                            'ID_PAGAMENTO' => $payment->id,
+                            'ID_CARTAO' => $card->id,
+                            'STATUS' => $payment->status,
+                            'DT_CRIACAO' => $payment->date_created,
+                        ]);
+                    }
                 }
             }
             //Registro adicionando o cartão
@@ -249,19 +258,29 @@ class pagamentosController extends Controller
 
         // Salva os dados do pagamento e atualiza os status do serviço
         if(!empty($payment->id)) {
-            $this->objPagamentos->create([
-                'ID_PAGAMENTO' => $payment->id,
-                'ID_SERVICO_PRESTADO' => $request->idServico,
-                'ID_CARTAO' => $request->idCartao,
-                'STATUS' => $payment->status,
-                'DT_CRIACAO' => $payment->date_created,
-                'DT_APROVACAO' => $payment->date_approved
-            ]);
+            if($payment->status == 'approved') {
+                $this->objPagamentos->create([
+                    'ID_PAGAMENTO' => $payment->id,
+                    'ID_SERVICO_PRESTADO' => $request->idServico,
+                    'ID_CARTAO' => $request->idCartao,
+                    'STATUS' => $payment->status,
+                    'DT_CRIACAO' => $payment->date_created,
+                    'DT_APROVACAO' => $payment->date_approved
+                ]);
 
-            $this->objServicosPrestados->where(['ID' => $request->idServico])->update([
-                'STATUS_APROVACAO' => $payment->status,
-                'STATUS_SERVICO' => \Config::get('constants.SERVICOS.APROVADO'),
-            ]);
+                $this->objServicosPrestados->where(['ID' => $request->idServico])->update([
+                    'STATUS_APROVACAO' => $payment->status,
+                    'STATUS_SERVICO' => \Config::get('constants.SERVICOS.APROVADO'),
+                ]);
+            } else {
+                $this->objPagamentos->create([
+                    'ID_PAGAMENTO' => $payment->id,
+                    'ID_SERVICO_PRESTADO' => $request->idServico,
+                    'ID_CARTAO' => $request->idCartao,
+                    'STATUS' => $payment->status,
+                    'DT_CRIACAO' => $payment->date_created,
+                ]);
+            }
         }
 
         return redirect('/pagamentos');

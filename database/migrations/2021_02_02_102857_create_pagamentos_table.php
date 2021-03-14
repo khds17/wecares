@@ -20,10 +20,9 @@ class CreatePagamentosTable extends Migration
             $table->string('ID_CARTAO',15);
             $table->string('STATUS',20);
             $table->string('DT_CRIACAO',35);
-            $table->string('DT_APROVACAO',35);
+            $table->string('DT_APROVACAO',35)->nullable();
             $table->foreign('ID_SERVICO_PRESTADO')->references('ID')->on('SERVICOS_PRESTADOS')->onDelete('cascade')->onUpdate('cascade');
         });
-        
     }
 
     /**
