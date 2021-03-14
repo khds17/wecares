@@ -28,7 +28,6 @@ Route::get('/conduta','indexController@conduta');
 Route::get('/encontrecuidador','indexController@encontrecuidador');
 Route::get('/registros','indexController@registros');
 Route::get('/cuidadorCidades','indexController@cuidadorCidades');
-// Route::get('/perfil','indexController@perfil');
 Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
 // ===========================================

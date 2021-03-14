@@ -82,9 +82,4 @@ class indexController extends Controller
         return response()->json($result);
 
     }
-
-    public function perfil()
-    {
-        return view('index/perfil-cuidador');
-    }
 }
