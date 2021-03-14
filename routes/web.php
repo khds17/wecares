@@ -44,8 +44,8 @@ Route::resource('/recebimentos','recebimentosController')->middleware('auth')->m
 Route::resource('/servico','servicosController');
 Route::post('/proposta','servicosController@proposta')->middleware('auth');
 Route::get('/propostaAgradecimento','servicosController@propostaAgradecimento');
-Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth');
-Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth');
+Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth')->middleware('role:solicitante');
+Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 Route::get('/criarServicos','servicosController@criarServicos')->middleware('auth')->middleware('role:administrador');
 Route::put('/aceitarProspostaPrestador/{id}', 'servicosController@aceitarProspostaPrestador')->middleware('auth');
 Route::put('/recusarProspostaPrestador/{id}', 'servicosController@recusarProspostaPrestador')->middleware('auth');
@@ -56,9 +56,9 @@ Route::post('/selectProposta/{id}','servicosController@selectProposta');
 // ===========================================
 Route::resource('/solicitante','solicitantesController');
 Route::get('/cadastroSolicitante','solicitantesController@cadastroSolicitante')->middleware('auth')->middleware('role:solicitante');
-Route::get('/propostas','solicitantesController@propostas')->middleware('auth');
+Route::get('/propostas','solicitantesController@propostas')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
-Route::resource('/pagamentos','pagamentosController')->middleware('auth');
+Route::resource('/pagamentos','pagamentosController')->middleware('auth')->middleware('role:solicitante');
 Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation');
 Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
 Route::get('/estorno','pagamentosController@estorno');
