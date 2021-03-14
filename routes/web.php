@@ -56,7 +56,7 @@ Route::post('/selectproposta/{id}','servicosController@selectproposta');
 // ===========================================
 Route::resource('/solicitante','solicitantesController');
 Route::get('/cadastroSolicitante','solicitantesController@dadosCadastrais')->middleware('auth');
-Route::get('/propostas','solicitantesController@solicitantePropostas')->middleware('auth');
+Route::get('/propostas','solicitantesController@propostas')->middleware('auth');
 // ===========================================
 Route::resource('/pagamentos','pagamentosController')->middleware('auth');
 Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation');

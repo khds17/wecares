@@ -258,7 +258,7 @@ class solicitantesController extends Controller
         return redirect()->action('solicitantesController@dadosCadastrais');
     }
 
-    public function solicitantePropostas()
+    public function propostas()
     {
 
         $propostaAceita = \Config::get('constants.SERVICOS.ACEITADO');
