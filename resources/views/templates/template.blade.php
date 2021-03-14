@@ -65,7 +65,7 @@
                                                     <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                                                 </svg>
                                                 &nbsp&nbsp
-                                                <span>Serviços contratados</span>  
+                                                <span>Serviços contratados</span>
                                             </a>
                                             <a class="dropdown-item" href="{{url("/propostas")}}">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -74,7 +74,7 @@
                                                     <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                                                 </svg>
                                                 &nbsp&nbsp
-                                                <span>Propostas pendentes</span>  
+                                                <span>Propostas pendentes</span>
                                             </a>
                                             <a class="dropdown-item" href="{{url("/pagamentos")}}">
                                                 {{-- <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> --}}
@@ -98,7 +98,7 @@
                                                     <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                                                 </svg>
                                                 &nbsp&nbsp
-                                                <span>Serviços prestados</span>                                                
+                                                <span>Serviços prestados</span>
                                             </a>
                                             <a class="dropdown-item" href="{{url("/novaspropostas")}}">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +107,7 @@
                                                     <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                                                 </svg>
                                                 &nbsp&nbsp
-                                                <span>Propostas de serviço</span>                                                 
+                                                <span>Propostas de serviço</span>
                                             </a>
                                             <a class="dropdown-item" href="{{url("/recebimentos")}}">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-wallet2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -138,7 +138,7 @@
                                                     <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                                                 </svg>
                                                 &nbsp&nbsp
-                                                <span>Lista de administradores</span>                                                
+                                                <span>Lista de administradores</span>
                                             </a>
                                             <a class="dropdown-item" href="{{url("/prestadoresLista")}}">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@
                                                     <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                                                 </svg>
                                                 &nbsp&nbsp
-                                                <span> Lista de prestadores</span>                                               
+                                                <span> Lista de prestadores</span>
                                             </a>
                                             <a class="dropdown-item" href="{{url("listagemServicos")}}">
                                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -156,7 +156,7 @@
                                                     <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
                                                 </svg>
                                                 &nbsp&nbsp
-                                                <span>Lista de serviços prestados</span>                                                
+                                                <span>Lista de serviços prestados</span>
                                             </a>
                                         @endrole
                                         <a class="dropdown-item" href="{{url("/registros")}}">
@@ -174,7 +174,7 @@
                                             @csrf
                                         </form>
                                     </div>
-                                @else 
+                                @else
                                     <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="{{url("login")}}"> Entrar</a>
                                 @endif
 
@@ -235,7 +235,7 @@
                         </div>
                     </div>
                     <!-- Fim modal --> --}}
-        </main>       
+        </main>
     </div>
     @yield('content')
     <div id="layoutDefault_footer">
@@ -245,10 +245,10 @@
                             <div class="col-lg-3">
                                 <div class="footer-brand">WeCares</div>
                                 <div class="icon-list-social mb-5">
-                                    <a class="icon-list-social-link" href="javascript:void(0);">
+                                    <a class="icon-list-social-link" href="https://www.facebook.com/Wecares-103096788530580" target="_blank">
                                         <i class="fab fa-facebook"></i>
                                     </a>
-                                    <a class="icon-list-social-link" href="javascript:void(0);">
+                                    <a class="icon-list-social-link" href="https://www.instagram.com/wecaresoficial/" target="_blank">
                                         <i class="fab fa-instagram"></i>
                                     </a>
                                     <a class="icon-list-social-link" href="javascript:void(0);">
@@ -273,7 +273,7 @@
                                         <ul class="list-unstyled mb-0">
                                             <li class="mb-2"><a href="{{url("/encontrecuidador")}}">Encontre um cuidador</a></li>
                                             <li class="mb-2"><a href="{{url("prestador/create")}}">Seja um cuidador</a></li>
-                                            <li class="mb-2"><a href="{{url("solicitante/create")}}">Seja um solicitante</a></li>                                            
+                                            <li class="mb-2"><a href="{{url("solicitante/create")}}">Seja um solicitante</a></li>
                                             {{-- <li class="mb-2"><a href="javascript:void(0);">Dicas de contratação</a></li> --}}
                                             {{-- <li class="mb-2"><a href="javascript:void(0);">Dicas de segurança</a></li> --}}
                                         </ul>
