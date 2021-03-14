@@ -3,7 +3,7 @@
 <table class="table-register">
     <thead>
         <tr>
-            <th> 
+            <th>
                 Data
             </th>
             <th>

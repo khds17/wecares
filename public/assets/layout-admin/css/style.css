@@ -215,6 +215,24 @@ table {
   border-collapse: collapse;
 }
 
+table.table-register{
+  padding:2rem;
+  width:90%;
+  margin:auto;
+}
+
+.table-register tr{
+  border: 1px solid #ddd;
+}
+
+.table-register td,.table-register th{
+  padding: 1rem;
+}
+
+.table-register th{
+  background: white
+}
+
 caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
