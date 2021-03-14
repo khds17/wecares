@@ -27,7 +27,7 @@ if (document.getElementById('cidade') !== null) {
 function getPaciente(id) {
 
     $.ajax({
-        url: "selectpacientes/" + id,
+        url: "selectPacientes/" + id,
         type: "post",
         dataType: 'json',
         headers:{

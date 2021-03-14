@@ -32,7 +32,7 @@ Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
 // ===========================================
 Route::resource('/paciente','pacientesController')->middleware('auth');
-Route::post('/selectpacientes/{id}','pacientesController@selectPacientes');
+Route::post('/selectPacientes/{id}','pacientesController@selectPacientes');
 // ===========================================
 Route::resource('/prestador','prestadoresController');
 Route::get('/prestadorCadastro','prestadoresController@dadosCadastrais')->middleware('auth')->middleware('role:cuidador/enfermeiro');
