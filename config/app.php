@@ -167,6 +167,10 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         /*
+         * Package Service Bugsnag...
+         */
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
