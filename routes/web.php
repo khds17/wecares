@@ -64,7 +64,7 @@ Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValid
 Route::get('/paymentForm','pagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
 Route::post('/payment','pagamentosController@payment')->middleware('auth')->middleware('role:administrador');
 Route::post('/estornoPayment/{id}','pagamentosController@estornoPayment')->middleware('role:solicitante');
-// Route::get('/estorno','pagamentosController@estorno');
+Route::post('/atualizarPagamentos','pagamentosController@atualizarPagamentos');
 
 Auth::routes(['register' => false]);
 

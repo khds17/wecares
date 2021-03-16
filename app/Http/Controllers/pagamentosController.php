@@ -11,6 +11,7 @@ use App\Models\pagamentos;
 use App\Models\registros_log;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 
 class pagamentosController extends Controller
@@ -336,6 +337,13 @@ class pagamentosController extends Controller
         } else {
             echo "Cancelamento não deu certo";
         }
+    }
+
+    public function atualizarPagamentos(Request $request)
+    {
+        Storage::disk('local')->put('example.txt', $request);
+
+        return ('STATUS 200 (OK)');
     }
 
 }
