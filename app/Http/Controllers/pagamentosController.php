@@ -343,7 +343,7 @@ class pagamentosController extends Controller
     {
         Storage::disk('local')->put('example.txt', $request);
 
-        return ('STATUS 200 (OK)');
+        return 200;
     }
 
 }
