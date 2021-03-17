@@ -122,13 +122,22 @@ class pagamentosController extends Controller
                         ]);
 
                         //Grava os dados do pagamento de validação para estorno.
-                        $this->objValidaCartao->create([
-                            'ID_PAGAMENTO' => $payment->id,
-                            'ID_CARTAO' => $card->id,
-                            'STATUS' => $payment->status,
-                            'DT_CRIACAO' => $payment->date_created,
-                            'DT_APROVACAO' => $payment->date_approved,
-                        ]);
+                        if($payment->status == 'approved') {
+                                $this->objValidaCartao->create([
+                                    'ID_PAGAMENTO' => $payment->id,
+                                    'ID_CARTAO' => $card->id,
+                                    'STATUS' => $payment->status,
+                                    'DT_CRIACAO' => $payment->date_created,
+                                    'DT_APROVACAO' => $payment->date_approved
+                                ]);
+                        } else {
+                            $this->objValidaCartao->create([
+                                'ID_PAGAMENTO' => $payment->id,
+                                'ID_CARTAO' => $card->id,
+                                'STATUS' => $payment->status,
+                                'DT_CRIACAO' => $payment->date_created,
+                            ]);
+                        }
                     } else {
                         $errorArray = (array)$card->error;
                         echo json_encode ($errorArray);
@@ -341,9 +350,46 @@ class pagamentosController extends Controller
 
     public function atualizarPagamentos(Request $request)
     {
-        Storage::disk('local')->put('example.txt', $request);
+        \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
-        return http_response_code(200);
+        $pagamentos = $this->objPagamentos
+                            ->where('PAGAMENTOS.STATUS', '=', 'in_process')
+                            ->get();
+
+        // if(count($pagamentos) >= 1) {
+
+        //     foreach ($pagamentos as $pagamento) {
+        //         $payment = \MercadoPago\Payment::find_by_id($pagamento->id);
+
+        //         if($payment == 'approved') {
+        //             $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->id])->update([
+        //                 'STATUS' => $payment->status,
+        //                 'DT_APROVACAO' => $payment->date_approved
+        //             ]);
+        //         }
+        //     }
+        // }
+
+        $pagamentosValidacao = $this->objValidaCartao
+                                ->where('VALIDA_CARTAO.STATUS', '=', 'in_process')
+                                ->get();
+
+        // if(count($pagamentosValidacao) >= 1) {
+
+        //     foreach ($pagamentosValidacao as $pagamento) {
+        //         $payment = \MercadoPago\Payment::find_by_id($pagamento->id);
+
+        //         if($payment == 'approved') {
+        //             $this->objValidaCartao->where(['ID_PAGAMENTO' => $pagamento->id])->update([
+        //                 'STATUS' => $payment->status,
+        //                 'DT_APROVACAO' => $payment->date_approved
+        //             ]);
+        //         }
+        //     }
+        // }
+
+        dd($pagamentos, $pagamentosValidacao);
+
     }
 
 }
