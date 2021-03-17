@@ -361,8 +361,6 @@ class pagamentosController extends Controller
             foreach ($pagamentos as $pagamento) {
                 $payment = \MercadoPago\Payment::find_by_id($pagamento->id);
 
-                dd($payment);
-
                 if($payment == 'approved') {
                     $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->id])->update([
                         'STATUS' => $payment->status,
@@ -371,6 +369,8 @@ class pagamentosController extends Controller
                 }
             }
         }
+
+        dd($payment);
 
         $pagamentosValidacao = $this->objValidaCartao
                                 ->where('VALIDA_CARTAO.STATUS', '=', 'in_process')
