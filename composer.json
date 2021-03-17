@@ -19,8 +19,7 @@
         "laravel/ui": "^2.4",
         "laravellegends/pt-br-validator": "^7.0",
         "mercadopago/dx-php": "^2.2",
-        "spatie/laravel-permission": "^3.17",
-        "spatie/laravel-webhook-client": "^2.7"
+        "spatie/laravel-permission": "^3.17"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
