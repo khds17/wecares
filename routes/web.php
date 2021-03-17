@@ -64,11 +64,6 @@ Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValid
 Route::get('/paymentForm','pagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
 Route::post('/payment','pagamentosController@payment')->middleware('auth')->middleware('role:administrador');
 Route::post('/estornoPayment/{id}','pagamentosController@estornoPayment')->middleware('role:solicitante');
-Route::get('/atualizarPagamentos',function(){
-    return response ('status: 200', 200)
-    ->header('Content-Type', 'text/plain');
-});
-
 Route::post('/atualizarPagamentos','pagamentosController@atualizarPagamentos');
 
 Auth::routes(['register' => false]);
