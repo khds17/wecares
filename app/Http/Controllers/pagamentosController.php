@@ -348,7 +348,7 @@ class pagamentosController extends Controller
         }
     }
 
-    public function atualizarPagamentos(Request $request)
+    public function atualizarPagamentos()
     {
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
