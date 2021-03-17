@@ -356,19 +356,21 @@ class pagamentosController extends Controller
                             ->where('PAGAMENTOS.STATUS', '=', 'in_process')
                             ->get();
 
-        // if(count($pagamentos) >= 1) {
+        if(count($pagamentos) >= 1) {
 
-        //     foreach ($pagamentos as $pagamento) {
-        //         $payment = \MercadoPago\Payment::find_by_id($pagamento->id);
+            foreach ($pagamentos as $pagamento) {
+                $payment = \MercadoPago\Payment::find_by_id($pagamento->id);
 
-        //         if($payment == 'approved') {
-        //             $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->id])->update([
-        //                 'STATUS' => $payment->status,
-        //                 'DT_APROVACAO' => $payment->date_approved
-        //             ]);
-        //         }
-        //     }
-        // }
+                dd($payment);
+
+                if($payment == 'approved') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->id])->update([
+                        'STATUS' => $payment->status,
+                        'DT_APROVACAO' => $payment->date_approved
+                    ]);
+                }
+            }
+        }
 
         $pagamentosValidacao = $this->objValidaCartao
                                 ->where('VALIDA_CARTAO.STATUS', '=', 'in_process')
@@ -387,8 +389,6 @@ class pagamentosController extends Controller
         //         }
         //     }
         // }
-
-        dd($pagamentos, $pagamentosValidacao);
 
     }
 
