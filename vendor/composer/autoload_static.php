@@ -87,6 +87,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\WebhookClient\\' => 21,
             'Spatie\\Permission\\' => 18,
         ),
         'R' => 
@@ -320,6 +321,10 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Spatie\\WebhookClient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src',
         ),
         'Spatie\\Permission\\' => 
         array (
@@ -4524,6 +4529,22 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
         'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
         'Spatie\\Permission\\WildcardPermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/WildcardPermission.php',
+        'Spatie\\WebhookClient\\Events\\InvalidSignatureEvent' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/Events/InvalidSignatureEvent.php',
+        'Spatie\\WebhookClient\\Exceptions\\InvalidConfig' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/Exceptions/InvalidConfig.php',
+        'Spatie\\WebhookClient\\Exceptions\\WebhookFailed' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/Exceptions/WebhookFailed.php',
+        'Spatie\\WebhookClient\\Models\\WebhookCall' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/Models/WebhookCall.php',
+        'Spatie\\WebhookClient\\ProcessWebhookJob' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/ProcessWebhookJob.php',
+        'Spatie\\WebhookClient\\SignatureValidator\\DefaultSignatureValidator' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/SignatureValidator/DefaultSignatureValidator.php',
+        'Spatie\\WebhookClient\\SignatureValidator\\SignatureValidator' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/SignatureValidator/SignatureValidator.php',
+        'Spatie\\WebhookClient\\WebhookClientServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookClientServiceProvider.php',
+        'Spatie\\WebhookClient\\WebhookConfig' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookConfig.php',
+        'Spatie\\WebhookClient\\WebhookConfigRepository' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookConfigRepository.php',
+        'Spatie\\WebhookClient\\WebhookController' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookController.php',
+        'Spatie\\WebhookClient\\WebhookProcessor' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookProcessor.php',
+        'Spatie\\WebhookClient\\WebhookProfile\\ProcessEverythingWebhookProfile' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookProfile/ProcessEverythingWebhookProfile.php',
+        'Spatie\\WebhookClient\\WebhookProfile\\WebhookProfile' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookProfile/WebhookProfile.php',
+        'Spatie\\WebhookClient\\WebhookResponse\\DefaultRespondsTo' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookResponse/DefaultRespondsTo.php',
+        'Spatie\\WebhookClient\\WebhookResponse\\RespondsToWebhook' => __DIR__ . '/..' . '/spatie/laravel-webhook-client/src/WebhookResponse/RespondsToWebhook.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Color' => __DIR__ . '/..' . '/symfony/console/Color.php',
