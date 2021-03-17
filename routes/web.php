@@ -69,7 +69,7 @@ Route::get('/atualizarPagamentos',function(){
     ->header('Content-Type', 'text/plain');
 });
 
-// Route::post('/atualizarPagamentos','pagamentosController@atualizarPagamentos');
+Route::post('/atualizarPagamentos','pagamentosController@atualizarPagamentos');
 
 Auth::routes(['register' => false]);
 
