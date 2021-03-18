@@ -369,8 +369,8 @@ class pagamentosController extends Controller
                 }
             }
         }
-
-        dd(\MercadoPago\Payment::find_by_id(14010470614));
+        $payment = \MercadoPago\Payment::find_by_id(14010470614);
+        dd($payment);
 
         $pagamentosValidacao = $this->objValidaCartao
                                 ->where('VALIDA_CARTAO.STATUS', '=', 'in_process')
