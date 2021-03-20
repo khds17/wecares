@@ -54,7 +54,7 @@
                                                 <i class="fas fa-chart-line fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 <span>Dashboard</span>
                                             </a>
-                                            <a class="dropdown-item" href="{{url("/adminCadastro")}}">
+                                            <a class="dropdown-item" href="{{url("/cadastroAdmin")}}">
                                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 Dados cadastrais
                                             </a>
