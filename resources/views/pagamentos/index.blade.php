@@ -57,7 +57,7 @@
                                     </td>
                                 @else
                                     <td> {
-                                    <center> {$solicitante->BANDEIRA}} <img src="https://img.icons8.com/color/40/000000/bank-card-back-side.png"/> </center>
+                                    <center> {{$solicitante->BANDEIRA}} <img src="https://img.icons8.com/color/40/000000/bank-card-back-side.png"/> </center>
                                     </td>
                                 @endif
                                 @if ($solicitante->PRINCIPAL === 1)
