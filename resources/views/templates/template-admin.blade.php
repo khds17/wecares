@@ -24,30 +24,27 @@
                     </div>
                     <div class="sidebar-brand-text mx-3">WeCares</div>
                 </a>
+                {{-- Menu do administrador --}}
                 @role('administrador')
-                <hr class="sidebar-divider my-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url("/admin")}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                            <path d="M0,172v-172h172v172z" fill="#456bd8"></path><g fill="#ffffff">
-                            <path d="M26.875,10.32c-1.65281,0.30906 -2.83531,1.76031 -2.795,3.44v134.16c0,1.89469 1.54531,3.44 3.44,3.44h48.16c1.89469,0 3.44,-1.54531 3.44,-3.44v-134.16c0,-1.89469 -1.54531,-3.44 -3.44,-3.44zM30.96,17.2h41.28v127.28h-41.28zM96.32,44.72c-1.89469,0 -3.44,1.54531 -3.44,3.44v99.76c0,1.89469 1.54531,3.44 3.44,3.44h48.16c1.89469,0 3.44,-1.54531 3.44,-3.44v-99.76c0,-1.89469 -1.54531,-3.44 -3.44,-3.44zM10.32,158.24v6.88h151.36v-6.88z"></path></g></g>
+                    <hr class="sidebar-divider my-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url("/admin")}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <path d="M0,172v-172h172v172z" fill="#456bd8"></path><g fill="#ffffff">
+                                <path d="M26.875,10.32c-1.65281,0.30906 -2.83531,1.76031 -2.795,3.44v134.16c0,1.89469 1.54531,3.44 3.44,3.44h48.16c1.89469,0 3.44,-1.54531 3.44,-3.44v-134.16c0,-1.89469 -1.54531,-3.44 -3.44,-3.44zM30.96,17.2h41.28v127.28h-41.28zM96.32,44.72c-1.89469,0 -3.44,1.54531 -3.44,3.44v99.76c0,1.89469 1.54531,3.44 3.44,3.44h48.16c1.89469,0 3.44,-1.54531 3.44,-3.44v-99.76c0,-1.89469 -1.54531,-3.44 -3.44,-3.44zM10.32,158.24v6.88h151.36v-6.88z"></path></g></g>
+                            </svg>
+                        <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <hr class="sidebar-divider my-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url("/cadastroAdmin")}}">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                         </svg>
-                    <span>Dashboard</span>
-                    </a>
-                </li>
-                @endrole
-                @role('administrador')
-                <hr class="sidebar-divider my-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url("/cadastroAdmin")}}">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                    </svg>
-                        <span>Dados cadastrais</span>
-                    </a>
-                </li>
-                @endrole
-                @role('administrador')
+                            <span>Dados cadastrais</span>
+                        </a>
+                    </li>
                     <hr class="sidebar-divider my-0">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/listaAdmins")}}">
@@ -59,74 +56,38 @@
                             <span>Lista de administradores</span>
                         </a>
                     </li>
-                @endrole
-                <!-- Divider -->
-                @role('administrador')
-                <hr class="sidebar-divider my-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url("/prestadoresLista")}}">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
-                            <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-                            <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                        <span>Lista de prestadores</span>
-                    </a>
-                </li>
-                @endrole    
-                @role('administrador')
-                <hr class="sidebar-divider my-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url("listaServicosPrestados")}}">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
-                            <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-                            <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                        <span>Lista de serviços prestados</span>
-                    </a>
-                </li>
-                @endrole  
-                <!-- Divider -->
+                    <hr class="sidebar-divider my-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url("/prestadoresLista")}}">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+                                <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+                                <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                            <span>Lista de prestadores</span>
+                        </a>
+                    </li>
+                    <hr class="sidebar-divider my-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url("listaServicosPrestados")}}">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+                                <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+                                <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                            </svg>
+                            <span>Lista de serviços prestados</span>
+                        </a>
+                    </li>
+                @endrole 
+                {{-- Menu do cuidador --}}
                 @role('cuidador/enfermeiro')
                     <hr class="sidebar-divider my-0">
-                    <!-- Nav Item - Dados cadastrais -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/cadastroPrestador")}}">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        </svg>
+                        <i class="far fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             <span>Dados cadastrais</span>
                         </a>
                     </li>
-                @endrole
-                <!-- Divider -->
-                @role('solicitante')
-                    <hr class="sidebar-divider my-0">
-                    <!-- Nav Item - Dados cadastrais -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url("/cadastroSolicitante")}}">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        </svg>
-                            <span>Dados cadastrais</span>
-                        </a>
-                    </li>
-                @endrole
-                <!-- Divider -->
-                @role('solicitante')
-                    <hr class="sidebar-divider">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url("/paciente")}}">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        </svg>
-                            <span>Dados do paciente</span>
-                        </a>
-                    </li>
-                @endrole
-                <!-- Divider -->
-                @role('cuidador/enfermeiro')
                     <hr class="sidebar-divider">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/servicosPrestados")}}">
@@ -138,9 +99,6 @@
                             <span>Serviços prestados</span>
                         </a>
                     </li>
-                @endrole
-                    <!-- Divider -->
-                    @role('cuidador/enfermeiro')
                     <hr class="sidebar-divider">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/novaspropostas")}}">
@@ -152,37 +110,6 @@
                             <span>Propostas de serviço</span>
                         </a>
                     </li>
-                @endrole
-                <!-- Divider -->
-                @role('solicitante')
-                    <hr class="sidebar-divider">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url("/servicosContratados")}}">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
-                                <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-                                <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                            </svg>
-                            <span>Serviços contratados</span>
-                        </a>
-                    </li>
-                @endrole
-                <!-- Divider -->
-                @role('solicitante')
-                <hr class="sidebar-divider">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url("/propostas")}}">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
-                            <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-                            <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                        </svg>
-                        <span>Propostas pendentes</span>
-                    </a>
-                </li>
-                @endrole
-                <!-- Divider -->
-                @role('cuidador/enfermeiro')
                     <hr class="sidebar-divider">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/recebimentos")}}">
@@ -194,18 +121,43 @@
                         </a>
                     </li>
                 @endrole
-                <!-- Divider -->
+                {{-- Menu do solicitante --}}
                 @role('solicitante')
-                    <hr class="sidebar-divider">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url("/pagamentos")}}">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-credit-card" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
-                            <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
-                        </svg>
-                            <span>Pagamentos</span>
-                        </a>
-                    </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url("/cadastroSolicitante")}}">
+                        <i class="far fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <span>Dados cadastrais</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url("/paciente")}}">
+                        <i class="far fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <span>Dados do paciente</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url("/servicosContratados")}}">
+                        <i class="far fa-handshake fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <span>Serviços contratados</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url("/propostas")}}">
+                        <i class="fas fa-file-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <span>Propostas pendentes</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url("/pagamentos")}}">
+                        <i class="far fa-credit-card fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <span>Pagamentos</span>
+                    </a>
+                </li>
                 @endrole
                  <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
@@ -366,12 +318,11 @@
                             </li> --}}
 
                             <div class="topbar-divider d-none d-sm-block"></div>
-                            
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                    <img class="img-profile rounded-circle" src="">
+                                    {{-- <img class="img-profile rounded-circle" src=""> --}}
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -384,8 +335,7 @@
                                         Settings
                                     </a> --}}
                                     <a class="dropdown-item" href="{{url("")}}">
-                                        <img src="https://img.icons8.com/fluent-systems-regular/15/000000/home-screen.png"/>
-                                        &nbsp
+                                        <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Tela inicial
                                     </a>
                                     <a class="dropdown-item" href="{{url("/registros")}}">
