@@ -78,7 +78,7 @@
                             <span>Lista de serviços prestados</span>
                         </a>
                     </li>
-                @endrole 
+                @endrole
                 {{-- Menu do cuidador --}}
                 @role('cuidador/enfermeiro')
                     <hr class="sidebar-divider my-0">
@@ -91,32 +91,21 @@
                     <hr class="sidebar-divider">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/servicosPrestados")}}">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
-                                <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-                                <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                            </svg>
+                            <i class="far fa-handshake fa-sm fa-fw mr-2 text-gray-400"></i>
                             <span>Serviços prestados</span>
                         </a>
                     </li>
                     <hr class="sidebar-divider">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/novaspropostas")}}">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-medical" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
-                                <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-                                <path fill-rule="evenodd" d="M7 4a.5.5 0 0 1 .5.5v.634l.549-.317a.5.5 0 1 1 .5.866L8 6l.549.317a.5.5 0 1 1-.5.866L7.5 6.866V7.5a.5.5 0 0 1-1 0v-.634l-.549.317a.5.5 0 1 1-.5-.866L6 6l-.549-.317a.5.5 0 0 1 .5-.866l.549.317V4.5A.5.5 0 0 1 7 4zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                            </svg>
+                            <i class="fas fa-file-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             <span>Propostas de serviço</span>
                         </a>
                     </li>
                     <hr class="sidebar-divider">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/recebimentos")}}">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-wallet2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.5 4l10-3A1.5 1.5 0 0 1 14 2.5v2h-1v-2a.5.5 0 0 0-.5-.5L5.833 4H2.5z"/>
-                            <path fill-rule="evenodd" d="M1 5.5A1.5 1.5 0 0 1 2.5 4h11A1.5 1.5 0 0 1 15 5.5v8a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 13.5v-8zM2.5 5a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-11z"/>
-                        </svg>
+                            <i class="fas fa-wallet fa-sm fa-fw mr-2 text-gray-400"></i>
                             <span>Recebimentos</span>
                         </a>
                     </li>
@@ -168,7 +157,7 @@
                 </div>
 
             </ul>
-            <!-- End of Sidebar AQUI ESTA CERTO--> 
+            <!-- End of Sidebar AQUI ESTA CERTO-->
 
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -238,7 +227,7 @@
                                             <span class="font-weight-bold">A new monthly report is ready to download!</span>
                                         </div>
                                     <a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">   
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
                                         <div class="mr-3">
                                             <div class="icon-circle bg-success">
                                                 <i class="fas fa-donate text-white"></i>
@@ -387,7 +376,7 @@
                     <div class="float-right">
                         <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" href="{{url("/encontreCuidador")}}">Encontre cuidadores</a>
                     </div>
-                </div>  
+                </div>
             @endrole
             <!-- Fim do botão -->
         </div>
@@ -424,20 +413,20 @@
         <!-- Core plugin JavaScript-->
         <script src="{{url('assets/layout-admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-        
+
         <!-- Custom scripts for all pages-->
         <script src="{{url('assets/layout-admin/js/sb-admin-2.min.js')}}"></script>
         <script src="{{url('assets/layout-admin/js/javascript.js')}}"></script>
         <script src="{{url('assets/layout-admin/js/validacaoPrestador.js')}}"></script>
         <script src="{{url('assets/layout/js/solicitacaoServico.js')}}"></script>
         <script src="{{url('assets/layout/js/camposOcultos.js')}}"></script>
-        
+
 
         <!-- Page level plugins -->
         {{-- <script src="{{url('assets/layout-admin/vendor/chart.js/Chart.min.js')}}"></script> --}}
         <script src="{{url('assets/layout-admin/vendor/datatables/jquery.dataTables.min.js')}}"></script>
         <script src="{{url('assets/layout-admin/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-        
+
         <!-- Page level custom scripts -->
         {{-- <script src="{{url('assets/layout-admin/js/demo/chart-area-demo.js')}}"></script> --}}
         {{-- <script src="{{url('assets/layout-admin/js/demo/chart-pie-demo.js')}}"></script> --}}
