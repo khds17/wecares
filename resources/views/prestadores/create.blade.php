@@ -162,7 +162,7 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <label for="antecedentes">Antecedentes criminais</label><br>
+                                    <a href="https://servicos.dpf.gov.br/antecedentes-criminais/certidao" target="_blank"> Antecedentes criminais</a><br>
                                     <input type="file" name="antecedentes" id="antecedentes" value="{{old('antecedentes')}}"><br>
                                     @error('antecedentes')
                                         <span class="text-danger"><small>{{$message}}</small></span>
