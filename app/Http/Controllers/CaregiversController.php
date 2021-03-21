@@ -30,24 +30,6 @@ use Illuminate\Support\Facades\DB;
 
 class CaregiversController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
-    //Variaveis que vão receber os objetos do model
-    private $objPrestador;
-    private $objEstado;
-    private $objCidade;
-    private $objEndereco;
-    private $objCertificado;
-    private $objAntecedente;
-    private $objFormacao;
-    private $objSexos;
-    private $objUsers;
-
-
     //Instanciando as classes
     public function __construct()
     {
