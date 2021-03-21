@@ -21,50 +21,50 @@ Route::put('/aprovarPrestador/{id}', 'AdministratorController@aprovarPrestador')
 Route::put('/reprovarPrestador/{id}', 'AdministratorController@reprovarPrestador')->middleware('auth')->middleware('role:administrador');
 Route::get('/prestadoresLista','AdministratorController@prestadoresLista')->middleware('auth')->middleware('role:administrador');
 // ===========================================
-Route::resource('/','indexController');
-Route::get('/sobre','indexController@sobre');
-Route::get('/termos','indexController@termos');
-Route::get('/conduta','indexController@conduta');
-Route::get('/encontreCuidador','indexController@encontreCuidador');
-Route::get('/registros','indexController@registros');
-Route::get('/cuidadorCidades','indexController@cuidadorCidades');
-Route::get('/privacidade','indexController@privacidade');
-Route::get('/agradecimento','indexController@agradecimento');
-Route::get('/resultado','indexController@resultado')->middleware('auth')->middleware('role:solicitante');
+Route::resource('/','IndexController');
+Route::get('/sobre','IndexController@sobre');
+Route::get('/termos','IndexController@termos');
+Route::get('/conduta','IndexController@conduta');
+Route::get('/encontreCuidador','IndexController@encontreCuidador');
+Route::get('/registros','IndexController@registros');
+Route::get('/cuidadorCidades','IndexController@cuidadorCidades');
+Route::get('/privacidade','IndexController@privacidade');
+Route::get('/agradecimento','IndexController@agradecimento');
+Route::get('/resultado','IndexController@resultado')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
 Route::resource('/paciente','PatientsController')->middleware('auth')->middleware('role:solicitante');
 Route::post('/selectPacientes/{id}','PatientsController@selectPacientes')->middleware('role:solicitante');
 // ===========================================
-Route::resource('/prestador','prestadoresController');
-Route::get('/cadastroPrestador','prestadoresController@cadastroPrestador')->middleware('auth')->middleware('role:cuidador/enfermeiro');
-Route::get('/novaspropostas','prestadoresController@prestadoresPropostas')->middleware('auth')->middleware('role:cuidador/enfermeiro');
+Route::resource('/prestador','CaregiversController');
+Route::get('/cadastroPrestador','CaregiversController@cadastroPrestador')->middleware('auth')->middleware('role:cuidador/enfermeiro');
+Route::get('/novaspropostas','CaregiversController@prestadoresPropostas')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 // ===========================================
-Route::resource('/recebimentos','recebimentosController')->middleware('auth')->middleware('role:cuidador/enfermeiro');
+Route::resource('/recebimentos','ReceiptsController')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 // ===========================================
-Route::resource('/servico','servicosController');
-Route::post('/proposta','servicosController@proposta')->middleware('auth');
-Route::get('/propostaAgradecimento','servicosController@propostaAgradecimento');
-Route::get('/servicosContratados','servicosController@servicosContratados')->middleware('auth')->middleware('role:solicitante');
-Route::get('/servicosPrestados','servicosController@servicosPrestados')->middleware('auth')->middleware('role:cuidador/enfermeiro');
-Route::get('/criarServicos','servicosController@criarServicos')->middleware('auth')->middleware('role:administrador');
-Route::put('/aceitarProspostaPrestador/{id}', 'servicosController@aceitarProspostaPrestador')->middleware('auth');
-Route::put('/recusarProspostaPrestador/{id}', 'servicosController@recusarProspostaPrestador')->middleware('auth');
-Route::put('/aceitarPropostaSolicitante/{id}', 'servicosController@aceitarPropostaSolicitante')->middleware('auth');
-Route::put('/recusarProspostaSolicitante/{id}', 'servicosController@recusarProspostaSolicitante')->middleware('auth');
-Route::post('/selectProposta/{id}','servicosController@selectProposta');
+Route::resource('/servico','JobsController');
+Route::post('/proposta','JobsController@proposta')->middleware('auth');
+Route::get('/propostaAgradecimento','JobsController@propostaAgradecimento');
+Route::get('/servicosContratados','JobsController@servicosContratados')->middleware('auth')->middleware('role:solicitante');
+Route::get('/servicosPrestados','JobsController@servicosPrestados')->middleware('auth')->middleware('role:cuidador/enfermeiro');
+Route::get('/criarServicos','JobsController@criarServicos')->middleware('auth')->middleware('role:administrador');
+Route::put('/aceitarProspostaPrestador/{id}', 'JobsController@aceitarProspostaPrestador')->middleware('auth');
+Route::put('/recusarProspostaPrestador/{id}', 'JobsController@recusarProspostaPrestador')->middleware('auth');
+Route::put('/aceitarPropostaSolicitante/{id}', 'JobsController@aceitarPropostaSolicitante')->middleware('auth');
+Route::put('/recusarProspostaSolicitante/{id}', 'JobsController@recusarProspostaSolicitante')->middleware('auth');
+Route::post('/selectProposta/{id}','JobsController@selectProposta');
 
 // ===========================================
-Route::resource('/solicitante','solicitantesController');
-Route::get('/cadastroSolicitante','solicitantesController@cadastroSolicitante')->middleware('auth')->middleware('role:solicitante');
-Route::get('/propostas','solicitantesController@propostas')->middleware('auth')->middleware('role:solicitante');
+Route::resource('/solicitante','ClientsController');
+Route::get('/cadastroSolicitante','ClientsController@cadastroSolicitante')->middleware('auth')->middleware('role:solicitante');
+Route::get('/propostas','ClientsController@propostas')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
-Route::resource('/pagamentos','pagamentosController')->middleware('auth')->middleware('role:solicitante');
-Route::post('/processPaymentValidation','pagamentosController@processPaymentValidation')->middleware('role:solicitante');
-Route::get('/estornoPaymentValidation','pagamentosController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
-Route::get('/paymentForm','pagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
-Route::post('/payment','pagamentosController@payment')->middleware('auth')->middleware('role:administrador');
-Route::post('/estornoPayment/{id}','pagamentosController@estornoPayment')->middleware('role:solicitante');
-Route::get('/atualizarPagamentos','pagamentosController@atualizarPagamentos');
+Route::resource('/pagamentos','PaymentController')->middleware('auth')->middleware('role:solicitante');
+Route::post('/processPaymentValidation','PaymentController@processPaymentValidation')->middleware('role:solicitante');
+Route::get('/estornoPaymentValidation','PaymentController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
+Route::get('/paymentForm','PaymentController@paymentForm')->middleware('auth')->middleware('role:administrador');
+Route::post('/payment','PaymentController@payment')->middleware('auth')->middleware('role:administrador');
+Route::post('/estornoPayment/{id}','PaymentController@estornoPayment')->middleware('role:solicitante');
+Route::get('/atualizarPagamentos','PaymentController@atualizarPagamentos');
 
 Auth::routes(['register' => false]);
 

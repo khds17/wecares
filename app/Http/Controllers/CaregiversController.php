@@ -28,7 +28,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
-class prestadoresController extends Controller
+class CaregiversController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -194,11 +194,11 @@ class prestadoresController extends Controller
 
             DB::commit();
 
-            return redirect()->action('indexController@agradecimento');
+            return redirect()->action('IndexController@agradecimento');
 
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->action('prestadoresController@create');
+            return redirect()->action('CaregiversController@create');
         }
     }
 
@@ -326,11 +326,11 @@ class prestadoresController extends Controller
 
             DB::commit();
 
-            return redirect()->action('prestadoresController@cadastroPrestador');
+            return redirect()->action('CaregiversController@cadastroPrestador');
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect()->action('prestadoresController@edit');
+            return redirect()->action('CaregiversController@edit');
         }
     }
 }

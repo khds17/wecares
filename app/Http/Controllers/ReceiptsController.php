@@ -9,7 +9,7 @@ use App\Models\conta_recebimento;
 use App\Config\constants;	
 use Illuminate\Support\Facades\DB;
 
-class recebimentosController extends Controller
+class ReceiptsController extends Controller
 {
 
     //Instanciando as classes	
