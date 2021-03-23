@@ -356,10 +356,13 @@ class pagamentosController extends Controller
         //                     ->where('PAGAMENTOS.STATUS', '=', 'in_process')
         //                     ->get();
 
-                $pagamentos = DB::table('PAGAMENTOS')
-                                ->where('PAGAMENTOS.ID_PAGAMENTO', '=', 14049799273)
-                                ->get();
-        dd($pagamentos);
+                // $pagamentos = DB::table('PAGAMENTOS')
+                //                 ->where('PAGAMENTOS.ID_PAGAMENTO', '=', 14049799273)
+                //                 ->get();
+
+        $payment = \MercadoPago\Payment::find_by_id(14049799273);
+
+        dd($payment);
 
         if(count($pagamentos) >= 1) {
             dump('Entrou');
