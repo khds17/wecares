@@ -14,7 +14,7 @@ use App\Models\familiaridade;
 use App\Models\registros_log;
 use Illuminate\Support\Facades\DB;
 
-class PatientsController extends Controller
+class pacientesController extends Controller
 {
     //Instanciando as classes
     public function __construct()
@@ -124,7 +124,7 @@ class PatientsController extends Controller
 
         } catch (\Throwable $e) {
             DB::rollback();
-            return redirect()->action('PatientsController@create');
+            return redirect()->action('pacientesController@create');
         }
     }
     public function selectPacientes($id)
@@ -251,7 +251,7 @@ class PatientsController extends Controller
         } catch (\Throwable $e) {
             DB::rollback();
             //Validar se funciona esse edit para o cadastro do paciente
-            return redirect()->action('PatientsController@edit');
+            return redirect()->action('pacientesController@edit');
         }
     }
 }

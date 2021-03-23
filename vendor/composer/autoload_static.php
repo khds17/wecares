@@ -570,7 +570,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\AdministratorController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdministratorController.php',
         'App\\Http\\Controllers\\indexController' => __DIR__ . '/../..' . '/app/Http/Controllers/indexController.php',
-        'App\\Http\\Controllers\\PatientsController' => __DIR__ . '/../..' . '/app/Http/Controllers/PatientsController.php',
+        'App\\Http\\Controllers\\pacientesController' => __DIR__ . '/../..' . '/app/Http/Controllers/pacientesController.php',
         'App\\Http\\Controllers\\pagamentosController' => __DIR__ . '/../..' . '/app/Http/Controllers/pagamentosController.php',
         'App\\Http\\Controllers\\prestadoresController' => __DIR__ . '/../..' . '/app/Http/Controllers/prestadoresController.php',
         'App\\Http\\Controllers\\recebimentosController' => __DIR__ . '/../..' . '/app/Http/Controllers/recebimentosController.php',

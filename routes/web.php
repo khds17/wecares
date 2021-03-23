@@ -32,8 +32,8 @@ Route::get('/privacidade','indexController@privacidade');
 Route::get('/agradecimento','indexController@agradecimento');
 Route::get('/resultado','indexController@resultado')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
-Route::resource('/paciente','PatientsController')->middleware('auth')->middleware('role:solicitante');
-Route::post('/selectPacientes/{id}','PatientsController@selectPacientes')->middleware('role:solicitante');
+Route::resource('/paciente','pacientesController')->middleware('auth')->middleware('role:solicitante');
+Route::post('/selectPacientes/{id}','pacientesController@selectPacientes')->middleware('role:solicitante');
 // ===========================================
 Route::resource('/prestador','prestadoresController');
 Route::get('/cadastroPrestador','prestadoresController@cadastroPrestador')->middleware('auth')->middleware('role:cuidador/enfermeiro');

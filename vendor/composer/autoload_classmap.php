@@ -19,7 +19,7 @@ return array(
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\AdministratorController' => $baseDir . '/app/Http/Controllers/AdministratorController.php',
     'App\\Http\\Controllers\\indexController' => $baseDir . '/app/Http/Controllers/indexController.php',
-    'App\\Http\\Controllers\\PatientsController' => $baseDir . '/app/Http/Controllers/PatientsController.php',
+    'App\\Http\\Controllers\\pacientesController' => $baseDir . '/app/Http/Controllers/pacientesController.php',
     'App\\Http\\Controllers\\pagamentosController' => $baseDir . '/app/Http/Controllers/pagamentosController.php',
     'App\\Http\\Controllers\\prestadoresController' => $baseDir . '/app/Http/Controllers/prestadoresController.php',
     'App\\Http\\Controllers\\recebimentosController' => $baseDir . '/app/Http/Controllers/recebimentosController.php',
