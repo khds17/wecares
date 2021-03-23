@@ -357,7 +357,7 @@ class pagamentosController extends Controller
         //                     ->get();
 
                 $pagamentos = DB::table('PAGAMENTOS')
-                                ->where('PAGAMENTOS.ID_PAGAMENTO', '=', 14010470614)
+                                ->where('PAGAMENTOS.ID_PAGAMENTO', '=', 14049137142)
                                 ->get();
         
         dd($pagamentos);
