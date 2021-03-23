@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
 
-class PaymentsController extends Controller
+class PaymentController extends Controller
 {
 
         //Instanciando as classes

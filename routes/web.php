@@ -58,13 +58,13 @@ Route::resource('/solicitante','ClientsController');
 Route::get('/cadastroSolicitante','ClientsController@cadastroSolicitante')->middleware('auth')->middleware('role:solicitante');
 Route::get('/propostas','ClientsController@propostas')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
-Route::resource('/pagamentos','PaymentsController')->middleware('auth')->middleware('role:solicitante');
-Route::post('/processPaymentValidation','PaymentsController@processPaymentValidation')->middleware('role:solicitante');
-Route::get('/estornoPaymentValidation','PaymentsController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
-Route::get('/paymentForm','PaymentsController@paymentForm')->middleware('auth')->middleware('role:administrador');
-Route::post('/payment','PaymentsController@payment')->middleware('auth')->middleware('role:administrador');
-Route::post('/estornoPayment/{id}','PaymentsController@estornoPayment')->middleware('role:solicitante');
-Route::get('/atualizarPagamentos','PaymentsController@atualizarPagamentos');
+Route::resource('/pagamentos','PaymentController')->middleware('auth')->middleware('role:solicitante');
+Route::post('/processPaymentValidation','PaymentController@processPaymentValidation')->middleware('role:solicitante');
+Route::get('/estornoPaymentValidation','PaymentController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
+Route::get('/paymentForm','PaymentController@paymentForm')->middleware('auth')->middleware('role:administrador');
+Route::post('/payment','PaymentController@payment')->middleware('auth')->middleware('role:administrador');
+Route::post('/estornoPayment/{id}','PaymentController@estornoPayment')->middleware('role:solicitante');
+Route::get('/atualizarPagamentos','PaymentController@atualizarPagamentos');
 
 Auth::routes(['register' => false]);
 
