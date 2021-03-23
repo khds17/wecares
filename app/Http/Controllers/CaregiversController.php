@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestCaregivers;
-use App\Http\Requests\RequestCaregiversEdit;
+use App\Http\Requests\requestPrestador;
+use App\Http\Requests\requestPrestadorEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\prestadores;
@@ -113,10 +113,10 @@ class CaregiversController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \app\Http\Requests\RequestCaregivers  $request
+     * @param  \app\Http\Requests\requestPrestador  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestCaregivers $request)
+    public function store(requestPrestador $request)
     {
         DB::beginTransaction();
 
@@ -252,7 +252,7 @@ class CaregiversController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RequestCaregiversEdit $request, $id)
+    public function update(requestPrestadorEdit $request, $id)
     {
         $prestadores = $this->objPrestador->find($id);
 

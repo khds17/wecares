@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RequestAdministrators;
+use App\Http\Requests\requestAdmin;
 use Illuminate\Http\Request;
 use App\Models\admin;
 use App\Models\user;
@@ -78,7 +78,7 @@ class AdministratorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestAdministrators $request)
+    public function store(requestAdmin $request)
     {
         DB::beginTransaction();
 
