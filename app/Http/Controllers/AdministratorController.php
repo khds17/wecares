@@ -17,7 +17,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
-class AdministratorsController extends Controller
+class AdministratorController extends Controller
 {
 
     private $admin;
@@ -120,12 +120,12 @@ class AdministratorsController extends Controller
 
             DB::commit();
 
-            return redirect()->action('AdministratorsController@listaAdmins');
+            return redirect()->action('AdministratorController@listaAdmins');
 
         } catch (\Throwable $th) {
             DB::rollback();
 
-            return redirect()->action('AdministratorsController@create');
+            return redirect()->action('AdministratorController@create');
         }
 
 

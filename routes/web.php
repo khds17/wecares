@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::resource('/admin','AdministratorsController');
-Route::resource('/admin','AdministratorsController')->middleware('auth')->middleware('role:administrador');
-Route::get('/listaAdmins','AdministratorsController@listaAdmins')->middleware('auth')->middleware('role:administrador');
-Route::get('/listaServicosPrestados','AdministratorsController@listaServicosPrestados')->middleware('auth')->middleware('role:administrador');
-Route::get('/cadastroAdmin','AdministratorsController@cadastroAdmin')->middleware('auth')->middleware('role:administrador');
-Route::put('/aprovarPrestador/{id}', 'AdministratorsController@aprovarPrestador')->middleware('auth')->middleware('role:administrador');
-Route::put('/reprovarPrestador/{id}', 'AdministratorsController@reprovarPrestador')->middleware('auth')->middleware('role:administrador');
-Route::get('/prestadoresLista','AdministratorsController@prestadoresLista')->middleware('auth')->middleware('role:administrador');
+// Route::resource('/admin','AdministratorController');
+Route::resource('/admin','AdministratorController')->middleware('auth')->middleware('role:administrador');
+Route::get('/listaAdmins','AdministratorController@listaAdmins')->middleware('auth')->middleware('role:administrador');
+Route::get('/listaServicosPrestados','AdministratorController@listaServicosPrestados')->middleware('auth')->middleware('role:administrador');
+Route::get('/cadastroAdmin','AdministratorController@cadastroAdmin')->middleware('auth')->middleware('role:administrador');
+Route::put('/aprovarPrestador/{id}', 'AdministratorController@aprovarPrestador')->middleware('auth')->middleware('role:administrador');
+Route::put('/reprovarPrestador/{id}', 'AdministratorController@reprovarPrestador')->middleware('auth')->middleware('role:administrador');
+Route::get('/prestadoresLista','AdministratorController@prestadoresLista')->middleware('auth')->middleware('role:administrador');
 // ===========================================
 Route::resource('/','IndexController');
 Route::get('/sobre','IndexController@sobre');
