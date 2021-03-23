@@ -22,7 +22,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
-class ClientsController extends Controller
+class solicitantesController extends Controller
 {
      //Variaveis que vão receber os objetos do model
     private $objSolicitante;
@@ -169,7 +169,7 @@ class ClientsController extends Controller
 
         } catch (\Throwable $e) {
             DB::rollback();
-            return redirect()->action('ClientsController@create');
+            return redirect()->action('solicitantesController@create');
         }
     }
 
@@ -255,7 +255,7 @@ class ClientsController extends Controller
         } catch (\Throwable $e) {
             DB::rollback();
         }
-        return redirect()->action('ClientsController@cadastroSolicitante');
+        return redirect()->action('solicitantesController@cadastroSolicitante');
     }
 
     public function propostas()

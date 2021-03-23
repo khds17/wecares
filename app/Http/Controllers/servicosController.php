@@ -17,7 +17,7 @@ use App\Models\registros_log;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
-class JobsController extends Controller
+class servicosController extends Controller
 {
 
         //Instanciando as classes
@@ -138,11 +138,11 @@ class JobsController extends Controller
 
                     DB::commit();
 
-                    return redirect()->action('JobsController@propostaAgradecimento');
+                    return redirect()->action('servicosController@propostaAgradecimento');
                 }
             } catch (\Throwable $th) {
                 DB::rollback();
-                return redirect()->action('JobsController@propostas');
+                return redirect()->action('servicosController@propostas');
             }
     }
 
