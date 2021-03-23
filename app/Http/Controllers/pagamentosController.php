@@ -357,7 +357,7 @@ class pagamentosController extends Controller
         //                     ->get();
 
                 $pagamentos = DB::table('PAGAMENTOS')
-                                ->where('PAGAMENTOS.STATUS', '=', 'in_process')
+                                ->where('PAGAMENTOS.ID_PAGAMENTO', '=', 14010470614)
                                 ->get();
         
         dd($pagamentos);
