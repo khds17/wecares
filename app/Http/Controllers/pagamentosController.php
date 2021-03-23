@@ -16,17 +16,17 @@ use Illuminate\Support\Facades\Crypt;
 
 class pagamentosController extends Controller
 {
+    //Instanciando as classes
+    public function __construct()
+    {
+        $this->objSolicitante = new solicitantes();
+        $this->objCartoes = new cartoes();
+        $this->objPagamentos = new pagamentos();
+        $this->objValidaCartao = new valida_cartao();
+        $this->objServicosPrestados = new servicos_prestados();
+        $this->objRegistros = new registros_log();
+    }
 
-        //Instanciando as classes
-        public function __construct()
-        {
-            $this->objSolicitante = new solicitantes();
-            $this->objCartoes = new cartoes();
-            $this->objPagamentos = new pagamentos();
-            $this->objValidaCartao = new valida_cartao();
-            $this->objServicosPrestados = new servicos_prestados();
-            $this->objRegistros = new registros_log();
-        }
     /**
      * Display a listing of the resource.
      *

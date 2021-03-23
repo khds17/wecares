@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\prestadores;	
-use App\Models\bancos;	
-use App\Models\conta_recebimento;	
-use App\Config\constants;	
+use App\Models\prestadores;
+use App\Models\bancos;
+use App\Models\conta_recebimento;
+use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
 class recebimentosController extends Controller
 {
-
-    //Instanciando as classes	
-    public function __construct()	
-    {	
-        $this->objPrestador = new prestadores();	
-        $this->objBancos = new bancos();   	
-        $this->objContaRecebimento = new conta_recebimento(); 	
+    //Instanciando as classes
+    public function __construct()
+    {
+        $this->objPrestador = new prestadores();
+        $this->objBancos = new bancos();
+        $this->objContaRecebimento = new conta_recebimento();
     }
 
     /**
@@ -27,18 +26,18 @@ class recebimentosController extends Controller
      */
     public function index()
     {
-        // Encontra o prestador pelo usuario logado.	
-        $arrayPrestadores = $this->objPrestador->where('ID_USUARIO', auth()->user()->id)	
-                                            ->get();	
+        // Encontra o prestador pelo usuario logado.
+        $arrayPrestadores = $this->objPrestador->where('ID_USUARIO', auth()->user()->id)
+                                            ->get();
 
-        foreach ($arrayPrestadores as $arrayPrestador) {	
-            $prestador = $arrayPrestador;	
-        }	
+        foreach ($arrayPrestadores as $arrayPrestador) {
+            $prestador = $arrayPrestador;
+        }
 
-        //Pegando todas as contas de recebimento que o cliente informou	
-        $contasRecebimento = $this->objContaRecebimento	
-                                ->join('BANCOS','CONTA_RECEBIMENTO.ID_BANCO','=','BANCOS.ID')	
-                                ->where('CONTA_RECEBIMENTO.ID_PRESTADOR','=',$prestador->ID)	
+        //Pegando todas as contas de recebimento que o cliente informou
+        $contasRecebimento = $this->objContaRecebimento
+                                ->join('BANCOS','CONTA_RECEBIMENTO.ID_BANCO','=','BANCOS.ID')
+                                ->where('CONTA_RECEBIMENTO.ID_PRESTADOR','=',$prestador->ID)
                                 ->select('CONTA_RECEBIMENTO.*','BANCOS.BANCO')
                                 ->get();
 
@@ -52,10 +51,10 @@ class recebimentosController extends Controller
      */
     public function create()
     {
-        //Pegando todos os bancos para disponibilizar na view	        //
-        $bancos = $this->objBancos->all();		
+        //Pegando todos os bancos para disponibilizar na view
+        $bancos = $this->objBancos->all();
 
-        return view('recebimentos/create',compact('bancos'));	
+        return view('recebimentos/create',compact('bancos'));
     }
 
     /**
@@ -67,52 +66,41 @@ class recebimentosController extends Controller
     public function store(Request $request)
     {
         // Encontra o prestador pelo usuario logado.	        //
-        $arrayPrestadores = $this->objPrestador->where('ID_USUARIO', auth()->user()->id)	
-                                          ->get();	
+        $arrayPrestadores = $this->objPrestador->where('ID_USUARIO', auth()->user()->id)
+                                          ->get();
 
-        foreach ($arrayPrestadores as $arrayPrestador) {	
-            $prestador = $arrayPrestador;	
+        foreach ($arrayPrestadores as $arrayPrestador) {
+            $prestador = $arrayPrestador;
         }
 
-        // Pegando o valor da constant para colocar no prestador	
-        $status = \Config::get('constants.STATUS.ATIVO');	
+        // Pegando o valor da constant para colocar no prestador
+        $status = \Config::get('constants.STATUS.ATIVO');
 
-        DB::beginTransaction();	
+        DB::beginTransaction();
 
-        try {	
-            //Cadastro da conta de recebimento dos prestadores	
-            $contaPagamento = $this->objContaRecebimento->create([	
-                'AGENCIA' => $request->agencia,	
-                'CONTA' => $request->conta,	
-                'TIPO_CONTA' => $request->tipo_conta,	
-                'STATUS' => $status,	
+        try {
+            //Cadastro da conta de recebimento dos prestadores
+            $contaPagamento = $this->objContaRecebimento->create([
+                'AGENCIA' => $request->agencia,
+                'CONTA' => $request->conta,
+                'TIPO_CONTA' => $request->tipo_conta,
+                'STATUS' => $status,
                 'PRINCIPAL' => $request->contaRecebimentoPrincipal,
-                'ID_BANCO' => $request->banco,	
-                'ID_PRESTADOR' => $prestador->ID,	
-            ]);	
+                'ID_BANCO' => $request->banco,
+                'ID_PRESTADOR' => $prestador->ID,
+            ]);
 
-            DB::commit();	
+            DB::commit();
 
-            return redirect('/recebimentos');	
+            return redirect('/recebimentos');
 
-        } catch (\Throwable $th) {	
-            DB::rollback();	
-            return redirect('/recebimentos');	
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect('/recebimentos');
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -125,7 +113,7 @@ class recebimentosController extends Controller
 
         //Pegando todas as contas de recebimento que o cliente informou
         $contaRecebimento = $this->objContaRecebimento->find($id);
-                
+
         return view('recebimentos/edit',compact('bancos','contaRecebimento'));
     }
 
@@ -141,35 +129,24 @@ class recebimentosController extends Controller
 
         DB::beginTransaction();
 
-        try {	
-            //Cadastro da conta de recebimento dos prestadores	
+        try {
+            //Cadastro da conta de recebimento dos prestadores
             $this->objContaRecebimento->where(['ID' => $id])->update([
-                'AGENCIA' => $request->agencia,	
-                'CONTA' => $request->conta,	
-                'TIPO_CONTA' => $request->tipo_conta,	
-                'ID_BANCO' => $request->banco,	
+                'AGENCIA' => $request->agencia,
+                'CONTA' => $request->conta,
+                'TIPO_CONTA' => $request->tipo_conta,
+                'ID_BANCO' => $request->banco,
                 'PRINCIPAL' => $request->contaRecebimentoPrincipal,
-            ]);	
+            ]);
 
-            DB::commit();	
+            DB::commit();
 
-            return redirect('/recebimentos');	
+            return redirect('/recebimentos');
 
-        } catch (\Throwable $th) {	
-            DB::rollback();	
-            return redirect('/recebimentos');	
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect('/recebimentos');
         }
 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

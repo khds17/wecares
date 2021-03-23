@@ -19,23 +19,22 @@ use Illuminate\Support\Facades\DB;
 
 class servicosController extends Controller
 {
+    //Instanciando as classes
+    public function __construct()
+    {
+        $this->objProposta = new proposta();
+        $this->objPrestador = new prestadores();
+        $this->objSolicitante = new solicitantes();
+        $this->objPaciente = new pacientes();
+        $this->objPacienteTipo = new paciente_tipo();
+        $this->objCidades = new cidades();
+        $this->objPacienteLocalizacao = new paciente_localizacao();
+        $this->objServicosPrestados = new servicos_prestados();
+        $this->objServico = new servicos();
+        $this->objFamiliaridades = new familiaridade();
+        $this->objRegistros = new registros_log();
 
-        //Instanciando as classes
-        public function __construct()
-        {
-            $this->objProposta = new proposta();
-            $this->objPrestador = new prestadores();
-            $this->objSolicitante = new solicitantes();
-            $this->objPaciente = new pacientes();
-            $this->objPacienteTipo = new paciente_tipo();
-            $this->objCidades = new cidades();
-            $this->objPacienteLocalizacao = new paciente_localizacao();
-            $this->objServicosPrestados = new servicos_prestados();
-            $this->objServico = new servicos();
-            $this->objFamiliaridades = new familiaridade();
-            $this->objRegistros = new registros_log();
-
-        }
+    }
 
     public function proposta(Request $request)
     {
