@@ -352,13 +352,20 @@ class pagamentosController extends Controller
     {
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
-        $pagamentos = $this->objPagamentos
-                            ->where('PAGAMENTOS.STATUS', '=', 'in_process')
-                            ->get();
+        // $pagamentos = $this->objPagamentos
+        //                     ->where('PAGAMENTOS.STATUS', '=', 'in_process')
+        //                     ->get();
+
+                $pagamentos = DB::table('PAGAMENTOS')
+                                ->where('PAGAMENTOS.STATUS', '=', 'in_process')
+                                ->get();
+        
+        dd($pagamentos);
 
         if(count($pagamentos) >= 1) {
-
+            dump('Entrou');
             foreach ($pagamentos as $pagamento) {
+                dump('Entrou');
                 $payment = \MercadoPago\Payment::find_by_id($pagamento->id);
 
                 if($payment == 'approved') {
@@ -370,7 +377,7 @@ class pagamentosController extends Controller
             }
         }
         $payment = \MercadoPago\Payment::find_by_id(14010470614);
-        dd();
+        dd($payment);
 
         $pagamentosValidacao = $this->objValidaCartao
                                 ->where('VALIDA_CARTAO.STATUS', '=', 'in_process')
