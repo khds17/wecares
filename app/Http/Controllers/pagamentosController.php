@@ -357,12 +357,8 @@ class pagamentosController extends Controller
                             ->get();
 
         if(count($pagamentos) >= 1) {
-            dump('Entrou');
             foreach ($pagamentos as $pagamento) {
-                dump('Entrou 2');
                 $payment = \MercadoPago\Payment::find_by_id($pagamento->ID_PAGAMENTO);
-
-                dump($payment);
 
                 if($payment == 'approved') {
                     $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
