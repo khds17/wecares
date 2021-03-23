@@ -24,6 +24,16 @@ use Illuminate\Support\Facades\DB;
 
 class ClientsController extends Controller
 {
+     //Variaveis que vão receber os objetos do model
+    private $objSolicitante;
+    private $objPaciente;
+    private $objEstados;
+    private $objCidades;
+    private $objPacienteTipo;
+    private $objPacienteLocalizacao;
+    private $objFamiliaridade;
+    private $objUsers;
+
     //Instanciando as classes
     public function __construct()
     {
