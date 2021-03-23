@@ -19,9 +19,6 @@ use Illuminate\Support\Facades\DB;
 
 class adminController extends Controller
 {
-
-    private $admin;
-
     public function __construct()
     {
         $this->objAdmin = new admin();
@@ -65,9 +62,9 @@ class adminController extends Controller
      */
     public function create()
     {
-        $estados=$this->objEstados->all();
+        $estados = $this->objEstados->all();
 
-        $cidades=$this->objCidades->orderBy('CIDADE','asc')->get();
+        $cidades = $this->objCidades->orderBy('CIDADE','asc')->get();
 
         return view('admin/create',compact('estados','cidades'));
     }
@@ -173,18 +170,6 @@ class adminController extends Controller
             'STATUS'=>$request->status
         ]);
         return redirect('admin');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $del=$this->objAdmin->destroy($id);
-        return($del)?"sim":"não";
     }
 
     public function prestadoresLista()
