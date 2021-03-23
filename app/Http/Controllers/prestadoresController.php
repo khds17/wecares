@@ -30,29 +30,11 @@ use Illuminate\Support\Facades\DB;
 
 class prestadoresController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    
-    //Variaveis que vão receber os objetos do model
-    private $objPrestador;
-    private $objEstado;
-    private $objCidade;
-    private $objEndereco;
-    private $objCertificado;
-    private $objAntecedente;
-    private $objFormacao;
-    private $objSexos;
-    private $objUsers;
-
-
     //Instanciando as classes
     public function __construct()
     {
         $this->objPrestador = new prestadores();
-        $this->objProposta = new proposta();  
+        $this->objProposta = new proposta();
         $this->objEstado = new estados();
         $this->objCidade = new cidades();
         $this->objEndereco = new enderecos();
@@ -65,15 +47,10 @@ class prestadoresController extends Controller
         $this->objUsers = new user();
         $this->objServico = new servicos();
         $this->objPacienteTipo = new paciente_tipo();
-        $this->objPacienteLocalizacao = new paciente_localizacao(); 
-        $this->objFamiliaridades = new familiaridade();   
-        $this->objRegistros = new registros_log(); 
+        $this->objPacienteLocalizacao = new paciente_localizacao();
+        $this->objFamiliaridades = new familiaridade();
+        $this->objRegistros = new registros_log();
 
-    }
-
-    public function index()
-    {
-        echo "Teste";
     }
 
     public function cadastroPrestador()
@@ -99,9 +76,9 @@ class prestadoresController extends Controller
                         ->select('PROPOSTAS.*')
                         ->get();
 
-        $servicos=$this->objServico->all();
+        $servicos = $this->objServico->all();
 
-        $familiaridades=$this->objFamiliaridades->all(); 
+        $familiaridades = $this->objFamiliaridades->all();
 
         return view('prestadores/propostas',compact('propostas','servicos','familiaridades'));
     }
@@ -117,13 +94,13 @@ class prestadoresController extends Controller
      */
     public function create()
     {
-        $estados=$this->objEstado->all();
+        $estados = $this->objEstado->all();
 
-        $cidades=$this->objCidade->orderBy('CIDADE','asc')->get();
+        $cidades = $this->objCidade->orderBy('CIDADE','asc')->get();
 
-        $formacoes=$this->objFormacao->all();
+        $formacoes = $this->objFormacao->all();
 
-        $sexos=$this->objSexos->all();
+        $sexos = $this->objSexos->all();
 
         return view('prestadores/create',compact('estados','cidades','formacoes','sexos'));
     }
@@ -211,13 +188,13 @@ class prestadoresController extends Controller
     public function show($id)
     {
         //Criando as variaveis com os objetos que podem ser usados na view
-        $prestadores=$this->objPrestador->find($id);
+        $prestadores = $this->objPrestador->find($id);
 
-        $enderecos=$this->objEndereco->find($id);
+        $enderecos = $this->objEndereco->find($id);
 
-        $certificados=$this->objCertificado->find($id);
+        $certificados = $this->objCertificado->find($id);
 
-        $antecedentes=$this->objAntecedente->find($id);
+        $antecedentes = $this->objAntecedente->find($id);
 
         return view('prestadores/prestadores-informacoes',compact('prestadores','enderecos','certificados', 'antecedentes'));
     }
@@ -230,7 +207,7 @@ class prestadoresController extends Controller
      */
     public function edit($id)
     {
-        $prestadores= $this->objPrestador->find($id);
+        $prestadores = $this->objPrestador->find($id);
 
         $users = $prestadores->find($prestadores->ID)
                         ->relUsuario;

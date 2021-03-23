@@ -24,16 +24,6 @@ use Illuminate\Support\Facades\DB;
 
 class solicitantesController extends Controller
 {
-     //Variaveis que vão receber os objetos do model
-    private $objSolicitante;
-    private $objPaciente;
-    private $objEstados;
-    private $objCidades;
-    private $objPacienteTipo;
-    private $objPacienteLocalizacao;
-    private $objFamiliaridade;
-    private $objUsers;
-
     //Instanciando as classes
     public function __construct()
     {
@@ -74,15 +64,15 @@ class solicitantesController extends Controller
      */
     public function create()
     {
-        $estados=$this->objEstados->all();
+        $estados = $this->objEstados->all();
 
-        $cidades=$this->objCidades->orderBy('CIDADE','asc')->get();
+        $cidades = $this->objCidades->orderBy('CIDADE','asc')->get();
 
-        $pacienteTipo=$this->objPacienteTipo->all();
+        $pacienteTipo = $this->objPacienteTipo->all();
 
-        $pacienteLocalizacao=$this->objPacienteLocalizacao->all();
+        $pacienteLocalizacao = $this->objPacienteLocalizacao->all();
 
-        $familiaridades=$this->objFamiliaridade->all();
+        $familiaridades = $this->objFamiliaridade->all();
 
         return view('solicitantes/create',compact('estados','cidades','familiaridades','pacienteTipo','pacienteLocalizacao'));
     }
@@ -181,7 +171,7 @@ class solicitantesController extends Controller
      */
     public function show($id)
     {
-        $solicitante=$this->objSolicitante->find($id);
+        $solicitante = $this->objSolicitante->find($id);
 
         return view('solicitantes/information',compact('solicitante'));
     }
@@ -194,7 +184,7 @@ class solicitantesController extends Controller
      */
     public function edit($id)
     {
-        $solicitantes= $this->objSolicitante->find($id);
+        $solicitantes = $this->objSolicitante->find($id);
 
         $users = $solicitantes->find($solicitantes->ID)
                             ->relUsuario;
