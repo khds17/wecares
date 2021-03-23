@@ -357,9 +357,8 @@ class pagamentosController extends Controller
         //                     ->get();
 
                 $pagamentos = DB::table('PAGAMENTOS')
-                                ->where('PAGAMENTOS.ID_PAGAMENTO', '=', 14049137142)
+                                ->where('PAGAMENTOS.ID_PAGAMENTO', '=', 14049799273)
                                 ->get();
-        
         dd($pagamentos);
 
         if(count($pagamentos) >= 1) {
