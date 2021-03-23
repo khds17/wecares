@@ -7,8 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class enderecos extends Model
 {
     public $timestamps = false;
-    protected $table='ENDERECOS';
-    protected $fillable=['CEP','ENDERECO','NUMERO','COMPLEMENTO','BAIRRO','ID_CIDADE','ID_ESTADO'];
+    protected $table = 'ENDERECOS';
+    protected $fillable = [
+        'CEP',
+        'ENDERECO',
+        'NUMERO',
+        'COMPLEMENTO',
+        'BAIRRO',
+        'ID_CIDADE',
+        'ID_ESTADO'
+    ];
 
     // Relacionamento entre as tabelas enderecos e prestadores
     public function relPrestador(){

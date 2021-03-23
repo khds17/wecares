@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class proposta extends Model
 {
     public $timestamps = false;
-    protected $table='PROPOSTAS';
-    protected $fillable=[
+    protected $table = 'PROPOSTAS';
+    protected $fillable = [
         'ID_PRESTADOR',
         'NOME_PRESTADOR',
         'ID_SOLICITANTE',

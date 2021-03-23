@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class cidades extends Model
 {
     public $timestamps = false;
-    protected $table='CIDADES';
-    protected $fillable=[''];
+    protected $table = 'CIDADES';
+    protected $fillable = [
+        'CIDADE',
+        'UF'
+    ];
 
 
         // Relacionamento entre as tabelas cidades e enderecos

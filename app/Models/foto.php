@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class foto extends Model
 {
     public $timestamps = false;
-    protected $table='FOTOS';
-    protected $fillable=['FOTO'];
+    protected $table = 'FOTOS';
+    protected $fillable = [
+        'FOTO'
+    ];
 
     // Criando relacionamento entre as tabelas antecedentes e prestadores 
     public function relPrestadores(){

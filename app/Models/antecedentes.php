@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class antecedentes extends Model
 {
     public $timestamps = false;
-    protected $table='ANTECEDENTES';
-    protected $fillable=['ANTECEDENTE'];
+    protected $table = 'ANTECEDENTES';
+    protected $fillable = [
+        'ANTECEDENTE'
+    ];
 
     // Criando relacionamento entre as tabelas antecedentes e prestadores 
     public function relPrestadores(){

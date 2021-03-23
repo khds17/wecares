@@ -7,8 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class solicitantes extends Model
 {
     public $timestamps = false;
-    protected $table='SOLICITANTES';
-    protected $fillable=['NOME','CPF','EMAIL','TELEFONE','ID_USUARIO','ID_ENDERECO','ID_FOTO', 'ID_CUSTOMER'];
+    protected $table = 'SOLICITANTES';
+    protected $fillable = [
+        'NOME',
+        'CPF',
+        'EMAIL',
+        'TELEFONE',
+        'ID_USUARIO',
+        'ID_ENDERECO',
+        'ID_FOTO',
+        'ID_CUSTOMER'
+    ];
 
         // Criando relacionamento entre as tabelas solicitantes e enderecos
         public function relEndereco(){
@@ -23,7 +32,7 @@ class solicitantes extends Model
         // Criando relacionamento entre as tabelas solicitantes e pacientes
         public function relPaciente(){
             return $this->hasMany('App\Models\pacientes', 'ID_SOLICITANTE');
-        }     
+        }
 
         // Criando relacionamento entre as tabelas prestadores e fotos
         public function relFotos(){

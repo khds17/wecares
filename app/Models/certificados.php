@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class certificados extends Model
 {
     public $timestamps = false;
-    protected $table='CERTIFICADOS';
-    protected $fillable=['CERTIFICADO'];
+    protected $table = 'CERTIFICADOS';
+    protected $fillable = [
+        'CERTIFICADO'
+    ];
 
     // Relacionamento entre as tabelas certificados e prestadores
     public function relPrestador(){

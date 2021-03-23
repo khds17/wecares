@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class servicos_prestados extends Model
 {
     public $timestamps = false;
-    protected $table='SERVICOS_PRESTADOS';
-    protected $fillable=[
+    protected $table  ='SERVICOS_PRESTADOS';
+    protected $fillable = [
         'ID_PROPOSTA',
         'ID_PRESTADOR',
         'NOME_PRESTADOR',

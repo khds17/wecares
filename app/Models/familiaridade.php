@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class familiaridade extends Model
 {
     public $timestamps = false;
-    protected $table='FAMILIARIDADES';
-    protected $fillable=['ID','FAMILIARIDADE'];
+    protected $table = 'FAMILIARIDADES';
+    protected $fillable = [
+        'FAMILIARIDADE'
+    ];
 
     // Criando relacionamento entre as tabelas familiaridade e pacientes
     public function relSolicitantePaciente(){

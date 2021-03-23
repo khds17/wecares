@@ -7,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class admin extends Model
 {
     public $timestamps = false;
-    protected $table='ADMIN';
-    protected $fillable=['NOME','CPF','EMAIL','TELEFONE','ID_USUARIO','ID_ENDERECO'];
+    protected $table = 'ADMIN';
+    protected $fillable = [
+        'NOME',
+        'CPF',
+        'EMAIL',
+        'TELEFONE',
+        'ID_USUARIO',
+        'ID_ENDERECO'
+    ];
 
     // Criando relacionamento entre as tabelas admin e users
     public function relUsuario(){

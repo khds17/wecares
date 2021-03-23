@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class formacao extends Model
 {
     public $timestamps = false;
-    protected $table='FORMACAO';
-    protected $fillable=['ID','FORMACAO'];
+    protected $table = 'FORMACAO';
+    protected $fillable = [
+        'FORMACAO'
+    ];
 
     // Relacionamento entre as tabelas formacao e prestadores
     public function relPrestador(){
