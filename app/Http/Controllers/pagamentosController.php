@@ -352,52 +352,31 @@ class pagamentosController extends Controller
     {
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
-        // $pagamentos = $this->objPagamentos
-        //                     ->where('PAGAMENTOS.STATUS', '=', 'in_process')
-        //                     ->get();
-
-                // $pagamentos = DB::table('PAGAMENTOS')
-                //                 ->where('PAGAMENTOS.ID_PAGAMENTO', '=', 14049799273)
-                //                 ->get();
-
-        $payment = \MercadoPago\Payment::find_by_id(14049799273);
-
-        dd($payment);
+        $pagamentos = $this->objPagamentos
+                            ->where('PAGAMENTOS.STATUS', '=', 'in_process')
+                            ->get();
 
         if(count($pagamentos) >= 1) {
             dump('Entrou');
             foreach ($pagamentos as $pagamento) {
-                dump('Entrou');
-                $payment = \MercadoPago\Payment::find_by_id($pagamento->id);
+                dump('Entrou 2');
+                $payment = \MercadoPago\Payment::find_by_id($pagamento->ID_PAGAMENTO);
+
+                dump($payment);
 
                 if($payment == 'approved') {
-                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->id])->update([
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                        'DT_APROVACAO' => $payment->date_approved
+                    ]);
+                } else {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
                         'STATUS' => $payment->status,
                         'DT_APROVACAO' => $payment->date_approved
                     ]);
                 }
             }
         }
-        $payment = \MercadoPago\Payment::find_by_id(14010470614);
-        dd($payment);
-
-        $pagamentosValidacao = $this->objValidaCartao
-                                ->where('VALIDA_CARTAO.STATUS', '=', 'in_process')
-                                ->get();
-
-        // if(count($pagamentosValidacao) >= 1) {
-
-        //     foreach ($pagamentosValidacao as $pagamento) {
-        //         $payment = \MercadoPago\Payment::find_by_id($pagamento->id);
-
-        //         if($payment == 'approved') {
-        //             $this->objValidaCartao->where(['ID_PAGAMENTO' => $pagamento->id])->update([
-        //                 'STATUS' => $payment->status,
-        //                 'DT_APROVACAO' => $payment->date_approved
-        //             ]);
-        //         }
-        //     }
-        // }
 
     }
 
