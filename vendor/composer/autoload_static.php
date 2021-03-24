@@ -590,7 +590,7 @@ class ComposerStaticInit1b0cc0a0339b264223cbc6e5b1741208
         'App\\Http\\Requests\\PrestadorEdit' => __DIR__ . '/../..' . '/app/Http/Requests/PrestadorEdit.php',
         'App\\Http\\Requests\\SolicitantePaciente' => __DIR__ . '/../..' . '/app/Http/Requests/SolicitantePaciente.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
-        'App\\Models\\Administrador' => __DIR__ . '/../..' . '/app/Models/Administrador.php',
+        'App\\Models\\Administradores' => __DIR__ . '/../..' . '/app/Models/Administradores.php',
         'App\\Models\\antecedentes' => __DIR__ . '/../..' . '/app/Models/antecedentes.php',
         'App\\Models\\bancos' => __DIR__ . '/../..' . '/app/Models/bancos.php',
         'App\\Models\\cartoes' => __DIR__ . '/../..' . '/app/Models/cartoes.php',

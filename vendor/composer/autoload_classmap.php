@@ -39,7 +39,7 @@ return array(
     'App\\Http\\Requests\\PrestadorEdit' => $baseDir . '/app/Http/Requests/PrestadorEdit.php',
     'App\\Http\\Requests\\SolicitantePaciente' => $baseDir . '/app/Http/Requests/SolicitantePaciente.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
-    'App\\Models\\Administrador' => $baseDir . '/app/Models/Administrador.php',
+    'App\\Models\\Administradores' => $baseDir . '/app/Models/Administradores.php',
     'App\\Models\\antecedentes' => $baseDir . '/app/Models/antecedentes.php',
     'App\\Models\\bancos' => $baseDir . '/app/Models/bancos.php',
     'App\\Models\\cartoes' => $baseDir . '/app/Models/cartoes.php',

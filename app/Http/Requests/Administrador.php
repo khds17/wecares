@@ -25,8 +25,8 @@ class Administrador extends FormRequest
     {
         return [
             'adminNome'=>'bail|required|min:3|max:100',
-            'adminCPF'=>'bail|required|cpf|unique:ADMIN,CPF',
-            'adminEmail'=>'bail|required|email:rfc,dns|unique:ADMIN,EMAIL',
+            'adminCPF'=>'bail|required|cpf|unique:ADMINISTRADORES,CPF',
+            'adminEmail'=>'bail|required|email:rfc,dns|unique:ADMINISTRADORES,EMAIL',
             'adminTelefone'=>'required',
             'adminSenha'=>'required:min:8',
             'adminConfirmarSenha'=>'required|min:8|same:adminSenha',
