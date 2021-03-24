@@ -28,7 +28,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
-class prestadoresController extends Controller
+class PrestadoresController extends Controller
 {
     //Instanciando as classes
     public function __construct()
@@ -171,11 +171,11 @@ class prestadoresController extends Controller
 
             DB::commit();
 
-            return redirect()->action('indexController@agradecimento');
+            return redirect()->action('IndexController@agradecimento');
 
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->action('prestadoresController@create');
+            return redirect()->action('PrestadoresController@create');
         }
     }
 
@@ -303,11 +303,11 @@ class prestadoresController extends Controller
 
             DB::commit();
 
-            return redirect()->action('prestadoresController@cadastroPrestador');
+            return redirect()->action('PrestadoresController@cadastroPrestador');
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect()->action('prestadoresController@edit');
+            return redirect()->action('PrestadoresController@edit');
         }
     }
 }

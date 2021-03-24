@@ -15,7 +15,7 @@ use App\Models\cidades;
 use App\Models\estados;
 use App\Models\familiaridade;
 
-class indexController extends Controller
+class IndexController extends Controller
 {
     //Instanciando as classes
     public function __construct()

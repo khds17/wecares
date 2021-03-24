@@ -22,7 +22,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
 
-class solicitantesController extends Controller
+class SolicitantesController extends Controller
 {
     //Instanciando as classes
     public function __construct()
@@ -159,7 +159,7 @@ class solicitantesController extends Controller
 
         } catch (\Throwable $e) {
             DB::rollback();
-            return redirect()->action('solicitantesController@create');
+            return redirect()->action('SolicitantesController@create');
         }
     }
 
@@ -245,7 +245,7 @@ class solicitantesController extends Controller
         } catch (\Throwable $e) {
             DB::rollback();
         }
-        return redirect()->action('solicitantesController@cadastroSolicitante');
+        return redirect()->action('SolicitantesController@cadastroSolicitante');
     }
 
     public function propostas()

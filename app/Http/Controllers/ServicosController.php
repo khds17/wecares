@@ -18,7 +18,7 @@ use App\Http\Requests\Proposta;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
-class servicosController extends Controller
+class ServicosController extends Controller
 {
     //Instanciando as classes
     public function __construct()
@@ -138,11 +138,11 @@ class servicosController extends Controller
 
                     DB::commit();
 
-                    return redirect()->action('servicosController@propostaAgradecimento');
+                    return redirect()->action('ServicosController@propostaAgradecimento');
                 }
             } catch (\Throwable $th) {
                 DB::rollback();
-                return redirect()->action('servicosController@propostas');
+                return redirect()->action('ServicosController@propostas');
             }
     }
 
