@@ -26,7 +26,7 @@ class solicitantes extends Model
 
         // Criando relacionamento entre as tabelas solicitantes e users
         public function relUsuario(){
-            return $this->hasOne('App\Models\user', 'ID','ID_USUARIO');
+            return $this->hasOne('App\Models\User', 'ID','ID_USUARIO');
         }
 
         // Criando relacionamento entre as tabelas solicitantes e pacientes

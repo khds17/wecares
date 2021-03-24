@@ -19,6 +19,6 @@ class Administradores extends Model
 
     // Criando relacionamento entre as tabelas admin e users
     public function relUsuario(){
-        return $this->hasOne('App\Models\user', 'ID','ID_USUARIO');
+        return $this->hasOne('App\Models\User', 'ID','ID_USUARIO');
     }
 }
