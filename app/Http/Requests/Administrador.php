@@ -68,7 +68,6 @@ class Administrador extends FormRequest
               'adminCidade.required'=>'Cidade é um campo obrigatório',
               'adminBairro.required'=>'Bairro é um campo obrigatório',
               'adminEstado.required'=>'Estado é um campo obrigatório',
-  
           ];
       }
 }
