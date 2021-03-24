@@ -162,8 +162,8 @@ trait AuthenticatesUsers
                             ->get();
 
         $arrayUsersAdmins = DB::table('users')
-                            ->join('ADMIN','users.ID','=','ADMIN.ID_USUARIO')
-                            ->where('ADMIN.ID_USUARIO', auth()->user()->id)
+                            ->join('ADMINISTRADORES','users.ID','=','ADMINISTRADORES.ID_USUARIO')
+                            ->where('ADMINISTRADORES.ID_USUARIO', auth()->user()->id)
                             ->where('users.status', '=', $status)
                             ->get();
 
