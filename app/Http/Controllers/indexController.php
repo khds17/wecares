@@ -98,12 +98,16 @@ class indexController extends Controller
     {
         $idCidade = $request->id;
 
+        $ativo = \Config::get('constants.STATUS.ATIVO');
+
         $prestadores = $this->objPrestador
                             ->join('ENDERECOS', 'PRESTADORES.ID_ENDERECO', '=', 'ENDERECOS.ID')
                             ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
+                            ->leftJoin('users', 'PRESTADORES.ID_USUARIO', '=', 'users.id')
                             ->leftJoin('FOTOS', 'PRESTADORES.ID_FOTO', '=', 'FOTOS.ID')
                             ->select('PRESTADORES.*','FORMACAO.FORMACAO', 'FOTOS.FOTO')
                             ->where('ENDERECOS.ID_CIDADE', '=', $idCidade)
+                            ->where('users.status', '=', $ativo)
                             ->get();
 
         //Verifica se há algum prestador
