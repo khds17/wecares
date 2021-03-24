@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\requestSolicitantePaciente;
+use App\Http\Requests\SolicitantePaciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\solicitantes;
@@ -80,10 +80,10 @@ class SolicitantesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\requestSolicitantePaciente; $request
+     * @param  \App\Http\Requests\SolicitantePaciente; $request
      * @return \Illuminate\Http\Response
      */
-    public function store(requestSolicitantePaciente $request)
+    public function store(SolicitantePaciente $request)
     {
         DB::beginTransaction();
 

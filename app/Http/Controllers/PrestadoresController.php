@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\requestPrestador;
-use App\Http\Requests\requestPrestadorEdit;
+use App\Http\Requests\Prestador;
+use App\Http\Requests\PrestadorEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\prestadores;
@@ -108,10 +108,10 @@ class PrestadoresController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \app\Http\Requests\requestPrestador  $request
+     * @param  \app\Http\Requests\Prestador  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(requestPrestador $request)
+    public function store(Prestador $request)
     {
         DB::beginTransaction();
 
@@ -247,7 +247,7 @@ class PrestadoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(requestPrestadorEdit $request, $id)
+    public function update(PrestadorEdit $request, $id)
     {
         $prestadores = $this->objPrestador->find($id);
 
