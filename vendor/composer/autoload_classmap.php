@@ -57,7 +57,7 @@ return array(
     'App\\Models\\pacientes' => $baseDir . '/app/Models/pacientes.php',
     'App\\Models\\pagamentos' => $baseDir . '/app/Models/pagamentos.php',
     'App\\Models\\prestadores' => $baseDir . '/app/Models/prestadores.php',
-    'App\\Models\\proposta' => $baseDir . '/app/Models/proposta.php',
+    'App\\Models\\Propostas' => $baseDir . '/app/Models/Propostas.php',
     'App\\Models\\registros_log' => $baseDir . '/app/Models/registros_log.php',
     'App\\Models\\servicos' => $baseDir . '/app/Models/servicos.php',
     'App\\Models\\servicos_prestados' => $baseDir . '/app/Models/servicos_prestados.php',

@@ -17,7 +17,7 @@ use App\Models\antecedentes;
 use App\Models\foto;
 use App\Models\formacao;
 use App\Models\sexo;
-use App\Models\proposta;
+use App\Models\Propostas;
 use App\Models\user;
 use App\Models\familiaridade;
 use App\Models\paciente_tipo;
@@ -34,7 +34,7 @@ class prestadoresController extends Controller
     public function __construct()
     {
         $this->objPrestador = new prestadores();
-        $this->objProposta = new proposta();
+        $this->objProposta = new Propostas();
         $this->objEstado = new estados();
         $this->objCidade = new cidades();
         $this->objEndereco = new enderecos();

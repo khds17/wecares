@@ -15,7 +15,7 @@ use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
 use App\Models\user;
-use App\Models\proposta;
+use App\Models\Propostas;
 use App\Models\registros_log;
 use App\Config\constants;
 use Spatie\Permission\Models\Role;
@@ -28,7 +28,7 @@ class solicitantesController extends Controller
     public function __construct()
     {
         $this->objSolicitante = new solicitantes();
-        $this->objProposta = new proposta();
+        $this->objProposta = new Propostas();
         $this->objPaciente = new pacientes();
         $this->objEstados = new estados();
         $this->objCidades = new cidades();

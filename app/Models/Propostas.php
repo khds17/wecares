@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class proposta extends Model
+class Propostas extends Model
 {
     public $timestamps = false;
     protected $table = 'PROPOSTAS';
