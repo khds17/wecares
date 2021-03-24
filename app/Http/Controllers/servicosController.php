@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\proposta;
+use App\Models\Propostas;
 use App\Models\solicitantes;
 use App\Models\paciente_tipo;
 use App\Models\pacientes;
@@ -14,6 +14,7 @@ use App\Models\servicos_prestados;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
 use App\Models\registros_log;
+use App\Http\Requests\Proposta;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 
@@ -22,7 +23,7 @@ class servicosController extends Controller
     //Instanciando as classes
     public function __construct()
     {
-        $this->objProposta = new proposta();
+        $this->objProposta = new Propostas();
         $this->objPrestador = new prestadores();
         $this->objSolicitante = new solicitantes();
         $this->objPaciente = new pacientes();
@@ -36,7 +37,7 @@ class servicosController extends Controller
 
     }
 
-    public function proposta(Request $request)
+    public function proposta(Proposta $request)
     {
         // Todos os select estão em um array dentro de um array, para isso, criei um foreach para remover todos do array
         $arraySolicitantes = $this->objSolicitante

@@ -23,7 +23,7 @@
                             <input type="image" src="{{url("storage/{$prestador->FOTO}")}}" width="100" height="100">
                             <input type="hidden" id="idPrestador[{{$prestador->ID}}]" name="idPrestador" value="{{$prestador->ID}}">
                             <h6>{{$prestador->NOME}}</h6>
-                            <div class="small text-gray-500 text-left">Formação:{{$prestador->FORMACAO}}</div>
+                            <div class="small text-gray-500 text-left">Formação: {{$prestador->FORMACAO}}</div>
                             {{-- <div class="small text-gray-500 text-left">Serviço realizados:</div>
                             <div class="small text-gray-500 text-left">Avaliação</div>    --}}
 
@@ -64,12 +64,15 @@
                             <div class="form-group">
                                 <input type="hidden" id="idPrestadores" name="idPrestadores">
                                 <label for="paciente" class="text-dark">Paciente</label><br>
-                                <select name="selectPaciente" class="custom-select" onchange="getPaciente(this.value)">
+                                <select name="selectPaciente" id="selectPaciente" class="custom-select" onchange="getPaciente(this.value)">
                                     <option value="">Escolha um paciente</option>
                                     @foreach ($pacientes as $paciente)
                                         <option value="{{$paciente->ID}}">{{$paciente->NOME}}</option>
                                     @endforeach
                                 </select>
+                                @error('selectPaciente')
+                                    <span class="text-danger"><small>{{$message}}</small></span>
+                                @enderror
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col">
@@ -80,6 +83,9 @@
                                                 <option value="{{$tipo->ID}}">{{$tipo->TIPO}}</option>
                                         @endforeach
                                     </select>
+                                    @error('pacienteTipo')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
                             <br>
@@ -92,6 +98,9 @@
                                             <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
                                         @endforeach
                                     </select>
+                                    @error('familiaridade')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col">
                                     <label for="familiaridade" class="text-dark">Descreva o que é do paciente</label>
@@ -108,6 +117,9 @@
                                                 <option value="{{$localizacao->ID}}" >{{$localizacao->LOCALIZACAO}}</option>
                                         @endforeach
                                     </select>
+                                    @error('pacienteLocalizacao')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
                             <br>
@@ -115,17 +127,28 @@
                                 @if ($paciente->ID_ENDERECO == $endereco->ID)
                                     <div class="row margin-top-10">
                                         <div class="col">
-                                            <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" value=""><br>
+                                            <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" value="">
+                                            @error('pacienteCep')
+                                                <span class="text-danger"><small>{{$message}}</small></span>
+                                            @enderror
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="row margin-top-10">
                                         <div class="col">
-                                                <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" value="">
+                                            <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" value="">
+                                            @error('pacienteEndereco')
+                                                <span class="text-danger"><small>{{$message}}</small></span>
+                                            @enderror
                                         </div>
                                         <div class="col">
-                                            <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" value=""><br>
+                                            <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" value="">
+                                            @error('pacienteNumero')
+                                                <span class="text-danger"><small>{{$message}}</small></span>
+                                            @enderror
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="row margin-top-10">
                                         <div class="col">
                                             <select class ="form-control"name="pacienteCidade" id="pacienteCidade">
@@ -134,11 +157,18 @@
                                                     <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
                                                 @endforeach
                                             </select>
+                                            @error('pacienteCidade')
+                                                <span class="text-danger"><small>{{$message}}</small></span>
+                                            @enderror
                                         </div>
                                         <div class="col">
-                                            <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" value=""><br>
+                                            <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" value="">
+                                            @error('pacienteBairro')
+                                                <span class="text-danger"><small>{{$message}}</small></span>
+                                            @enderror
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="row margin-top-10">
                                         <div class="col">
                                             <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" value="">
@@ -150,6 +180,9 @@
                                                     <option value="{{$estado->ID}}">{{$estado->UF}}</option>
                                                 @endforeach
                                             </select>
+                                            @error('pacienteEstado')
+                                                <span class="text-danger"><small>{{$message}}</small></span>
+                                            @enderror
                                         </div>
                                     </div>
                                 @endif
@@ -157,42 +190,59 @@
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <label for="formacao">Serviços que deverão ser realizados</label><br>
+                                    <label for="opcaoDeServicos">Serviços que deverão ser realizados</label><br>
                                     @foreach($servicos as $servico)
-                                        <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}" onclick="calcularServicos(this.value)"> {{$servico->TIPO}} <br>
+                                        <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}} <br>
                                     @endforeach
                                     <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
                                 </div>
                             </div>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <label for="formacao">Paciente toma medicamentos?</label><br>
+                                    <label for="tomaMedicamento">Paciente toma medicamentos?</label><br>
                                     <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br>
-                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não
+                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não <br>
+                                    @error('tomaMedicamento')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                                 <div class="col font-color-gray">
-                                    <label for="formacao">Quais medicamentos?</label><br>
+                                    <label for="tipoMedicamentos">Quais medicamentos?</label><br>
                                     <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="">
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
-                                    <label class ="" for="formacao">Data e hora do serviço:</label><br>
+                                    <label class ="" for="inicio">Data do inicio do serviço:</label><br>
+                                    <input class="form-control" type="date" name="dataInicio" id="dataInicio">
+                                    @error('dataInicio')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="date" name="dataServico" id="dataServico" placeholder="Data do serviço">
+                                <div class="col font-color-gray">
+                                    <label class ="" for="fim">Data fim do serviço:</label><br>
+                                    <input class="form-control" type="date" name="dataFim" id="dataFim">
+                                    @error('dataFim')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
                             <br>
                             <div class="row margin-top-10">
-                                <div class="col">
-                                    <input class="form-control" type="time" name="horaInicio" id="horaInicio" placeholder="Horário de início ">
+                                <div class="col font-color-gray">
+                                    <label class ="" for="horaroInicio">Horário de início</label><br>
+                                    <input class="form-control" type="time" name="horaInicio" id="horaInicio" placeholder="Horário de início">
+                                    @error('horaInicio')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
-                                <div class="col">
-                                    <input class="form-control" type="time" name="horaFim" id="horaFim" placeholder="Horário do fim">
+                                <div class="col font-color-gray">
+                                    <label class ="" for="horaroFim">Horário fim</label><br>
+                                    <input class="form-control" type="time" name="horaFim" id="horaFim" placeholder="Horário do fim" onchange="calcularServicos()">
+                                    @error('horaFim')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
                                 </div>
                             </div>
                             <br>
@@ -204,8 +254,9 @@
                             <br> -->
                             <div class="row margin-top-10" id="servicos" >
                                 <div class="col font-color-gray">
-                                    <label class ="" for="formacao">Valor total do serviço: R$</label>
-                                    <input type="text" name="precoServico" id="precoServico" value="">
+                                    <label class="" for="formacao">Valor total do serviço: R$</label>
+                                    <input class="" type="text" name="propostaValorSimulacao" id="propostaValorSimulacao">
+                                    <input class="" type="hidden" name="precoServico" id="precoServico">
                                 </div>
                             </div>
                             <div class="modal-footer">

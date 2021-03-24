@@ -197,3 +197,54 @@ function getProposta(id) {
         }
     });
 }
+
+function calcularServicos() {
+
+    //Pegando as datas e horas do form
+    let dataInicio = document.getElementById('dataInicio').value;
+    let horaInicio = document.getElementById('horaInicio').value;
+    let dataFim = document.getElementById('dataFim').value;
+    let horaFim = document.getElementById('horaFim').value;
+
+    //Pegando a data do dia
+    let hoje = new Date();
+    let dd = String(hoje.getDate()).padStart(2, '0');
+    let mm = String(hoje.getMonth() + 1).padStart(2, '0');
+    let yyyy = hoje.getFullYear();
+
+    hoje = yyyy + '-' + mm + '-' + dd;
+
+    //Concatenando data e horário
+    let dataInicioServico = dataInicio + ' ' + horaInicio;
+    let dataFimServico = dataFim + ' ' + horaFim;
+
+    //Valor total do serviço
+    let valorTotal = 0;
+
+    // Calculo das horas
+    var ms = moment(dataInicioServico,"YYYY-MM-DD HH:mm").diff(moment(dataFimServico,"YYYY-MM-DD HH:mm"));
+    var d = moment.duration(ms);
+    let horasContratadas = Math.floor(d.asHours());
+
+    //Converte a quantidade horas contratadas para positivo
+    if(horasContratadas < 0) {
+        horasContratadas = Math.abs(horasContratadas);
+    }
+
+    //Validações
+    if(hoje > dataInicio) {
+        alert('A data inicio do serviço não pode ser menor que hoje');
+    } else if(dataInicio > dataFim) {
+        alert('A data inicio do serviço não pode ser maior que a data de fim');
+    } else if(dataInicio == dataFim && horaInicio > horaFim) {
+        alert('A hora de inicio não pode ser maior que a hora de inicio do serviço');
+    } else if(horasContratadas > 16) {
+        alert('Desculpe! Não é possível contratar mais do que 15 horas de serviço');
+    } else {
+        valorTotal = horasContratadas * 15;
+        document.getElementById('propostaValorSimulacao').value = valorTotal;
+        document.getElementById('precoServico').value = valorTotal;
+    }
+
+}
+
