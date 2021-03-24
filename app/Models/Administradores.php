@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class admin extends Model
+class Administradores extends Model
 {
     public $timestamps = false;
-    protected $table = 'ADMIN';
+    protected $table = 'ADMINISTRADORES';
     protected $fillable = [
         'NOME',
         'CPF',

@@ -14,7 +14,7 @@ use App\Models\enderecos;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
-use App\Models\user;
+use App\Models\User;
 use App\Models\Propostas;
 use App\Models\registros_log;
 use App\Config\constants;
@@ -37,7 +37,7 @@ class SolicitantesController extends Controller
         $this->objPacienteTipo = new paciente_tipo();
         $this->objPacienteLocalizacao = new paciente_localizacao();
         $this->objFamiliaridade = new familiaridade();
-        $this->objUsers = new user();
+        $this->objUsers = new User();
         $this->objRegistros = new registros_log();
 
     }

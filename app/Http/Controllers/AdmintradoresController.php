@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Administrador;
 use Illuminate\Http\Request;
-use App\Models\admin;
-use App\Models\user;
+use App\Models\Administradores;
+use App\Models\User;
 use App\Models\prestadores;
 use App\Models\estados;
 use App\Models\cidades;
@@ -21,8 +21,8 @@ class AdmintradoresController extends Controller
 {
     public function __construct()
     {
-        $this->objAdmin = new admin();
-        $this->objUsers = new user();
+        $this->objAdmin = new Administradores();
+        $this->objUsers = new User();
         $this->objEstados = new estados();
         $this->objCidades = new cidades();
         $this->objEndereco = new enderecos();

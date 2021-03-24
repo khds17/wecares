@@ -18,7 +18,7 @@ use App\Models\foto;
 use App\Models\formacao;
 use App\Models\sexo;
 use App\Models\Propostas;
-use App\Models\user;
+use App\Models\User;
 use App\Models\familiaridade;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
@@ -44,7 +44,7 @@ class PrestadoresController extends Controller
         $this->objFormacao = new formacao();
         $this->objSexos = new sexo();
         $this->objPacientes = new pacientes();
-        $this->objUsers = new user();
+        $this->objUsers = new User();
         $this->objServico = new servicos();
         $this->objPacienteTipo = new paciente_tipo();
         $this->objPacienteLocalizacao = new paciente_localizacao();

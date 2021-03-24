@@ -67,5 +67,6 @@ Route::post('/estornoPayment/{id}','PagamentosController@estornoPayment')->middl
 Route::get('/atualizarPagamentos','PagamentosController@atualizarPagamentos');
 
 Auth::routes(['register' => false]);
+Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
