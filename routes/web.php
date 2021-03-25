@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::resource('/admin','AdmintradoresController');
-Route::resource('/admin','AdmintradoresController')->middleware('auth')->middleware('role:administrador');
+Route::resource('/admin','AdmintradoresController');
+// Route::resource('/admin','AdmintradoresController')->middleware('auth')->middleware('role:administrador');
 Route::get('/listaAdmins','AdmintradoresController@listaAdmins')->middleware('auth')->middleware('role:administrador');
 Route::get('/listaServicosPrestados','AdmintradoresController@listaServicosPrestados')->middleware('auth')->middleware('role:administrador');
 Route::get('/cadastroAdmin','AdmintradoresController@cadastroAdmin')->middleware('auth')->middleware('role:administrador');
