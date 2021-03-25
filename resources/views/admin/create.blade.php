@@ -1,8 +1,8 @@
 @extends('templates.template-admin')
 @section('content')
 <h1 class="text-center">Preencha os dados do adminstrador</h1>
-    <form name="formAdmin" id="formAdmin" method="post" action="{{url('admin')}}">  
-        <div class="card-body">       
+    <form name="formAdmin" id="formAdmin" method="post" action="{{url('admin')}}">
+        <div class="card-body">
             @csrf
             <div class="row margin-top-10">
                 <div class="col">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="col">
                     <label for="">CPF:</label>
-                    <input class="form-control" type="adminCPF" name="adminCPF" id="cpf" value="{{old('adminCPF')}}"> 
+                    <input class="form-control" type="adminCPF" name="adminCPF" id="cpf" value="{{old('adminCPF')}}">
                     @error('adminCPF')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -90,7 +90,7 @@
                         @foreach($cidades as $cidade)
                             <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
                         @endforeach
-                    </select>   
+                    </select>
                     @error('adminCidade')
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror
@@ -112,10 +112,10 @@
                         @foreach($estados as $estado)
                             <option value="{{$estado->ID}}">{{$estado->UF}}</option>
                         @endforeach
-                    </select>   
+                    </select>
                     @error('adminEstado')
                         <span class="text-danger"><small>{{$message}}</small></span>
-                    @enderror   
+                    @enderror
                 </div>
                 <div class="col">
                     <label for="">Complemento:</label>
