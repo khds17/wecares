@@ -144,6 +144,22 @@
                     </a>
                 </li>
                 @endrole
+                @if(!Auth::user())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url("")}}">
+                        <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <span>Tela inicial</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url("/login")}}">
+                        <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <span>Login</span>
+                    </a>
+                </li>
+                @endif
+
                  <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -304,49 +320,49 @@
 
                             <div class="topbar-divider d-none d-sm-block"></div>
                             <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @if(Auth::user())
-                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                    @else
-                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                    @endif
-                                    {{-- <img class="img-profile rounded-circle" src=""> --}}
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                    {{-- <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Dados cadastrais
-                                    </a> --}}
-                                    {{-- <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a> --}}
-                                    <a class="dropdown-item" href="{{url("")}}">
-                                        <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Tela inicial
+                            @if(Auth::user())
+                                <li class="nav-item dropdown no-arrow">
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                        {{-- <img class="img-profile rounded-circle" src=""> --}}
                                     </a>
-                                    <a class="dropdown-item" href="{{url("/registros")}}">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Registro de atividades
-                                    </a>
-                                    {{-- <a class="dropdown-item" href="{{url("/registros")}}">
-                                        <i class="fas fa-camera-retro fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Foto de perfil
-                                    </a> --}}
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Sair') }}
-                                    </a>
+                                    <!-- Dropdown - User Information -->
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                        {{-- <a class="dropdown-item" href="#">
+                                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Dados cadastrais
+                                        </a> --}}
+                                        {{-- <a class="dropdown-item" href="#">
+                                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Settings
+                                        </a> --}}
+                                        <a class="dropdown-item" href="{{url("")}}">
+                                            <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Tela inicial
+                                        </a>
+                                        <a class="dropdown-item" href="{{url("/registros")}}">
+                                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Registro de atividades
+                                        </a>
+                                        {{-- <a class="dropdown-item" href="{{url("/registros")}}">
+                                            <i class="fas fa-camera-retro fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Foto de perfil
+                                        </a> --}}
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Sair') }}
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @else
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                            @endif
                         </ul>
                     </nav>
                     <!-- End of Topbar -->
