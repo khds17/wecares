@@ -177,10 +177,12 @@ function getProposta(id) {
                 $('#pacienteCidade').val(data.propostas.CIDADE);
                 $('#pacienteEstado').val(data.propostas.UF);
                 $('#pacienteComplemento').val(data.propostas.COMPLEMENTO);
-                $('#servicoDataPrestacao').val(data.propostas.DATA_SERVICO);
-                $('#servicoValor').val(data.propostas.VALOR);
-                $('#servicoInicio').val(data.propostas.HORA_INICIO);
-                $('#servicoFim').val(data.propostas.HORA_FIM);
+                $('#dataInicio').val(data.propostas.DATA_INICIO);
+                $('#dataFim').val(data.propostas.DATA_FIM);
+                $('#valorServico').val(data.propostas.VALOR);
+                $('#valorRepasse').val(data.propostas.VALOR * 0.88);
+                $('#horaInicio').val(data.propostas.HORA_INICIO);
+                $('#horaFim').val(data.propostas.HORA_FIM);
                 $("input[name=tomaMedicamento][value="+data.propostas.TOMA_MEDICAMENTOS+"]").attr("checked", true);
                 $('#tipoMedicamento').val(data.propostas.TIPO_MEDICAMENTOS);
                 $('#servicoOutros').val(data.propostas.SERVICOS_OUTROS);

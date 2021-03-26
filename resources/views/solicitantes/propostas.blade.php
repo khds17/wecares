@@ -28,9 +28,9 @@
                             Não há propostas disponíveis no momento
                         </thead>
                     @endif
-                    <tbody>         
-                        {{-- Só crio esse foreach para percorrer e jogar os valores dentro do td do foreach de baixo --}}           
-                        @foreach($propostas as $proposta) 
+                    <tbody>
+                        {{-- Só crio esse foreach para percorrer e jogar os valores dentro do td do foreach de baixo --}}
+                        @foreach($propostas as $proposta)
                                 <tr>
                                     {{-- <th scope="row">{{$proposta->ID}}</th> --}}
                                     <td>{{$proposta->NOME_PRESTADOR}}</td>
@@ -46,7 +46,7 @@
                                         <a href="">
                                             <button class="btn btn-danger" onclick="recusarProspostaSolicitante({{$proposta->ID}})">Recusar</button>
                                         </a>
-                                    </td>     
+                                    </td>
                                 <tr>
                         @endforeach
                     </tbody>
@@ -71,107 +71,113 @@
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Nome do profissional</label>
-                                <input class="form-control"type="text" name="prestadorNome" id="prestadorNome" value=""><br>                                       
+                                <input class="form-control"type="text" name="prestadorNome" id="prestadorNome" value=""><br>
                             </div>
                             <div class="col">
                                 <label for="">Formação</label>
-                                <input class="form-control"type="text" name="formacao" id="formacao" value=""><br>     
+                                <input class="form-control"type="text" name="formacao" id="formacao" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Telefone para contato</label>
-                                <input class="form-control"type="text" name="prestadorTelefone" id="prestadorTelefone" value=""><br>                                       
+                                <input class="form-control"type="text" name="prestadorTelefone" id="prestadorTelefone" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Nome do paciente</label>
-                                <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" value=""><br>                                       
+                                <input class="form-control"type="text" name="pacienteNome" id="pacienteNome" value=""><br>
                             </div>
                             <div class="col">
                                 <label for="">Tipo paciente</label>
-                                <input class="form-control"type="text" name="pacienteTipo" id="pacienteTipo" value=""><br>     
+                                <input class="form-control"type="text" name="pacienteTipo" id="pacienteTipo" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                              <div class="col">
                                 <label for="">Localização do paciente</label>
-                                <input class="form-control"type="text" name="pacienteLocalizacao" id="pacienteLocalizacao" value=""><br>      
+                                <input class="form-control"type="text" name="pacienteLocalizacao" id="pacienteLocalizacao" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">CEP</label>
-                                <input class="form-control"type="text" name="pacienteCep" id="pacienteCep" value=""><br>     
+                                <input class="form-control"type="text" name="pacienteCep" id="pacienteCep" value=""><br>
                             </div>
                             <div class="col">
                                 <label for="">Endereço</label>
-                                <input class="form-control"type="text" name="pacienteEndereco" id="pacienteEndereco" value=""><br> 
+                                <input class="form-control"type="text" name="pacienteEndereco" id="pacienteEndereco" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Bairro</label>
-                                <input class="form-control"type="text" name="pacienteBairro" id="pacienteBairro" value=""><br>       
+                                <input class="form-control"type="text" name="pacienteBairro" id="pacienteBairro" value=""><br>
                             </div>
                             <div class="col">
                                 <label for="">Número</label>
-                                <input class="form-control"type="text" name="pacienteNumero" id="pacienteNumero" value=""><br>      
+                                <input class="form-control"type="text" name="pacienteNumero" id="pacienteNumero" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Cidade</label>
-                                <input class="form-control"type="text" name="pacienteCidade" id="pacienteCidade" value=""><br>     
+                                <input class="form-control"type="text" name="pacienteCidade" id="pacienteCidade" value=""><br>
                             </div>
                             <div class="col">
                                 <label for="">Estado</label>
-                                <input class="form-control"type="text" name="pacienteEstado" id="pacienteEstado" value=""><br>      
+                                <input class="form-control"type="text" name="pacienteEstado" id="pacienteEstado" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Serviços a serem realizados</label><br>
                                 @foreach($servicos as $servico)
-                                    <input type="checkbox" name="servicos" id="servicos" value="{{$servico->ID}}"> {{$servico->TIPO}}<br> 
-                                @endforeach  
+                                    <input type="checkbox" name="servicos" id="servicos" value="{{$servico->ID}}"> {{$servico->TIPO}}<br>
+                                @endforeach
                             </div>
                             <div class="col">
                                 <label for="">Serviços outros</label>
-                                <input class="form-control"type="text" name="servicoOutros" id="servicoOutros" value=""><br>      
+                                <input class="form-control"type="text" name="servicoOutros" id="servicoOutros" value=""><br>
                             </div>
                         </div>
                         <br>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Toma medicamentos?</label><br>
-                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br> 
-                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não    
+                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br>
+                                <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não
                             </div>
                             <div class="col">
                                 <label for="">Tipo medicamentos</label>
-                                <input class="form-control"type="text" name="tipoMedicamento" id="tipoMedicamento" value=""><br>      
+                                <input class="form-control"type="text" name="tipoMedicamento" id="tipoMedicamento" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
-                                <label for="">Data serviço</label><br>  
-                                <input class="form-control"type="text" name="servicoDataPrestacao" id="servicoDataPrestacao" value=""><br>      
+                                <label for="">Valor</label><br>
+                                <input class="form-control"type="text" name="valorServico" id="valorServico" value=""><br>
+                            </div>
+                        </div>
+                        <div class="row margin-top-10">
+                            <div class="col">
+                                <label for="">Data de inicio</label><br>
+                                <input class="form-control"type="text" name="dataInicio" id="dataInicio" value=""><br>
                             </div>
                             <div class="col">
-                                <label for="">Valor</label><br>  
-                                <input class="form-control"type="text" name="servicoValor" id="servicoValor" value=""><br>      
+                                <label for="">Data fim</label><br>
+                                <input class="form-control"type="text" name="dataFim" id="dataFim" value=""><br>
                             </div>
                         </div>
                         <div class="row margin-top-10">
                             <div class="col">
                                 <label for="">Hora de início</label>
-                                <input class="form-control"type="text" name="servicoInicio" id="servicoInicio" value=""><br>      
+                                <input class="form-control"type="text" name="horaInicio" id="horaInicio" value=""><br>
                             </div>
                             <div class="col">
                                 <label for="">Hora de fim</label>
-                                <input class="form-control"type="text" name="servicoFim" id="servicoFim" value=""><br>      
+                                <input class="form-control"type="text" name="horaFim" id="horaFim" value=""><br>
                             </div>
                         </div>
                     </form>

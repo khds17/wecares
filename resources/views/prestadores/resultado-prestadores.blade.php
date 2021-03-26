@@ -256,7 +256,7 @@
                                 <div class="col font-color-gray">
                                     <label class="" for="formacao">Valor total do serviço: R$</label>
                                     <input class="" type="text" name="propostaValorSimulacao" id="propostaValorSimulacao">
-                                    <input class="" type="hidden" name="precoServico" id="precoServico">
+                                    <input class="" type="hidden" name="precoServico" id="precoServico" value="">
                                 </div>
                             </div>
                             <div class="modal-footer">

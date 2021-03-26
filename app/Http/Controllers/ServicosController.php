@@ -123,7 +123,8 @@ class ServicosController extends Controller
                             'SERVICOS_OUTROS' => $request->servicoOutros,
                             'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
                             'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
-                            'DATA_SERVICO' => $request->dataServico,
+                            'DATA_INICIO' => $request->dataInicio,
+                            'DATA_FIM' => $request->dataFim,
                             'HORA_INICIO' => $request->horaInicio,
                             'HORA_FIM' => $request->horaFim,
                             'VALOR' => $request->precoServico
@@ -142,7 +143,7 @@ class ServicosController extends Controller
                 }
             } catch (\Throwable $th) {
                 DB::rollback();
-                return redirect()->action('ServicosController@propostas');
+                return redirect()->action('IndexController@encontreCuidador');
             }
     }
 
@@ -249,7 +250,8 @@ class ServicosController extends Controller
                         'SERVICOS_OUTROS' => $servico->SERVICOS_OUTROS,
                         'TOMA_MEDICAMENTOS' => $servico->TOMA_MEDICAMENTOS,
                         'TIPO_MEDICAMENTOS' => $servico->TIPO_MEDICAMENTOS,
-                        'DATA_SERVICO' => $servico->DATA_SERVICO,
+                        'DATA_INICIO' => $servico->DATA_INICIO,
+                        'DATA_FIM' => $servico->DATA_FIM,
                         'HORA_INICIO' => $servico->HORA_INICIO,
                         'HORA_FIM' => $servico->HORA_FIM,
                         'VALOR' => $servico->VALOR,
