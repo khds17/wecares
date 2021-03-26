@@ -37,7 +37,8 @@ class CreateServicosPrestadosTable extends Migration
             $table->string('SERVICOS_OUTROS', 255)->nullable();
             $table->unsignedSmallInteger('TOMA_MEDICAMENTOS');
             $table->string('TIPO_MEDICAMENTOS')->nullable();
-            $table->date('DATA_SERVICO');
+            $table->date('DATA_INICIO');
+            $table->date('DATA_FIM');
             $table->time('HORA_INICIO',0);
             $table->time('HORA_FIM',0);
             $table->float('VALOR',8,2);
