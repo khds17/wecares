@@ -17,6 +17,8 @@ use App\Models\registros_log;
 use App\Http\Requests\Proposta;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EnvioProposta;
 
 class ServicosController extends Controller
 {
@@ -135,6 +137,13 @@ class ServicosController extends Controller
                             'TEXTO' => 'Proposta feita pelo solicitante '.$solicitante->NOME.' foi enviada com sucesso',
                             'ID_USUARIO' => auth()->user()->id
                         ]);
+
+                        $data = array(
+                          'nomePrestador' => $prestador->NOME,
+                        );
+
+                        Mail::to($prestador->EMAIL)
+                                ->send(new EnvioProposta($data));
                     }
 
                     DB::commit();
