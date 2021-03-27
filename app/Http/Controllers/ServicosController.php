@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\EnvioProposta;
 use App\Mail\AceitePropostaCuidador;
 use App\Mail\AceitePropostaSolicitante;
+use App\Mail\RecusaPropostaSolicitante;
 
 class ServicosController extends Controller
 {
@@ -355,17 +356,26 @@ class ServicosController extends Controller
     public function recusarProspostaSolicitante($id)
     {
 
-        $this->objProposta->where(['ID'=>$id])->update([
-            'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
-        ]);
+        // $this->objProposta->where(['ID'=>$id])->update([
+        //     'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
+        // ]);
 
         $proposta = $this->objProposta->find($id);
 
-        $this->objRegistros->create([
-            'DATA' => date('d/m/Y \à\s H:i:s'),
-            'TEXTO' => 'Proposta#'.$proposta->ID.' recusada',
-            'ID_USUARIO' => auth()->user()->id
-        ]);
+        // $this->objRegistros->create([
+        //     'DATA' => date('d/m/Y \à\s H:i:s'),
+        //     'TEXTO' => 'Proposta#'.$proposta->ID.' recusada',
+        //     'ID_USUARIO' => auth()->user()->id
+        // ]);
+
+        $prestador = $this->objPrestador->find($proposta->ID_PRESTADOR);
+
+        $data = array(
+            'nomePrestador' => $prestador->NOME,
+          );
+
+          Mail::to($prestador->EMAIL)
+                  ->send(new RecusaPropostaSolicitante($data));
 
         return true;
     }
