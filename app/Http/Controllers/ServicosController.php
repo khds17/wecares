@@ -356,17 +356,17 @@ class ServicosController extends Controller
     public function recusarProspostaSolicitante($id)
     {
 
-        // $this->objProposta->where(['ID'=>$id])->update([
-        //     'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
-        // ]);
+        $this->objProposta->where(['ID'=>$id])->update([
+            'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
+        ]);
 
         $proposta = $this->objProposta->find($id);
 
-        // $this->objRegistros->create([
-        //     'DATA' => date('d/m/Y \à\s H:i:s'),
-        //     'TEXTO' => 'Proposta#'.$proposta->ID.' recusada',
-        //     'ID_USUARIO' => auth()->user()->id
-        // ]);
+        $this->objRegistros->create([
+            'DATA' => date('d/m/Y \à\s H:i:s'),
+            'TEXTO' => 'Proposta#'.$proposta->ID.' recusada',
+            'ID_USUARIO' => auth()->user()->id
+        ]);
 
         $prestador = $this->objPrestador->find($proposta->ID_PRESTADOR);
 
