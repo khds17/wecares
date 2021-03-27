@@ -19,6 +19,8 @@ use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnvioProposta;
+use App\Mail\AceitePropostaCuidador;
+use App\Mail\AceitePropostaSolicitante;
 
 class ServicosController extends Controller
 {
@@ -294,6 +296,15 @@ class ServicosController extends Controller
             'ID_USUARIO' => auth()->user()->id
         ]);
 
+        $solicitante = $this->objSolicitante->find($proposta->ID_SOLICITANTE);
+
+        $data = array(
+            'nomeSolicitante' => $proposta->NOME_SOLICITANTE,
+          );
+
+          Mail::to($solicitante->EMAIL)
+                  ->send(new AceitePropostaCuidador($data));
+
         return true;
 
     }
@@ -328,6 +339,15 @@ class ServicosController extends Controller
             'TEXTO' => 'Proposta#'.$proposta->ID.' aceita',
             'ID_USUARIO' => auth()->user()->id
         ]);
+
+        $prestador = $this->objPrestador->find($proposta->ID_PRESTADOR);
+
+        $data = array(
+            'nomePrestador' => $prestador->NOME,
+          );
+
+          Mail::to($prestador->EMAIL)
+                  ->send(new AceitePropostaSolicitante($data));
 
         return true;
     }
