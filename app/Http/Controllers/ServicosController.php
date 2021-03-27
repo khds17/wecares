@@ -18,7 +18,6 @@ use App\Http\Requests\Proposta;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\EnvioProposta;
 use App\Mail\AceitePropostaCuidador;
 use App\Mail\AceitePropostaSolicitante;
 use App\Mail\RecusaPropostaSolicitante;
@@ -106,34 +105,34 @@ class ServicosController extends Controller
                     foreach ($arrayPrestadores as $arrayPrestador) {
                         $prestador = $arrayPrestador;
 
-                        $this->objProposta->create([
-                            'ID_PRESTADOR' => $prestador->ID,
-                            'NOME_PRESTADOR' =>$prestador->NOME,
-                            'ID_SOLICITANTE' => $solicitante->ID,
-                            'NOME_SOLICITANTE' => $solicitante->NOME,
-                            'ID_FAMILIARIDADE' => $request->familiaridade,
-                            'OUTROS_FAMILIARIDADE' => $request->familiaridadeOutros,
-                            'ID_PACIENTE' => $paciente->ID,
-                            'NOME_PACIENTE' => $paciente->NOME,
-                            'TIPO' => $pacienteTipo->TIPO,
-                            'LOCALIZACAO' => $pacienteLocalizacao->LOCALIZACAO,
-                            'CEP' => $request->pacienteCep,
-                            'ENDERECO' => $request->pacienteEndereco,
-                            'NUMERO' => $request->pacienteNumero,
-                            'COMPLEMENTO' => $request->pacienteComplemento,
-                            'BAIRRO' => $request->pacienteBairro,
-                            'CIDADE' => $cidade->CIDADE,
-                            'UF' => $cidade->UF,
-                            'SERVICOS' => $idServicos,
-                            'SERVICOS_OUTROS' => $request->servicoOutros,
-                            'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
-                            'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
-                            'DATA_INICIO' => $request->dataInicio,
-                            'DATA_FIM' => $request->dataFim,
-                            'HORA_INICIO' => $request->horaInicio,
-                            'HORA_FIM' => $request->horaFim,
-                            'VALOR' => $request->precoServico
-                        ]);
+                         $proposta = $this->objProposta->create([
+                                'ID_PRESTADOR' => $prestador->ID,
+                                'NOME_PRESTADOR' =>$prestador->NOME,
+                                'ID_SOLICITANTE' => $solicitante->ID,
+                                'NOME_SOLICITANTE' => $solicitante->NOME,
+                                'ID_FAMILIARIDADE' => $request->familiaridade,
+                                'OUTROS_FAMILIARIDADE' => $request->familiaridadeOutros,
+                                'ID_PACIENTE' => $paciente->ID,
+                                'NOME_PACIENTE' => $paciente->NOME,
+                                'TIPO' => $pacienteTipo->TIPO,
+                                'LOCALIZACAO' => $pacienteLocalizacao->LOCALIZACAO,
+                                'CEP' => $request->pacienteCep,
+                                'ENDERECO' => $request->pacienteEndereco,
+                                'NUMERO' => $request->pacienteNumero,
+                                'COMPLEMENTO' => $request->pacienteComplemento,
+                                'BAIRRO' => $request->pacienteBairro,
+                                'CIDADE' => $cidade->CIDADE,
+                                'UF' => $cidade->UF,
+                                'SERVICOS' => $idServicos,
+                                'SERVICOS_OUTROS' => $request->servicoOutros,
+                                'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
+                                'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
+                                'DATA_INICIO' => $request->dataInicio,
+                                'DATA_FIM' => $request->dataFim,
+                                'HORA_INICIO' => $request->horaInicio,
+                                'HORA_FIM' => $request->horaFim,
+                                'VALOR' => $request->precoServico
+                            ]);
 
                         $this->objRegistros->create([
                             'DATA' => date('d/m/Y \à\s H:i:s'),
@@ -141,12 +140,8 @@ class ServicosController extends Controller
                             'ID_USUARIO' => auth()->user()->id
                         ]);
 
-                        $data = array(
-                          'nomePrestador' => $prestador->NOME,
-                        );
-
-                        Mail::to($prestador->EMAIL)
-                                ->send(new EnvioProposta($data));
+                        $email = new EmailsController($proposta);
+                        $email->envioProposta();
                     }
 
                     DB::commit();
