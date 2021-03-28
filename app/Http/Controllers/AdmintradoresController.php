@@ -185,22 +185,28 @@ class AdmintradoresController extends Controller
 
     public function aprovarPrestador($id)
     {
-        $this->objUsers->where(['ID'=>$id])->update([
-            'status' => \Config::get('constants.STATUS.ATIVO')
-        ]);
+        try {
+            // $this->objUsers->where(['ID'=>$id])->update([
+            //     'status' => \Config::get('constants.STATUS.ATIVO')
+            // ]);
+            $user = $this->objUsers->find($id);
 
-        $user = $this->objUsers->find($id);
-
-        $prestador = $user->find($id)
+            $prestador = $user->find($id)
                             ->relPrestador;
 
-        $this->objRegistros->create([
-            'DATA' => date('d/m/Y \à\s H:i:s'),
-            'TEXTO' => 'Prestador#'.$prestador->ID.' '.$prestador->NOME.' aprovado pelo administrador '.auth()->user()->name,
-            'ID_USUARIO' => auth()->user()->id
-        ]);
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Prestador#'.$prestador->ID.' '.$prestador->NOME.' aprovado pelo administrador '.auth()->user()->name,
+                'ID_USUARIO' => auth()->user()->id
+            ]);
 
-        return true;
+            $email = new EmailsController($prestador);
+            $email->aceiteCadastroPrestador();
+
+            return true;
+        } catch (\Throwable $th) {
+           return false;
+        }
     }
 
     public function reprovarPrestador($id)

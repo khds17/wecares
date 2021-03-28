@@ -2,37 +2,49 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnvioProposta;
 use App\Mail\AceitePropostaPrestador;
 use App\Mail\AceitePropostaSolicitante;
 use App\Mail\RecusaPropostaSolicitante;
+use App\Mail\AceiteCadastroPrestador;
+use App\Mail\RecusaCadastroPrestador;
 use App\Models\prestadores;
 use App\Models\solicitantes;
 use App\Models\pacientes;
 
 class EmailsController extends Controller
 {
+    //Atributos da tabela proposta
     private $idProposta;
-    private $idPrestador;
-    private $idSolicitante;
-    private $idPaciente;
+    private $idPrestadorProposta;
+    private $idSolicitanteProposta;
 
-    public function __construct($proposta)
+    //Atributos da tabela prestador
+    private $idPrestador;
+
+
+    public function __construct($dados)
     {
-        $this->idProposta = $proposta->id;
-        $this->idPrestador = $proposta->ID_PRESTADOR;
-        $this->idSolicitante = $proposta->ID_SOLICITANTE;
-        $this->idPaciente = $proposta->ID_PACIENTE;
+        //Objetos
         $this->objPrestador = new prestadores();
         $this->objSolicitante = new solicitantes();
         $this->objPaciente = new pacientes();
+
+        //Atributos da tabela proposta
+        $this->idProposta = $dados->id;
+        $this->idPrestadorProposta = $dados->ID_PRESTADOR;
+        $this->idSolicitanteProposta = $dados->ID_SOLICITANTE;
+
+        //Atributos da tabela prestador
+        $this->idPrestador = $dados->ID;
     }
 
     public function envioProposta()
     {
-        $prestador = $this->objPrestador->find($this->idPrestador);
+        $prestador = $this->objPrestador->find($this->idPrestadorProposta);
 
         Mail::to($prestador->EMAIL)
             ->send(new EnvioProposta($prestador));
@@ -40,7 +52,7 @@ class EmailsController extends Controller
 
     public function aceitePropostaPrestador()
     {
-        $solicitante = $this->objSolicitante->find($this->idSolicitante);
+        $solicitante = $this->objSolicitante->find($this->idSolicitanteProposta);
 
         Mail::to($solicitante->EMAIL)
             ->send(new AceitePropostaPrestador($solicitante));
@@ -48,7 +60,7 @@ class EmailsController extends Controller
 
     public function aceitePropostaSolicitante()
     {
-        $prestador = $this->objPrestador->find($this->idPrestador);
+        $prestador = $this->objPrestador->find($this->idPrestadorProposta);
 
         Mail::to($prestador->EMAIL)
             ->send(new AceitePropostaSolicitante($prestador));
@@ -56,10 +68,18 @@ class EmailsController extends Controller
 
     public function recusaPropostaSolicitante()
     {
-        $prestador = $this->objPrestador->find($this->idPrestador);
+        $prestador = $this->objPrestador->find($this->idPrestadorProposta);
 
         Mail::to($prestador->EMAIL)
             ->send(new RecusaPropostaSolicitante($prestador));
+    }
+
+    public function aceiteCadastroPrestador()
+    {
+        $prestador = $this->objPrestador->find($this->idPrestador);
+
+        Mail::to($prestador->EMAIL)
+            ->send(new AceiteCadastroPrestador($prestador));
     }
 
 }
