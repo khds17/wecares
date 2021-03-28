@@ -18,7 +18,6 @@ use App\Models\pacientes;
 class EmailsController extends Controller
 {
     //Atributos da tabela proposta
-    private $idProposta;
     private $idPrestadorProposta;
     private $idSolicitanteProposta;
 
@@ -34,7 +33,6 @@ class EmailsController extends Controller
         $this->objPaciente = new pacientes();
 
         //Atributos da tabela proposta
-        $this->idProposta = $dados->id;
         $this->idPrestadorProposta = $dados->ID_PRESTADOR;
         $this->idSolicitanteProposta = $dados->ID_SOLICITANTE;
 
@@ -80,6 +78,14 @@ class EmailsController extends Controller
 
         Mail::to($prestador->EMAIL)
             ->send(new AceiteCadastroPrestador($prestador));
+    }
+
+    public function recusaCadastroPrestador()
+    {
+        $prestador = $this->objPrestador->find($this->idPrestador);
+
+        Mail::to($prestador->EMAIL)
+            ->send(new RecusaCadastroPrestador($prestador));
     }
 
 }

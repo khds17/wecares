@@ -32,8 +32,10 @@ function reprovarPrestador(id)
             },
             success: function (result) {
                 window.location.replace('/prestadoresLista');
-         }
-
+            },
+            error: function(result) {
+                alert("Ocorreu um erro inesperado! Tente novamente daqui alguns segundos");
+            }
          })
     }
 }

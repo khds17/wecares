@@ -11,14 +11,16 @@ class RecusaCadastroPrestador extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $prestador;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($prestador)
     {
-        //
+        $this->prestador = $prestador;
     }
 
     /**
@@ -28,6 +30,9 @@ class RecusaCadastroPrestador extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this
+            ->subject('Resultado cadastro!')
+            ->view('email.RecusaCadastroPrestador')
+            ->with('prestador', $this->prestador);
     }
 }
