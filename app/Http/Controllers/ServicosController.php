@@ -276,9 +276,9 @@ class ServicosController extends Controller
     public function aceitarProspostaPrestador($id)
     {
         try {
-            $this->objProposta->where(['ID'=>$id])->update([
-                'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.ACEITADO')
-            ]);
+            // $this->objProposta->where(['ID'=>$id])->update([
+            //     'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.ACEITADO')
+            // ]);
 
             $proposta = $this->objProposta->find($id);
 
@@ -289,7 +289,7 @@ class ServicosController extends Controller
             ]);
 
             $email = new EmailsController($proposta);
-            $email->aceitePropostaCuidador();
+            $email->aceitePropostaPrestador();
 
             return true;
         } catch (\Throwable $th) {

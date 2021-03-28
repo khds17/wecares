@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AceitePropostaCuidador extends Mailable
+class AceitePropostaPrestador extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,7 +32,7 @@ class AceitePropostaCuidador extends Mailable
     {
         return $this
             ->subject('Olá, temos novidades sobre sua proposta!')
-            ->view('email.AceitePropostaCuidador')
+            ->view('email.AceitePropostaPrestador')
             ->with('solicitante', $this->solicitante);
     }
 }

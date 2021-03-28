@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnvioProposta;
-use App\Mail\AceitePropostaCuidador;
+use App\Mail\AceitePropostaPrestador;
 use App\Mail\AceitePropostaSolicitante;
 use App\Mail\RecusaPropostaSolicitante;
 use App\Models\prestadores;
@@ -38,12 +38,12 @@ class EmailsController extends Controller
             ->send(new EnvioProposta($prestador));
     }
 
-    public function aceitePropostaCuidador()
+    public function aceitePropostaPrestador()
     {
         $solicitante = $this->objSolicitante->find($this->idSolicitante);
 
         Mail::to($solicitante->EMAIL)
-            ->send(new AceitePropostaCuidador($solicitante));
+            ->send(new AceitePropostaPrestador($solicitante));
     }
 
     public function aceitePropostaSolicitante()
