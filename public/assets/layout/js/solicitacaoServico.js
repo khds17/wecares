@@ -92,7 +92,10 @@ function aceitarProspostaPrestador(id)
             },
             success: function (result) {
                 window.location.replace('/novaspropostas');
-         }
+            },
+            error: function(result) {
+                alert("Ocorreu um erro inesperado! Tente novamente daqui alguns segundos");
+            }
         })
     }
 }
@@ -110,7 +113,10 @@ function recusarProspostaPrestador(id)
             },
             success: function (result) {
                 window.location.replace('/novaspropostas');
-         }
+            },
+            error: function(result) {
+                alert("Ocorreu um erro inesperado! Tente novamente daqui alguns segundos");
+            }
         })
     }
 }
@@ -128,7 +134,10 @@ function aceitarPropostaSolicitante(id)
             },
             success: function (result) {
                 window.location.replace('/propostas');
-         }
+            },
+            error: function(result) {
+                alert("Ocorreu um erro inesperado! Tente novamente daqui alguns segundos");
+            }
         })
     }
 }
@@ -146,7 +155,10 @@ function recusarProspostaSolicitante(id)
             },
             success: function (result) {
                 window.location.replace('/propostas');
-         }
+            },
+            error: function(result) {
+                alert("Ocorreu um erro inesperado! Tente novamente daqui alguns segundos");
+            }
         })
     }
 }

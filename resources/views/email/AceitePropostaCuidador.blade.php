@@ -467,7 +467,7 @@ div.preheader {
             <div style="Margin-left: 20px;Margin-right: 20px;">
       <div style="mso-line-height-rule: exactly;mso-text-raise: 11px;vertical-align: middle;">
         <h3 style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #788991;font-size: 16px;line-height: 24px;text-align: center;">WeCares</h3>
-        <h1 style="Margin-top: 12px;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #3e4751;font-size: 22px;line-height: 31px;font-family: Ubuntu,sans-serif;text-align: center;">{{$data['nomeSolicitante']}}, a proposta que você enviou foi aceita por um profissional!</h1>
+        <h1 style="Margin-top: 12px;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #3e4751;font-size: 22px;line-height: 31px;font-family: Ubuntu,sans-serif;text-align: center;">{{$solicitante->NOME}}, a proposta que você enviou foi aceita por um profissional!</h1>
         <p style="Margin-top: 20px;Margin-bottom: 20px;">
             <center><span>Para ter mais informações da proposta, clique no botão abaixo.&nbsp;</span></center>
         </p>

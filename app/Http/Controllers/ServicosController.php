@@ -17,10 +17,6 @@ use App\Models\registros_log;
 use App\Http\Requests\Proposta;
 use App\Config\constants;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\AceitePropostaCuidador;
-use App\Mail\AceitePropostaSolicitante;
-use App\Mail\RecusaPropostaSolicitante;
 
 class ServicosController extends Controller
 {
@@ -279,100 +275,96 @@ class ServicosController extends Controller
 
     public function aceitarProspostaPrestador($id)
     {
+        try {
+            $this->objProposta->where(['ID'=>$id])->update([
+                'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.ACEITADO')
+            ]);
 
-        $this->objProposta->where(['ID'=>$id])->update([
-            'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.ACEITADO')
-        ]);
+            $proposta = $this->objProposta->find($id);
 
-        $proposta = $this->objProposta->find($id);
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Proposta#'.$proposta->ID.' do solicitante '.$proposta->NOME_SOLICITANTE.' aceita',
+                'ID_USUARIO' => auth()->user()->id
+            ]);
 
-        $this->objRegistros->create([
-            'DATA' => date('d/m/Y \à\s H:i:s'),
-            'TEXTO' => 'Proposta#'.$proposta->ID.' do solicitante '.$proposta->NOME_SOLICITANTE.' aceita',
-            'ID_USUARIO' => auth()->user()->id
-        ]);
+            $email = new EmailsController($proposta);
+            $email->aceitePropostaCuidador();
 
-        $solicitante = $this->objSolicitante->find($proposta->ID_SOLICITANTE);
-
-        $data = array(
-            'nomeSolicitante' => $proposta->NOME_SOLICITANTE,
-          );
-
-          Mail::to($solicitante->EMAIL)
-                  ->send(new AceitePropostaCuidador($data));
-
-        return true;
-
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public function recusarProspostaPrestador($id)
     {
-        $this->objProposta->where(['ID'=>$id])->update([
-            'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.RECUSADO'),
-        ]);
+        try {
+            $this->objProposta->where(['ID'=>$id])->update([
+                'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.RECUSADO'),
+            ]);
 
-        $proposta = $this->objProposta->find($id);
+            $proposta = $this->objProposta->find($id);
 
-        $this->objRegistros->create([
-            'DATA' => date('d/m/Y \à\s H:i:s'),
-            'TEXTO' => 'Proposta#'.$proposta->ID.' do solicitante '.$proposta->NOME_SOLICITANTE.' recusada',
-            'ID_USUARIO' => auth()->user()->id
-        ]);
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Proposta#'.$proposta->ID.' do solicitante '.$proposta->NOME_SOLICITANTE.' recusada',
+                'ID_USUARIO' => auth()->user()->id
+            ]);
 
-        return true;
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+
     }
 
     public function aceitarPropostaSolicitante($id)
     {
-        $this->objProposta->where(['ID'=>$id])->update([
-            'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.ACEITADO'),
-        ]);
+        try {
+            $this->objProposta->where(['ID'=>$id])->update([
+                'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.ACEITADO'),
+            ]);
 
-        $proposta = $this->objProposta->find($id);
+            $proposta = $this->objProposta->find($id);
 
-        $this->objRegistros->create([
-            'DATA' => date('d/m/Y \à\s H:i:s'),
-            'TEXTO' => 'Proposta#'.$proposta->ID.' aceita',
-            'ID_USUARIO' => auth()->user()->id
-        ]);
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Proposta#'.$proposta->ID.' aceita',
+                'ID_USUARIO' => auth()->user()->id
+            ]);
 
-        $prestador = $this->objPrestador->find($proposta->ID_PRESTADOR);
+            $email = new EmailsController($proposta);
+            $email->aceitePropostaSolicitante();
 
-        $data = array(
-            'nomePrestador' => $prestador->NOME,
-          );
-
-          Mail::to($prestador->EMAIL)
-                  ->send(new AceitePropostaSolicitante($data));
-
-        return true;
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     public function recusarProspostaSolicitante($id)
     {
+        try {
+            $this->objProposta->where(['ID'=>$id])->update([
+                'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
+            ]);
 
-        $this->objProposta->where(['ID'=>$id])->update([
-            'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
-        ]);
+            $proposta = $this->objProposta->find($id);
 
-        $proposta = $this->objProposta->find($id);
+            $this->objRegistros->create([
+                'DATA' => date('d/m/Y \à\s H:i:s'),
+                'TEXTO' => 'Proposta#'.$proposta->ID.' recusada',
+                'ID_USUARIO' => auth()->user()->id
+            ]);
 
-        $this->objRegistros->create([
-            'DATA' => date('d/m/Y \à\s H:i:s'),
-            'TEXTO' => 'Proposta#'.$proposta->ID.' recusada',
-            'ID_USUARIO' => auth()->user()->id
-        ]);
+            $email = new EmailsController($proposta);
+            $email->recusaPropostaSolicitante();
 
-        $prestador = $this->objPrestador->find($proposta->ID_PRESTADOR);
-
-        $data = array(
-            'nomePrestador' => $prestador->NOME,
-          );
-
-          Mail::to($prestador->EMAIL)
-                  ->send(new RecusaPropostaSolicitante($data));
-
-        return true;
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
 }

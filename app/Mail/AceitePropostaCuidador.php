@@ -11,16 +11,16 @@ class AceitePropostaCuidador extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public $solicitante;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($solicitante)
     {
-        $this->data = $data;
+        $this->solicitante = $solicitante;
     }
 
     /**
@@ -33,6 +33,6 @@ class AceitePropostaCuidador extends Mailable
         return $this
             ->subject('Olá, temos novidades sobre sua proposta!')
             ->view('email.AceitePropostaCuidador')
-            ->with('data', $this->data);
+            ->with('solicitante', $this->solicitante);
     }
 }

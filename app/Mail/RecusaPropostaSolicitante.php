@@ -11,16 +11,16 @@ class RecusaPropostaSolicitante extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public $prestador;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($prestador)
     {
-        $this->data = $data;
+        $this->prestador = $prestador;
     }
 
     /**
@@ -33,6 +33,6 @@ class RecusaPropostaSolicitante extends Mailable
         return $this
             ->subject('Olá, temos uma novidade sobre a proposta!')
             ->view('email.RecusaPropostaSolicitante')
-            ->with('data', $this->data);
+            ->with('prestador', $this->prestador);
     }
 }
