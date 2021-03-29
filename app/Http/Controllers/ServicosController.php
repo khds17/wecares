@@ -275,6 +275,8 @@ class ServicosController extends Controller
 
     public function aceitarProspostaPrestador($id)
     {
+        DB::beginTransaction();
+
         try {
             $this->objProposta->where(['ID'=>$id])->update([
                 'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.ACEITADO')
@@ -291,14 +293,19 @@ class ServicosController extends Controller
             $email = new EmailsController($proposta);
             $email->aceitePropostaPrestador();
 
+            DB::commit();
+
             return true;
         } catch (\Throwable $th) {
+            DB::rollback();
             return false;
         }
     }
 
     public function recusarProspostaPrestador($id)
     {
+        DB::beginTransaction();
+
         try {
             $this->objProposta->where(['ID'=>$id])->update([
                 'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.RECUSADO'),
@@ -312,8 +319,11 @@ class ServicosController extends Controller
                 'ID_USUARIO' => auth()->user()->id
             ]);
 
+            DB::commit();
+
             return true;
         } catch (\Throwable $th) {
+            DB::rollback();
             return false;
         }
 
@@ -321,6 +331,7 @@ class ServicosController extends Controller
 
     public function aceitarPropostaSolicitante($id)
     {
+        DB::beginTransaction();
         try {
             $this->objProposta->where(['ID'=>$id])->update([
                 'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.ACEITADO'),
@@ -337,14 +348,19 @@ class ServicosController extends Controller
             $email = new EmailsController($proposta);
             $email->aceitePropostaSolicitante();
 
+            DB::commit();
+
             return true;
         } catch (\Throwable $th) {
+            DB::rollback();
             return false;
         }
     }
 
     public function recusarProspostaSolicitante($id)
     {
+        DB::beginTransaction();
+
         try {
             $this->objProposta->where(['ID'=>$id])->update([
                 'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
@@ -361,8 +377,11 @@ class ServicosController extends Controller
             $email = new EmailsController($proposta);
             $email->recusaPropostaSolicitante();
 
+            DB::commit();
+
             return true;
         } catch (\Throwable $th) {
+            DB::rollback();
             return false;
         }
     }

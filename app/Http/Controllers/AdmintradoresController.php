@@ -210,13 +210,14 @@ class AdmintradoresController extends Controller
             return true;
         } catch (\Throwable $th) {
             DB::rollback();
-            dump($th);
             return false;
         }
     }
 
     public function reprovarPrestador($id)
     {
+        DB::beginTransaction();
+
         try {
             $this->objUsers->where(['ID'=>$id])->update([
                 'status' => \Config::get('constants.STATUS.REPROVADO')
@@ -236,8 +237,11 @@ class AdmintradoresController extends Controller
             $email = new EmailsController($prestador);
             $email->recusaCadastroPrestador();
 
+            DB::commit();
+
             return true;
         } catch (\Throwable $th) {
+            DB::rollback();
             return false;
         }
 
