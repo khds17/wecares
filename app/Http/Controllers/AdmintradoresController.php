@@ -185,6 +185,8 @@ class AdmintradoresController extends Controller
 
     public function aprovarPrestador($id)
     {
+        DB::beginTransaction();
+
         try {
             $this->objUsers->where(['ID'=>$id])->update([
                 'status' => \Config::get('constants.STATUS.ATIVO')
@@ -203,10 +205,13 @@ class AdmintradoresController extends Controller
             $email = new EmailsController($prestador);
             $email->aceiteCadastroPrestador();
 
+            DB::commit();
+
             return true;
         } catch (\Throwable $th) {
+            DB::rollback();
             dump($th);
-           return false;
+            return false;
         }
     }
 
