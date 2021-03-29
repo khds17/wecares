@@ -205,6 +205,7 @@ class AdmintradoresController extends Controller
 
             return true;
         } catch (\Throwable $th) {
+            dump($th);
            return false;
         }
     }

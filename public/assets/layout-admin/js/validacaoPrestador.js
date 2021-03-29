@@ -13,6 +13,7 @@ function aprovarPrestador(id)
                 window.location.replace('/prestadoresLista');
             },
             error: function(result) {
+                console.log(result);
                 alert("Ocorreu um erro inesperado! Tente novamente daqui alguns segundos");
             }
         })
