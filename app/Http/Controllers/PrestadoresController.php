@@ -190,6 +190,8 @@ class PrestadoresController extends Controller
         //Criando as variaveis com os objetos que podem ser usados na view
         $prestadores = $this->objPrestador->find($id);
 
+        dd($prestadores);
+
         $enderecos = $this->objEndereco->find($id);
 
         $certificados = $this->objCertificado->find($id);
