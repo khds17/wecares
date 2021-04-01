@@ -187,18 +187,17 @@ class PrestadoresController extends Controller
      */
     public function show($id)
     {
-        //Criando as variaveis com os objetos que podem ser usados na view
-        $prestadores = $this->objPrestador->find($id);
+        $prestador = $this->objPrestador->find($id);
 
-        dd($prestadores);
+        $endereco = $this->objEndereco->find($prestador->ID_ENDERECO);
 
-        $enderecos = $this->objEndereco->find($id);
+        $certificado = $this->objCertificado->find($prestador->ID_CERTIFICADO);
 
-        $certificados = $this->objCertificado->find($id);
+        $antecedente = $this->objAntecedente->find($prestador->ID_ANTECEDENTE);
 
-        $antecedentes = $this->objAntecedente->find($id);
+        $cidade = $this->objCidade->find($endereco->ID_CIDADE);
 
-        return view('prestadores/prestadores-informacoes',compact('prestadores','enderecos','certificados', 'antecedentes'));
+        return view('prestadores/prestadores-informacoes',compact('prestador','endereco','certificado', 'antecedente', 'cidade'));
     }
 
     /**
