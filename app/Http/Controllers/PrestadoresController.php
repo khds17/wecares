@@ -189,15 +189,23 @@ class PrestadoresController extends Controller
     {
         $prestador = $this->objPrestador->find($id);
 
+        $sexos = $this->objSexos->all();
+
         $endereco = $this->objEndereco->find($prestador->ID_ENDERECO);
+
+        $cidades = $this->objCidade->all();
+
+        $estados = $this->objEstado->all();
+
+        $formacoes = $this->objFormacao->all();
 
         $certificado = $this->objCertificado->find($prestador->ID_CERTIFICADO);
 
         $antecedente = $this->objAntecedente->find($prestador->ID_ANTECEDENTE);
 
-        $cidade = $this->objCidade->find($endereco->ID_CIDADE);
+        $foto = $this->objFotos->find($prestador->ID_FOTO);
 
-        return view('prestadores/prestadores-informacoes',compact('prestador','endereco','certificado', 'antecedente', 'cidade'));
+        return view('prestadores/prestadores-informacoes',compact('prestador','sexos','endereco','cidades','estados','formacoes','certificado','antecedente'));
     }
 
     /**
