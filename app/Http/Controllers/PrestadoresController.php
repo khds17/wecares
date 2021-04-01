@@ -197,8 +197,6 @@ class PrestadoresController extends Controller
 
         $cidade = $this->objCidade->find($endereco->ID_CIDADE);
 
-        dd($prestador, $endereco, $certificado, $antecedente, $cidade);
-
         return view('prestadores/prestadores-informacoes',compact('prestador','endereco','certificado', 'antecedente', 'cidade'));
     }
 

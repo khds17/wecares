@@ -1,12 +1,13 @@
 @extends('templates.template-admin')
 @section('content')
-    <h1 class="text-center">Informações do prestadores</h1>
+    <h1 class="text-center">Informações do prestador</h1>
     <div class="col-8 m-auto">
-        Nome:{{$prestadores->NOME}}<br>
-        CPF:{{$prestadores->CPF}}<br>
-        Telefone:{{$prestadores->TELEFONE}}<br>
-        Data de Nascimento:{{$prestadores->DT_NASCIMENTO}}<br>
-        E-mail:{{$prestadores->EMAIL}}<br>
+        @dump($prestador, $endereco, $certificado, $antecedente, $cidade);
+        Nome:{{$prestador->NOME}}<br>
+        CPF:{{$prestador->CPF}}<br>
+        Telefone:{{$prestador->TELEFONE}}<br>
+        Data de Nascimento:{{$prestador->DT_NASCIMENTO}}<br>
+        E-mail:{{$prestador->EMAIL}}<br>
         CEP:{{$endereco->CEP}}<br>
         Endereço:{{$endereco->ENDERECO}}<br>
         Número:{{$endereco->NUMERO}}<br>
@@ -34,10 +35,10 @@
         @endif
         <br><br>
         <a href="">
-            <button class="btn btn-success" onclick="aprovarPrestador({{$prestadores->ID_USUARIO}})">Aprovar</button>
+            <button class="btn btn-success" onclick="aprovarPrestador({{$prestador->ID_USUARIO}})">Aprovar</button>
         </a>
         <a href="">
-            <button class="btn btn-danger" onclick="reprovarPrestador({{$prestadores->ID_USUARIO}})">Reprovar</button>
+            <button class="btn btn-danger" onclick="reprovarPrestador({{$prestador->ID_USUARIO}})">Reprovar</button>
         </a>
     </div>
 @endsection
