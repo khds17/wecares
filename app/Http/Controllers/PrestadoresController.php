@@ -205,7 +205,7 @@ class PrestadoresController extends Controller
 
         $foto = $this->objFotos->find($prestador->ID_FOTO);
 
-        return view('prestadores/prestadores-informacoes',compact('prestador','sexos','endereco','cidades','estados','formacoes','certificado','antecedente'));
+        return view('prestadores/prestadores-informacoes',compact('prestador','sexos','endereco','cidades','estados','formacoes','certificado','antecedente','foto'));
     }
 
     /**
