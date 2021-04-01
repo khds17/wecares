@@ -70,7 +70,7 @@
                 </div>
                 <div class="col">
                     <label for="bairro">Bairro</label>
-                    <input class="form-control" type="text" name="prestadorBairro" id="prestadorBairro" value="{{$endereco->BAIRRO}}">
+                    <input class="form-control" type="text" name="prestadorBairro" id="prestadorBairro" value="{{$endereco->BAIRRO}}" disabled>
                 </div>
             </div>
             <br>
