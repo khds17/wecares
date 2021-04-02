@@ -53,6 +53,11 @@ class PrestadoresController extends Controller
 
     }
 
+    public function index()
+    {
+        return redirect("/");
+    }
+
     public function cadastroPrestador()
     {
         // Encontra o prestador pelo usuario logado.
