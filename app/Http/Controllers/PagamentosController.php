@@ -407,7 +407,7 @@ class PagamentosController extends Controller
             }
         } else if(count($pagamentosValidaCartao) >= 1) {
             foreach ($pagamentosValidaCartao as $pagamentoValidaCartao) {
-                $payment = \MercadoPago\Payment::find_by_id($pagamentosValidaCartao->ID_PAGAMENTO);
+                $payment = \MercadoPago\Payment::find_by_id($pagamentoValidaCartao->ID_PAGAMENTO);
 
                 if($payment == 'approved') {
                     $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamentoValidaCartao->ID_PAGAMENTO])->update([
