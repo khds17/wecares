@@ -339,7 +339,7 @@ class PagamentosController extends Controller
     {
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
-        $payment = \MercadoPago\Payment::find_by_id(14305307730);
+        $payment = \MercadoPago\Payment::find_by_id();
         $payment->refund();
 
         if($payment->status == "refunded") {
@@ -360,6 +360,7 @@ class PagamentosController extends Controller
         if(count($pagamentos) >= 1) {
             foreach ($pagamentos as $pagamento) {
                 $payment = \MercadoPago\Payment::find_by_id($pagamento->ID_PAGAMENTO);
+                dump($payment);
 
                 if($payment == 'approved') {
                     $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
