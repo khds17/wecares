@@ -64,6 +64,8 @@ Route::get('/paymentForm','PagamentosController@paymentForm')->middleware('auth'
 Route::post('/payment','PagamentosController@payment')->middleware('auth')->middleware('role:administrador');
 Route::post('/estornoPayment/{id}','PagamentosController@estornoPayment')->middleware('role:solicitante');
 Route::get('/atualizarPagamentos','PagamentosController@atualizarPagamentos');
+//Rota para cancelamento de pagamentos de teste
+Route::get('/estorno','PagamentosController@estorno')->middleware('auth')->middleware('role:administrador');
 
 Auth::routes(['register' => false]);
 Auth::routes(['verify' => true]);
