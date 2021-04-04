@@ -360,18 +360,45 @@ class PagamentosController extends Controller
         if(count($pagamentos) >= 1) {
             foreach ($pagamentos as $pagamento) {
                 $payment = \MercadoPago\Payment::find_by_id($pagamento->ID_PAGAMENTO);
-                dump($payment);
 
                 if($payment == 'approved') {
                     $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
                         'STATUS' => $payment->status,
                         'DT_APROVACAO' => $payment->date_approved
                     ]);
-                } else {
+
+                    echo "Status do pagamento atualizado para aprovado";
+
+                } else if($payment == 'rejected') {
                     $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
                         'STATUS' => $payment->status,
-                        'DT_APROVACAO' => $payment->date_approved
                     ]);
+
+                    echo "Status do pagamento atualizado para rejeitado";
+
+                } else if($payment == 'refunded') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                    ]);
+
+                    echo "Status do pagamento atualizado para cancelado - Comprador cancelou";
+
+                } else if($payment == 'cancelled') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                    ]);
+
+                    echo "Status do pagamento atualizado para cancelado - Emissor do cartão cancelou";
+
+                } else if($payment == 'charged_back') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamento->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                    ]);
+
+                    echo "Status do pagamento atualizado para Charge Back";
+
+                } else {
+                    echo "Status do cartão não atualizado";
                 }
             }
         }
