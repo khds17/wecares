@@ -1,26 +1,30 @@
 if (document.getElementById('cidade') !== null) {
     $(document).ready(function() {
         $( "#cidade" ).autocomplete({
-             source: function(request, response) {
+            source: function(request, response) {
                 $.ajax({
-                url: '/cuidadorCidades',
-                type: 'get',
-                data: {
-                        term : request.term
-                 },
-                dataType: "json",
-                success: function(data){
-                   var resp = $.map(data,function(obj){
-                        $( "#id" ).val(obj.ID);
-                        return obj.CIDADE;
-                   });
-
-                   response(resp);
-                }
-            });
-        },
-        minLength: 1
-     });
+                    url: '/cuidadorCidades',
+                    type: 'get',
+                    data: {
+                            term : request.term
+                    },
+                    dataType: "json",
+                    success: function(data){
+                    let resp = $.map(data,function(objCidade){
+                        let resultado = objCidade.ID + ' ' + objCidade.CIDADE;
+                        return (resultado);
+                    });
+                    response(resp);
+                    }
+                });
+            },
+            select: function (event, ui) {
+                let idCidade = ui.item.value.split(" ");
+                $("#id").val(idCidade[0]);
+                return false;
+            },
+            minLength: 1
+        });
     });
 }
 
