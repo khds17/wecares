@@ -357,6 +357,10 @@ class PagamentosController extends Controller
                             ->where('PAGAMENTOS.STATUS', '=', 'in_process')
                             ->get();
 
+        $pagamentosValidaCartao = $this->objValidaCartao
+                                    ->where('VALIDA_CARTAO.STATUS', '=', 'in_process')
+                                    ->get();
+
         if(count($pagamentos) >= 1) {
             foreach ($pagamentos as $pagamento) {
                 $payment = \MercadoPago\Payment::find_by_id($pagamento->ID_PAGAMENTO);
@@ -401,7 +405,52 @@ class PagamentosController extends Controller
                     echo "Status do cartão não atualizado";
                 }
             }
-            dd('Entrou aqui');
+        } else if(count($pagamentosValidaCartao) >= 1) {
+            foreach ($pagamentosValidaCartao as $pagamentoValidaCartao) {
+                $payment = \MercadoPago\Payment::find_by_id($pagamento->ID_PAGAMENTO);
+
+                if($payment == 'approved') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamentoValidaCartao->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                        'DT_APROVACAO' => $payment->date_approved
+                    ]);
+
+                    echo "Status do pagamento atualizado para aprovado";
+
+                } else if($payment == 'rejected') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamentoValidaCartao->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                    ]);
+
+                    echo "Status do pagamento atualizado para rejeitado";
+
+                } else if($payment == 'refunded') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamentoValidaCartao->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                    ]);
+
+                    echo "Status do pagamento atualizado para cancelado - Comprador cancelou";
+
+                } else if($payment == 'cancelled') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamentoValidaCartao->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                    ]);
+
+                    echo "Status do pagamento atualizado para cancelado - Emissor do cartão cancelou";
+
+                } else if($payment == 'charged_back') {
+                    $this->objPagamentos->where(['ID_PAGAMENTO' => $pagamentoValidaCartao->ID_PAGAMENTO])->update([
+                        'STATUS' => $payment->status,
+                    ]);
+
+                    echo "Status do pagamento atualizado para Charge Back";
+
+                } else {
+                    echo "Status do cartão não atualizado";
+                }
+            }
+        } else {
+            echo "Nenhuma pagamento ou pagamento de teste para ser atualizado";
         }
     }
 
