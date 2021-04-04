@@ -202,10 +202,11 @@ class PagamentosController extends Controller
 
         } else {
             $errorArray = (array)$payment->error;
+            Storage::put('file.txt', $errorArray);
             echo json_encode ($errorArray);
         }
 
-        return redirect('/pagamentos');
+        // return redirect('/pagamentos');
     }
 
     public function estornoPaymentValidation()
