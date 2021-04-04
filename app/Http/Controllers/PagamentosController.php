@@ -401,8 +401,8 @@ class PagamentosController extends Controller
                     echo "Status do cartão não atualizado";
                 }
             }
+            dd('Entrou aqui');
         }
-
     }
 
 }
