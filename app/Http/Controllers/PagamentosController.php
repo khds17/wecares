@@ -402,7 +402,7 @@ class PagamentosController extends Controller
                     echo "Status do pagamento atualizado para Charge Back";
 
                 } else {
-                    echo "Status do cartão não atualizado";
+                    echo "Status do pagamento não atualizado";
                 }
             }
         } else if(count($pagamentosValidaCartao) >= 1) {
@@ -446,7 +446,7 @@ class PagamentosController extends Controller
                     echo "Status do pagamento atualizado para Charge Back";
 
                 } else {
-                    echo "Status do cartão não atualizado";
+                    echo "Status do pagamento de teste não atualizado";
                 }
             }
         } else {
