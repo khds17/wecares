@@ -141,9 +141,8 @@ class ServicosController extends Controller
                     }
 
                     DB::commit();
-
-                    return redirect()->action('ServicosController@propostaAgradecimento');
                 }
+                return redirect()->action('ServicosController@propostaAgradecimento');
             } catch (\Throwable $th) {
                 DB::rollback();
                 return redirect()->action('IndexController@encontreCuidador');

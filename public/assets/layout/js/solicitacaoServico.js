@@ -68,6 +68,17 @@ function getPaciente(id) {
     });
 }
 
+function checkPrestador(id) {
+
+    let cardCuidador = document.getElementById("checkPrestador["+id+"]");
+
+    if(cardCuidador.checked){
+        cardCuidador.checked = false;
+    } else {
+        cardCuidador.checked = true;
+    }
+}
+
 function selectPrestadores() {
 
     let prestadores = [];

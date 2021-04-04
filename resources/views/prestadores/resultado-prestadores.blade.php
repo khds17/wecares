@@ -17,7 +17,7 @@
             <div class="row features text-center mb-10">
                 @foreach ($prestadores as $prestador)
                 <div class="col-lg-4 col-md-6 mb-5">
-                    <a class="card card-link border-top border-top-lg border-primary h-100 lift">
+                    <a class="card card-link border-top border-top-lg border-primary h-100 lift" onclick="checkPrestador({{$prestador->ID}})">
                         <div class="card-body p-5">
                             {{-- <div class="icon-stack icon-stack-lg bg-primary-soft text-primary mb-4"><i data-feather="user"></i></div> --}}
                             <input type="image" src="{{url("storage/{$prestador->FOTO}")}}" width="100" height="100">
