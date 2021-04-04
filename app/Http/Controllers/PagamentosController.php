@@ -334,11 +334,12 @@ class PagamentosController extends Controller
         }
     }
 
+    //Action para fazer os cancelamentos de teste
     public function estorno()
     {
         \MercadoPago\SDK::setAccessToken(\Config::get('constants.TOKEN.PROD_ACCESS_TOKEN'));
 
-        $payment = \MercadoPago\Payment::find_by_id(14049089636);
+        $payment = \MercadoPago\Payment::find_by_id(14304981816);
         $payment->refund();
 
         if($payment->status == "refunded") {
