@@ -44,228 +44,295 @@
     @if (count($prestadores) >= 1)
         <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
             <div class="float-right">
-                <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" data-toggle= "modal" data-target="#modalServico" onclick="selectPrestadores()">Solicitar serviço</a>
+                <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" data-toggle= "modal" data-target="#modalServico" @if(Auth::user()) onclick="selectPrestadores()" @else onclick="teste15()" @endif> Solicitar serviço</a>
             </div>
         </div>
 
         <!-- Modal -->
-        <div class="modal fade bd-example-modal-lg" id="modalServico" tabindex="-1" role="dialog" aria-labelledby="modalServicoLabel" aria-hidden="true">
+        @if (isset($pacientes))
+            <div class="modal fade bd-example-modal-lg" id="modalServico" tabindex="-1" role="dialog" aria-labelledby="modalServicoLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalServicoLabel">Informações da solicitação</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <form name="formProposta" id="formProposta" method="post" enctype="multipart/form-data" action="{{url('proposta')}}">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="hidden" id="idPrestadores" name="idPrestadores">
+                                    <label for="paciente" class="text-dark">Paciente</label><br>
+                                    <select name="selectPaciente" id="selectPaciente" class="custom-select" onchange="getPaciente(this.value)">
+                                        <option value="">Escolha um paciente</option>
+                                        @foreach ($pacientes as $paciente)
+                                            <option value="{{$paciente->ID}}">{{$paciente->NOME}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('selectPaciente')
+                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    @enderror
+                                </div>
+                                <div class="row margin-top-10">
+                                    <div class="col">
+                                        <label for="paciente" class="text-dark">O paciente é?</label><br>
+                                        <select name="pacienteTipo" id="pacienteTipo" class="custom-select">
+                                            <option value=""></option>
+                                            @foreach($pacientesTipos as $tipo)
+                                                    <option value="{{$tipo->ID}}">{{$tipo->TIPO}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('pacienteTipo')
+                                            <span class="text-danger"><small>{{$message}}</small></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row margin-top-10">
+                                    <div class="col">
+                                        <label for="paciente" class="text-dark">Qual a sua familiaridade com o paciente?</label><br>
+                                        <select name="familiaridade" id="familiaridade" class="custom-select" value="">
+                                            <option value=""></option>
+                                            @foreach($familiaridades as $familiaridade)
+                                                <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('familiaridade')
+                                            <span class="text-danger"><small>{{$message}}</small></span>
+                                        @enderror
+                                    </div>
+                                    <div class="col">
+                                        <label for="familiaridade" class="text-dark">Descreva o que é do paciente</label>
+                                        <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" value="">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row margin-top-10">
+                                    <div class="col">
+                                        <label for="paciente" class="text-dark">Onde o paciente está localizado?</label><br>
+                                        <select name="pacienteLocalizacao" id="pacienteLocalizacao" class="custom-select">
+                                            <option value=""></option>
+                                            @foreach($pacientesLocalizacao as $localizacao)
+                                                    <option value="{{$localizacao->ID}}" >{{$localizacao->LOCALIZACAO}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('pacienteLocalizacao')
+                                            <span class="text-danger"><small>{{$message}}</small></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <br>
+                                @foreach ($enderecos as $endereco)
+                                    @if ($paciente->ID_ENDERECO == $endereco->ID)
+                                        <div class="row margin-top-10">
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" value="">
+                                                @error('pacienteCep')
+                                                    <span class="text-danger"><small>{{$message}}</small></span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row margin-top-10">
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" value="">
+                                                @error('pacienteEndereco')
+                                                    <span class="text-danger"><small>{{$message}}</small></span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" value="">
+                                                @error('pacienteNumero')
+                                                    <span class="text-danger"><small>{{$message}}</small></span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row margin-top-10">
+                                            <div class="col">
+                                                <select class ="form-control"name="pacienteCidade" id="pacienteCidade">
+                                                    <option value="">Cidade</option>
+                                                    @foreach($cidades as $cidade)
+                                                        <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('pacienteCidade')
+                                                    <span class="text-danger"><small>{{$message}}</small></span>
+                                                @enderror
+                                            </div>
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" value="">
+                                                @error('pacienteBairro')
+                                                    <span class="text-danger"><small>{{$message}}</small></span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row margin-top-10">
+                                            <div class="col">
+                                                <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" value="">
+                                            </div>
+                                            <div class="col">
+                                                <select class ="form-control"name="pacienteEstado" id="pacienteEstado">
+                                                    <option value="">Estado</option>
+                                                    @foreach($estados as $estado)
+                                                        <option value="{{$estado->ID}}">{{$estado->UF}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('pacienteEstado')
+                                                    <span class="text-danger"><small>{{$message}}</small></span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                <br>
+                                <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label for="opcaoDeServicos">Serviços que deverão ser realizados</label><br>
+                                        @foreach($servicos as $servico)
+                                            <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}} <br>
+                                        @endforeach
+                                        <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
+                                    </div>
+                                </div>
+                                <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label for="tomaMedicamento">Paciente toma medicamentos?</label><br>
+                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br>
+                                        <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não <br>
+                                        @error('tomaMedicamento')
+                                            <span class="text-danger"><small>{{$message}}</small></span>
+                                        @enderror
+                                    </div>
+                                    <div class="col font-color-gray">
+                                        <label for="tipoMedicamentos">Quais medicamentos?</label><br>
+                                        <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label class ="" for="inicio">Data do inicio do serviço:</label><br>
+                                        <input class="form-control" type="date" name="dataInicio" id="dataInicio">
+                                        @error('dataInicio')
+                                            <span class="text-danger"><small>{{$message}}</small></span>
+                                        @enderror
+                                    </div>
+                                    <div class="col font-color-gray">
+                                        <label class ="" for="fim">Data fim do serviço:</label><br>
+                                        <input class="form-control" type="date" name="dataFim" id="dataFim">
+                                        @error('dataFim')
+                                            <span class="text-danger"><small>{{$message}}</small></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label class ="" for="horaroInicio">Horário de início</label><br>
+                                        <input class="form-control" type="time" name="horaInicio" id="horaInicio" placeholder="Horário de início">
+                                        @error('horaInicio')
+                                            <span class="text-danger"><small>{{$message}}</small></span>
+                                        @enderror
+                                    </div>
+                                    <div class="col font-color-gray">
+                                        <label class ="" for="horaroFim">Horário fim</label><br>
+                                        <input class="form-control" type="time" name="horaFim" id="horaFim" placeholder="Horário do fim" onchange="calcularServicos()">
+                                        @error('horaFim')
+                                            <span class="text-danger"><small>{{$message}}</small></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- <div class="row margin-top-10">
+                                    <div class="col font-color-gray">
+                                        <label class ="" for="">Adicionar mais</label><br>
+                                    </div>
+                                </div>
+                                <br> -->
+                                <div class="row margin-top-10" id="servicos" >
+                                    <div class="col font-color-gray">
+                                        <label class="" for="formacao">Valor total do serviço: R$</label>
+                                        <input class="" type="text" name="propostaValorSimulacao" id="propostaValorSimulacao">
+                                        <input class="" type="hidden" name="precoServico" id="precoServico" value="">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input class="btn btn-teal btn-block btn-marketing rounded-pill" type="submit" value="Enviar proposta">
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @else
+        <div class="modal fade bd-example-modal-sm" id="modalServico" tabindex="-1" role="dialog" aria-labelledby="modalServicoLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalServicoLabel">Informações da solicitação</h5>
+                        <h5 class="modal-title" id="modalServicoLabel">Login</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                    <form name="formProposta" id="formProposta" method="post" enctype="multipart/form-data" action="{{url('proposta')}}">
+                        <form method="POST" action="{{ route('login') }}">
                             @csrf
+    
+                            <div class="form-group">   
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail" autofocus>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                            </div>
+    
                             <div class="form-group">
-                                <input type="hidden" id="idPrestadores" name="idPrestadores">
-                                <label for="paciente" class="text-dark">Paciente</label><br>
-                                <select name="selectPaciente" id="selectPaciente" class="custom-select" onchange="getPaciente(this.value)">
-                                    <option value="">Escolha um paciente</option>
-                                    @foreach ($pacientes as $paciente)
-                                        <option value="{{$paciente->ID}}">{{$paciente->NOME}}</option>
-                                    @endforeach
-                                </select>
-                                @error('selectPaciente')
-                                    <span class="text-danger"><small>{{$message}}</small></span>
-                                @enderror
-                            </div>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <label for="paciente" class="text-dark">O paciente é?</label><br>
-                                    <select name="pacienteTipo" id="pacienteTipo" class="custom-select">
-                                        <option value=""></option>
-                                        @foreach($pacientesTipos as $tipo)
-                                                <option value="{{$tipo->ID}}">{{$tipo->TIPO}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('pacienteTipo')
-                                        <span class="text-danger"><small>{{$message}}</small></span>
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Senha">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
-                                </div>
                             </div>
-                            <br>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <label for="paciente" class="text-dark">Qual a sua familiaridade com o paciente?</label><br>
-                                    <select name="familiaridade" id="familiaridade" class="custom-select" value="">
-                                        <option value=""></option>
-                                        @foreach($familiaridades as $familiaridade)
-                                            <option value="{{$familiaridade->ID}}">{{$familiaridade->FAMILIARIDADE}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('familiaridade')
-                                        <span class="text-danger"><small>{{$message}}</small></span>
-                                    @enderror
-                                </div>
-                                <div class="col">
-                                    <label for="familiaridade" class="text-dark">Descreva o que é do paciente</label>
-                                    <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" value="">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row margin-top-10">
-                                <div class="col">
-                                    <label for="paciente" class="text-dark">Onde o paciente está localizado?</label><br>
-                                    <select name="pacienteLocalizacao" id="pacienteLocalizacao" class="custom-select">
-                                        <option value=""></option>
-                                        @foreach($pacientesLocalizacao as $localizacao)
-                                                <option value="{{$localizacao->ID}}" >{{$localizacao->LOCALIZACAO}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('pacienteLocalizacao')
-                                        <span class="text-danger"><small>{{$message}}</small></span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <br>
-                            @foreach ($enderecos as $endereco)
-                                @if ($paciente->ID_ENDERECO == $endereco->ID)
-                                    <div class="row margin-top-10">
-                                        <div class="col">
-                                            <input class="form-control" type="text" name="pacienteCep" id="pacienteCep" placeholder="CEP" value="">
-                                            @error('pacienteCep')
-                                                <span class="text-danger"><small>{{$message}}</small></span>
-                                            @enderror
-                                        </div>
+    
+                            {{-- <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="remember">
+                                            {{ __('Lembrar-me') }}
+                                        </label>
                                     </div>
-                                    <br>
-                                    <div class="row margin-top-10">
-                                        <div class="col">
-                                            <input class="form-control" type="text" name="pacienteEndereco" id="pacienteEndereco" placeholder="Endereço" value="">
-                                            @error('pacienteEndereco')
-                                                <span class="text-danger"><small>{{$message}}</small></span>
-                                            @enderror
-                                        </div>
-                                        <div class="col">
-                                            <input class="form-control" type="text" name="pacienteNumero" id="pacienteNumero" placeholder="Número" value="">
-                                            @error('pacienteNumero')
-                                                <span class="text-danger"><small>{{$message}}</small></span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row margin-top-10">
-                                        <div class="col">
-                                            <select class ="form-control"name="pacienteCidade" id="pacienteCidade">
-                                                <option value="">Cidade</option>
-                                                @foreach($cidades as $cidade)
-                                                    <option value="{{$cidade->ID}}">{{$cidade->CIDADE}}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('pacienteCidade')
-                                                <span class="text-danger"><small>{{$message}}</small></span>
-                                            @enderror
-                                        </div>
-                                        <div class="col">
-                                            <input class="form-control" type="text" name="pacienteBairro" id="pacienteBairro" placeholder="Bairro" value="">
-                                            @error('pacienteBairro')
-                                                <span class="text-danger"><small>{{$message}}</small></span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row margin-top-10">
-                                        <div class="col">
-                                            <input class="form-control" type="text" name="pacienteComplemento" id="pacienteComplemento" placeholder="Complemento" value="">
-                                        </div>
-                                        <div class="col">
-                                            <select class ="form-control"name="pacienteEstado" id="pacienteEstado">
-                                                <option value="">Estado</option>
-                                                @foreach($estados as $estado)
-                                                    <option value="{{$estado->ID}}">{{$estado->UF}}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('pacienteEstado')
-                                                <span class="text-danger"><small>{{$message}}</small></span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-                            <br>
-                            <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label for="opcaoDeServicos">Serviços que deverão ser realizados</label><br>
-                                    @foreach($servicos as $servico)
-                                        <input type="checkbox" name="servicos[]" id="servicos[]" value="{{$servico->ID}}"> {{$servico->TIPO}} <br>
-                                    @endforeach
-                                    <input class="form-control" type="text" name="servicoOutros" id="servicoOutros" placeholder="Outros"><br>
+                            </div> --}}
+                            <div class="form-group">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Login') }}
+                                    </button>
+    
+                                    @if (Route::has('password.request'))
+                                        <a class="btn-white" href="{{ route('password.request') }}">
+                                            {{ __('Esqueceu a senha?') }}
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label for="tomaMedicamento">Paciente toma medicamentos?</label><br>
-                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="1"> Sim <br>
-                                    <input type="radio" name="tomaMedicamento" id="tomaMedicamento" value="0"> Não <br>
-                                    @error('tomaMedicamento')
-                                        <span class="text-danger"><small>{{$message}}</small></span>
-                                    @enderror
-                                </div>
-                                <div class="col font-color-gray">
-                                    <label for="tipoMedicamentos">Quais medicamentos?</label><br>
-                                    <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="">
-                                </div>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="{{url("prestador/create")}}">Seja um cuidador</a>
                             </div>
-                            <br>
-                            <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label class ="" for="inicio">Data do inicio do serviço:</label><br>
-                                    <input class="form-control" type="date" name="dataInicio" id="dataInicio">
-                                    @error('dataInicio')
-                                        <span class="text-danger"><small>{{$message}}</small></span>
-                                    @enderror
-                                </div>
-                                <div class="col font-color-gray">
-                                    <label class ="" for="fim">Data fim do serviço:</label><br>
-                                    <input class="form-control" type="date" name="dataFim" id="dataFim">
-                                    @error('dataFim')
-                                        <span class="text-danger"><small>{{$message}}</small></span>
-                                    @enderror
-                                </div>
+                            <div class="text-center">
+                                <a class="small" href="{{url("solicitante/create")}}">Seja um solicitante!</a>
                             </div>
-                            <br>
-                            <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label class ="" for="horaroInicio">Horário de início</label><br>
-                                    <input class="form-control" type="time" name="horaInicio" id="horaInicio" placeholder="Horário de início">
-                                    @error('horaInicio')
-                                        <span class="text-danger"><small>{{$message}}</small></span>
-                                    @enderror
-                                </div>
-                                <div class="col font-color-gray">
-                                    <label class ="" for="horaroFim">Horário fim</label><br>
-                                    <input class="form-control" type="time" name="horaFim" id="horaFim" placeholder="Horário do fim" onchange="calcularServicos()">
-                                    @error('horaFim')
-                                        <span class="text-danger"><small>{{$message}}</small></span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <br>
-                            <!-- <div class="row margin-top-10">
-                                <div class="col font-color-gray">
-                                    <label class ="" for="">Adicionar mais</label><br>
-                                </div>
-                            </div>
-                            <br> -->
-                            <div class="row margin-top-10" id="servicos" >
-                                <div class="col font-color-gray">
-                                    <label class="" for="formacao">Valor total do serviço: R$</label>
-                                    <input class="" type="text" name="propostaValorSimulacao" id="propostaValorSimulacao">
-                                    <input class="" type="hidden" name="precoServico" id="precoServico" value="">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input class="btn btn-teal btn-block btn-marketing rounded-pill" type="submit" value="Enviar proposta">
-                            </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        @endif
     @else
         <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
             <div class="float-right">

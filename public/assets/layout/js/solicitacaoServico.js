@@ -94,6 +94,11 @@ function selectPrestadores() {
     $("#idPrestadores").val(prestadores);
 }
 
+function teste15() {
+    console.log('Entrou');
+}
+
+
 function aceitarProspostaPrestador(id)
  {
     event.preventDefault();

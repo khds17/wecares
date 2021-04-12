@@ -110,38 +110,39 @@ class IndexController extends Controller
                             ->where('users.status', '=', $ativo)
                             ->get();
 
+        $cidades = $this->objCidade->all();
+
+        $estados = $this->objEstado->all();
+
+        $familiaridades=$this->objFamiliaridades->all();
+
+        $servicos=$this->objServico->all();
+
+        $pacientesTipos = $this->objPacienteTipo->all();
+
+        $pacientesLocalizacao = $this->objPacienteLocalizacao->all();
+
         //Verifica se há algum prestador
         if(count($prestadores) >= 1) {
-
-            $pacientes = $this->objPacientes
-                    ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-                    ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                    ->select('PACIENTES.*')
-                    ->get();
-
-            $servicos=$this->objServico->all();
-
-            //Pegando todos os tipos de pacientes
-            $pacientesTipos = $this->objPacienteTipo->all();
-
-            //Pegando todas as localizações
-            $pacientesLocalizacao = $this->objPacienteLocalizacao->all();
-
-            //Encontrando o endereço da localização dos pacientes
-            $enderecos = $this->objEndereco
-                        ->join('PACIENTES', 'ENDERECOS.ID', '=', 'PACIENTES.ID_ENDERECO')
-                        ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-                        ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                        ->select('ENDERECOS.*')
-                        ->get();
-
-            $cidades = $this->objCidade->all();
-
-            $estados = $this->objEstado->all();
-
-            $familiaridades=$this->objFamiliaridades->all();
-
-            return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientes','pacientesTipos','pacientesLocalizacao', 'enderecos', 'cidades','estados','familiaridades'));
+            if(auth()->user()) {
+                $pacientes = $this->objPacientes
+                                ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+                                ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                                ->select('PACIENTES.*')
+                                ->get();
+            
+                //Encontrando o endereço da localização dos pacientes
+                $enderecos = $this->objEndereco
+                            ->join('PACIENTES', 'ENDERECOS.ID', '=', 'PACIENTES.ID_ENDERECO')
+                            ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+                            ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+                            ->select('ENDERECOS.*')
+                            ->get();
+    
+                return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientes','pacientesTipos','pacientesLocalizacao', 'enderecos', 'cidades','estados','familiaridades'));
+            } else {
+                return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientesTipos','pacientesLocalizacao', 'cidades','estados','familiaridades'));
+            }
         } else {
             return view('prestadores/resultado-prestadores',compact('prestadores'));
         }

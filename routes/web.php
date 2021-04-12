@@ -29,7 +29,7 @@ Route::get('/registros','IndexController@registros');
 Route::get('/cuidadorCidades','IndexController@cuidadorCidades');
 Route::get('/privacidade','IndexController@privacidade');
 Route::get('/agradecimento','IndexController@agradecimento');
-Route::get('/resultado','IndexController@resultado')->middleware('auth')->middleware('role:solicitante');
+Route::get('/resultado','IndexController@resultado');
 // ===========================================
 Route::resource('/paciente','PacientesController')->middleware('auth')->middleware('role:solicitante');
 Route::post('/selectPacientes/{id}','PacientesController@selectPacientes')->middleware('role:solicitante');
