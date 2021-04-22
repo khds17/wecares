@@ -30,7 +30,7 @@ class IndexController extends Controller
         $this->objEndereco = new enderecos();
         $this->objCidade = new cidades();
         $this->objEstado = new estados();
-        $this->objFamiliaridades = new familiaridade();   
+        $this->objFamiliaridades = new familiaridade();
 
     }
     /**
@@ -96,19 +96,34 @@ class IndexController extends Controller
 
     public function resultado(Request $request)
     {
-        $idCidade = $request->id;
-
         $ativo = \Config::get('constants.STATUS.ATIVO');
 
-        $prestadores = $this->objPrestador
+        if($request->id) {
+            $idCidade = $request->id;
+
+            $prestadores = $this->objPrestador
+                                ->join('ENDERECOS', 'PRESTADORES.ID_ENDERECO', '=', 'ENDERECOS.ID')
+                                ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
+                                ->leftJoin('users', 'PRESTADORES.ID_USUARIO', '=', 'users.id')
+                                ->leftJoin('FOTOS', 'PRESTADORES.ID_FOTO', '=', 'FOTOS.ID')
+                                ->select('PRESTADORES.*','FORMACAO.FORMACAO', 'FOTOS.FOTO')
+                                ->where('ENDERECOS.ID_CIDADE', '=', $idCidade)
+                                ->where('users.status', '=', $ativo)
+                                ->get();
+        } else {
+            $cidade = $request->cidade;
+
+            $prestadores = $this->objPrestador
                             ->join('ENDERECOS', 'PRESTADORES.ID_ENDERECO', '=', 'ENDERECOS.ID')
+                            ->join('CIDADES', 'ENDERECOS.ID_CIDADE', '=', 'CIDADES.ID')
                             ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
                             ->leftJoin('users', 'PRESTADORES.ID_USUARIO', '=', 'users.id')
                             ->leftJoin('FOTOS', 'PRESTADORES.ID_FOTO', '=', 'FOTOS.ID')
                             ->select('PRESTADORES.*','FORMACAO.FORMACAO', 'FOTOS.FOTO')
-                            ->where('ENDERECOS.ID_CIDADE', '=', $idCidade)
+                            ->where('CIDADES.CIDADE', 'like', '%'.$cidade)
                             ->where('users.status', '=', $ativo)
                             ->get();
+        }
 
         $cidades = $this->objCidade->all();
 
@@ -130,7 +145,7 @@ class IndexController extends Controller
                                 ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
                                 ->select('PACIENTES.*')
                                 ->get();
-            
+
                 //Encontrando o endereço da localização dos pacientes
                 $enderecos = $this->objEndereco
                             ->join('PACIENTES', 'ENDERECOS.ID', '=', 'PACIENTES.ID_ENDERECO')
@@ -138,7 +153,7 @@ class IndexController extends Controller
                             ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
                             ->select('ENDERECOS.*')
                             ->get();
-    
+
                 return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientes','pacientesTipos','pacientesLocalizacao', 'enderecos', 'cidades','estados','familiaridades'));
             } else {
                 return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientesTipos','pacientesLocalizacao', 'cidades','estados','familiaridades'));
