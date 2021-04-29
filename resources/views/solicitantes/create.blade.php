@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <br>
-                            <div class="row margin-top-10">
+                            {{-- <div class="row margin-top-10">
                                 <div class="col">
                                     <input class="form-control" type="text" name="solicitanteCep" id="solicitanteCep" placeholder="CEP" value="{{old('solicitanteCep')}}">
                                     @error('solicitanteCep')
@@ -254,7 +254,7 @@
                                     <input class="form-control" type="text" name="tipoMedicamento" id="tipoMedicamento" value="{{old('tipoMedicamento')}}">
                                 </div>
                             </div>
-                            <br>
+                            <br> --}}
                             <div class="row margin-top-10">
                                 <div class="col font-color-gray">
                                     <input type="checkbox" name="termos" id="termos" value="aceito">

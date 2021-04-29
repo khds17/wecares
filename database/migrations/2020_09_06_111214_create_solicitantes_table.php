@@ -20,7 +20,7 @@ class CreateSolicitantesTable extends Migration
             $table->string('EMAIL',255);
             $table->string('TELEFONE',15);
             $table->unsignedInteger('ID_USUARIO');
-            $table->unsignedInteger('ID_ENDERECO');
+            $table->unsignedInteger('ID_ENDERECO')->nullable();
             $table->unsignedInteger('ID_FOTO')->nullable();
             $table->string('ID_CUSTOMER',30)->nullable();
             $table->foreign('ID_USUARIO')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

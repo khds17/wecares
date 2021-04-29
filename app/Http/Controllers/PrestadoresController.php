@@ -6,6 +6,7 @@ use App\Http\Requests\Prestador;
 use App\Http\Requests\PrestadorEdit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Administradores;
 use App\Models\prestadores;
 use App\Models\pacientes;
 use App\Models\servicos;
@@ -33,6 +34,7 @@ class PrestadoresController extends Controller
     //Instanciando as classes
     public function __construct()
     {
+        $this->objAdmin = new Administradores();
         $this->objPrestador = new prestadores();
         $this->objProposta = new Propostas();
         $this->objEstado = new estados();
@@ -50,7 +52,6 @@ class PrestadoresController extends Controller
         $this->objPacienteLocalizacao = new paciente_localizacao();
         $this->objFamiliaridades = new familiaridade();
         $this->objRegistros = new registros_log();
-
     }
 
     public function index()
@@ -192,25 +193,28 @@ class PrestadoresController extends Controller
      */
     public function show($id)
     {
-        $prestador = $this->objPrestador->find($id);
+        if (auth()->user()) {
+            $prestador = $this->objPrestador->find($id);
 
-        $sexos = $this->objSexos->all();
+            $sexos = $this->objSexos->all();
 
-        $endereco = $this->objEndereco->find($prestador->ID_ENDERECO);
+            $endereco = $this->objEndereco->find($prestador->ID_ENDERECO);
 
-        $cidades = $this->objCidade->all();
+            $cidades = $this->objCidade->all();
 
-        $estados = $this->objEstado->all();
+            $estados = $this->objEstado->all();
 
-        $formacoes = $this->objFormacao->all();
+            $formacoes = $this->objFormacao->all();
 
-        $certificado = $this->objCertificado->find($prestador->ID_CERTIFICADO);
+            $certificado = $this->objCertificado->find($prestador->ID_CERTIFICADO);
 
-        $antecedente = $this->objAntecedente->find($prestador->ID_ANTECEDENTE);
+            $antecedente = $this->objAntecedente->find($prestador->ID_ANTECEDENTE);
 
-        $foto = $this->objFotos->find($prestador->ID_FOTO);
+            $foto = $this->objFotos->find($prestador->ID_FOTO);
 
-        return view('prestadores/prestadores-informacoes',compact('prestador','sexos','endereco','cidades','estados','formacoes','certificado','antecedente','foto'));
+            return view('prestadores/prestadores-informacoes',compact('prestador','sexos','endereco','cidades','estados','formacoes','certificado','antecedente','foto'));
+        }
+
     }
 
     /**
@@ -221,37 +225,40 @@ class PrestadoresController extends Controller
      */
     public function edit($id)
     {
-        $prestadores = $this->objPrestador->find($id);
+        if (auth()->user()) {
+            $prestadores = $this->objPrestador->find($id);
 
-        $users = $prestadores->find($prestadores->ID)
-                        ->relUsuario;
+            $users = $prestadores->find($prestadores->ID)
+                            ->relUsuario;
 
-        $certificados = $prestadores->find($prestadores->ID)
-                                ->relCertificado;
+            $certificados = $prestadores->find($prestadores->ID)
+                                    ->relCertificado;
 
-        $antecedentes = $prestadores->find($prestadores->ID)
-                                ->relAntecedentes;
+            $antecedentes = $prestadores->find($prestadores->ID)
+                                    ->relAntecedentes;
 
-        $enderecos = $prestadores->find($prestadores->ID)
-                            ->relEndereco;
+            $enderecos = $prestadores->find($prestadores->ID)
+                                ->relEndereco;
 
-        $arrayFotos = $this->objFotos
-                    ->where('FOTOS.ID', '=', $prestadores->ID_FOTO)
-                    ->get();
+            $arrayFotos = $this->objFotos
+                        ->where('FOTOS.ID', '=', $prestadores->ID_FOTO)
+                        ->get();
 
-        foreach ($arrayFotos as $arrayFoto) {
-            $foto = $arrayFoto;
+            foreach ($arrayFotos as $arrayFoto) {
+                $foto = $arrayFoto;
+            }
+
+            $formacoes = $this->objFormacao->all();
+
+            $sexos = $this->objSexos->all();
+
+            $cidades = $this->objCidade->all();
+
+            $estados = $this->objEstado->all();
+
+            return view('prestadores/edit',compact('prestadores','users','sexos','enderecos','cidades','estados','formacoes','certificados','antecedentes', 'foto'));
         }
 
-        $formacoes = $this->objFormacao->all();
-
-        $sexos = $this->objSexos->all();
-
-        $cidades = $this->objCidade->all();
-
-        $estados = $this->objEstado->all();
-
-        return view('prestadores/edit',compact('prestadores','users','sexos','enderecos','cidades','estados','formacoes','certificados','antecedentes', 'foto'));
     }
 
     /**

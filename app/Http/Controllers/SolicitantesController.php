@@ -44,9 +44,7 @@ class SolicitantesController extends Controller
 
     public function index()
     {
-        $solicitante = $this->objSolicitante->all();
-
-        return view('solicitantes/index',compact('solicitante'));
+        return redirect("/");
     }
 
     public function cadastroSolicitante()
@@ -89,15 +87,15 @@ class SolicitantesController extends Controller
 
         // Cadastra endereço, usuario, solicitante, função do solicitante, cadastro do paciente e log.
         try {
-            $enderecoSolicitante = $this->objEndereco->create([
-                'CEP' => $request->solicitanteCep,
-                'ENDERECO' => $request->solicitanteEndereco,
-                'NUMERO' => $request->solicitanteNumero,
-                'COMPLEMENTO' => $request->solicitanteComplemento,
-                'BAIRRO' => $request->solicitanteBairro,
-                'ID_CIDADE' => $request->solicitanteCidade,
-                'ID_ESTADO' => $request->solicitanteEstado,
-            ]);
+            // $enderecoSolicitante = $this->objEndereco->create([
+            //     'CEP' => $request->solicitanteCep,
+            //     'ENDERECO' => $request->solicitanteEndereco,
+            //     'NUMERO' => $request->solicitanteNumero,
+            //     'COMPLEMENTO' => $request->solicitanteComplemento,
+            //     'BAIRRO' => $request->solicitanteBairro,
+            //     'ID_CIDADE' => $request->solicitanteCidade,
+            //     'ID_ESTADO' => $request->solicitanteEstado,
+            // ]);
 
             $usuario = $this->objUsers->create([
                 'name' => $request->solicitanteNome,
@@ -109,13 +107,13 @@ class SolicitantesController extends Controller
             //Gravando a função no usuario
             $usuario->assignRole('solicitante');
 
-            $solicitante = $this->objSolicitante->create([
+            $this->objSolicitante->create([
                 'NOME' => $request->solicitanteNome,
                 'CPF' => $request->solicitanteCPF,
                 'EMAIL' => $request->solicitanteEmail,
                 'TELEFONE' => $request->solicitanteTelefone,
                 'ID_USUARIO' => $usuario->id,
-                'ID_ENDERECO' => $enderecoSolicitante->id,
+                // 'ID_ENDERECO' => $enderecoSolicitante->id,
                 ]);
 
             $this->objRegistros->create([
@@ -124,34 +122,34 @@ class SolicitantesController extends Controller
                 'ID_USUARIO' => $usuario->id
             ]);
 
-            $enderecoPaciente = $this->objEndereco->create([
-                'CEP' => $request->pacienteCep,
-                'ENDERECO' => $request->pacienteEndereco,
-                'NUMERO' => $request->pacienteNumero,
-                'COMPLEMENTO' => $request->solicitanteComplemento,
-                'BAIRRO' => $request->pacienteBairro,
-                'ID_CIDADE' => $request->pacienteCidade,
-                'ID_ESTADO' => $request->pacienteEstado,
-            ]);
+            // $enderecoPaciente = $this->objEndereco->create([
+            //     'CEP' => $request->pacienteCep,
+            //     'ENDERECO' => $request->pacienteEndereco,
+            //     'NUMERO' => $request->pacienteNumero,
+            //     'COMPLEMENTO' => $request->solicitanteComplemento,
+            //     'BAIRRO' => $request->pacienteBairro,
+            //     'ID_CIDADE' => $request->pacienteCidade,
+            //     'ID_ESTADO' => $request->pacienteEstado,
+            // ]);
 
-            $paciente = $this->objPaciente->create([
-                'NOME' => $request->pacienteNome,
-                'ID_TIPO' => $request->pacienteTipo,
-                'ID_LOCALIZACAO' => $request->pacienteLocalizacao,
-                'ID_ENDERECO' => $enderecoPaciente->id,
-                'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
-                'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
-                'ID_SOLICITANTE' => $solicitante->id,
-                'STATUS' => \Config::get('constants.STATUS.ATIVO'),
-                'ID_FAMILIARIDADE' => $request->familiaridade,
-                'FAMILIAR_OUTROS' => $request->familiaridadeOutros,
-                ]);
+            // $paciente = $this->objPaciente->create([
+            //     'NOME' => $request->pacienteNome,
+            //     'ID_TIPO' => $request->pacienteTipo,
+            //     'ID_LOCALIZACAO' => $request->pacienteLocalizacao,
+            //     'ID_ENDERECO' => $enderecoPaciente->id,
+            //     'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
+            //     'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
+            //     'ID_SOLICITANTE' => $solicitante->id,
+            //     'STATUS' => \Config::get('constants.STATUS.ATIVO'),
+            //     'ID_FAMILIARIDADE' => $request->familiaridade,
+            //     'FAMILIAR_OUTROS' => $request->familiaridadeOutros,
+            //     ]);
 
-                $this->objRegistros->create([
-                    'DATA' => date('d/m/Y \à\s H:i:s'),
-                    'TEXTO' => 'Cadastro do paciente '.$paciente->NOME.' realizado com sucesso',
-                    'ID_USUARIO' => $usuario->id
-                ]);
+            //     $this->objRegistros->create([
+            //         'DATA' => date('d/m/Y \à\s H:i:s'),
+            //         'TEXTO' => 'Cadastro do paciente '.$paciente->NOME.' realizado com sucesso',
+            //         'ID_USUARIO' => $usuario->id
+            //     ]);
 
             DB::commit();
 
@@ -171,9 +169,12 @@ class SolicitantesController extends Controller
      */
     public function show($id)
     {
-        $solicitante = $this->objSolicitante->find($id);
+        if (auth()->user()) {
+            $solicitante = $this->objSolicitante->find($id);
 
-        return view('solicitantes/information',compact('solicitante'));
+            return view('solicitantes/information',compact('solicitante'));
+        }
+
     }
 
     /**
@@ -184,19 +185,21 @@ class SolicitantesController extends Controller
      */
     public function edit($id)
     {
-        $solicitantes = $this->objSolicitante->find($id);
+        if (auth()->user()) {
+            $solicitantes = $this->objSolicitante->find($id);
 
-        $users = $solicitantes->find($solicitantes->ID)
-                            ->relUsuario;
+            $users = $solicitantes->find($solicitantes->ID)
+                                ->relUsuario;
 
-        $enderecos = $solicitantes->find($solicitantes->ID)
-                                ->relEndereco;
+            $enderecos = $solicitantes->find($solicitantes->ID)
+                                    ->relEndereco;
 
-        $cidades = $this->objCidades->all();
+            $cidades = $this->objCidades->all();
 
-        $estados = $this->objEstados->all();
+            $estados = $this->objEstados->all();
 
-        return view('solicitantes/edit',compact('solicitantes','users','enderecos','cidades','estados'));
+            return view('solicitantes/edit',compact('solicitantes','users','enderecos','cidades','estados'));
+        }
 
     }
 
