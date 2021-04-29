@@ -25,16 +25,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pacientes as $paciente)
+                        @if (count($pacientes) >=1)
+                            @foreach ($pacientes as $paciente)
                                 <tr>
                                     <th scope="row">{{$paciente->NOME}}</th>
                                     <td>{{$paciente->TIPO}}</td>
                                     <td>{{$paciente->LOCALIZACAO}}</td>
-                                    <td>                
+                                    <td>
                                         <a class="btn btn-primary" href="{{"paciente/$paciente->ID/edit"}}" target="_blank"> Editar </a>
                                     </td>
                                 </tr>
-                        @endforeach
+                            @endforeach
+                        @else
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
