@@ -169,10 +169,18 @@ class SolicitantesController extends Controller
      */
     public function show($id)
     {
+        //Verifica se existe usuário
         if (auth()->user()) {
-            $solicitante = $this->objSolicitante->find($id);
+            $userSolicitante = $this->objSolicitante
+                                ->where('ID_USUARIO', auth()->user()->id)
+                                ->get();
 
-            return view('solicitantes/information',compact('solicitante'));
+            //Verifica se o usuario e solicitante
+            if (count($userSolicitante) > 0) {
+                $solicitante = $this->objSolicitante->find($id);
+
+                return view('solicitantes/information',compact('solicitante'));
+            }
         }
 
     }
@@ -185,20 +193,29 @@ class SolicitantesController extends Controller
      */
     public function edit($id)
     {
+        //Verifica se existe usuário
         if (auth()->user()) {
-            $solicitantes = $this->objSolicitante->find($id);
+            $userSolicitante = $this->objSolicitante
+                                ->where('ID_USUARIO', auth()->user()->id)
+                                ->get();
 
-            $users = $solicitantes->find($solicitantes->ID)
-                                ->relUsuario;
+            //Verifica se o usuario e solicitante
+            if (count($userSolicitante) > 0) {
+                $solicitantes = $this->objSolicitante->find($id);
 
-            $enderecos = $solicitantes->find($solicitantes->ID)
-                                    ->relEndereco;
+                $users = $solicitantes->find($solicitantes->ID)
+                                    ->relUsuario;
 
-            $cidades = $this->objCidades->all();
+                $enderecos = $solicitantes->find($solicitantes->ID)
+                                        ->relEndereco;
 
-            $estados = $this->objEstados->all();
+                $cidades = $this->objCidades->all();
 
-            return view('solicitantes/edit',compact('solicitantes','users','enderecos','cidades','estados'));
+                $estados = $this->objEstados->all();
+
+                return view('solicitantes/edit',compact('solicitantes','users','enderecos','cidades','estados'));
+            }
+
         }
 
     }
