@@ -5,8 +5,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-10 text-center">
-                    <h1 class="page-header-title">Encontre um cuidador</h1>
-                    <p class="page-header-text mb-5">Digite a cidade em que deseja encontrar cuidadores</p>
+                    <h1 class="font-size-35">Encontre um cuidador perto de você</h1>
                     <form class="page-header-signup mb-2 mb-md-0" name="formEncontreCuidador" id="formEncontreCuidador" method="get" enctype="multipart/form-data" action="{{url('resultado')}}">   
                          <div class="form-row justify-content-center">
                             <div class="col-lg-9 col-md-8">
@@ -22,6 +21,7 @@
                             </div> 
                         </div>
                     </form>
+                    <h2 class="font-size-26">Digite o nome da cidade de onde você gostaria de encontrar cuidadores</h2>
                 </div>
             </div>
         </div>

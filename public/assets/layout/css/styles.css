@@ -562,6 +562,18 @@ kbd kbd {
   font-weight: 700;
 }
 
+.font-size-35 {
+  font-size: 35px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.font-size-26 {
+  font-size: 26px;
+  color: #fff;
+  font-weight: 500;
+}
+
 pre {
   display: block;
   font-size: 87.5%;
