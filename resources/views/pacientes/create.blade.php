@@ -140,7 +140,7 @@
                         <span class="text-danger"><small>{{$message}}</small></span>
                     @enderror     
                 </div>
-                <div class="col d-none" id="familiaridadeOutros">
+                <div class="col d-none" id="familiar">
                     <label for="familiaridadeOutros">Descreva o que é do paciente</label>
                     <input class="form-control"type="text" name="familiaridadeOutros" id="familiaridadeOutros" value="">
                 </div>

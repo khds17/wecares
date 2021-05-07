@@ -32,7 +32,9 @@ Route::get('/agradecimento','IndexController@agradecimento');
 Route::get('/resultado','IndexController@resultado');
 // ===========================================
 Route::resource('/paciente','PacientesController')->middleware('auth')->middleware('role:solicitante');
-Route::post('/selectPacientes/{id}','PacientesController@selectPacientes')->middleware('role:solicitante');
+Route::post('/store','PacientesController@store')->middleware('auth')->middleware('role:solicitante');
+Route::post('/getDadosPaciente/{id}','PacientesController@getDadosPaciente')->middleware('role:solicitante');
+Route::get('/getPacientes','PacientesController@getPacientes')->middleware('role:solicitante');
 // ===========================================
 Route::resource('/prestador','PrestadoresController');
 Route::get('/cadastroPrestador','PrestadoresController@cadastroPrestador')->middleware('auth')->middleware('role:cuidador/enfermeiro');

@@ -139,25 +139,7 @@ class IndexController extends Controller
 
         //Verifica se há algum prestador
         if(count($prestadores) >= 1) {
-            if(auth()->user()) {
-                $pacientes = $this->objPacientes
-                                ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-                                ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                                ->select('PACIENTES.*')
-                                ->get();
-
-                //Encontrando o endereço da localização dos pacientes
-                $enderecos = $this->objEndereco
-                            ->join('PACIENTES', 'ENDERECOS.ID', '=', 'PACIENTES.ID_ENDERECO')
-                            ->join('SOLICITANTES', 'PACIENTES.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
-                            ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                            ->select('ENDERECOS.*')
-                            ->get();
-
-                return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientes','pacientesTipos','pacientesLocalizacao', 'enderecos', 'cidades','estados','familiaridades'));
-            } else {
-                return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientesTipos','pacientesLocalizacao', 'cidades','estados','familiaridades'));
-            }
+            return view('prestadores/resultado-prestadores',compact('servicos','prestadores','pacientesTipos','pacientesLocalizacao', 'cidades','estados','familiaridades'));
         } else {
             return view('prestadores/resultado-prestadores',compact('prestadores'));
         }

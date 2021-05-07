@@ -28,10 +28,10 @@ if (document.getElementById('cidade') !== null) {
     });
 }
 
-function getPaciente(id) {
+function getDadosPaciente(id) {
 
     $.ajax({
-        url: "selectPacientes/" + id,
+        url: "getDadosPaciente/" + id,
         type: "post",
         dataType: 'json',
         headers:{
@@ -79,24 +79,121 @@ function checkPrestador(id) {
     }
 }
 
-function selectPrestadores() {
+function closeModal() {
+    $('#modalPacienteCadastro').modal('hide');
+    clearForm();
+}
+
+//Código para permitir que funcione o scroll do externo ao fechar o interno
+$("#modalServico").on("hidden.bs.modal", function() {
+    $("body").addClass("modal-open");
+});
+
+function openLoginModal() {
+    $("#modalLogin").modal({
+        show: true
+    });
+}
+
+function enviarProposta() {
 
     let prestadores = [];
+    let countPrestadores = 0;
 
     $("input[id*='checkPrestador[']").each(function (chave, elemento) {
 
         if($(elemento).is(':checked')) {
 
             prestadores.push($(elemento).val());
+            countPrestadores++
         }
+
     });
 
-    $("#idPrestadores").val(prestadores);
+    if (countPrestadores > 0) {
+        $("#idPrestadores").val(prestadores);
+
+        $("#modalServico").modal({
+            show: true
+        });
+
+        getPacientes();
+    } else {
+        alert('Nenhum profissional selecionado!');
+    }
 }
 
-function teste15() {
-    console.log('Entrou');
+function getPacientes() {
+    $.ajax({
+        url: "getPacientes",
+        type: "get",
+        dataType: 'json',
+        headers:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data) {
+            if (data != null) {
+                //Limpa o select
+                $("#selectPaciente").empty();
+
+                // Adiciona a primeira linha.
+                $("#selectPaciente").append($('<option>', {
+                    value: -1,
+                    text: 'Escolha um paciente'
+                }));
+
+                // Adiciona as demais linhas (dinâmico).
+                $.each(data, function(id, paciente) {
+                    $("#selectPaciente").append($('<option>', {
+                        value: paciente.ID,
+                        text: paciente.NOME
+                    }));
+                });
+            }
+        }
+    });
 }
+
+function clearForm() {
+    console.log('CHamou');
+    console.log(document.getElementById("pacienteCep"));
+    // $("#pacienteTipo").find('option').attr("selected",false);
+    // $("#pacienteLocalizacao").find('option').attr("selected",false);
+    // $("#pacienteCidade").find('option').attr("selected",false);
+    // $("#pacienteEstado").find('option').attr("selected",false);
+    // $("#familiaridade").find('option').attr("selected",false);
+    // $("#tomaMedicamento").find('input[type="radio"]').attr("checked",false);
+    // $('#familiaridadeOutros').val("");
+    // document.getElementById("pacienteCep").value = "";
+    // $('#pacienteEndereco').val("");
+    // $('#pacienteBairro').val("");
+    // $('#pacienteNumero').val("");
+    // $('#pacienteComplemento').val("");
+    // $('#tipoMedicamento').val("");
+}
+
+$('#formPaciente').submit(function(event) {
+    event.preventDefault();
+    let dados = jQuery(this).serialize();
+
+    $.ajax({
+        type: "POST",
+        url: 'store',
+        data: dados,
+        success: function(response) {
+            alert('Paciente cadastrado com sucesso');
+
+            $("#modalPacienteCadastro").modal('hide');
+
+            getPacientes();
+            clearForm();
+        },
+        error: function(response) {
+            alert('Erro ao cadastrar paciente! Valide os dados e tente novamente.');
+        }
+    });
+    return false;
+});
 
 
 function aceitarProspostaPrestador(id)
@@ -224,7 +321,6 @@ function getProposta(id) {
                 let servicos = data.propostas.SERVICOS.split([',']);
 
                 servicos.forEach(function(elemento){
-                    console.log(elemento);
                     $("input[name=servicos][value="+elemento+"]").attr("checked", true);
                 });
             }

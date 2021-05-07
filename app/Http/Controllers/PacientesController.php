@@ -8,6 +8,7 @@ use App\Models\cidades;
 use App\Models\enderecos;
 use App\Models\pacientes;
 use App\Models\solicitantes;
+use App\Models\User;
 use App\Models\paciente_tipo;
 use App\Models\paciente_localizacao;
 use App\Models\familiaridade;
@@ -28,6 +29,7 @@ class PacientesController extends Controller
         $this->objEndereco = new enderecos();
         $this->objFamiliaridades = new familiaridade();
         $this->objRegistros = new registros_log();
+        $this->objUsers = new User();
     }
 
     /**
@@ -65,7 +67,7 @@ class PacientesController extends Controller
 
         $pacienteLocalizacao = $this->objPacienteLocalizacao->all();
 
-        $familiaridades = $this->objFamiliaridades->all(); 
+        $familiaridades = $this->objFamiliaridades->all();
 
         return view('pacientes/create',compact('estados','cidades','familiaridades','pacienteTipo','pacienteLocalizacao'));
     }
@@ -120,14 +122,22 @@ class PacientesController extends Controller
 
             DB::commit();
 
-            return redirect("/paciente");
-
+            if($request->solicitacao) {
+                return true;
+            } else {
+                return redirect("/paciente");
+            }
         } catch (\Throwable $e) {
             DB::rollback();
-            return redirect()->action('PacientesController@create');
+            if($request->solicitacao) {
+                return false;
+            } else {
+                return redirect()->action('PacientesController@create');
+            }
         }
     }
-    public function selectPacientes($id)
+
+    public function getDadosPaciente($id)
     {
         //Encontrando os pacientes do solicitante logado
         $paciente = $this->objPaciente->find($id);
@@ -161,6 +171,22 @@ class PacientesController extends Controller
         ];
 
         return $dadosPacientes;
+
+    }
+
+    public function getPacientes()
+    {
+        $usuario = $this->objUsers->find(auth()->user()->id);
+
+        $solicitante = $usuario->find($usuario->id)
+                            ->relSolicitante;
+
+        //Encontrando os pacientes do solicitante logado
+        $paciente = $this->objPaciente
+                        ->where('ID_SOLICITANTE', '=', $solicitante->ID)
+                        ->get();
+
+        return $paciente;
 
     }
 
