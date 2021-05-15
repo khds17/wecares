@@ -120,6 +120,8 @@ trait AuthenticatesUsers
     {
         $request->session()->regenerate();
 
+        $url = $request->session()->previousUrl();
+
         $this->clearLoginAttempts($request);
 
         if ($response = $this->authenticated($request, $this->guard()->user())) {
@@ -128,7 +130,7 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
                     ? new JsonResponse([], 204)
-                    : redirect()->intended($this->redirectPath());
+                    : redirect()->intended($this->redirectPath($url));
     }
 
     /**
@@ -143,7 +145,7 @@ trait AuthenticatesUsers
         //
     }
 
-    public function redirectTo()
+    public function redirectTo($url)
     {
         // Pegando o valor da constant para colocar no solicitante
         $status = \Config::get('constants.STATUS.ATIVO');
@@ -184,10 +186,16 @@ trait AuthenticatesUsers
         if (isset($userPrestador)) {
             return '/cadastroPrestador';
         } else if (isset($userSolicitante)) {
-            return '/cadastroSolicitante';
+            if (empty($url)) {
+                return '/cadastroSolicitante';
+            } else {
+                return $url;
+            }
         } else if (isset($userAdmin)) {
             return '/cadastroAdmin';
         }
+        dd('Passou tudo');
+
     }
 
     /**

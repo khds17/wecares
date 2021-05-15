@@ -9,10 +9,10 @@ trait RedirectsUsers
      *
      * @return string
      */
-    public function redirectPath()
+    public function redirectPath($url)
     {
         if (method_exists($this, 'redirectTo')) {
-            return $this->redirectTo();
+            return $this->redirectTo($url);
         }
 
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
