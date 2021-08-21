@@ -6,8 +6,8 @@
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-10 text-center">
                     @if (count($prestadores) >= 1)
-                        <h1 class="font-size-26">CUIDADORES ENCONTRADOS PERTO DE VOCÊ</h1>
-                        <h2 class="font-size-35">Selecione um ou mais cuidadores para enviar uma proposta</h2>
+                        <h1 class="page-header-title">Profissionais encontrados</h1>
+                        <p class="page-header-text mb-7">Selecione um ou mais cuidadores para enviar uma proposta.</p>
                     @else
                         <h1 class="page-header-title">Não foi possível encontrar profissionais para esta cidade</h1>
                     @endif
@@ -31,7 +31,7 @@
                         </div>
                         <div class="card-footer bg-transparent border-top d-flex align-items-center justify-content-center">
                             <input type="checkbox" name="checkPrestador" id="checkPrestador[{{$prestador->ID}}]" value="{{$prestador->ID}}" style="cursor: pointer">&nbsp
-                            <div class="text-primary">Selecionar</div>
+                            <div class="small text-primary">Selecionar</div>
                         </div>
                     </a>
                 </div>
@@ -45,7 +45,7 @@
     @if (count($prestadores) >= 1)
         <div style="position: fixed; bottom: 35px; width: 90%; height: 100px;">
             <div class="float-right">
-                <a class="btn-dark btn rounded-pill px-4 ml-lg-4" @if(Auth::user()) onclick="enviarProposta()" @else onclick="openLoginModal()" @endif> Enviar proposta</a>
+                <a class="btn-cyan btn rounded-pill px-4 ml-lg-4" @if(Auth::user()) onclick="enviarProposta()" @else onclick="openLoginModal()" @endif> Enviar proposta</a>
             </div>
         </div>
         @if(Auth::user())
