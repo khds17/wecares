@@ -84,7 +84,7 @@
                             <span>Dados cadastrais</span>
                         </a>
                     </li>
-                    <hr class="sidebar-divider">
+                    <!-- <hr class="sidebar-divider">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url("/servicosPrestados")}}">
                             <i class="far fa-handshake fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -104,7 +104,7 @@
                             <i class="fas fa-wallet fa-sm fa-fw mr-2 text-gray-400"></i>
                             <span>Recebimentos</span>
                         </a>
-                    </li>
+                    </li> -->
                 @endrole
                 {{-- Menu do solicitante --}}
                 @role('solicitante')

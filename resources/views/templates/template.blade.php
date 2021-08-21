@@ -90,7 +90,7 @@
                                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 Dados cadastrais
                                             </a>
-                                            <a class="dropdown-item" href="{{url("/servicosPrestados")}}">
+                                            <!-- <a class="dropdown-item" href="{{url("/servicosPrestados")}}">
                                                 <i class="far fa-handshake fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 <span>Serviços prestados</span>
                                             </a>
@@ -100,7 +100,7 @@
                                             </a>
                                             <a class="dropdown-item" href="{{url("/recebimentos")}}">
                                                 <i class="fas fa-wallet fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                <span>Recebimentos</span>
+                                                <span>Recebimentos</span> -->
                                             </a>
                                         @endrole
                                         {{-- Menu do solicitante --}}
