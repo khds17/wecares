@@ -122,7 +122,7 @@
                         <span>Dados do paciente</span>
                     </a>
                 </li>
-                <hr class="sidebar-divider">
+                <!-- <hr class="sidebar-divider">
                 <li class="nav-item">
                     <a class="nav-link" href="{{url("/servicosContratados")}}">
                         <i class="far fa-handshake fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -142,7 +142,7 @@
                         <i class="far fa-credit-card fa-sm fa-fw mr-2 text-gray-400"></i>
                         <span>Pagamentos</span>
                     </a>
-                </li>
+                </li> -->
                 @endrole
                 @if(!Auth::user())
                 <li class="nav-item">

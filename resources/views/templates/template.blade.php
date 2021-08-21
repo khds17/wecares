@@ -113,7 +113,7 @@
                                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 Dados do paciente
                                             </a>
-                                            <a class="dropdown-item" href="{{url("/servicosContratados")}}">
+                                            <!-- <a class="dropdown-item" href="{{url("/servicosContratados")}}">
                                                 <i class="far fa-handshake fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 <span>Serviços contratados</span>
                                             </a>
@@ -124,7 +124,7 @@
                                             <a class="dropdown-item" href="{{url("/pagamentos")}}">
                                                 <i class="far fa-credit-card fa-sm fa-fw mr-2 text-gray-400"></i>
                                                 <span>Pagamentos</span>
-                                            </a>
+                                            </a> -->
                                         @endrole
                                         <a class="dropdown-item" href="{{url("/registros")}}">
                                             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
