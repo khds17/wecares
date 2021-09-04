@@ -61,32 +61,31 @@ class PrestadoresController extends Controller
 
     public function cadastroPrestador()
     {
-        // Encontra o prestador pelo usuario logado.
         $prestadores = $this->objPrestador->where('ID_USUARIO', auth()->user()->id)->get();
 
         $formacoes = $this->objFormacao
-                         ->join('PRESTADORES', 'FORMACAO.ID', '=', 'PRESTADORES.ID_FORMACAO')
-                         ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
-                         ->get();
+            ->join('PRESTADORES', 'FORMACAO.ID', '=', 'PRESTADORES.ID_FORMACAO')
+            ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+            ->get();
 
-        return view('prestadores/cadastro',compact('prestadores','formacoes'));
+        return view('prestadores/cadastro', compact('prestadores', 'formacoes'));
     }
 
     public function prestadoresPropostas()
     {
         $propostas = $this->objProposta
-                        ->join('PRESTADORES','PROPOSTAS.ID_PRESTADOR','=','PRESTADORES.ID')
-                        ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
-                        ->whereNull('PROPOSTAS.APROVACAO_PRESTADOR')
-                        ->orWhere('PROPOSTAS.APROVACAO_PRESTADOR', '=', 0)
-                        ->select('PROPOSTAS.*')
-                        ->get();
+            ->join('PRESTADORES', 'PROPOSTAS.ID_PRESTADOR', '=', 'PRESTADORES.ID')
+            ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+            ->whereNull('PROPOSTAS.APROVACAO_PRESTADOR')
+            ->orWhere('PROPOSTAS.APROVACAO_PRESTADOR', '=', 0)
+            ->select('PROPOSTAS.*')
+            ->get();
 
         $servicos = $this->objServico->all();
 
         $familiaridades = $this->objFamiliaridades->all();
 
-        return view('prestadores/propostas',compact('propostas','servicos','familiaridades'));
+        return view('prestadores/propostas', compact('propostas', 'servicos', 'familiaridades'));
     }
 
     public function recebimentos()
@@ -102,13 +101,13 @@ class PrestadoresController extends Controller
     {
         $estados = $this->objEstado->all();
 
-        $cidades = $this->objCidade->orderBy('CIDADE','asc')->get();
+        $cidades = $this->objCidade->orderBy('CIDADE', 'asc')->get();
 
         $formacoes = $this->objFormacao->all();
 
         $sexos = $this->objSexos->all();
 
-        return view('prestadores/create',compact('estados','cidades','formacoes','sexos'));
+        return view('prestadores/create', compact('estados', 'cidades', 'formacoes', 'sexos'));
     }
 
     /**
@@ -121,7 +120,6 @@ class PrestadoresController extends Controller
     {
         DB::beginTransaction();
 
-        // Cadastra endereço, certificado, antecedentes crimimais, prestador, usuário, foto, função do prestador e log.
         try {
             $endereco = $this->objEndereco->create([
                 'CEP' => $request->prestadorCep,
@@ -149,7 +147,7 @@ class PrestadoresController extends Controller
                 'name' => $request->prestadorNome,
                 'email' => $request->prestadorEmail,
                 'password' => Hash::make($request['prestadorSenha']),
-                'status'=> \Config::get('constants.STATUS.PENDENTE'),
+                'status' => \Config::get('constants.STATUS.PENDENTE'),
             ]);
 
             $usuario->assignRole('cuidador/enfermeiro');
@@ -171,14 +169,13 @@ class PrestadoresController extends Controller
 
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso',
+                'TEXTO' => 'Cadastro de ' . $usuario->name . ' realizado com sucesso',
                 'ID_USUARIO' => $usuario->id
             ]);
 
             DB::commit();
 
             return redirect()->action('IndexController@agradecimento');
-
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->action('PrestadoresController@create');
@@ -196,11 +193,11 @@ class PrestadoresController extends Controller
         //Verifica se existe usuário
         if (auth()->user()) {
             $userAdmin = $this->objAdmin
-                            ->where('ID_USUARIO', auth()->user()->id)
-                            ->get();
+                ->where('ID_USUARIO', auth()->user()->id)
+                ->get();
 
             //Verifica se o usuario e administrador
-            if(count($userAdmin) > 0){
+            if (count($userAdmin) > 0) {
                 $prestador = $this->objPrestador->find($id);
 
                 $sexos = $this->objSexos->all();
@@ -219,10 +216,9 @@ class PrestadoresController extends Controller
 
                 $foto = $this->objFotos->find($prestador->ID_FOTO);
 
-                return view('prestadores/prestadores-informacoes',compact('prestador','sexos','endereco','cidades','estados','formacoes','certificado','antecedente','foto'));
+                return view('prestadores/prestadores-informacoes', compact('prestador', 'sexos', 'endereco', 'cidades', 'estados', 'formacoes', 'certificado', 'antecedente', 'foto'));
             }
         }
-
     }
 
     /**
@@ -236,28 +232,28 @@ class PrestadoresController extends Controller
         //Verifica se existe usuário
         if (auth()->user()) {
             $userPrestador = $this->objPrestador
-                                ->where('ID_USUARIO', auth()->user()->id)
-                                ->get();
+                ->where('ID_USUARIO', auth()->user()->id)
+                ->get();
 
             //Verifica se o usuario e administrador
             if (count($userPrestador) > 0) {
                 $prestadores = $this->objPrestador->find($id);
 
                 $users = $prestadores->find($prestadores->ID)
-                                ->relUsuario;
+                    ->relUsuario;
 
                 $certificados = $prestadores->find($prestadores->ID)
-                                        ->relCertificado;
+                    ->relCertificado;
 
                 $antecedentes = $prestadores->find($prestadores->ID)
-                                        ->relAntecedentes;
+                    ->relAntecedentes;
 
                 $enderecos = $prestadores->find($prestadores->ID)
-                                    ->relEndereco;
+                    ->relEndereco;
 
                 $arrayFotos = $this->objFotos
-                            ->where('FOTOS.ID', '=', $prestadores->ID_FOTO)
-                            ->get();
+                    ->where('FOTOS.ID', '=', $prestadores->ID_FOTO)
+                    ->get();
 
                 foreach ($arrayFotos as $arrayFoto) {
                     $foto = $arrayFoto;
@@ -271,10 +267,9 @@ class PrestadoresController extends Controller
 
                 $estados = $this->objEstado->all();
 
-                return view('prestadores/edit',compact('prestadores','users','sexos','enderecos','cidades','estados','formacoes','certificados','antecedentes', 'foto'));
+                return view('prestadores/edit', compact('prestadores', 'users', 'sexos', 'enderecos', 'cidades', 'estados', 'formacoes', 'certificados', 'antecedentes', 'foto'));
             }
         }
-
     }
 
     /**
@@ -301,19 +296,15 @@ class PrestadoresController extends Controller
                 'ID_ESTADO' => $request->prestadorEstado,
             ]);
 
-            if($request->certificadoFormacao) {
+            if ($request->certificadoFormacao) {
                 $this->objCertificado->where(['ID' => $prestadores->ID_CERTIFICADO])->update([
                     'CERTIFICADO' => $request->certificadoFormacao->store('certificados')
                 ]);
-            }
-
-            else if($request->antecedentes) {
+            } else if ($request->antecedentes) {
                 $this->objAntecedente->where(['ID' => $prestadores->ID_ANTECEDENTE])->update([
                     'ANTECEDENTE' => $request->antecedentes->store('antecedentes')
                 ]);
-            }
-
-            else if($request->foto) {
+            } else if ($request->foto) {
                 $this->objFotos->where(['ID' => $prestadores->ID_FOTO])->update([
                     'FOTO' => $request->foto->store('fotos')
                 ]);
@@ -334,14 +325,13 @@ class PrestadoresController extends Controller
 
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Cadastro de '.$prestadores->NOME.' alterado com sucesso',
+                'TEXTO' => 'Cadastro de ' . $prestadores->NOME . ' alterado com sucesso',
                 'ID_USUARIO' => $prestadores->ID_USUARIO
             ]);
 
             DB::commit();
 
             return redirect()->action('PrestadoresController@cadastroPrestador');
-
         } catch (\Throwable $th) {
             DB::rollback();
             return redirect()->action('PrestadoresController@edit');

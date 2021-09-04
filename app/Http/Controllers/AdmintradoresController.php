@@ -38,7 +38,7 @@ class AdmintradoresController extends Controller
     {
         $admin = $this->objAdmin->all();
 
-        return view('admin/lista-admins',compact('admin'));
+        return view('admin/lista-admins', compact('admin'));
     }
 
     public function listaServicosPrestados()
@@ -49,10 +49,10 @@ class AdmintradoresController extends Controller
     public function cadastroAdmin()
     {
         $arrayAdmin = $this->objAdmin
-                        ->where('ID_USUARIO', auth()->user()->id)
-                        ->get();
+            ->where('ID_USUARIO', auth()->user()->id)
+            ->get();
 
-        return view('admin/cadastro',compact('arrayAdmin'));
+        return view('admin/cadastro', compact('arrayAdmin'));
     }
 
     /**
@@ -64,9 +64,9 @@ class AdmintradoresController extends Controller
     {
         $estados = $this->objEstados->all();
 
-        $cidades = $this->objCidades->orderBy('CIDADE','asc')->get();
+        $cidades = $this->objCidades->orderBy('CIDADE', 'asc')->get();
 
-        return view('admin/create',compact('estados','cidades'));
+        return view('admin/create', compact('estados', 'cidades'));
     }
 
     /**
@@ -108,24 +108,20 @@ class AdmintradoresController extends Controller
                 'ID_USUARIO' => $usuario->id,
             ]);
 
-            //Registro de criação
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Cadastro de '.$usuario->name.' realizado com sucesso pelo administrator '.auth()->user()->name.'',
+                'TEXTO' => 'Cadastro de ' . $usuario->name . ' realizado com sucesso pelo administrator ' . auth()->user()->name . '',
                 'ID_USUARIO' => $usuario->id
             ]);
 
             DB::commit();
 
             return redirect()->action('AdmintradoresController@listaAdmins');
-
         } catch (\Throwable $th) {
             DB::rollback();
 
             return redirect()->action('AdmintradoresController@create');
         }
-
-
     }
 
     /**
@@ -138,7 +134,7 @@ class AdmintradoresController extends Controller
     {
         $admin = $this->objAdmin->find($id);
 
-        return view('admin/information',compact('admin'));
+        return view('admin/information', compact('admin'));
     }
 
     /**
@@ -151,7 +147,7 @@ class AdmintradoresController extends Controller
     {
         $admin = $this->objAdmin->find($id);
 
-        return view('admin/edit',compact('admin'));
+        return view('admin/edit', compact('admin'));
     }
 
     /**
@@ -163,11 +159,11 @@ class AdmintradoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->objAdmin->where(['id'=>$id])->update([
-            'NOME'=>$request->nome,
-            'EMAIL'=>$request->email,
-            'SENHA'=>$request->senha,
-            'STATUS'=>$request->status
+        $this->objAdmin->where(['id' => $id])->update([
+            'NOME' => $request->nome,
+            'EMAIL' => $request->email,
+            'SENHA' => $request->senha,
+            'STATUS' => $request->status
         ]);
         return redirect('admin');
     }
@@ -175,12 +171,12 @@ class AdmintradoresController extends Controller
     public function prestadoresLista()
     {
         $prestadores = $this->objPrestador
-                        ->join('users','PRESTADORES.ID_USUARIO','=','users.id')
-                        ->where('users.status', '=', 0)
-                        ->select('PRESTADORES.*')
-                        ->get();
+            ->join('users', 'PRESTADORES.ID_USUARIO', '=', 'users.id')
+            ->where('users.status', '=', 0)
+            ->select('PRESTADORES.*')
+            ->get();
 
-        return view('prestadores/lista-prestadores',compact('prestadores'));
+        return view('prestadores/lista-prestadores', compact('prestadores'));
     }
 
     public function aprovarPrestador($id)
@@ -188,17 +184,17 @@ class AdmintradoresController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->objUsers->where(['ID'=>$id])->update([
+            $this->objUsers->where(['ID' => $id])->update([
                 'status' => \Config::get('constants.STATUS.ATIVO')
             ]);
             $user = $this->objUsers->find($id);
 
             $prestador = $user->find($id)
-                            ->relPrestador;
+                ->relPrestador;
 
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Prestador#'.$prestador->ID.' '.$prestador->NOME.' aprovado pelo administrador '.auth()->user()->name,
+                'TEXTO' => 'Prestador#' . $prestador->ID . ' ' . $prestador->NOME . ' aprovado pelo administrador ' . auth()->user()->name,
                 'ID_USUARIO' => auth()->user()->id
             ]);
 
@@ -219,18 +215,18 @@ class AdmintradoresController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->objUsers->where(['ID'=>$id])->update([
+            $this->objUsers->where(['ID' => $id])->update([
                 'status' => \Config::get('constants.STATUS.REPROVADO')
             ]);
 
             $user = $this->objUsers->find($id);
 
             $prestador = $user->find($id)
-                            ->relPrestador;
+                ->relPrestador;
 
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Prestador#'.$prestador->ID.' '.$prestador->NOME.' reprovada pelo administrador '.auth()->user()->name,
+                'TEXTO' => 'Prestador#' . $prestador->ID . ' ' . $prestador->NOME . ' reprovada pelo administrador ' . auth()->user()->name,
                 'ID_USUARIO' => auth()->user()->id
             ]);
 
@@ -244,6 +240,5 @@ class AdmintradoresController extends Controller
             DB::rollback();
             return false;
         }
-
     }
 }
