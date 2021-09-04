@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'Dados do login incorreto. Verifique seu e-mail e senha',
+    'failed' => 'Dados do login incorreto. Verifique seu e-mail e senha.',
     'invalid' => 'Acesso não permitido. Entre em contato conosco por e-mail ou aguarde nosso contato.',
-    'throttle' => 'Excesso de tentativas falhas. Tente novamente em :seconds segundos.',
-
+    // 'throttle' => 'Excesso de tentativas falhas. Tente novamente em :seconds segundos.',
+    'throttle' => 'Excesso de tentativas falhas. Tente novamente em 1 minuto.',
 ];
