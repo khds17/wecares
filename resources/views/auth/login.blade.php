@@ -79,9 +79,9 @@
                                 <div class="text-center">
                                     <a class="small" href="{{url("prestador/create")}}">Seja um cuidador</a>
                                 </div>
-                                <div class="text-center">
+                                {{-- <div class="text-center">
                                     <a class="small" href="{{url("solicitante/create")}}">Seja um solicitante!</a>
-                                </div>
+                                </div> --}}
                             </form>
                         </div>
                     </div>

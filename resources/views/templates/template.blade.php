@@ -35,9 +35,9 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ml-auto mr-lg-5">
                                     <li class="nav-item dropdown no-caret">
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("/encontreCuidador")}}" role="button" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("prestador/create")}}" role="button" aria-haspopup="true" aria-expanded="false">Seja um cuidador</a>
-                                        <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("solicitante/create")}}" role="button" aria-haspopup="true" aria-expanded="false">Seja um solicitante</a>
+                                        <a class="nav-link dropdown-toggle" id="navbarEncontreUmCuidador" href="{{url("/encontreCuidador")}}" role="button" aria-haspopup="true" aria-expanded="false">Encontre um cuidador</a>
+                                        <a class="nav-link dropdown-toggle" id="navbarSejaUmCuidador" href="{{url("prestador/create")}}" role="button" aria-haspopup="true" aria-expanded="false">Seja um cuidador</a>
+                                        {{-- <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="{{url("solicitante/create")}}" role="button" aria-haspopup="true" aria-expanded="false">Seja um solicitante</a> --}}
                                     </li>
                                     <!-- <li class="nav-item dropdown dropdown-xl no-caret">
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownDemos" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empresa<i class="fas fa-chevron-right dropdown-arrow"></i></a>
@@ -142,7 +142,7 @@
                                         </form>
                                     </div>
                                 @else
-                                    <a class="btn-teal btn rounded-pill px-4 ml-lg-4" href="{{url("login")}}"> Entrar</a>
+                                    <a class="btn-teal btn rounded-pill px-4 ml-lg-4"  id="login" href="{{url("login")}}"> Entrar</a>
                                 @endif
 
                             </div>
@@ -238,9 +238,9 @@
                                     <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
                                         <div class="text-uppercase-expanded text-xs mb-4">Serviços</div>
                                         <ul class="list-unstyled mb-0">
-                                            <li class="mb-2"><a href="{{url("/encontreCuidador")}}">Encontre um cuidador</a></li>
-                                            <li class="mb-2"><a href="{{url("prestador/create")}}">Seja um cuidador</a></li>
-                                            <li class="mb-2"><a href="{{url("solicitante/create")}}">Seja um solicitante</a></li>
+                                            <li class="mb-2" id="encontreUmCuidadorRodape"><a href="{{url("/encontreCuidador")}}">Encontre um cuidador</a></li>
+                                            <li class="mb-2" id="sejaUmCuidadorRodape"><a href="{{url("prestador/create")}}">Seja um cuidador</a></li>
+                                            {{-- <li class="mb-2"><a href="{{url("solicitante/create")}}">Seja um solicitante</a></li> --}}
                                             {{-- <li class="mb-2"><a href="javascript:void(0);">Dicas de contratação</a></li> --}}
                                             {{-- <li class="mb-2"><a href="javascript:void(0);">Dicas de segurança</a></li> --}}
                                         </ul>

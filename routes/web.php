@@ -55,21 +55,21 @@ Route::put('/recusarProspostaSolicitante/{id}', 'ServicosController@recusarProsp
 Route::post('/selectProposta/{id}','ServicosController@selectProposta');
 
 // ===========================================
-Route::resource('/solicitante','SolicitantesController');
-Route::get('/cadastroSolicitante','SolicitantesController@cadastroSolicitante')->middleware('auth')->middleware('role:solicitante');
-Route::get('/propostas','SolicitantesController@propostas')->middleware('auth')->middleware('role:solicitante');
+// Route::resource('/solicitante','SolicitantesController');
+// Route::get('/cadastroSolicitante','SolicitantesController@cadastroSolicitante')->middleware('auth')->middleware('role:solicitante');
+// Route::get('/propostas','SolicitantesController@propostas')->middleware('auth')->middleware('role:solicitante');
 // ===========================================
-Route::resource('/pagamentos','PagamentosController')->middleware('auth')->middleware('role:solicitante');
-Route::post('/processPaymentValidation','PagamentosController@processPaymentValidation')->middleware('role:solicitante');
-Route::get('/estornoPaymentValidation','PagamentosController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
-Route::get('/paymentForm','PagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
-Route::post('/payment','PagamentosController@payment')->middleware('auth')->middleware('role:administrador');
-Route::post('/estornoPayment/{id}','PagamentosController@estornoPayment')->middleware('role:solicitante');
-Route::get('/atualizarPagamentos','PagamentosController@atualizarPagamentos');
+// Route::resource('/pagamentos','PagamentosController')->middleware('auth')->middleware('role:solicitante');
+// Route::post('/processPaymentValidation','PagamentosController@processPaymentValidation')->middleware('role:solicitante');
+// Route::get('/estornoPaymentValidation','PagamentosController@estornoPaymentValidation')->middleware('auth')->middleware('role:administrador');
+// Route::get('/paymentForm','PagamentosController@paymentForm')->middleware('auth')->middleware('role:administrador');
+// Route::post('/payment','PagamentosController@payment')->middleware('auth')->middleware('role:administrador');
+// Route::post('/estornoPayment/{id}','PagamentosController@estornoPayment')->middleware('role:solicitante');
+// Route::get('/atualizarPagamentos','PagamentosController@atualizarPagamentos');
 //Rota para cancelamento de pagamentos de teste
-Route::get('/estorno','PagamentosController@estorno')->middleware('auth')->middleware('role:administrador');
+// Route::get('/estorno','PagamentosController@estorno')->middleware('auth')->middleware('role:administrador');
 
 Auth::routes(['register' => false]);
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
