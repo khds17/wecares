@@ -43,7 +43,7 @@ Route::get('/novaspropostas','PrestadoresController@prestadoresPropostas')->midd
 Route::resource('/recebimentos','RecebimentosController')->middleware('auth')->middleware('role:cuidador/enfermeiro');
 // ===========================================
 Route::resource('/servico','ServicosController');
-Route::post('/proposta','ServicosController@proposta')->middleware('auth');
+Route::post('/proposta','ServicosController@proposta');
 Route::get('/propostaAgradecimento','ServicosController@propostaAgradecimento');
 Route::get('/servicosContratados','ServicosController@servicosContratados')->middleware('auth')->middleware('role:solicitante');
 Route::get('/servicosPrestados','ServicosController@servicosPrestados')->middleware('auth')->middleware('role:cuidador/enfermeiro');

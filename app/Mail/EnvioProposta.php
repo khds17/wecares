@@ -11,16 +11,16 @@ class EnvioProposta extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $prestador;
+    public $data;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($prestador)
+    public function __construct($data)
     {
-        $this->prestador = $prestador;
+        $this->data = $data;
     }
 
     /**
@@ -31,8 +31,8 @@ class EnvioProposta extends Mailable
     public function build()
     {
         return $this
-            ->subject('Oba, você recebeu uma nova proposta')
+            ->subject('Oba, você recebeu um pedido de trabalho')
             ->view('email.EnvioProposta')
-            ->with('prestador', $this->prestador);
+            ->with('prestador', $this->data);
     }
 }

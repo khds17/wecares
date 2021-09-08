@@ -7,8 +7,8 @@
                 <div class="container text-center">
                     <div class="row justify-content-center">   
                         <div class="col-lg-8">
-                            <h1 class="page-header-title mb-3">Sua proposta foi enviada com sucesso.</h1>
-                            <p class="page-header-text">Pedimos que acompanhe frequentemente a resposta no menu propostas pendentes.</p>
+                            <h1 class="page-header-title mb-3">Sua solicitação foi enviada com sucesso.</h1>
+                            <p class="page-header-text">Pedimos que aguarde o contato dos profissionais.</p>
                         </div>
                     </div>
                 </div>

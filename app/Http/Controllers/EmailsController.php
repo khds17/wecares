@@ -33,8 +33,9 @@ class EmailsController extends Controller
         $this->objPaciente = new pacientes();
 
         //Atributos da tabela proposta
-        $this->idPrestadorProposta = $dados->ID_PRESTADOR;
+        $this->idPrestadorProposta = $dados->idPrestadores;
         $this->idSolicitanteProposta = $dados->ID_SOLICITANTE;
+        $this->dadosEmails = $dados;
 
         //Atributos da tabela prestador
         $this->idPrestador = $dados->ID;
@@ -44,8 +45,17 @@ class EmailsController extends Controller
     {
         $prestador = $this->objPrestador->find($this->idPrestadorProposta);
 
+        $data = [
+            'paciente' => $this->dadosEmails->selectPaciente,
+            'pacienteTipo' => $this->dadosEmails->pacienteTipo,
+            'nomeSolicitante' => $this->dadosEmails->nomeSolicitante,
+            'telefoneSolicitante' => $this->dadosEmails->telefoneSolicitante,
+        ];
+
         Mail::to($prestador->EMAIL)
-            ->send(new EnvioProposta($prestador));
+            ->send(new EnvioProposta(
+                $data,
+            ));
     }
 
     public function aceitePropostaPrestador()

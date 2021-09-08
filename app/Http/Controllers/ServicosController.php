@@ -34,120 +34,128 @@ class ServicosController extends Controller
         $this->objServico = new servicos();
         $this->objFamiliaridades = new familiaridade();
         $this->objRegistros = new registros_log();
-
     }
 
-    public function proposta(Proposta $request)
+    public function proposta(Request $request)
     {
-        // Todos os select estão em um array dentro de um array, para isso, criei um foreach para remover todos do array
-        $arraySolicitantes = $this->objSolicitante
-                            ->where('ID_USUARIO', auth()->user()->id)
-                            ->get();
+        $email = new EmailsController($request);
+        $email->envioProposta();
 
-        foreach ($arraySolicitantes as $arraySolicitante) {
-            $solicitante = $arraySolicitante;
-        }
-
-        $arrayPacientes = $this->objPaciente
-                            ->where('PACIENTES.ID', '=', $request->selectPaciente)
-                            ->get();
-
-        foreach ($arrayPacientes as $arrayPaciente) {
-            $paciente = $arrayPaciente;
-        }
-
-        $arrayPacientesTipos = $this->objPacienteTipo
-                                ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
-                                ->where('PACIENTES_TIPOS.ID', '=', $paciente->ID_TIPO)
-                                ->select('PACIENTES_TIPOS.*')
-                                ->get();
-
-        foreach ($arrayPacientesTipos as $arrayPacienteTipos) {
-            $pacienteTipo = $arrayPacienteTipos;
-        }
-
-        $arrayPacientesLocalizacao = $this->objPacienteLocalizacao
-                                        ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
-                                        ->where('PACIENTE_LOCALIZACAO.ID', '=', $paciente->ID_LOCALIZACAO)
-                                        ->select('PACIENTE_LOCALIZACAO.*')
-                                        ->get();
-
-        foreach ($arrayPacientesLocalizacao as $arrayPacienteLocalizacao) {
-            $pacienteLocalizacao = $arrayPacienteLocalizacao;
-        }
-
-        $arrayCidades = $this->objCidades
-                        ->where('CIDADES.ID','=', $request->pacienteCidade)
-                        ->get();
-
-
-        foreach ($arrayCidades as $arrayCidade) {
-            $cidade = $arrayCidade;
-        }
-
-        DB::beginTransaction();
-
-            try {
-                $idPrestadores = explode(",",$request->idPrestadores);
-
-                $idServicos = implode(",",$request->servicos);
-
-                foreach ($idPrestadores as $idPrestador) {
-
-                    $arrayPrestadores = $this->objPrestador
-                                            ->where('PRESTADORES.ID', '=', $idPrestador)
-                                            ->get();
-
-                    foreach ($arrayPrestadores as $arrayPrestador) {
-                        $prestador = $arrayPrestador;
-
-                         $proposta = $this->objProposta->create([
-                                'ID_PRESTADOR' => $prestador->ID,
-                                'NOME_PRESTADOR' =>$prestador->NOME,
-                                'ID_SOLICITANTE' => $solicitante->ID,
-                                'NOME_SOLICITANTE' => $solicitante->NOME,
-                                'ID_FAMILIARIDADE' => $request->familiaridade,
-                                'OUTROS_FAMILIARIDADE' => $request->familiaridadeOutros,
-                                'ID_PACIENTE' => $paciente->ID,
-                                'NOME_PACIENTE' => $paciente->NOME,
-                                'TIPO' => $pacienteTipo->TIPO,
-                                'LOCALIZACAO' => $pacienteLocalizacao->LOCALIZACAO,
-                                'CEP' => $request->pacienteCep,
-                                'ENDERECO' => $request->pacienteEndereco,
-                                'NUMERO' => $request->pacienteNumero,
-                                'COMPLEMENTO' => $request->pacienteComplemento,
-                                'BAIRRO' => $request->pacienteBairro,
-                                'CIDADE' => $cidade->CIDADE,
-                                'UF' => $cidade->UF,
-                                'SERVICOS' => $idServicos,
-                                'SERVICOS_OUTROS' => $request->servicoOutros,
-                                'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
-                                'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
-                                'DATA_INICIO' => $request->dataInicio,
-                                'DATA_FIM' => $request->dataFim,
-                                'HORA_INICIO' => $request->horaInicio,
-                                'HORA_FIM' => $request->horaFim,
-                                'VALOR' => $request->precoServico
-                            ]);
-
-                        $this->objRegistros->create([
-                            'DATA' => date('d/m/Y \à\s H:i:s'),
-                            'TEXTO' => 'Proposta feita pelo solicitante '.$solicitante->NOME.' foi enviada com sucesso',
-                            'ID_USUARIO' => auth()->user()->id
-                        ]);
-
-                        $email = new EmailsController($proposta);
-                        $email->envioProposta();
-                    }
-
-                    DB::commit();
-                }
-                return redirect()->action('ServicosController@propostaAgradecimento');
-            } catch (\Throwable $th) {
-                DB::rollback();
-                return redirect()->action('IndexController@encontreCuidador');
-            }
+        return redirect()->action('ServicosController@propostaAgradecimento');
     }
+
+    // public function proposta(Proposta $request)
+    // {
+
+    //     // Todos os select estão em um array dentro de um array, para isso, criei um foreach para remover todos do array
+    //     $arraySolicitantes = $this->objSolicitante
+    //         ->where('ID_USUARIO', auth()->user()->id)
+    //         ->get();
+
+    //     foreach ($arraySolicitantes as $arraySolicitante) {
+    //         $solicitante = $arraySolicitante;
+    //     }
+
+    //     $arrayPacientes = $this->objPaciente
+    //         ->where('PACIENTES.ID', '=', $request->selectPaciente)
+    //         ->get();
+
+    //     foreach ($arrayPacientes as $arrayPaciente) {
+    //         $paciente = $arrayPaciente;
+    //     }
+
+    //     $arrayPacientesTipos = $this->objPacienteTipo
+    //         ->join('PACIENTES', 'PACIENTES_TIPOS.ID', '=', 'PACIENTES.ID_TIPO')
+    //         ->where('PACIENTES_TIPOS.ID', '=', $paciente->ID_TIPO)
+    //         ->select('PACIENTES_TIPOS.*')
+    //         ->get();
+
+    //     foreach ($arrayPacientesTipos as $arrayPacienteTipos) {
+    //         $pacienteTipo = $arrayPacienteTipos;
+    //     }
+
+    //     $arrayPacientesLocalizacao = $this->objPacienteLocalizacao
+    //         ->join('PACIENTES', 'PACIENTE_LOCALIZACAO.ID', '=', 'PACIENTES.ID_LOCALIZACAO')
+    //         ->where('PACIENTE_LOCALIZACAO.ID', '=', $paciente->ID_LOCALIZACAO)
+    //         ->select('PACIENTE_LOCALIZACAO.*')
+    //         ->get();
+
+    //     foreach ($arrayPacientesLocalizacao as $arrayPacienteLocalizacao) {
+    //         $pacienteLocalizacao = $arrayPacienteLocalizacao;
+    //     }
+
+    //     $arrayCidades = $this->objCidades
+    //         ->where('CIDADES.ID', '=', $request->pacienteCidade)
+    //         ->get();
+
+
+    //     foreach ($arrayCidades as $arrayCidade) {
+    //         $cidade = $arrayCidade;
+    //     }
+
+    //     DB::beginTransaction();
+
+    //     try {
+    //         $idPrestadores = explode(",", $request->idPrestadores);
+
+    //         $idServicos = implode(",", $request->servicos);
+
+    //         foreach ($idPrestadores as $idPrestador) {
+
+    //             $arrayPrestadores = $this->objPrestador
+    //                 ->where('PRESTADORES.ID', '=', $idPrestador)
+    //                 ->get();
+
+    //             foreach ($arrayPrestadores as $arrayPrestador) {
+    //                 $prestador = $arrayPrestador;
+
+    //                 $proposta = $this->objProposta->create([
+    //                     'ID_PRESTADOR' => $prestador->ID,
+    //                     'NOME_PRESTADOR' => $prestador->NOME,
+    //                     'ID_SOLICITANTE' => $solicitante->ID,
+    //                     'NOME_SOLICITANTE' => $solicitante->NOME,
+    //                     'ID_FAMILIARIDADE' => $request->familiaridade,
+    //                     'OUTROS_FAMILIARIDADE' => $request->familiaridadeOutros,
+    //                     'ID_PACIENTE' => $paciente->ID,
+    //                     'NOME_PACIENTE' => $paciente->NOME,
+    //                     'TIPO' => $pacienteTipo->TIPO,
+    //                     'LOCALIZACAO' => $pacienteLocalizacao->LOCALIZACAO,
+    //                     'CEP' => $request->pacienteCep,
+    //                     'ENDERECO' => $request->pacienteEndereco,
+    //                     'NUMERO' => $request->pacienteNumero,
+    //                     'COMPLEMENTO' => $request->pacienteComplemento,
+    //                     'BAIRRO' => $request->pacienteBairro,
+    //                     'CIDADE' => $cidade->CIDADE,
+    //                     'UF' => $cidade->UF,
+    //                     'SERVICOS' => $idServicos,
+    //                     'SERVICOS_OUTROS' => $request->servicoOutros,
+    //                     'TOMA_MEDICAMENTOS' => $request->tomaMedicamento,
+    //                     'TIPO_MEDICAMENTOS' => $request->tipoMedicamento,
+    //                     'DATA_INICIO' => $request->dataInicio,
+    //                     'DATA_FIM' => $request->dataFim,
+    //                     'HORA_INICIO' => $request->horaInicio,
+    //                     'HORA_FIM' => $request->horaFim,
+    //                     'VALOR' => $request->precoServico
+    //                 ]);
+
+    //                 $this->objRegistros->create([
+    //                     'DATA' => date('d/m/Y \à\s H:i:s'),
+    //                     'TEXTO' => 'Proposta feita pelo solicitante ' . $solicitante->NOME . ' foi enviada com sucesso',
+    //                     'ID_USUARIO' => auth()->user()->id
+    //                 ]);
+
+    //                 $email = new EmailsController($proposta);
+    //                 $email->envioProposta();
+    //             }
+
+    //             DB::commit();
+    //         }
+    //         return redirect()->action('ServicosController@propostaAgradecimento');
+    //     } catch (\Throwable $th) {
+    //         DB::rollback();
+    //         return redirect()->action('IndexController@encontreCuidador');
+    //     }
+    // }
 
     public function propostaAgradecimento()
     {
@@ -159,10 +167,10 @@ class ServicosController extends Controller
         $propostas = $this->objProposta->find($id);
 
         $prestador = $this->objPrestador
-                            ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
-                            ->where('PRESTADORES.ID','=',$propostas->ID_PRESTADOR)
-                            ->select('PRESTADORES.TELEFONE','FORMACAO.FORMACAO')
-                            ->get();
+            ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
+            ->where('PRESTADORES.ID', '=', $propostas->ID_PRESTADOR)
+            ->select('PRESTADORES.TELEFONE', 'FORMACAO.FORMACAO')
+            ->get();
 
         $dadosProposta = [
             'propostas' => $propostas,
@@ -175,36 +183,36 @@ class ServicosController extends Controller
     public function servicosPrestados()
     {
         $servicosPrestados = $this->objServicosPrestados
-                                ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
-                                ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
-                                ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
-                                ->leftJoin('PAGAMENTOS','SERVICOS_PRESTADOS.ID','=','PAGAMENTOS.ID_SERVICO_PRESTADO')
-                                ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
-                                ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
-                                ->get();
+            ->join('SOLICITANTES', 'SERVICOS_PRESTADOS.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+            ->join('PRESTADORES', 'SERVICOS_PRESTADOS.ID_PRESTADOR', '=', 'PRESTADORES.ID')
+            ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
+            ->leftJoin('PAGAMENTOS', 'SERVICOS_PRESTADOS.ID', '=', 'PAGAMENTOS.ID_SERVICO_PRESTADO')
+            ->where('PRESTADORES.ID_USUARIO', auth()->user()->id)
+            ->select('SERVICOS_PRESTADOS.*', 'PRESTADORES.TELEFONE', 'FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
+            ->get();
 
         $servicos = $this->objServico->all();
 
         $familiaridades = $this->objFamiliaridades->all();
 
-        return view('servicos/servicosPrestados', compact('servicosPrestados','servicos','familiaridades'));
+        return view('servicos/servicosPrestados', compact('servicosPrestados', 'servicos', 'familiaridades'));
     }
 
 
     public function servicosContratados()
     {
         $servicosContratados = $this->objServicosPrestados
-                                ->join('SOLICITANTES','SERVICOS_PRESTADOS.ID_SOLICITANTE','=','SOLICITANTES.ID')
-                                ->join('PRESTADORES','SERVICOS_PRESTADOS.ID_PRESTADOR','=','PRESTADORES.ID')
-                                ->join('FORMACAO','PRESTADORES.ID_FORMACAO','=','FORMACAO.ID')
-                                ->leftJoin('PAGAMENTOS','SERVICOS_PRESTADOS.ID','=','PAGAMENTOS.ID_SERVICO_PRESTADO')
-                                ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
-                                ->select('SERVICOS_PRESTADOS.*','PRESTADORES.TELEFONE','FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
-                                ->get();
+            ->join('SOLICITANTES', 'SERVICOS_PRESTADOS.ID_SOLICITANTE', '=', 'SOLICITANTES.ID')
+            ->join('PRESTADORES', 'SERVICOS_PRESTADOS.ID_PRESTADOR', '=', 'PRESTADORES.ID')
+            ->join('FORMACAO', 'PRESTADORES.ID_FORMACAO', '=', 'FORMACAO.ID')
+            ->leftJoin('PAGAMENTOS', 'SERVICOS_PRESTADOS.ID', '=', 'PAGAMENTOS.ID_SERVICO_PRESTADO')
+            ->where('SOLICITANTES.ID_USUARIO', auth()->user()->id)
+            ->select('SERVICOS_PRESTADOS.*', 'PRESTADORES.TELEFONE', 'FORMACAO.FORMACAO', 'PAGAMENTOS.ID_PAGAMENTO')
+            ->get();
 
-        $servicos=$this->objServico->all();
+        $servicos = $this->objServico->all();
 
-        return view('servicos/servicosContratados', compact('servicosContratados','servicos'));
+        return view('servicos/servicosContratados', compact('servicosContratados', 'servicos'));
     }
 
     public function criarServicos()
@@ -217,17 +225,17 @@ class ServicosController extends Controller
 
         // Select para pegar todas as propostas que ainda não foram criadas como serviços a serem prestados
         $servicos = $this->objProposta
-                        ->leftJoin('SERVICOS_PRESTADOS', 'SERVICOS_PRESTADOS.ID_PROPOSTA', '=', 'PROPOSTAS.ID')
-                        ->where('PROPOSTAS.APROVACAO_SOLICITANTE', '=', $propostaAceita)
-                        ->where('PROPOSTAS.APROVACAO_PRESTADOR', '=', $propostaAceita)
-                        ->whereNull('SERVICOS_PRESTADOS.ID_PROPOSTA')
-                        ->select('PROPOSTAS.*')
-                        ->get();
+            ->leftJoin('SERVICOS_PRESTADOS', 'SERVICOS_PRESTADOS.ID_PROPOSTA', '=', 'PROPOSTAS.ID')
+            ->where('PROPOSTAS.APROVACAO_SOLICITANTE', '=', $propostaAceita)
+            ->where('PROPOSTAS.APROVACAO_PRESTADOR', '=', $propostaAceita)
+            ->whereNull('SERVICOS_PRESTADOS.ID_PROPOSTA')
+            ->select('PROPOSTAS.*')
+            ->get();
 
         // Percorre o select e cria o serviço a ser prestado para todas as propostas que não possuem essa serviço.
         try {
             DB::beginTransaction();
-            if(count($servicos) >= 1) {
+            if (count($servicos) >= 1) {
                 foreach ($servicos as $servico) {
                     $this->objServicosPrestados->create([
                         'ID_PROPOSTA' => $servico->ID,
@@ -277,7 +285,7 @@ class ServicosController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->objProposta->where(['ID'=>$id])->update([
+            $this->objProposta->where(['ID' => $id])->update([
                 'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.ACEITADO')
             ]);
 
@@ -285,7 +293,7 @@ class ServicosController extends Controller
 
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Proposta#'.$proposta->ID.' do solicitante '.$proposta->NOME_SOLICITANTE.' aceita',
+                'TEXTO' => 'Proposta#' . $proposta->ID . ' do solicitante ' . $proposta->NOME_SOLICITANTE . ' aceita',
                 'ID_USUARIO' => auth()->user()->id
             ]);
 
@@ -306,7 +314,7 @@ class ServicosController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->objProposta->where(['ID'=>$id])->update([
+            $this->objProposta->where(['ID' => $id])->update([
                 'APROVACAO_PRESTADOR' => \Config::get('constants.SERVICOS.RECUSADO'),
             ]);
 
@@ -314,7 +322,7 @@ class ServicosController extends Controller
 
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Proposta#'.$proposta->ID.' do solicitante '.$proposta->NOME_SOLICITANTE.' recusada',
+                'TEXTO' => 'Proposta#' . $proposta->ID . ' do solicitante ' . $proposta->NOME_SOLICITANTE . ' recusada',
                 'ID_USUARIO' => auth()->user()->id
             ]);
 
@@ -325,14 +333,13 @@ class ServicosController extends Controller
             DB::rollback();
             return false;
         }
-
     }
 
     public function aceitarPropostaSolicitante($id)
     {
         DB::beginTransaction();
         try {
-            $this->objProposta->where(['ID'=>$id])->update([
+            $this->objProposta->where(['ID' => $id])->update([
                 'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.ACEITADO'),
             ]);
 
@@ -340,7 +347,7 @@ class ServicosController extends Controller
 
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Proposta#'.$proposta->ID.' aceita',
+                'TEXTO' => 'Proposta#' . $proposta->ID . ' aceita',
                 'ID_USUARIO' => auth()->user()->id
             ]);
 
@@ -361,7 +368,7 @@ class ServicosController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->objProposta->where(['ID'=>$id])->update([
+            $this->objProposta->where(['ID' => $id])->update([
                 'APROVACAO_SOLICITANTE' => \Config::get('constants.SERVICOS.RECUSADO'),
             ]);
 
@@ -369,7 +376,7 @@ class ServicosController extends Controller
 
             $this->objRegistros->create([
                 'DATA' => date('d/m/Y \à\s H:i:s'),
-                'TEXTO' => 'Proposta#'.$proposta->ID.' recusada',
+                'TEXTO' => 'Proposta#' . $proposta->ID . ' recusada',
                 'ID_USUARIO' => auth()->user()->id
             ]);
 
@@ -384,5 +391,4 @@ class ServicosController extends Controller
             return false;
         }
     }
-
 }
