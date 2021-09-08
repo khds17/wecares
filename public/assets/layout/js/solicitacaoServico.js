@@ -117,7 +117,7 @@ function enviarProposta() {
             show: true
         });
 
-        getPacientes();
+        // getPacientes();
     } else {
         alert('Nenhum profissional selecionado!');
     }
