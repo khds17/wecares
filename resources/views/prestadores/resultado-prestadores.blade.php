@@ -91,14 +91,14 @@
                                 <div class="row margin-top-10">
                                     <div class="col">
                                         <label for="solicitante" class="text-dark">Nome do solicitante</label><br>
-                                        <input class="form-control" type="text" name="nomeSolicitante" id="nomeSolicitante">
+                                        <input class="form-control" type="text" name="firstname" id="firstname">
                                         @error('selectPaciente')
                                             <span class="text-danger"><small>{{$message}}</small></span>
                                         @enderror
                                     </div>
                                     <div class="col">
                                         <label for="telefone" class="text-dark">Telefone para contato</label><br>
-                                        <input class="form-control" type="text" name="telefoneSolicitante" id="telefoneSolicitante">
+                                        <input class="form-control" type="text" name="phone" id="phone">
                                     </div>
                                 </div>
                                 <br>
