@@ -72,7 +72,7 @@ class Kernel extends HttpKernel
     {
         return array_merge(
             [\Bugsnag\BugsnagLaravel\OomBootstrapper::class],
-            parent::bootstrappers(),
+            parent::bootstrappers()
         );
     }
 }
