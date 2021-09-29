@@ -85,9 +85,9 @@ function closeModal() {
 }
 
 //Código para permitir que funcione o scroll do externo ao fechar o interno
-$("#modalServico").on("hidden.bs.modal", function() {
-    $("body").addClass("modal-open");
-});
+// $("#modalServico").on("hidden.bs.modal", function() {
+//     $("body").addClass("modal-open");
+// });
 
 function openLoginModal() {
     $("#modalLogin").modal({
