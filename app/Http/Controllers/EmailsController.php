@@ -33,29 +33,35 @@ class EmailsController extends Controller
         $this->objPaciente = new pacientes();
 
         //Atributos da tabela proposta
-        $this->idPrestadorProposta = $dados->idPrestadores;
-        $this->idSolicitanteProposta = $dados->ID_SOLICITANTE;
+        $idPrestadorProposta = [];
+        $idPrestadorProposta = explode(',', $dados['idPrestadores']);
+        $this->idPrestadorProposta = $idPrestadorProposta;
+        // $this->idSolicitanteProposta = $dados->ID_SOLICITANTE;
         $this->dadosEmails = $dados;
 
         //Atributos da tabela prestador
-        $this->idPrestador = $dados->ID;
+        // $this->idPrestador = $dados->ID;
     }
 
     public function envioProposta()
     {
-        $prestador = $this->objPrestador->find($this->idPrestadorProposta);
 
-        $data = [
-            'paciente' => $this->dadosEmails->selectPaciente,
-            'pacienteTipo' => $this->dadosEmails->pacienteTipo,
-            'nomeSolicitante' => $this->dadosEmails->nomeSolicitante,
-            'telefoneSolicitante' => $this->dadosEmails->telefoneSolicitante,
-        ];
+        foreach ($this->idPrestadorProposta as $idPrestador) {
+            $prestador = $this->objPrestador->find($idPrestador);
 
-        Mail::to($prestador->EMAIL)
-            ->send(new EnvioProposta(
-                $data,
-            ));
+            $data = [
+                'paciente' => $this->dadosEmails['selectPaciente'],
+                'pacienteTipo' => $this->dadosEmails['pacienteTipo'],
+                'nomeSolicitante' => $this->dadosEmails['firstname'],
+                'telefoneSolicitante' => $this->dadosEmails['phone'],
+            ];
+    
+            Mail::to($prestador->EMAIL)
+                ->send(new EnvioProposta(
+                    $data
+                ));
+        }
+
     }
 
     public function aceitePropostaPrestador()

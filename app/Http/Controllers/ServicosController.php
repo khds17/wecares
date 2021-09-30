@@ -38,7 +38,7 @@ class ServicosController extends Controller
 
     public function proposta(Request $request)
     {
-        $email = new EmailsController($request);
+        $email = new EmailsController($request->all());
         $email->envioProposta();
 
         return redirect()->action('ServicosController@propostaAgradecimento');
